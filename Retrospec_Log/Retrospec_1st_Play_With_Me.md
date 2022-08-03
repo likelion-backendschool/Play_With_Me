@@ -311,3 +311,12 @@
   </div>
 </details>
 <!-- 최승근 작성 완료 -->
+
+<details>
+<summary><h1>(08/03) 수요일 필수 영상 정리</h1></summary>
+<div markdown="1">
+
+- https://subsequent-shroud-fd5.notion.site/22-08-03-34-a0fc710501114c159296e3453a9e95df
+
+</div>
+</details>
