@@ -320,3 +320,13 @@
 
 </div>
 </details>
+
+<!-- 박범서 작성 완료 -->
+<details>
+<summary><h1>(08/04) 목요일 필수 영상 정리</h1></summary>
+<div markdown="1">
+
+- https://www.notion.so/22-08-04-35-88fdeb7c04cb4c8b97167785965467a6
+
+</div>
+</details>
