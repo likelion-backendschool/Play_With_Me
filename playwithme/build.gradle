@@ -27,6 +27,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.15.2'
 }
 
 tasks.named('test') {
