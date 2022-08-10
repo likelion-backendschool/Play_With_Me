@@ -36,10 +36,10 @@ public class Member {
     @Column(length = 20)
     private String gender;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Article> articleList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
 
