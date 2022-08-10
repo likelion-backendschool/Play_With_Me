@@ -4,6 +4,7 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.sql.Array;
@@ -22,7 +23,7 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-//    @
+    @CreatedDate
     private LocalDateTime created_at;
     // 카멜케이스
     private boolean is_blind;

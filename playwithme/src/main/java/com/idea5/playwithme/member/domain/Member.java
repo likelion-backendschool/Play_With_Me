@@ -4,6 +4,7 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.comment.domain.Comment;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ public class Member {
     @Column(length = 20)
     private String name;
 
+    @CreatedDate
     private LocalDateTime created_at;
 
     private Integer manner_temp;

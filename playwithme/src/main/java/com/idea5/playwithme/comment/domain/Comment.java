@@ -4,6 +4,8 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,9 +19,9 @@ public class Comment {
     @GeneratedValue
     @Column(name = "comment_id")
     private Long id;
-    // 어노테이션
+    @CreatedDate
     private LocalDateTime created_at;
-    // 어노테이션
+    @LastModifiedDate
     private LocalDateTime updated_at;
 
     @Column(columnDefinition = "TEXT")
