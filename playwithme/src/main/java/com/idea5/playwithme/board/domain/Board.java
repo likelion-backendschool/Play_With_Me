@@ -18,8 +18,7 @@ import java.util.List;
 @Setter
 public class Board {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long id;
 
@@ -32,7 +31,7 @@ public class Board {
     @JoinColumn(name = "event_id")
     private Event Event;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "board")
     private List<Article> articleList = new ArrayList<>();
 
 

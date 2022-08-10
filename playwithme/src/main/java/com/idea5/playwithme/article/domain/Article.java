@@ -19,7 +19,7 @@ import java.util.List;
 @Setter
 public class Article {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "article_id")
     private Long id;
 
@@ -54,7 +54,7 @@ public class Article {
     private Member member;
 
     // V
-    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
 
