@@ -18,7 +18,7 @@ public class Event {
     @Column(name = "event_id")
     private Long id;
 
-    private Long category_id;
+    private Long categoryId;
 
     @Column(length = 20)
     private String name;

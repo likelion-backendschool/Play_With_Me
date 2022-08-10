@@ -23,15 +23,15 @@ public class Member {
     private String email;
 
     @Column(length = 20)
-    private String age_range;
+    private String ageRange;
 
     @Column(length = 20)
     private String name;
 
     @CreatedDate
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private Integer manner_temp;
+    private Integer mannerTemp;
 
     @Column(length = 20)
     private String gender;

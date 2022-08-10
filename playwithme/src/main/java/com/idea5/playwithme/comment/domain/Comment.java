@@ -19,14 +19,14 @@ public class Comment {
     @Column(name = "comment_id")
     private Long id;
     @CreatedDate
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Column(columnDefinition = "TEXT")
     private String contents;
 
-    private boolean secret_status;
+    private boolean secretStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")

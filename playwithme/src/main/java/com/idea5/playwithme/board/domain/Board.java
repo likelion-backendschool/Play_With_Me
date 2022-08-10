@@ -23,9 +23,9 @@ public class Board {
     private Long id;
 
     @CreatedDate
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     // 카멜케이스
-    private boolean is_blind;
+    private boolean isBlind;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")

@@ -29,21 +29,21 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String contents;
 
-    private int max_recruit_num;
+    private int maxRecruitNum;
 
-    private boolean recruit_status;
+    private boolean recruitStatus;
 
     @CreatedDate
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Column(length = 20)
     private String gender;
 
     @Column(length = 20)
-    private String age_range;
+    private String ageRange;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
