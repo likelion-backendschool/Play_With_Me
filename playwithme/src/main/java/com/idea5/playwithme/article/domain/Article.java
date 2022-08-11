@@ -3,8 +3,7 @@ package com.idea5.playwithme.article.domain;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.member.domain.Member;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -16,6 +15,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Article {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,4 +57,5 @@ public class Article {
     // V
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
+
 }

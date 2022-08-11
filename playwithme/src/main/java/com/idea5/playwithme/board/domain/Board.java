@@ -2,8 +2,7 @@ package com.idea5.playwithme.board.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -14,6 +13,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
