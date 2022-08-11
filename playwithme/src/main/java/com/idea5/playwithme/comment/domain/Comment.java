@@ -2,6 +2,7 @@ package com.idea5.playwithme.comment.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Comment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
