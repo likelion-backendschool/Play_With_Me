@@ -7,8 +7,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.sql.Array;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ public class Board {
     @CreatedDate
     private LocalDateTime createdAt;
     // 카멜케이스
-    private boolean isBlind;
+    private Boolean isBlind;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")

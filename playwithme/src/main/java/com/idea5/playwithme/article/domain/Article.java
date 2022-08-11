@@ -6,7 +6,6 @@ import com.idea5.playwithme.member.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -29,9 +28,9 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String contents;
 
-    private int maxRecruitNum;
+    private Integer maxRecruitNum;
 
-    private boolean recruitStatus;
+    private Boolean recruitStatus;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -56,6 +55,4 @@ public class Article {
     // V
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-
-
 }
