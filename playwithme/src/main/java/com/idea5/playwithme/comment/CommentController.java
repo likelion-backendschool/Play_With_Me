@@ -26,11 +26,30 @@ public class CommentController {
      * 고민 중인 점 : 댓글 작성자의 성별까지 가져온다고 하면 그건 어떤식으로 할것인지.
      */
     @GetMapping("/comment/{board_id}/{article_id}")
-    public ResponseEntity<List<CommentDto>> getComment(@PathVariable("board_id") Long board_id, @PathVariable("article_id")Long article_id){
+    public ResponseEntity<List<CommentDto>> getComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 
-        //article_id를 넘겨야됨
-        System.out.println("board_id = " + board_id);
-        System.out.println("article_id = " + article_id);
+        System.out.println("articleId = " + articleId);
+
+        return null;
+    }
+
+    /**
+     * 질문거리)
+     * 댓글은 게시글과 유저랑만 관계가 있음.
+     * -> board_id가 과연 필요할까?
+     * 유저 아이디 (fk)는 세션으로 하면 될거 같음
+     * -> @LoginUser
+     *
+     * 현재 로그인한 회원이 누구인지.
+     * -> HttpSession session으로 하자.
+     *
+     */
+    //localhost:
+    @PostMapping("/comment/write/{board_id}/{article_id}")
+    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestParam("content") String content) {
+
+        System.out.println("content = " + content);
+
         return null;
     }
 

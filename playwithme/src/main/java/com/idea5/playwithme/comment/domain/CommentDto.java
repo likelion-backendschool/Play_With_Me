@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CommentDto {
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     private String contents;
 
-    private boolean secret_status;
+    private boolean secretStatus;
 
 
 

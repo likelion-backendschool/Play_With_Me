@@ -23,12 +23,12 @@ public class Comment {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String contents;
 
     private boolean secretStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
 
