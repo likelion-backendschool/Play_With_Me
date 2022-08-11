@@ -1,4 +1,4 @@
-package com.idea5.playwithme.user;
+package com.idea5.playwithme.member;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,10 +9,10 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Users {
+public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Users {
     private String gender;
 
     @Builder
-    public Users(String email, String ageRange, String name, Integer mannerTemp, String gender) {
+    public Member(String email, String ageRange, String name, Integer mannerTemp, String gender) {
         this.email = email;
         this.ageRange = ageRange;
         this.name = name;
