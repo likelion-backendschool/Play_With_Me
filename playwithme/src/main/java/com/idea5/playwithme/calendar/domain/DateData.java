@@ -11,7 +11,7 @@ import java.util.Map;
 
 @ToString
 @Data
-public class DateDto {
+public class DateData {
     String year = "";
     String month ="";
     String date="";
@@ -76,7 +76,7 @@ public class DateDto {
         this.event = event;
     }
 
-    public Map<String,Integer> today_info(DateDto date_data) {
+    public Map<String,Integer> today_info(DateData date_data) {
         Map<String, Integer> today_Data = new HashMap<String, Integer>();
         Calendar cal = Calendar.getInstance();
 
@@ -160,7 +160,7 @@ public class DateDto {
     }
 
 
-    public DateDto(String year, String month, String date, String value, Event[] event) { // 이벤트 스케줄 사용시 사용될 생성자
+    public DateData(String year, String month, String date, String value, Event[] event) { // 이벤트 스케줄 사용시 사용될 생성자
         if ((month != null && month != "") && (date != null && date != "")) {
             this.year = year;
             this.month = month;
