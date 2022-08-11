@@ -1,4 +1,4 @@
-package com.idea5.playwithme.member;
+package com.idea5.playwithme.member.dto;
 
 import lombok.Data;
 
