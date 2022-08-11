@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class CommentController {
      */
     //localhost:
     @PostMapping("/comment/write/{board_id}/{article_id}")
-    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody CommentRequestDto dto)
+    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid @RequestBody CommentRequestDto dto)
     {
         Long commentId = commentService.commentSave(articleId, dto); // 로그인 세션 추가되면 변경해야 됨.
         return null;

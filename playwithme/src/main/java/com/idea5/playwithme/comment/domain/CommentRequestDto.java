@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +25,7 @@ public class CommentRequestDto {
 
     private LocalDateTime updatedAt= LocalDateTime.now().withNano(0);
 
+    @NotNull
     private String contents;
 
     private boolean secretStatus;
