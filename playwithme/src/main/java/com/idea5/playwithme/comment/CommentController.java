@@ -29,12 +29,19 @@ public class CommentController {
      * 고민 중인 점 : 댓글 작성자의 성별까지 가져온다고 하면 그건 어떤식으로 할것인지.
      */
     @GetMapping("/comment/{board_id}/{article_id}")
-    public ResponseEntity<List<CommentDto>> getComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
+    public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 
         System.out.println("articleId = " + articleId);
 
         return null;
     }
+
+    @GetMapping("/comment/{comment_id}")
+    public ResponseEntity<CommentDto> getComment(@PathVariable("comment_id") Long id){
+        commentService.findComment(id);
+        return null;
+    }
+
 
     /**
      * 질문)
@@ -51,9 +58,18 @@ public class CommentController {
     @PostMapping("/comment/write/{board_id}/{article_id}")
     public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody CommentRequestDto dto)
     {
-        Long id = commentService.commentSave(articleId, dto); // 로그인 세션 추가되면 변경해야 됨.
+        Long commentId = commentService.commentSave(articleId, dto); // 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
+
+    @PostMapping("/comment/modify/{comment_id}")
+    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, @RequestBody CommentRequestDto dto)
+    {
+        System.out.println("id = " + id);
+        Long commentId = commentService.commentUpdate(id, dto);// 로그인 세션 추가되면 변경해야 됨.
+        return null;
+    }
+
 
 
 

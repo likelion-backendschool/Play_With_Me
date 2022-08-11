@@ -17,4 +17,5 @@ public class ArticleService {
     public void test(){
         articleRepository.save(new Article());
     }
+
 }

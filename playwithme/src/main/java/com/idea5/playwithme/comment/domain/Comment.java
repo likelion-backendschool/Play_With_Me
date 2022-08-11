@@ -2,15 +2,15 @@ package com.idea5.playwithme.comment.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -30,7 +30,7 @@ public class Comment {
 
     private boolean secretStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
 
@@ -38,5 +38,13 @@ public class Comment {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    /**
+     * 댓글 수정 메소드
+     * 수정 사항
+     */
+    public void update(String contents) {
+        this.contents = contents;
+        updatedAt = LocalDateTime.now().withNano(0);
+    }
 
 }

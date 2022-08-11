@@ -9,7 +9,9 @@ import com.idea5.playwithme.member.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,10 +29,12 @@ public class CommentService {
         this.memberRepository = memberRepository;
     }
 
+
     public List<Comment> findById(Long id){
         return commentRepository.findByArticleId(id);
     }
 
+    @Transactional
     public Long commentSave(Long articleId, CommentRequestDto dto) {
         Article article = articleRepository.findById(articleId).orElse(null);
         dto.setArticle(article);
@@ -58,4 +62,17 @@ public class CommentService {
 
     }
 
+    @Transactional
+    public Long commentUpdate(Long id, CommentRequestDto dto) {
+        Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
+        comment.update(dto.getContents());
+        return comment.getId();
+    }
+
+    @Transactional
+    public void findComment(Long id) {
+        System.out.println("id = " + id);
+        Comment comment = commentRepository.findById(id).orElse(null);
+        System.out.println("comment.getContents() = " + comment.getContents());
+    }
 }
