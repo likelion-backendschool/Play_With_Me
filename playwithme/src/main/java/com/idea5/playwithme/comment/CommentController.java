@@ -5,6 +5,7 @@ import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentRequestDto;
 import com.idea5.playwithme.event.domain.Event;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,15 +16,16 @@ import java.util.List;
 
 /**
  * TODO
- * 엔티티 To Dto 변환
+ * 엔티티 To Dto 변환 V
+ * delete 추가
  */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/board")
+
 public class CommentController {
 
     private final CommentService commentService;
-    @Autowired
-    public CommentController(CommentService commentService) {this.commentService = commentService;}
 
     /**
      * 댓글 리스트로 반환

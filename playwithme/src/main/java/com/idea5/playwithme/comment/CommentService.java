@@ -7,6 +7,7 @@ import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentRequestDto;
 import com.idea5.playwithme.member.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,19 +16,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
-
     private final MemberRepository memberRepository;
-
-    @Autowired
-    public CommentService(CommentRepository commentRepository, ArticleRepository articleRepository, MemberRepository memberRepository) {
-        this.commentRepository = commentRepository;
-        this.articleRepository = articleRepository;
-        this.memberRepository = memberRepository;
-    }
 
 
     public List<Comment> findById(Long id){
