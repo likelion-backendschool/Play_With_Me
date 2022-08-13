@@ -1,4 +1,4 @@
-package com.idea5.playwithme;
+package com.idea5.playwithme.calendar.domain;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
