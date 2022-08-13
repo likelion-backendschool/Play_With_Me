@@ -29,6 +29,7 @@ public class Event {
     @CreatedDate
     private LocalDateTime date;
 
+
 //    @OneToOne(mappedBy = "event", fetch = FetchType.LAZY)
 //    private Board board; // 일대일 양방향 매핑 ( 읽기 전용 )
 
