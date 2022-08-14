@@ -31,6 +31,7 @@
 <details>
 <summary><h3>4. 최승근 - 필수 영상 정리</h1></summary>
 <div markdown="1">
+  
 - https://heavenly-rubidium-d41.notion.site/2-3637f196a4524e44a77f4213529f88e6
 </div>
 </details>
