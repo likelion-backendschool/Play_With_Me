@@ -28,6 +28,14 @@
 </div>
 </details>
 
+<details>
+<summary><h3>3.주민지 - 필수 영상 정리</h1></summary>
+<div markdown="1">
+
+- https://forhighproductivity.notion.site/8-67791b76121c4f36ba4b59ffe5a75364
+</div>
+</details>
+
 
 ## 회고 과정에서 나왔던 질문 (최소 200자 이상)
 
