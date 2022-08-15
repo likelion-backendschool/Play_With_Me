@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 public class CalendarController {
-    @Autowired
     private EventRepository eventRepository;
     private List<Event> events = new ArrayList<>();
 
