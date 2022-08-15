@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/board/comment")
 
 public class CommentController {
 
@@ -31,7 +31,7 @@ public class CommentController {
      * 댓글 리스트로 반환
      * 고민 중인 점 : 댓글 작성자의 성별까지 가져온다고 하면 그건 어떤식으로 할것인지.
      */
-    @GetMapping("/comment/{board_id}/{article_id}")
+    @GetMapping("/{board_id}/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 
         System.out.println("articleId = " + articleId);
@@ -39,7 +39,7 @@ public class CommentController {
         return null;
     }
 
-    @GetMapping("/comment/{comment_id}")
+    @GetMapping("/{comment_id}")
     public ResponseEntity<CommentDto> getComment(@PathVariable("comment_id") Long id){
         commentService.findComment(id);
         return null;
@@ -58,14 +58,14 @@ public class CommentController {
      *
      */
     //localhost:
-    @PostMapping("/comment/write/{board_id}/{article_id}")
+    @PostMapping("/write/{board_id}/{article_id}")
     public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid @RequestBody CommentRequestDto dto)
     {
         Long commentId = commentService.commentSave(articleId, dto); // 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
 
-    @PostMapping("/comment/modify/{comment_id}")
+    @PostMapping("/modify/{comment_id}")
     public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, @RequestBody CommentRequestDto dto)
     {
         System.out.println("id = " + id);
@@ -73,7 +73,7 @@ public class CommentController {
         return null;
     }
 
-    @DeleteMapping("/comment/delete/{comment_id}")
+    @DeleteMapping("/delete/{comment_id}")
     public ResponseEntity delete(@PathVariable("comment_id") Long id) {
         commentService.delete(id);
         return null;
