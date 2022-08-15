@@ -19,6 +19,13 @@
 </div>
 </details>
 
+<details>
+<summary><h3>2.우민식 - 필수 영상 정리</h1></summary>
+<div markdown="1">
+
+- https://honey-worm-a12.notion.site/2-ec840068a9ea4b378ddf4e8d16171d90
+</div>
+</details>
 
 <details>
 <summary><h3>3.한승연 - 필수 영상 정리</h1></summary>
