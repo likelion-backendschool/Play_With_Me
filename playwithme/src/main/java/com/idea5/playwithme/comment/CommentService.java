@@ -69,4 +69,10 @@ public class CommentService {
         Comment comment = commentRepository.findById(id).orElse(null);
         System.out.println("comment.getContents() = " + comment.getContents());
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Comment comment = commentRepository.findById(id).orElse(null);
+        commentRepository.delete(comment);
+    }
 }

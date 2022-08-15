@@ -73,7 +73,11 @@ public class CommentController {
         return null;
     }
 
-
+    @DeleteMapping("/comment/delete/{comment_id}")
+    public ResponseEntity delete(@PathVariable("comment_id") Long id) {
+        commentService.delete(id);
+        return null;
+    }
 
 
     @Autowired

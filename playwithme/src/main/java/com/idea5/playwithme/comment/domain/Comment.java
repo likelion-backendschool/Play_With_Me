@@ -28,7 +28,8 @@ public class Comment {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String contents;
 
-    private boolean secretStatus;
+    @Column(name = "secret_status", nullable = false)
+    private Boolean secretStatus = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
