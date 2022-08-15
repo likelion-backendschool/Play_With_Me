@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,8 +25,17 @@ public class CommentService {
     private final MemberRepository memberRepository;
 
 
-    public List<Comment> findById(Long id){
-        return commentRepository.findByArticleId(id);
+    /**
+     * 댓글 리스트 조회
+     */
+    public List<CommentDto> findByArticleId(Long id){
+        List<Comment> byArticleId = commentRepository.findByArticleId(id);
+        List<CommentDto> dtoList = new ArrayList<>();
+
+        for (Comment i : byArticleId) {
+            dtoList.add(i.toCommentDto());
+        }
+        return dtoList;
     }
 
     @Transactional
@@ -64,10 +74,9 @@ public class CommentService {
     }
 
     @Transactional
-    public void findComment(Long id) {
-        System.out.println("id = " + id);
+    public CommentDto findComment(Long id) {
         Comment comment = commentRepository.findById(id).orElse(null);
-        System.out.println("comment.getContents() = " + comment.getContents());
+        return comment.toCommentDto();
     }
 
     @Transactional

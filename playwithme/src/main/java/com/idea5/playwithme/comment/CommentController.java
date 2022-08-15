@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,23 +27,24 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
-
     /**
-     * 댓글 리스트로 반환
-     * 고민 중인 점 : 댓글 작성자의 성별까지 가져온다고 하면 그건 어떤식으로 할것인지.
+     * 게시글에 달려있던 댓글 리스트 조회
      */
     @GetMapping("/{board_id}/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 
-        System.out.println("articleId = " + articleId);
-
-        return null;
+        List<CommentDto> byArticleId = commentService.findByArticleId(articleId);
+        return ResponseEntity.ok(byArticleId);
     }
+
+    /**
+     * 댓글 조회기능
+     */
 
     @GetMapping("/{comment_id}")
     public ResponseEntity<CommentDto> getComment(@PathVariable("comment_id") Long id){
-        commentService.findComment(id);
-        return null;
+        CommentDto commentDto = commentService.findComment(id);
+        return ResponseEntity.ok(commentDto);
     }
 
 
@@ -82,7 +84,7 @@ public class CommentController {
 
     @Autowired
     ArticleService articleService;
-    @GetMapping("/comment/article_save")
+    @GetMapping("/article_save")
     public void testSave(){
         articleService.test();
     }

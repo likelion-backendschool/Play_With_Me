@@ -48,4 +48,17 @@ public class Comment {
         updatedAt = LocalDateTime.now().withNano(0);
     }
 
+    public CommentDto toCommentDto(){
+
+        CommentDto commentDto = CommentDto.builder()
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .contents(contents)
+                .secretStatus(secretStatus)
+                .build();
+        return commentDto;
+
+    }
+
+
 }
