@@ -41,14 +41,11 @@ public class ArticleController {
         return ResponseEntity.status(HttpStatus.OK).body(ArticleDto.toDto(article));
     }
 
-//    // 게시글 수정
-//    @PostMapping("/modify/{board_id}/{article_id}")
-//    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody ArticleDto articleDto) {
-//        articleDto.setBoardId(boardId);
-//        articleDto.setId(articleId);
-//        Article article = ArticleDto.toEntity(articleDto);
-//        articleService.modify(article);
-//    }
+    // 게시글 수정
+    @PostMapping("/modify/{board_id}/{article_id}")
+    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody ArticleRequestDto articleRequestDto) {
+        articleService.update(articleId, articleRequestDto);
+    }
 
     // 게시글 삭제
 

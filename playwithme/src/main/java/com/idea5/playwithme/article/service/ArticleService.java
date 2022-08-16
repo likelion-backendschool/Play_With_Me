@@ -44,19 +44,18 @@ public class ArticleService {
         return articleRepository.findById(articleId).orElse(null);
     }
 
-//    // 게시글 내용 수정
-//    public void modify(Article article) {
-//        Long id = article.getId();
-//        Article findArticle = articleRepository.findById(id)
-//                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(id)));
-//        // TODO: 수정될  수 있는 값
-//        findArticle.setTitle(article.getTitle());
-//        findArticle.setContents(article.getContents());
-//        findArticle.setMaxRecruitNum(article.getMaxRecruitNum());
-//        findArticle.setUpdatedAt(LocalDateTime.now());
-//        findArticle.setGender(article.getGender());
-//        findArticle.setAgeRange(article.getAgeRange());
-//
-//        articleRepository.save(findArticle);
-//    }
+    // 게시글 내용 수정
+    public void update(Long articleId, ArticleRequestDto articleRequestDto) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
+        // TODO: 수정될  수 있는 값(모집 상태 바꾸는 요청은 따로?)
+        article.setTitle(articleRequestDto.getTitle());
+        article.setContents(articleRequestDto.getContents());
+        article.setMaxRecruitNum(articleRequestDto.getMaxRecruitNum());
+        article.setUpdatedAt(LocalDateTime.now());
+        article.setGender(articleRequestDto.getGender());
+        article.setAgeRange(articleRequestDto.getAgeRange());
+
+        articleRepository.save(article);
+    }
 }
