@@ -39,36 +39,36 @@ class ArticleServiceTest {
     void findById() {
     }
 
-    @Test
-    void create() {
-        // given
-        Board board = Board.builder()
-                .createdAt(LocalDateTime.now())
-                .isBlind(true)
-                .build();
-        boardRepository.save(board);
-        Member member = new Member();
-        memberRepository.save(member);
-        Article article = Article.builder()
-                .title("제목")
-                .contents("내용")
-                .maxRecruitNum(5)
-                .recruitStatus(true)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .gender("Female")
-                .ageRange("10~20")
-                .board(board)
-                .member(member)
-                .build();
-        // when
-        articleService.create(article);
-        // then
-        Article findArticle = articleRepository.findById(1L).orElse(null);
-        assertThat(findArticle.getTitle()).isEqualTo("제목");
-        assertThat(findArticle.getContents()).isEqualTo("내용");
-        assertThat(findArticle.getMaxRecruitNum()).isEqualTo(5);
-        assertThat(findArticle.getGender()).isEqualTo("Female");
-        assertThat(findArticle.getAgeRange()).isEqualTo("10~20");
-    }
+//    @Test
+//    void create() {
+//        // given
+//        Board board = Board.builder()
+//                .createdAt(LocalDateTime.now())
+//                .isBlind(true)
+//                .build();
+//        boardRepository.save(board);
+//        Member member = new Member();
+//        memberRepository.save(member);
+//        Article article = Article.builder()
+//                .title("제목")
+//                .contents("내용")
+//                .maxRecruitNum(5)
+//                .recruitStatus(true)
+//                .createdAt(LocalDateTime.now())
+//                .updatedAt(LocalDateTime.now())
+//                .gender("Female")
+//                .ageRange("10~20")
+//                .board(board)
+//                .member(member)
+//                .build();
+//        // when
+//        articleService.create(article);
+//        // then
+//        Article findArticle = articleRepository.findById(1L).orElse(null);
+//        assertThat(findArticle.getTitle()).isEqualTo("제목");
+//        assertThat(findArticle.getContents()).isEqualTo("내용");
+//        assertThat(findArticle.getMaxRecruitNum()).isEqualTo(5);
+//        assertThat(findArticle.getGender()).isEqualTo("Female");
+//        assertThat(findArticle.getAgeRange()).isEqualTo("10~20");
+//    }
 }

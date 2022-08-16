@@ -1,15 +1,15 @@
 package com.idea5.playwithme.article.dto;
 
 import com.idea5.playwithme.article.domain.Article;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticleDto {
 
     private Long id;
@@ -38,19 +38,6 @@ public class ArticleDto {
                 .ageRange(article.getAgeRange())
                 .boardId(article.getBoard().getId())
                 .memberId(article.getMember().getId())
-                .build();
-    }
-
-    // ArticleDto -> Article 변환
-    public static Article toEntity(ArticleDto articleDto) {
-        return Article.builder()
-                .id(articleDto.getId())
-                .title(articleDto.getTitle())
-                .contents(articleDto.getContents())
-                .maxRecruitNum(articleDto.getMaxRecruitNum())
-                .recruitStatus(articleDto.getRecruitStatus())
-                .gender(articleDto.getGender())
-                .ageRange(articleDto.getAgeRange())
                 .build();
     }
 }
