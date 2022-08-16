@@ -1,14 +1,18 @@
 package com.idea5.playwithme.event.crawling;
 
+import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.event.repository.EventRepository;
 import lombok.Getter;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,15 +20,18 @@ import java.util.List;
 
 @Service
 public class ConcertAndMusicalCrawlService{
+
     @Getter
-    private static String url = "http://ticket.interpark.com/tiki/special/TPCalendar.asp?ImgYn=Y&Ca=&KindOfGoods={category}&KindOfFlag=&Type=A&PlayDate={eventDate}";
+    private String url = "http://ticket.interpark.com/tiki/special/TPCalendar.asp?ImgYn=Y&Ca=&KindOfGoods={category}&KindOfFlag=&Type=A&PlayDate={eventDate}";
+
+    @Autowired
+    private EventRepository eventRepository;
 
 
+    private final String musicalId = "01011";
+    private final String concertId = "01003";
 
-    private final static String musicalId = "01011";
-    private final static String concertId = "01003";
-
-    public static void setUrl(int category){ // 매일 날짜 바꾸기 위해서
+    public LocalDateTime setUrl(int category){ // 매일 날짜 바꾸기 위해서
         LocalDateTime nextMonth = LocalDateTime.now().plusMonths(1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -32,28 +39,18 @@ public class ConcertAndMusicalCrawlService{
         url = url.replace("{eventDate}",eventDate);
 
         switch (category){
-            case 5: // 뮤지컬
+            case 4: // 뮤지컬
                 url = url.replace("{category}",musicalId);
                 break;
 
-            case 6 : // 콘서트
+            case 5: // 콘서트
                 url = url.replace("{category}",concertId);
                 break;
         }
+        return nextMonth;
     }
 
-    public static void crawling() throws IOException{
-//        Connection conn = Jsoup.connect(DRIVER_PATH);
-        Connection conn = Jsoup.connect("https://ticket.interpark.com/tiki/special/TPCalendar.asp?ImgYn=Y&Ca=&KindOfGoods=01009&KindOfFlag=P&PlayDate=20220805");
-
-        List<String> names = crawlEventName();
-        List<String> locations = crawlEventLocation();
-        System.out.println(names);
-        System.out.println(locations);
-        System.out.println(names.size()+" "+locations.size());
-    }
-
-    public static List<String> crawlEventName() throws IOException {
+    public List<String> crawlEventName() throws IOException {
 
         Connection conn = Jsoup.connect(url);
 
@@ -72,7 +69,7 @@ public class ConcertAndMusicalCrawlService{
         return names;
     }
 
-    public static List<String> crawlEventLocation() throws IOException {
+    public List<String> crawlEventLocation() throws IOException {
 //        Connection conn = Jsoup.connect("https://ticket.interpark.com/tiki/special/TPCalendar.asp?ImgYn=Y&Ca=&KindOfGoods=01009&KindOfFlag=P&PlayDate=20220805");
 
         Connection conn = Jsoup.connect(url);
@@ -93,8 +90,26 @@ public class ConcertAndMusicalCrawlService{
         return locations;
     }
 
-    public static void main(String[] args)throws IOException {
-        setUrl(5);
-        crawling();
+    public void saveEvent(int category) { // controller에서 saveEvent를 통해 크롤링 요청
+        LocalDateTime date = setUrl(category);
+        List<String> names= null;
+        List<String> locations = null;
+
+        try{
+            names = crawlEventName();
+            locations = crawlEventLocation();
+        }
+        catch (Exception e){
+            e.printStackTrace(); //TODO 오류 처리 생각
+        }
+
+        for(int i=0;i<names.size();i++){
+            Event event = new Event();
+            event.setDate(date);
+            event.setCategoryId(category);
+            event.setName(names.get(i));
+            event.setLocation(locations.get(i));
+            eventRepository.save(event);
+        }
     }
 }
