@@ -24,6 +24,7 @@ public class ArticleController {
     // 게시글 작성
     @PostMapping("/write/{board_id}")
     public ResponseEntity<ArticleResponseDto> create(@PathVariable("board_id") Long boardId, @RequestBody ArticleRequestDto articleRequestDto) {
+        // TODO: member session 처리
         Long articleId = articleService.create(boardId, articleRequestDto);
         Article article = articleService.findById(articleId);
 
@@ -43,10 +44,13 @@ public class ArticleController {
 
     // 게시글 수정
     @PostMapping("/modify/{board_id}/{article_id}")
-    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody ArticleRequestDto articleRequestDto) {
+    public void update(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody ArticleRequestDto articleRequestDto) {
         articleService.update(articleId, articleRequestDto);
     }
 
     // 게시글 삭제
-
+    @DeleteMapping("/delete/{board_id}/{article_id}")
+    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+        articleService.delete(articleId);
+    }
 }

@@ -25,6 +25,7 @@ public class ArticleService {
         // board, member 넣기
         Board board = boardRepository.findById(boardId).orElse(null);
         articleRequestDto.setBoard(board);
+        // TODO: member 처리(테스트를 위해 무조건 memberId 1로 세팅해놓음)
         Member member = memberRepository.findById(1L).orElse(null);
         articleRequestDto.setMember(member);
         // 변환 후 값 채우기
@@ -57,5 +58,12 @@ public class ArticleService {
         article.setAgeRange(articleRequestDto.getAgeRange());
 
         articleRepository.save(article);
+    }
+
+    // 게시글 삭제
+    public void delete(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
+        articleRepository.delete(article);
     }
 }
