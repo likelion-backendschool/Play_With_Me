@@ -5,6 +5,8 @@ import com.idea5.playwithme.article.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
@@ -14,7 +16,14 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Article getArticleDetail(Long boardId, Long articleId) {
+    public Article create(Article article) {
+        article.setCreatedAt(LocalDateTime.now());
+        article.setUpdatedAt(LocalDateTime.now());
+
+        return articleRepository.save(article);
+    }
+
+    public Article getDetails(Long boardId, Long articleId) {
         return findById(articleId);
     }
     public Article findById(Long articleId) {
