@@ -1,5 +1,6 @@
-package com.idea5.playwithme;
+package com.idea5.playwithme.event.crawling;
 
+import com.idea5.playwithme.event.crawling.ConcertAndMusicalCrawlService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

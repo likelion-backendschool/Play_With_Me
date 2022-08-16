@@ -1,9 +1,7 @@
-package com.idea5.playwithme;
+package com.idea5.playwithme.event.crawling;
 
+import com.idea5.playwithme.event.crawling.SportsCrawlService;
 import org.junit.jupiter.api.Test;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

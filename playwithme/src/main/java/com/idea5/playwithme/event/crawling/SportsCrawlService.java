@@ -1,4 +1,4 @@
-package com.idea5.playwithme;
+package com.idea5.playwithme.event.crawling;
 
 import lombok.Getter;
 import org.jsoup.Connection;
