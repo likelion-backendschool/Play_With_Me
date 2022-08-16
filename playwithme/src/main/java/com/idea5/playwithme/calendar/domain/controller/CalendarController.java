@@ -4,6 +4,7 @@ package com.idea5.playwithme.calendar.domain.controller;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.domain.repository.EventRepository;
 
+import com.idea5.playwithme.event.domain.service.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,33 +21,31 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 public class CalendarController {
-    private EventRepository eventRepository;
+    private EventService eventService;
     private List<Event> events = new ArrayList<>();
 
-    @GetMapping("/calendar") // 템플릿 적용 확인 테스트용
+    @GetMapping("/event") // 템플릿 적용 확인 테스트용
     public String showCalendar(){ // 템플릿 적용 확인 테스트용
         return "calendar";
     }
 
     @GetMapping("/event/{category}")
     public String showEvent(Model model, @PathVariable String category) {
-        long categoryId = 0;
+        Integer categoryId = 0;
         switch(category) {
-            case "야구": categoryId = 1;
+            case "baseball": categoryId = 1;
                 break;
-            case "축구": categoryId = 2;
+            case "soccer": categoryId = 2;
                 break;
-            case "농구": categoryId = 3;
+            case "basketball": categoryId = 3;
                 break;
-            case "e-sports": categoryId = 4;
+            case "musical": categoryId = 4;
                 break;
-            case "musical": categoryId = 5;
-                break;
-            case "concert": categoryId = 6;
+            case "concert": categoryId = 5;
                 break;
         }
 
-        events = eventRepository.findByCategoryId(categoryId);
+        events = eventService.findByCategoryId(categoryId);
 
         model.addAttribute("events", events);
 
