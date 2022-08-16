@@ -40,4 +40,17 @@ public class ArticleDto {
                 .memberId(article.getMember().getId())
                 .build();
     }
+
+    // ArticleDto -> Article 변환
+    public static Article toEntity(ArticleDto articleDto) {
+        return Article.builder()
+                .id(articleDto.getId())
+                .title(articleDto.getTitle())
+                .contents(articleDto.getContents())
+                .maxRecruitNum(articleDto.getMaxRecruitNum())
+                .recruitStatus(articleDto.getRecruitStatus())
+                .gender(articleDto.getGender())
+                .ageRange(articleDto.getAgeRange())
+                .build();
+    }
 }
