@@ -2,7 +2,7 @@ package com.idea5.playwithme.article.service;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.ArticleCreateForm;
-import com.idea5.playwithme.article.dto.ArticleRequestDto;
+import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
@@ -45,16 +45,17 @@ public class ArticleService {
     }
 
     // 게시글 내용 수정
-    public void update(Long articleId, ArticleRequestDto articleRequestDto) {
+    @Transactional
+    public void update(Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
         // TODO: 수정될  수 있는 값(모집 상태 바꾸는 요청은 따로?)
-        article.setTitle(articleRequestDto.getTitle());
-        article.setContents(articleRequestDto.getContents());
-        article.setMaxRecruitNum(articleRequestDto.getMaxRecruitNum());
+        article.setTitle(articleUpdateForm.getTitle());
+        article.setContents(articleUpdateForm.getContents());
+        article.setMaxRecruitNum(articleUpdateForm.getMaxRecruitNum());
+        article.setGender(articleUpdateForm.getGender());
+        article.setAgeRange(articleUpdateForm.getAgeRange());
         article.setUpdatedAt(LocalDateTime.now());
-        article.setGender(articleRequestDto.getGender());
-        article.setAgeRange(articleRequestDto.getAgeRange());
 
         articleRepository.save(article);
     }

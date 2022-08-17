@@ -1,10 +1,7 @@
 package com.idea5.playwithme.article.Controller;
 
 import com.idea5.playwithme.article.domain.Article;
-import com.idea5.playwithme.article.dto.ArticleCreateForm;
-import com.idea5.playwithme.article.dto.ArticleDto;
-import com.idea5.playwithme.article.dto.ArticleRequestDto;
-import com.idea5.playwithme.article.dto.ArticleResponseDto;
+import com.idea5.playwithme.article.dto.*;
 import com.idea5.playwithme.article.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,8 +49,8 @@ public class ArticleController {
 
     // 게시글 수정
     @PostMapping("/modify/{board_id}/{article_id}")
-    public void update(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @RequestBody ArticleRequestDto articleRequestDto) {
-        articleService.update(articleId, articleRequestDto);
+    public void update(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+        articleService.update(articleId, articleUpdateForm);
     }
 
     // 게시글 삭제
