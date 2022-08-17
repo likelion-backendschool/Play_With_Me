@@ -2,6 +2,7 @@ package com.idea5.playwithme.article.service;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.ArticleCreateForm;
+import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
@@ -67,5 +68,27 @@ class ArticleServiceTest {
         assertThat(findArticle.getRecruitStatus()).isEqualTo(true);
         assertThat(findArticle.getGender()).isEqualTo("Female");
         assertThat(findArticle.getAgeRange()).isEqualTo("10~20");
+    }
+
+    @Test
+    void update() {
+        ArticleUpdateForm articleUpdateForm = ArticleUpdateForm.builder()
+                .title("제목!!")
+                .contents("내용!!")
+                .maxRecruitNum(10)
+                .gender("Male")
+                .ageRange("30~40")
+                .build();
+        Long articleId = 1L;
+        // when
+        articleService.update(articleId, articleUpdateForm);
+        // then
+        Article findArticle = articleRepository.findById(articleId).orElse(null);
+        assertThat(findArticle.getTitle()).isEqualTo("제목!!");
+        assertThat(findArticle.getContents()).isEqualTo("내용!!");
+        assertThat(findArticle.getMaxRecruitNum()).isEqualTo(10);
+        assertThat(findArticle.getGender()).isEqualTo("Male");
+        assertThat(findArticle.getAgeRange()).isEqualTo("30~40");
+        assertThat(findArticle.getUpdatedAt()).isAfter(findArticle.getCreatedAt());
     }
 }
