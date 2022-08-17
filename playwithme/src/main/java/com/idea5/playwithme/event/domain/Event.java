@@ -3,6 +3,7 @@ package com.idea5.playwithme.event.domain;
 import com.idea5.playwithme.board.domain.Board;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Event {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
