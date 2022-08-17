@@ -25,18 +25,22 @@ public class SportsCrawlService {
     @Autowired
     private EventRepository eventRepository;
     @Getter
-    private static String url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}";
+    private static String url = "";
     // 축구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query=2022%EB%85%84%208%EC%9B%94%2013%EC%9D%BC%20K%EB%A6%AC%EA%B7%B81%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95"
     // 농구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}%EC%9D%BC%20%EB%86%8D%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95
     // 야구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}%EC%9D%BC%20%EC%95%BC%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95
 
     private LocalDateTime setUrl(int category) {
-
-        LocalDateTime nextMonth = LocalDateTime.now().plusMonths(1).plusDays(2);
+        //url 초기화
+        url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}";
+        LocalDateTime nextMonth = LocalDateTime.now().plusMonths(1);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String eventDate = nextMonth.format(formatter);
 
+        url = url.replace("{dd}",eventDate.substring(6,8));
+        url = url.replace("{mm}",eventDate.substring(4,6));
+        url = url.replace("{yy}",eventDate.substring(0,4));
         switch (category){
             case 1 :
                 url +="%EC%9D%BC%20%EC%95%BC%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95";
@@ -50,9 +54,7 @@ public class SportsCrawlService {
                 url += "%EC%9D%BC%20%EB%86%8D%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95";
                 break;
         }
-        url = url.replace("{dd}",eventDate.substring(6,8));
-        url = url.replace("{mm}",eventDate.substring(4,6));
-        url = url.replace("{yy}",eventDate.substring(0,4));
+
 
         return nextMonth;
     }
@@ -64,8 +66,7 @@ public class SportsCrawlService {
 
         Document document = conn.get();
         Elements tr = document.select("tbody._scroll_content tr");
-        System.out.println(url);
-        System.out.println("qweqwe sc"+document);
+
         for(Element e : tr){
             String [] temp = new String[2];
             String name = e.select("td.l_team a").attr("title")+" vs "+e.select("td.r_team a").attr("title");
@@ -98,7 +99,6 @@ public class SportsCrawlService {
             temp[0] = name;
             temp[1] = place;
             output.add(temp);
-            System.out.println(name +" \n"+place);
         }
         return output;
     }
@@ -109,7 +109,6 @@ public class SportsCrawlService {
             output = crawlingBaseBall();
         }
         else{
-            System.out.println("asdasd "+category);
             output = crawlingSoccerAndBasketball();
         }
         return output;
