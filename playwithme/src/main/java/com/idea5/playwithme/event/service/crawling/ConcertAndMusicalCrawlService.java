@@ -1,4 +1,4 @@
-package com.idea5.playwithme.event.crawling;
+package com.idea5.playwithme.event.service.crawling;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ConcertAndMusicalCrawlService{
+public class ConcertAndMusicalCrawlService implements CrawlService{
 
     @Getter
     private String url = "http://ticket.interpark.com/tiki/special/TPCalendar.asp?ImgYn=Y&Ca=&KindOfGoods={category}&KindOfFlag=&Type=A&PlayDate={eventDate}";

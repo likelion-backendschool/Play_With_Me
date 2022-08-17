@@ -1,6 +1,6 @@
 package com.idea5.playwithme.event.crawling;
 
-import com.idea5.playwithme.event.crawling.SportsCrawlService;
+import com.idea5.playwithme.event.service.crawling.SportsCrawlService;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

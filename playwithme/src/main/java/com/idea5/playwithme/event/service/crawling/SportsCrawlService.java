@@ -1,4 +1,4 @@
-package com.idea5.playwithme.event.crawling;
+package com.idea5.playwithme.event.service.crawling;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class SportsCrawlService {
+public class SportsCrawlService implements CrawlService{
 
     @Autowired
     private EventRepository eventRepository;
@@ -30,7 +30,7 @@ public class SportsCrawlService {
     // 농구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}%EC%9D%BC%20%EB%86%8D%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95
     // 야구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}%EC%9D%BC%20%EC%95%BC%EA%B5%AC%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95
 
-    private LocalDateTime setUrl(int category) {
+    public LocalDateTime setUrl(int category) {
         //url 초기화
         url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query={yy}%EB%85%84%20{mm}%EC%9B%94%20{dd}";
         LocalDateTime nextMonth = LocalDateTime.now().plusMonths(1);

@@ -1,8 +1,8 @@
 package com.idea5.playwithme.event.controller;
 
 
-import com.idea5.playwithme.event.crawling.ConcertAndMusicalCrawlService;
-import com.idea5.playwithme.event.crawling.SportsCrawlService;
+import com.idea5.playwithme.event.service.crawling.ConcertAndMusicalCrawlService;
+import com.idea5.playwithme.event.service.crawling.SportsCrawlService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
