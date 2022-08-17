@@ -17,9 +17,9 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public List<Event> getEventsByCategoryAndDate(Integer categoryId) {
-        LocalDateTime start = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-        LocalDateTime end = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
+    public List<Event> getEventsByCategoryAndDate(Integer categoryId, LocalDate searchDate) {
+        LocalDateTime start = LocalDateTime.of(searchDate, LocalTime.MIN);
+        LocalDateTime end = LocalDateTime.of(searchDate, LocalTime.MAX);
 
         List<Event> events = eventRepository.findAllByDateBetweenAndCategoryId(start, end, categoryId);
         return events;
