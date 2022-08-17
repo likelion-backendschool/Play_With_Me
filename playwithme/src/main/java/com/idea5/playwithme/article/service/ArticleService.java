@@ -1,6 +1,7 @@
 package com.idea5.playwithme.article.service;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.article.dto.ArticleCreateForm;
 import com.idea5.playwithme.article.dto.ArticleRequestDto;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.board.domain.Board;
@@ -21,21 +22,19 @@ public class ArticleService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long create(Long boardId, ArticleRequestDto articleRequestDto) {
-        // board, member 넣기
+    public Long create(Long boardId, ArticleCreateForm articleCreateForm) {
         Board board = boardRepository.findById(boardId).orElse(null);
-        articleRequestDto.setBoard(board);
         // TODO: member 처리(테스트를 위해 무조건 memberId 1로 세팅해놓음)
         Member member = memberRepository.findById(1L).orElse(null);
-        articleRequestDto.setMember(member);
-        // 변환 후 값 채우기
-        Article article = ArticleRequestDto.toEntity(articleRequestDto);
-        article.setCreatedAt(LocalDateTime.now());
-        article.setUpdatedAt(LocalDateTime.now());
-        // 게시글 저장 후 ID 반환
-        articleRepository.save(article);
 
-        return article.getId();
+        // 변환 후 값 채우기
+        Article article = ArticleCreateForm.toEntity(articleCreateForm);
+        article.setBoard(board);
+        article.setMember(member);
+        // 게시글 저장 후 ID 반환
+        Article saveArticle = articleRepository.save(article);
+        System.out.println(saveArticle.getId());
+        return saveArticle.getId();
     }
 
     public Article getDetails(Long boardId, Long articleId) {
