@@ -6,6 +6,8 @@ import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
+import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.event.repository.EventRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +30,8 @@ class ArticleServiceTest {
     private BoardRepository boardRepository;
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
     @BeforeEach
     void beforeEach() {
@@ -39,6 +44,38 @@ class ArticleServiceTest {
 
     @Test
     void findById() {
+    }
+
+    @Test
+    void createSampleData() {
+        Event event = Event.builder()
+                .categoryId(1)
+                .date(LocalDateTime.now())
+                .location("잠실종합운동장 내 보조경기장")
+                .name("싸이 흠뻑쇼 SUMMER SWAG - 서울")
+                .build();
+        // TODO : 주석 제거하면 오류
+        //eventRepository.save(event);
+
+        Board board = Board.builder()
+                .createdAt(LocalDateTime.now())
+                .isBlind(true)
+                .build();
+        board.setEvent(event);
+        boardRepository.save(board);
+        Member member = new Member();
+        memberRepository.save(member);
+
+        IntStream.rangeClosed(1, 20).forEach(id -> {
+            ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
+                    .title("제목 %d".formatted(id))
+                    .contents("내용 %d".formatted(id))
+                    .maxRecruitNum(id % 5 + 1)
+                    .gender("Female")
+                    .ageRange("10~20")
+                    .build();
+            articleService.create(1L, articleCreateForm);
+        });
     }
 
     @Test
