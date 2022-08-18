@@ -3,30 +3,75 @@ package com.idea5.playwithme.member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.domain.RoleType;
 import com.idea5.playwithme.member.dto.KakaoUser;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
+import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.apache.tomcat.util.buf.UEncoder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.Encoder;
+import java.net.Authenticator;
+import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
+    @Value("${cos.key}")
+    private String cosKey;
 
-    public KakaoUser kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
+    private final MemberRepository memberRepository;
+//    private final AuthenticationManager authenticationManager;
+
+    @Transactional
+    public void kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         // 사용자 요청 코드를 이용해서 엑세스 토큰 요청
         String accessToken = getAccessToken(code);
 
         // 엑세스토큰을 이용해 사용자 정보 받아오기
         KakaoUser kakaoUserInfo = getKakaoUserInfo(accessToken);
 
-        return kakaoUserInfo;
+//        // 사용자가 이미 가입된 회원인지 확인
+//        Member originUser = findMember(kakaoUserInfo.getUsername());
+//        if (originUser.getUsername() == null) {
+//            join(kakaoUserInfo);
+//        }
+
+//        // 자동 로그인 진행
+//        Authentication authentication = authenticationManager
+//                .authenticate(new UsernamePasswordAuthenticationToken(kakaoUserInfo.getUsername(), cosKey));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    }
+
+    @Transactional(readOnly = true)
+    public Member findMember(String username) {
+        Member member = memberRepository.findByUsername(username).orElseGet(() -> {
+            return new Member();
+        });
+        return member;
     }
 
     private String getAccessToken(String code) throws JsonProcessingException{
@@ -76,16 +121,37 @@ public class MemberService {
                 host , HttpMethod.POST, kakaoUserInfoRequest, String.class
         );
 
+        // 카카오 응답으로 온 사용자 정보 파싱
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(response.getBody());
-
+        Long id = jsonNode.get("id").asLong();
         String email = jsonNode.get("kakao_account").get("email").asText();
         String ageRange = jsonNode.get("kakao_account").get("age_range").asText();
         String nickname = jsonNode.get("properties").get("nickname").asText();
         String gender = jsonNode.get("kakao_account").get("gender").asText();
+        String username = email + "_" + id;  // PWM의 유저 아이디 = 카카오이메일 + 카카오회원번호
 
-        return new KakaoUser(email, ageRange, nickname, gender);
+        return new KakaoUser(id, username, email, ageRange, nickname, gender);
     }
 
+    @Transactional
+    public void join(KakaoUser kakaoUser) {
+        // 회원가입을 멤버가 직접하지 않고 카카오 정보로 이용해 자동 회원가입
+        Member member = new Member();
+
+//        String rawPassword = UUID.randomUUID().toString();                 // PWM의 회원 원문 비밀번호 => UUID
+//        String encPassword = encoder.encode(rawPassword);                  // PWM의 비밀번호 해쉬 값 변환
+
+        member.setName(kakaoUser.getName());
+        member.setUsername(kakaoUser.getUsername());
+        member.setPassword(cosKey);
+        member.setEmail(kakaoUser.getEmail());
+        member.setAgeRange(kakaoUser.getAgeRange());
+        member.setMannerTemp(50);
+        member.setGender(kakaoUser.getGender());
+        member.setRole(RoleType.USER);
+
+        Member saveMember = memberRepository.save(member);
+    }
 
 }

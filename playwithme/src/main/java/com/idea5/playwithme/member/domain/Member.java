@@ -19,14 +19,20 @@ public class Member {
     @Column(name = "mebmer_id")
     private Long id;
 
+    @Column(length = 20)
+    private String name;
+
+    @Column(nullable = false, length = 100, unique = true)
+    private String username;        // 아이디
+
+    @Column(nullable = false, length = 100)
+    private String password;        // 비밀번호 => 해쉬(비밀번호 암호화)
+
     @Column(length = 50)
     private String email;
 
     @Column(length = 20)
     private String ageRange;
-
-    @Column(length = 20)
-    private String name;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -35,6 +41,9 @@ public class Member {
 
     @Column(length = 20)
     private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Article> articleList = new ArrayList<>();
