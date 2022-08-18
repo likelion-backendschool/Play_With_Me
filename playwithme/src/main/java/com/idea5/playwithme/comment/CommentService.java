@@ -4,15 +4,13 @@ import com.idea5.playwithme.article.ArticleRepository;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.domain.CommentDto;
-import com.idea5.playwithme.comment.domain.CommentRequestDto;
+import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.member.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class CommentService {
     }
 
     @Transactional
-    public Long commentSave(Long articleId, CommentRequestDto dto) {
+    public Long commentSave(Long articleId, CommentCreateForm dto) {
         Article article = articleRepository.findById(articleId).orElse(null);
         dto.setArticle(article);
         dto.setMember(null);
@@ -53,7 +51,7 @@ public class CommentService {
     /**
      * 세션 기능 완료된 후에는 이 메서드를 사용.
      */
-    public Long commentSave(Long memberId, Long articleId, CommentRequestDto dto) {
+    public Long commentSave(Long memberId, Long articleId, CommentCreateForm dto) {
         Article article = articleRepository.findById(articleId).orElse(null);
         Member member = memberRepository.findById(memberId).orElse(null);
         dto.setArticle(article);
@@ -67,7 +65,7 @@ public class CommentService {
     }
 
     @Transactional
-    public Long commentUpdate(Long id, CommentRequestDto dto) {
+    public Long commentUpdate(Long id, CommentCreateForm dto) {
         Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
         comment.update(dto.getContents());
         return comment.getId();
@@ -81,7 +79,9 @@ public class CommentService {
 
     @Transactional
     public void delete(Long id) {
-        Comment comment = commentRepository.findById(id).orElse(null);
+        Comment comment = commentRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 댓글이 존재하지 않습니다." + id));
+
         commentRepository.delete(comment);
     }
 }

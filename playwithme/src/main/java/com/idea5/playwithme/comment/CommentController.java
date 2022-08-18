@@ -1,18 +1,14 @@
 package com.idea5.playwithme.comment;
 
 import com.idea5.playwithme.article.ArticleService;
-import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.domain.CommentDto;
-import com.idea5.playwithme.comment.domain.CommentRequestDto;
-import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,17 +57,17 @@ public class CommentController {
      */
     //localhost:
     @PostMapping("/write/{board_id}/{article_id}")
-    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid @RequestBody CommentRequestDto dto)
+    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid @RequestBody CommentCreateForm createForm)
     {
-        Long commentId = commentService.commentSave(articleId, dto); // 로그인 세션 추가되면 변경해야 됨.
+        Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
 
     @PostMapping("/modify/{comment_id}")
-    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, @RequestBody CommentRequestDto dto)
+    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, @RequestBody CommentCreateForm createForm)
     {
         System.out.println("id = " + id);
-        Long commentId = commentService.commentUpdate(id, dto);// 로그인 세션 추가되면 변경해야 됨.
+        Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
 
