@@ -31,7 +31,7 @@ public class Comment {
     @Column(name = "secret_status", nullable = false)
     private Boolean secretStatus = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "article_id")
     private Article article;
 
