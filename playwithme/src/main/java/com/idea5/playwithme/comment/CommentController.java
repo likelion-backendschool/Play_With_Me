@@ -45,26 +45,21 @@ public class CommentController {
 
 
     /**
-     * 질문)
-     * 댓글은 게시글과 유저랑만 관계가 있음.
-     * -> board_id가 과연 필요할까?
-     * 유저 아이디 (fk)는 세션으로 하면 될거 같음
-     * -> @LoginUser
-     *
-     * 현재 로그인한 회원이 누구인지.
-     * -> HttpSession session으로 하자.
-     *
+     * 작성
      */
     //localhost:
-    @PostMapping("/write/{board_id}/{article_id}")
-    public ResponseEntity<CommentDto> writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid @RequestBody CommentCreateForm createForm)
+    @PostMapping("/write/{article_id}")
+    public ResponseEntity<CommentDto> writeComment(@PathVariable("article_id") Long articleId, CommentCreateForm createForm)
     {
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
 
+    /**
+     * 수정
+     */
     @PostMapping("/modify/{comment_id}")
-    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, @RequestBody CommentCreateForm createForm)
+    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm)
     {
         System.out.println("id = " + id);
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
