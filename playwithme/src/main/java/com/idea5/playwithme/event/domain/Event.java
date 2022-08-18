@@ -26,6 +26,7 @@ public class Event {
     @Column(length = 200)
     private String location;
 
+    // TODO: 크롤링 시간으로 들어옴
     @CreatedDate
     private LocalDateTime date;
 
