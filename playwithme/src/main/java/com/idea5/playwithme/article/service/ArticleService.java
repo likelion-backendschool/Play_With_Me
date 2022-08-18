@@ -26,7 +26,7 @@ public class ArticleService {
         Board board = boardRepository.findById(boardId).orElse(null);
         // TODO: member 처리(테스트를 위해 무조건 memberId 1로 세팅해놓음)
         Member member = memberRepository.findById(1L).orElse(null);
-
+        
         // 변환 후 값 채우기
         Article article = ArticleCreateForm.toEntity(articleCreateForm);
         article.setBoard(board);
@@ -65,5 +65,16 @@ public class ArticleService {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
         articleRepository.delete(article);
+    }
+
+    public void updateStatus(Long articleId) {
+        // 모집 완료(false)로 변경
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
+        article.setRecruitStatus(false);
+
+        articleRepository.save(article);
+        // TODO: 동행 테이블에 댓글 남긴 자동으로 회원 정보 저장?..(선택 시점 확인 필요)
+        // TODO: 공연 날짜 이후에 게시글 작성자가 동행 인원 확정하기 -> 확정 인원을 바탕으로 매너 평가
     }
 }

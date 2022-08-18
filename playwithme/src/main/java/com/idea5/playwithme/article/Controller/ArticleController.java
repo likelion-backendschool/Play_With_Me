@@ -53,6 +53,13 @@ public class ArticleController {
         articleService.update(articleId, articleUpdateForm);
     }
 
+    // 게시글 모집 상태 완료로 변경
+    @GetMapping("/complete/{board_id}/{article_id}")
+    public void updateStatus(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+        articleService.updateStatus(articleId);
+        // TODO: 게시글 리스트 페이지 redirect
+    }
+
     // 게시글 삭제
     @DeleteMapping("/delete/{board_id}/{article_id}")
     public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
