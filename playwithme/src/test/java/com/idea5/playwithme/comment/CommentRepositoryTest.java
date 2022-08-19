@@ -1,17 +1,13 @@
 package com.idea5.playwithme.comment;
 
-import com.idea5.playwithme.article.ArticleRepository;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.comment.domain.Comment;
-import com.idea5.playwithme.member.MemberRepository;
-import com.idea5.playwithme.member.domain.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 

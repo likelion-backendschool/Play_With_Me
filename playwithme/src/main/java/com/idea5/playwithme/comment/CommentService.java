@@ -1,12 +1,12 @@
 package com.idea5.playwithme.comment;
 
-import com.idea5.playwithme.article.ArticleRepository;
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
-import com.idea5.playwithme.member.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

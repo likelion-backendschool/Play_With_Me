@@ -1,6 +1,6 @@
 package com.idea5.playwithme.comment;
 
-import com.idea5.playwithme.article.ArticleService;
+import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -81,7 +80,7 @@ public class CommentController {
     ArticleService articleService;
     @GetMapping("/article_save")
     public void testSave(){
-        articleService.test();
+//        articleService.test();
     }
 
 }
