@@ -6,6 +6,7 @@ import com.idea5.playwithme.article.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,10 +42,10 @@ public class ArticleController {
     // 게시글 상세 조회
     // TODO: board_id url에 꼭 넣어야 하는가
     @GetMapping("/{board_id}/{article_id}")
-    public ResponseEntity<ArticleDto> getDetails(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    public String getDetails(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Model model) {
         Article article = articleService.getDetails(boardId, articleId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(ArticleDto.toDto(article));
+        return "article_detail";
     }
 
     // 게시글 수정
