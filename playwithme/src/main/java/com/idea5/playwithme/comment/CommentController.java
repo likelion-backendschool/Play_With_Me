@@ -66,6 +66,10 @@ public class CommentController {
         return null;
     }
 
+    /**
+     * 삭제
+     */
+
     @DeleteMapping("/delete/{comment_id}")
     public ResponseEntity delete(@PathVariable("comment_id") Long id) {
         commentService.delete(id);
