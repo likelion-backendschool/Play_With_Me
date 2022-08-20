@@ -49,7 +49,6 @@ public class ArticleService {
     public void update(Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
-        // TODO: 수정될  수 있는 값(모집 상태 바꾸는 요청은 따로?)
         article.setTitle(articleUpdateForm.getTitle());
         article.setContents(articleUpdateForm.getContents());
         article.setMaxRecruitNum(articleUpdateForm.getMaxRecruitNum());
