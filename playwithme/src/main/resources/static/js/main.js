@@ -59,7 +59,7 @@ function init_calendar(date) {
                 curr_date.addClass("event-date");
             }
             // Set onClick handler for clicking a date
-            curr_date.click({events: events, month: months[month], day:day}, date_click);
+            curr_date.click({events: events, year: year, month: month+1, day:day}, date_click);
             row.append(curr_date);
         }
     }
@@ -82,6 +82,33 @@ function date_click(event) {
     $(".active-date").removeClass("active-date");
     $(this).addClass("active-date");
     show_events(event.data.events, event.data.month, event.data.day);
+
+      // URL 관련 추가 시작
+
+      // (yyyy-mm-dd) 포맷에 맞게 Date를 String으로 변환
+      // 월, 일 2자리 이하시 0 붙여서 나오도록
+      var dateString = event.data.year + "-";
+      if ((event.data.month) < 10) {
+          dateString += "0";
+          }
+      dateString += (event.data.month) + "-";
+      if (event.data.day < 10) {
+          dateString += "0";
+          }
+      dateString += event.data.day;
+
+       let params = (new URL(document.location)).searchParams;
+       const categoryName = params.get("category");
+       const categoryName_2 = categoryName;
+       params.set("category",categoryName_2);
+       params.set("date",dateString);
+
+       // 페이지 갱신 없이 URL만 변경하도록
+       const state = { 'category':categoryName_2, 'date': dateString }
+       const title = ''
+       const url = "event?"+ params
+       history.pushState(state, title, url)
+      // URL 관련 추가 끝
 };
 
 // Event handler for when a month is clicked
@@ -307,19 +334,19 @@ var event_data = {
     ]
 };
 
-const months = [ 
-    "January", 
-    "February", 
-    "March", 
-    "April", 
-    "May", 
-    "June", 
-    "July", 
-    "August", 
-    "September", 
-    "October", 
-    "November", 
-    "December" 
+const months = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
 ];
 
 })(jQuery);
