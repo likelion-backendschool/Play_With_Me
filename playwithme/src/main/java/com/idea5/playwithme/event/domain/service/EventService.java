@@ -5,6 +5,7 @@ import com.idea5.playwithme.event.domain.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,5 +16,11 @@ public class EventService {
         return eventRepository.findByCategoryId(id);
 
     }
+
+    public List<Event> findByCategoryIdAndDate(Integer categoryId, LocalDateTime date)
+    {
+        return eventRepository.findByCategoryIdAndDate(categoryId, date);
+    }
+
 }
 

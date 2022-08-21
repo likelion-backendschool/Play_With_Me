@@ -98,7 +98,7 @@ function date_click(event) {
       dateString += event.data.day;
 
        let params = (new URL(document.location)).searchParams;
-       const categoryName = params.get("category");
+       let categoryName = params.get("category");
        const categoryName_2 = categoryName;
        params.set("category",categoryName_2);
        params.set("date",dateString);
@@ -109,6 +109,21 @@ function date_click(event) {
        const url = "event?"+ params
        history.pushState(state, title, url)
       // URL 관련 추가 끝
+
+     // ajax로 "/getEvent?category=categoryName_2&date=dateString" 호출해서 List<Event> 받아오기
+     $.ajax({
+       type:"GET",
+       url:"/getEvent?" + params,
+       dataType:"JSON",
+
+       success: function(data){
+             console.log("통신성공");
+             console.log(data);
+        },
+       error:function(){
+             console.log("통신에러");
+        }
+     })
 };
 
 // Event handler for when a month is clicked
