@@ -22,5 +22,14 @@ public class EventService {
         return eventRepository.findByCategoryIdAndDate(categoryId, date);
     }
 
+    public void create(Long id, Integer categoryId, String name, String location, LocalDateTime date) { // getEvent_Test()용
+        Event e = new Event();
+        e.setId(id);
+        e.setCategoryId(categoryId);
+        e.setName(name);
+        e.setLocation(location);
+        e.setDate(date);
+        eventRepository.save(e);
+    }
 }
 
