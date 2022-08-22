@@ -5,7 +5,9 @@ import com.idea5.playwithme.event.domain.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -17,19 +19,11 @@ public class EventService {
 
     }
 
-    public List<Event> findByCategoryIdAndDate(Integer categoryId, LocalDateTime date)
-    {
-        return eventRepository.findByCategoryIdAndDate(categoryId, date);
-    }
-
-    public void create(Long id, Integer categoryId, String name, String location, LocalDateTime date) { // getEvent_Test()용
-        Event e = new Event();
-        e.setId(id);
-        e.setCategoryId(categoryId);
-        e.setName(name);
-        e.setLocation(location);
-        e.setDate(date);
-        eventRepository.save(e);
+    public List<Event> getEventsByCategoryAndDate(Integer categoryId, LocalDate searchDate) {
+        LocalDateTime start = LocalDateTime.of(searchDate, LocalTime.MIN);
+        LocalDateTime end = LocalDateTime.of(searchDate, LocalTime.MAX);
+        List<Event> events = eventRepository.findAllByDateBetweenAndCategoryId(start, end, categoryId);
+        return events;
     }
 }
 

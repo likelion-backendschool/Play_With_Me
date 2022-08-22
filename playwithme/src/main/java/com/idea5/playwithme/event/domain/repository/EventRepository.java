@@ -11,6 +11,5 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     public List<Event> findByCategoryId(Integer id);
     List<Event> findByCategoryIdAndDate(Integer categoryId, LocalDateTime date);
-
-
+    List<Event> findAllByDateBetweenAndCategoryId(LocalDateTime start, LocalDateTime end, Integer categoryId);
 }
