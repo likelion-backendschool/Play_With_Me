@@ -84,7 +84,7 @@ class CommentRepositoryTest {
 
         Comment comment = new Comment();
         comment.setContents("test");
-        comment.setSecretStatus(true);
+        comment.setSecretStatus(false);
         comment.setCreatedAt(LocalDateTime.now());
         comment.setUpdatedAt(LocalDateTime.now());
         comment.setArticle(article);
@@ -93,7 +93,7 @@ class CommentRepositoryTest {
 
         Comment comment2 = new Comment();
         comment2.setContents("test2");
-        comment2.setSecretStatus(false);
+        comment2.setSecretStatus(true);
         comment2.setCreatedAt(LocalDateTime.now());
         comment.setUpdatedAt(LocalDateTime.now());
         comment2.setArticle(article);
