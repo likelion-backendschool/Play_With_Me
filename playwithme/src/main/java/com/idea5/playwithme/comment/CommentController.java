@@ -25,7 +25,7 @@ public class CommentController {
     /**
      * 게시글에 달려있던 댓글 리스트 조회
      */
-    @GetMapping("/{board_id}/{article_id}")
+    @GetMapping("/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 
         List<CommentDto> byArticleId = commentService.findByArticleId(articleId);
