@@ -1,3 +1,49 @@
-<div th:text="${article.title}"></div>
-<div th:text="${event.name}"></div>
-<div th:text="${event.location}"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+<div class="container my-3">
+    <div class="container my-3">
+        <h2 class="py-2" th:text="${article.title}"></h2>
+        <div class="border-bottom my-2" th:text="${#temporals.format(article.createdAt, 'yyyy.MM.dd')}"></div>
+        <div class="card my-3">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">공연명</th>
+                            <td>
+                                <div th:text="${event.name}"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">장소</th>
+                            <td>
+                                <div th:text="${event.location}"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">일시</th>
+                            <td>
+                                <span th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}"></span>
+                                <span th:text="${#temporals.dayOfWeekName(event.date)}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">모집인원</th>
+                            <td>
+                                <div th:text="${article.maxRecruitNum}"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="badge rounded-pill text-bg-primary" th:text="${article.ageRange}"></span>
+                <span class="badge rounded-pill text-bg-primary" th:text="${article.gender}"></span>
+            </div>
+        </div>
+        <div th:text="${article.contents}"></div>
+    </div>
+</div>
+
+</html>
