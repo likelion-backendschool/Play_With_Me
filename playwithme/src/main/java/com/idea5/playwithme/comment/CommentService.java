@@ -36,6 +36,7 @@ public class CommentService {
         for (Comment i : byArticleId) {
             System.out.println("i.getContents() = " + i.getContents());
             System.out.println("i.getParent() = " + i.getParent());
+            System.out.println("i.getChildList() = " + i.getChildList());
             dtoList.add(i.toCommentDto());
         }
         System.out.println("-----------------------------");

@@ -19,8 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/board/comment")
 
-public class CommentController {
 
+public class CommentController {
     private final CommentService commentService;
     /**
      * 게시글에 달려있던 댓글 리스트 조회

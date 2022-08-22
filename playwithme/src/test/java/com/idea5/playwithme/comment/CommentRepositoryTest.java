@@ -95,10 +95,40 @@ class CommentRepositoryTest {
         comment2.setContents("test2");
         comment2.setSecretStatus(true);
         comment2.setCreatedAt(LocalDateTime.now());
-        comment.setUpdatedAt(LocalDateTime.now());
+        comment2.setUpdatedAt(LocalDateTime.now());
         comment2.setArticle(article);
         comment2.setMember(member2);
         commentRepository.save(comment2);
+
+        Comment comment3 = new Comment();
+        comment3.setContents("test3");
+        comment3.setSecretStatus(false);
+        comment3.setCreatedAt(LocalDateTime.now());
+        comment3.setUpdatedAt(LocalDateTime.now());
+        comment3.setArticle(article);
+        comment3.setMember(member2);
+        commentRepository.save(comment3);
+
+        Comment comment4 = new Comment();
+        comment4.setContents("test4");
+        comment4.setSecretStatus(false);
+        comment4.setCreatedAt(LocalDateTime.now());
+        comment4.setUpdatedAt(LocalDateTime.now());
+        comment4.setArticle(article);
+        comment4.setMember(member2);
+        comment4.confirmParent(comment3);
+        commentRepository.save(comment4);
+
+        Comment comment5 = new Comment();
+        comment5.setContents("test4");
+        comment5.setSecretStatus(false);
+        comment5.setCreatedAt(LocalDateTime.now());
+        comment5.setUpdatedAt(LocalDateTime.now());
+        comment5.setArticle(article);
+        comment5.setMember(member2);
+        comment5.confirmParent(comment3);
+        commentRepository.save(comment5);
+
 
     }
 

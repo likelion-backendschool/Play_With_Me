@@ -47,6 +47,10 @@ public class Comment {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
+    /**
+     *  * Todo
+     *  * child List들 정렬해서 보내주면 되지 않을까
+     */
     //== 부모 댓글을 삭제해도 자식 댓글은 남아있음 ==//
     @OneToMany(mappedBy = "parent")
     private List<Comment> childList = new ArrayList<>();
@@ -94,6 +98,7 @@ public class Comment {
                 .secretStatus(secretStatus)
                 .parent(parent)
                 .member(member)
+                .childList(childList)
                 .build();
         return commentDto;
 

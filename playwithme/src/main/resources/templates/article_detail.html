@@ -16,9 +16,9 @@
         </div>
     </div>
 
-    <!-- 답변의 갯수 표시 -->
-    <h5 class="border-bottom my-3 py-2"
-        th:text="|${#lists.size(commentList.size())}개의 답변이 있습니다.|"></h5>
+<!--    &lt;!&ndash; 답변의 갯수 표시 &ndash;&gt;-->
+<!--    <h5 class="border-bottom my-3 py-2"-->
+<!--        th:text="|${#lists.size(commentList.size())}개의 답변이 있습니다.|"></h5>-->
 
     <!-- 답변 반복 시작 -->
     <div class="card my-3" th:each="comment : ${commentList}">
@@ -26,11 +26,6 @@
         <div th:if="${comment.parent == null}" class="card-body">
             <span th:if="${true} == ${comment.secretStatus}" class="text-black-50" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
             <span th:unless="${true} == ${comment.secretStatus}" th:text="${comment.contents}" class="card-text fs-5" style="white-space: pre-line;"></span>
-<!--            <span th:if="${true} == ${comment.secretStatus}" th:text= "will be rendered"> </span>-->
-<!--            <div th:text="${comment.secretStatus}"></div>-->
-<!--            <div th:text="${true}"></div>-->
-<!--            <div th:if="${true} == ${comment.secretStatus}" class="card-text fs-5" style="white-space: pre-line;" th:text="비밀 댓글 입니다."></div>-->
-<!--            <div th:unless="${true} == ${comment.secretStatus}" th:class="card-text fs-5" style="white-space: pre-line;" th:text="${comment.contents}"></div>-->
 
             <div class="d-flex justify-content-start fs-6">
                 <div class="badge bg-light text-secondary p-2 text-start ">
@@ -39,6 +34,20 @@
                 <div class="badge bg-light text-secondary p-2 text-start ">
                     <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
+            </div>
+
+            <div class="card my-3" th:each="child : ${comment.childList}">
+                <div th:text="${child.contents}" class="card-text fs-5" style="white-space: pre-line;"></div>
+
+                <div class="d-flex justify-content-start fs-6">
+                    <div class="badge bg-light text-secondary p-2 text-start ">
+                        <div class="p-1 mb-1 bg-primary text-white" th:if="${article.member == child.member}" th:text="글쓴이"></div>
+                    </div>
+                    <div class="badge bg-light text-secondary p-2 text-start ">
+                        <div th:text="${#temporals.format(child.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
