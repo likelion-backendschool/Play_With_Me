@@ -3,24 +3,30 @@ package com.idea5.playwithme.article.Controller;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.*;
 import com.idea5.playwithme.article.service.ArticleService;
+import com.idea5.playwithme.comment.CommentService;
+import com.idea5.playwithme.comment.domain.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/board")
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, CommentService commentService) {
         this.articleService = articleService;
+        this.commentService = commentService;
     }
 
     // 게시글 작성
@@ -44,7 +50,9 @@ public class ArticleController {
     @GetMapping("/{board_id}/{article_id}")
     public String getDetails(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Model model) {
         Article article = articleService.getDetails(boardId, articleId);
-
+        List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
+        model.addAttribute("article", article);
+        model.addAttribute("commentList", findCommenets);
         return "article_detail";
     }
 

@@ -3,11 +3,14 @@ package com.idea5.playwithme.comment.domain;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,6 +41,17 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
+    private Integer groupNumber; // 댓글 그룹
+
+    @ColumnDefault("0")
+    private Integer step; //대댓글의 계층 ( 0 : 부모댓글, 1 : 자식댓글 )
+
+    @ColumnDefault("0")
+    private Integer groupOrder; // 대댓글 간에 순서
+
+
 
     /**
      * 댓글 수정 메소드

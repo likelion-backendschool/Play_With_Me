@@ -1,18 +1,16 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
-        layout:decorate="~{layout}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 
-<div layout:fragment="content" class="container my-3 dd">
-    <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+<div class="container my-3">
+    <h2 class="border-bottom py-2" th:text="${article.title}"></h2>
 
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
+            <div class="card-text" style="white-space: pre-line;" th:text="${article.contents}"></div>
 
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2 text-start">
-                    <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                    <div th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
         </div>
@@ -20,28 +18,25 @@
 
     <!-- 답변의 갯수 표시 -->
     <h5 class="border-bottom my-3 py-2"
-        th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+        th:text="|${#lists.size(commentList.size())}개의 답변이 있습니다.|"></h5>
 
     <!-- 답변 반복 시작 -->
-    <div class="card my-3" th:each="answer : ${question.answerList}">
+    <div class="card my-3" th:each="comment : ${commentList}">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
-            <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2 text-start">
-                    <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+            <div class="card-text fs-5" style="white-space: pre-line;" th:text="${comment.contents}"></div>
+            <div class="d-flex justify-content-start fs-6">
+                <div class="badge bg-light text-secondary p-2 text-start ">
+                    <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
             </div>
         </div>
     </div>
     <!-- 답변 반복 끝  -->
 
-    <!-- 답변 작성 -->
-    <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
-        <div th:replace="form_errors :: formErrorsFragment"></div>
-        <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
-        <input type="submit" value="답변등록" class="btn btn-primary my-2">
-    </form>
+<!--    &lt;!&ndash; 답변 작성 &ndash;&gt;-->
+<!--    <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">-->
+<!--        <textarea name="content" rows="10" class="form-control"></textarea>-->
+<!--        <input type="submit" value="답변등록" class="btn btn-primary my-2">-->
+<!--    </form>-->
 
 </div>
-
-</html>

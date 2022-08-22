@@ -1,7 +1,9 @@
 package com.idea5.playwithme.comment;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.comment.domain.Comment;
+import com.idea5.playwithme.member.domain.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
