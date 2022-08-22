@@ -65,8 +65,16 @@ public class CommentService {
 
     }
 
-    public Long commentReSave(Long articleId, CommentCreateForm createForm, Long parentId) {
+    @Transactional
+    public void commentReSave(Long articleId, CommentCreateForm createForm, Long parentId) {
         Comment comment = createForm.toEntity();
+        //Todo
+        // orElseThrow 처리 해야됨.
+
+        comment.confirmArticle(articleRepository.findById(articleId).orElseThrow());
+        comment.confirmParent(commentRepository.findById(parentId).orElseThrow());
+
+        commentRepository.save(comment);
 
     }
 

@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  * TODO
- * 엔티티 To Dto 변환 V
- * delete 추가
+ * 비밀 상태 : 수정
+ *
  */
 @RequiredArgsConstructor
 @RestController
@@ -57,10 +57,11 @@ public class CommentController {
     /**
      * 대댓글 작성
      */
-    @PostMapping("/write/{article_id}/{comment_id")
+    @PostMapping("/write/{article_id}/{comment_id}")
     public ResponseEntity<CommentDto> reWriteComment(@PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
     {
-        Long commentId = commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
+        commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
+
         return null;
     }
 

@@ -70,7 +70,7 @@ public class Comment {
 //        writer.addComment(this);
 //    }
 
-    public void confirmPost(Article article) {
+    public void confirmArticle(Article article) {
         this.article = article;
         article.addComment(this);
     }
