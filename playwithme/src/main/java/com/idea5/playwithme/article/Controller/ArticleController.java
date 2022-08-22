@@ -55,6 +55,7 @@ public class ArticleController {
         model.addAttribute("commentList", findCommenets);
 
         for (CommentDto i : findCommenets) {
+            System.out.println("i.getMember() = " + i.getMember());
             System.out.println("i.getContents() = " + i.getContents());
             System.out.println("i.getParent() = " + i.getParent());
         }

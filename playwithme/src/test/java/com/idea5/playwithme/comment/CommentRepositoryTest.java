@@ -86,14 +86,16 @@ class CommentRepositoryTest {
         comment.setContents("test");
         comment.setSecretStatus(true);
         comment.setCreatedAt(LocalDateTime.now());
+        comment.setUpdatedAt(LocalDateTime.now());
         comment.setArticle(article);
         comment.setMember(member1);
         commentRepository.save(comment);
 
         Comment comment2 = new Comment();
         comment2.setContents("test2");
-        comment2.setSecretStatus(true);
+        comment2.setSecretStatus(false);
         comment2.setCreatedAt(LocalDateTime.now());
+        comment.setUpdatedAt(LocalDateTime.now());
         comment2.setArticle(article);
         comment2.setMember(member2);
         commentRepository.save(comment2);

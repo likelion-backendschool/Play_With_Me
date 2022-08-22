@@ -93,6 +93,7 @@ public class Comment {
                 .contents(contents)
                 .secretStatus(secretStatus)
                 .parent(parent)
+                .member(member)
                 .build();
         return commentDto;
 
