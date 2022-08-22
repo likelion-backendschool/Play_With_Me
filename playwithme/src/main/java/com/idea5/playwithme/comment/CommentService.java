@@ -7,6 +7,7 @@ import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.repository.MemberRepository;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +32,13 @@ public class CommentService {
         List<Comment> byArticleId = commentRepository.findByArticleId(id);
         List<CommentDto> dtoList = new ArrayList<>();
 
+        System.out.println("-------findByArticleId----------");
         for (Comment i : byArticleId) {
+            System.out.println("i.getContents() = " + i.getContents());
+            System.out.println("i.getParent() = " + i.getParent());
             dtoList.add(i.toCommentDto());
         }
+        System.out.println("-----------------------------");
         return dtoList;
     }
 

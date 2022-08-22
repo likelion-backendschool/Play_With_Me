@@ -53,6 +53,11 @@ public class ArticleController {
         List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         model.addAttribute("article", article);
         model.addAttribute("commentList", findCommenets);
+
+        for (CommentDto i : findCommenets) {
+            System.out.println("i.getContents() = " + i.getContents());
+            System.out.println("i.getParent() = " + i.getParent());
+        }
         return "article_detail";
     }
 

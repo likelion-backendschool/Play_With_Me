@@ -23,6 +23,8 @@ public class CommentDto {
 
     private boolean secretStatus;
 
+    private Comment parent;
+
 
 
 }

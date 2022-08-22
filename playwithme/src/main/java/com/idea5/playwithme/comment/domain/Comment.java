@@ -92,6 +92,7 @@ public class Comment {
                 .updatedAt(updatedAt)
                 .contents(contents)
                 .secretStatus(secretStatus)
+                .parent(parent)
                 .build();
         return commentDto;
 
