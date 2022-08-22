@@ -62,6 +62,29 @@ public class Comment {
         updatedAt = LocalDateTime.now().withNano(0);
     }
 
+    /**
+     * 연관관계 편의 메소드
+     */
+//    public void confirmWriter(Member writer) {
+//        this.member= writer;
+//        writer.addComment(this);
+//    }
+
+    public void confirmPost(Article article) {
+        this.article = article;
+        article.addComment(this);
+    }
+
+    public void confirmParent(Comment parent){
+        this.parent = parent;
+        parent.addChild(this);
+    }
+
+    public void addChild(Comment child){
+        childList.add(child);
+    }
+
+
     public CommentDto toCommentDto(){
 
         CommentDto commentDto = CommentDto.builder()

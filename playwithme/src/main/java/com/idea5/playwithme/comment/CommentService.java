@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +62,11 @@ public class CommentService {
         commentRepository.save(comment);
 
         return dto.getId();
+
+    }
+
+    public Long commentReSave(Long articleId, CommentCreateForm createForm, Long parentId) {
+        Comment comment = createForm.toEntity();
 
     }
 

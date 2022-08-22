@@ -55,11 +55,22 @@ public class CommentController {
     }
 
     /**
+     * 대댓글 작성
+     */
+    @PostMapping("/write/{article_id}/{comment_id")
+    public ResponseEntity<CommentDto> reWriteComment(@PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
+    {
+        Long commentId = commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
+        return null;
+    }
+
+
+    /**
      * 수정
      */
     @PostMapping("/modify/{comment_id}")
-    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm)
-    {
+    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm) {
+
         System.out.println("id = " + id);
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
         return null;
