@@ -43,13 +43,13 @@ public class Comment {
     private Member member;
 
 
-    private Integer groupNumber; // 댓글 그룹
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Comment parent;
 
-    @ColumnDefault("0")
-    private Integer step; //대댓글의 계층 ( 0 : 부모댓글, 1 : 자식댓글 )
-
-    @ColumnDefault("0")
-    private Integer groupOrder; // 대댓글 간에 순서
+    //== 부모 댓글을 삭제해도 자식 댓글은 남아있음 ==//
+    @OneToMany(mappedBy = "parent")
+    private List<Comment> childList = new ArrayList<>();
 
 
 
