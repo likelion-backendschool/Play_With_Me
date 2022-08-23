@@ -4,6 +4,7 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.*;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.CommentService;
+import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,12 +54,13 @@ public class ArticleController {
         List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         model.addAttribute("article", article);
         model.addAttribute("commentList", findCommenets);
-
+        model.addAttribute("createForm", new CommentCreateForm());
         for (CommentDto i : findCommenets) {
             System.out.println("i.getMember() = " + i.getMember());
             System.out.println("i.getContents() = " + i.getContents());
             System.out.println("i.getParent() = " + i.getParent());
         }
+
         return "article_detail";
     }
 

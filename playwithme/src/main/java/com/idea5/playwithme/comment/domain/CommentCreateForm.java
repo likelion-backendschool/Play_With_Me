@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class CommentCreateForm {
 
     private LocalDateTime updatedAt= LocalDateTime.now().withNano(0);
 
-    @NotNull
+    @NotEmpty(message = "내용은 필수항목입니다.")
     private String contents;
 
     private boolean secretStatus;

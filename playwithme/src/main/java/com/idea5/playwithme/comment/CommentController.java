@@ -6,8 +6,10 @@ import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ public class CommentController {
     private final CommentService commentService;
     /**
      * 게시글에 달려있던 댓글 리스트 조회
+     * Todo
+     * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
+     *
      */
     @GetMapping("/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
@@ -48,8 +53,12 @@ public class CommentController {
      */
     //localhost:
     @PostMapping("/write/{article_id}")
-    public ResponseEntity<CommentDto> writeComment(@PathVariable("article_id") Long articleId, CommentCreateForm createForm)
+    public ResponseEntity<CommentDto> writeComment(@PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
     {
+        System.out.println("--------------------------POST--------------------------------");
+        System.out.println("createForm = " + createForm);
+        System.out.println("createForm.getContents() = " + createForm.getContents());
+        System.out.println("createForm.getArticle() = " + createForm.getArticle());
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return null;
     }
