@@ -6,6 +6,7 @@ import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +19,8 @@ import java.util.List;
  *
  */
 @RequiredArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/board/comment")
-
-
 public class CommentController {
     private final CommentService commentService;
     /**
@@ -52,26 +51,31 @@ public class CommentController {
      * 작성
      */
     //localhost:
-    @PostMapping("/write/{article_id}")
-    public ResponseEntity<CommentDto> writeComment(@PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
+    @PostMapping("/write/{board_id}/{article_id}")
+    public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
     {
-        System.out.println("--------------------------POST--------------------------------");
-        System.out.println("createForm = " + createForm);
-        System.out.println("createForm.getContents() = " + createForm.getContents());
-        System.out.println("createForm.getArticle() = " + createForm.getArticle());
+        if(bindingResult.hasErrors()){
+            System.out.println("바인딩 에러 발생");
+            /**
+             * Todo
+             * 에러 처리
+             */
+        }
+        System.out.println("createForm.isSecretStatus() = " + createForm.isSecretStatus());
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
-        return null;
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
     /**
      * 대댓글 작성
      */
-    @PostMapping("/write/{article_id}/{comment_id}")
-    public ResponseEntity<CommentDto> reWriteComment(@PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
+    @PostMapping("/write/{board_id}/{article_id}/{comment_id}")
+    public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
     {
+        System.out.println("--------------------대댓글 작성--------------------");
         commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
 
-        return null;
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
 

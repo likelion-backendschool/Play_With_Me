@@ -32,14 +32,9 @@ public class CommentService {
         List<Comment> byArticleId = commentRepository.findByArticleId(id);
         List<CommentDto> dtoList = new ArrayList<>();
 
-        System.out.println("-------findByArticleId----------");
         for (Comment i : byArticleId) {
-            System.out.println("i.getContents() = " + i.getContents());
-            System.out.println("i.getParent() = " + i.getParent());
-            System.out.println("i.getChildList() = " + i.getChildList());
             dtoList.add(i.toCommentDto());
         }
-        System.out.println("-----------------------------");
         return dtoList;
     }
 

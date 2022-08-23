@@ -92,6 +92,7 @@ public class Comment {
     public CommentDto toCommentDto(){
 
         CommentDto commentDto = CommentDto.builder()
+                .id(id)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .contents(contents)

@@ -55,6 +55,7 @@ public class ArticleController {
         model.addAttribute("article", article);
         model.addAttribute("commentList", findCommenets);
         model.addAttribute("createForm", new CommentCreateForm());
+        model.addAttribute("board_id", boardId);
         for (CommentDto i : findCommenets) {
             System.out.println("i.getMember() = " + i.getMember());
             System.out.println("i.getContents() = " + i.getContents());
