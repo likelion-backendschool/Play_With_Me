@@ -55,8 +55,12 @@ class CommentRepositoryTest {
         Member member2 = new Member();
         member2.setName("memberB");
 
+        Member member3 = new Member();
+        member3.setName("memberC");
+
         memberRepository.save(member1);
         memberRepository.save(member2);
+        memberRepository.save(member3);
 
 
         // given
@@ -83,7 +87,7 @@ class CommentRepositoryTest {
 
 
         Comment comment = new Comment();
-        comment.setContents("test");
+        comment.setContents("test 댓글 작성.");
         comment.setSecretStatus(false);
         comment.setCreatedAt(LocalDateTime.now());
         comment.setUpdatedAt(LocalDateTime.now());
@@ -101,7 +105,7 @@ class CommentRepositoryTest {
         commentRepository.save(comment2);
 
         Comment comment3 = new Comment();
-        comment3.setContents("test3");
+        comment3.setContents("참여하고 싶습니다.");
         comment3.setSecretStatus(false);
         comment3.setCreatedAt(LocalDateTime.now());
         comment3.setUpdatedAt(LocalDateTime.now());
@@ -110,17 +114,17 @@ class CommentRepositoryTest {
         commentRepository.save(comment3);
 
         Comment comment4 = new Comment();
-        comment4.setContents("test4");
+        comment4.setContents("넵!! 환영합니다!!");
         comment4.setSecretStatus(false);
         comment4.setCreatedAt(LocalDateTime.now());
         comment4.setUpdatedAt(LocalDateTime.now());
         comment4.setArticle(article);
-        comment4.setMember(member2);
+        comment4.setMember(member1);
         comment4.confirmParent(comment3);
         commentRepository.save(comment4);
 
         Comment comment5 = new Comment();
-        comment5.setContents("test4");
+        comment5.setContents("저도 참여하고 싶어요");
         comment5.setSecretStatus(false);
         comment5.setCreatedAt(LocalDateTime.now());
         comment5.setUpdatedAt(LocalDateTime.now());
@@ -128,6 +132,26 @@ class CommentRepositoryTest {
         comment5.setMember(member2);
         comment5.confirmParent(comment3);
         commentRepository.save(comment5);
+
+
+        Comment comment6 = new Comment();
+        comment6.setContents("오픈 채팅방 링크 가능하신가요?");
+        comment6.setSecretStatus(false);
+        comment6.setCreatedAt(LocalDateTime.now());
+        comment6.setUpdatedAt(LocalDateTime.now());
+        comment6.setArticle(article);
+        comment6.setMember(member3);
+        commentRepository.save(comment6);
+
+        Comment comment7 = new Comment();
+        comment7.setContents("http://open~");
+        comment7.setSecretStatus(true);
+        comment7.setCreatedAt(LocalDateTime.now());
+        comment7.setUpdatedAt(LocalDateTime.now());
+        comment7.setArticle(article);
+        comment7.setMember(member1);
+        comment7.confirmParent(comment6);
+        commentRepository.save(comment7);
 
 
     }
