@@ -67,10 +67,28 @@ public class ArticleController {
         return "article_detail";
     }
 
+    // 게시글 수정폼
+    @GetMapping("/modify/{board_id}/{article_id}")
+    public String modifyForm(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
+        Article article = articleService.findById(articleId);
+        // 기존 값 넣기
+        articleUpdateForm.setTitle(article.getTitle());
+        articleUpdateForm.setContents(article.getContents());
+        articleUpdateForm.setGender(article.getGender());
+        // 연령대
+        String[] ages = article.getAgeRange().split("~");
+        articleUpdateForm.setMinAge(ages[0]);
+        articleUpdateForm.setMaxAge(ages[1]);
+        articleUpdateForm.setMaxRecruitNum(Integer.toString(article.getMaxRecruitNum()));
+
+        return "article_update_form";
+    }
+
+
     // 게시글 수정
     @PostMapping("/modify/{board_id}/{article_id}")
     @ResponseBody
-    public void update(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+    public void modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
         articleService.update(articleId, articleUpdateForm);
     }
 

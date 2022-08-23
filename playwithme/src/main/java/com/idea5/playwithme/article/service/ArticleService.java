@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +40,9 @@ public class ArticleService {
         return findById(articleId);
     }
     public Article findById(Long articleId) {
-        return articleRepository.findById(articleId).orElse(null);
+        return articleRepository.findById(articleId)
+                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
+//        return articleRepository.findById(articleId).orElse(null);
     }
 
     // 게시글 내용 수정
@@ -49,13 +50,8 @@ public class ArticleService {
     public void update(Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
-        article.setTitle(articleUpdateForm.getTitle());
-        article.setContents(articleUpdateForm.getContents());
-        article.setMaxRecruitNum(articleUpdateForm.getMaxRecruitNum());
-        article.setGender(articleUpdateForm.getGender());
-        article.setAgeRange(articleUpdateForm.getAgeRange());
-        article.setUpdatedAt(LocalDateTime.now());
 
+        articleUpdateForm.toEntity(article, articleUpdateForm);
         articleRepository.save(article);
     }
 

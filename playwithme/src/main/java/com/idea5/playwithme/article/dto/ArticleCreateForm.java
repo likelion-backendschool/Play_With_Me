@@ -45,7 +45,7 @@ public class ArticleCreateForm {
                 .updatedAt(LocalDateTime.now())
                 .gender(articleCreateForm.getGender())
 //                .ageRange(articleCreateForm.getAgeRange())
-                .ageRange(articleCreateForm.getMinAge() + " ~ " + articleCreateForm.getMaxAge())
+                .ageRange(articleCreateForm.getMinAge() + "~" + articleCreateForm.getMaxAge())
                 .build();
     }
 }

@@ -114,9 +114,10 @@ class ArticleServiceTest {
         ArticleUpdateForm articleUpdateForm = ArticleUpdateForm.builder()
                 .title("제목!!")
                 .contents("내용!!")
-                .maxRecruitNum(10)
+                .maxRecruitNum("10")
                 .gender("Male")
-                .ageRange("30~40")
+                .minAge("30")
+                .maxAge("40")
                 .build();
         Long articleId = 1L;
         // when
