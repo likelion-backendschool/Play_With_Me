@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+<html>
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">게시글 등록</h5>
+
+    <form th:action="@{|/board/write/${board_id}|}" th:object="${articleCreateForm}" method="post">
+        <div class="mb-3">
+            <div class="mb-1">제목</div>
+            <input type="text" name="title" class="form-control">
+        </div>
+        <div class="mb-3 d-flex">
+            <div>
+                <div class="mb-1">최대 모집 인원</div>
+                <select name="maxRecruitNum" class="form-select" aria-label="Default select example">
+                    <option selected>모집 인원을 선택해주세요.</option>
+                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}"></option>
+                    <!--                <option value="1">1</option>-->
+                    <!--                <option value="2">2</option>-->
+                    <!--                <option value="3">3</option>-->
+                    <!--                <option value="4">4</option>-->
+                    <!--                <option value="5">5</option>-->
+                </select>
+            </div>
+            <div class="mx-5">
+                <div class="mb-1">모집 성별</div>
+                <select name="gender" class="form-select" aria-label="Default select example">
+                    <option selected>모집 성별을 선택해주세요.</option>
+                    <option value="남성">남성</option>
+                    <option value="여성">여성</option>
+                    <option value="성별무관">성별무관</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="mb-1">모집 연령대</div>
+            <div class="d-flex">
+                <select name="minAge" class="form-select w-25" aria-label="Default select example">
+                    <option selected>모집 최소 연령을 선택해주세요.</option>
+                    <option th:each="i : ${#numbers.sequence(20, 50)}" th:value="${i}" th:text="${i}"></option>
+                </select>
+                <span class="mx-3">~</span>
+                <select name="maxAge" class="form-select w-25" aria-label="Default select example">
+                    <option selected>모집 최대 연령을 선택해주세요.</option>
+                    <option th:each="i : ${#numbers.sequence(20, 50)}" th:value="${i}" th:text="${i}"></option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 추후 에디터 적용될 수 있음 -->
+        <div class="mb-3">
+            <div class="mb-1">내용</div>
+            <textarea name="contents" class="form-control" rows="10"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+    </form>
+</div>
+
+</html>

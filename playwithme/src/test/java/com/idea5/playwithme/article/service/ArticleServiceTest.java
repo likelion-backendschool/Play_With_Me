@@ -70,9 +70,10 @@ class ArticleServiceTest {
             ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
                     .title("제목 %d".formatted(id))
                     .contents("내용 %d".formatted(id))
-                    .maxRecruitNum(id % 5 + 1)
+                    .maxRecruitNum(Integer.toString(id % 5 + 1))
                     .gender("Female")
-                    .ageRange("10~20")
+                    .minAge("10")
+                    .maxAge("20")
                     .build();
             articleService.create(1L, articleCreateForm);
         });
@@ -91,9 +92,10 @@ class ArticleServiceTest {
         ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
                 .title("제목")
                 .contents("내용")
-                .maxRecruitNum(5)
+                .maxRecruitNum("5")
                 .gender("Female")
-                .ageRange("10~20")
+                .minAge("10")
+                .maxAge("20")
                 .build();
         // when
         articleService.create(1L, articleCreateForm);
@@ -123,7 +125,7 @@ class ArticleServiceTest {
         Article findArticle = articleRepository.findById(articleId).orElse(null);
         assertThat(findArticle.getTitle()).isEqualTo("제목!!");
         assertThat(findArticle.getContents()).isEqualTo("내용!!");
-        assertThat(findArticle.getMaxRecruitNum()).isEqualTo(10);
+        assertThat(findArticle.getMaxRecruitNum()).isEqualTo("10");
         assertThat(findArticle.getGender()).isEqualTo("Male");
         assertThat(findArticle.getAgeRange()).isEqualTo("30~40");
         assertThat(findArticle.getUpdatedAt()).isAfter(findArticle.getCreatedAt());

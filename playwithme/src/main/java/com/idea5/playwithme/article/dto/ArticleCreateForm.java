@@ -22,13 +22,16 @@ public class ArticleCreateForm {
     private String contents;
 
     @NotNull(message = "최대 모집 인원을 선택해주세요.")
-    private Integer maxRecruitNum;
+    private String maxRecruitNum;                   // TODO: maxRecruitNum, minAge, maxAge Integer에서 변경
 
     @NotEmpty(message = "모집 성별을 선택해주세요.")
     private String gender;
 
-    @NotEmpty(message = "모집 나이대를 선택해주세요.")
-    private String ageRange;
+    @NotEmpty(message = "최소 모집 연령을 선택해주세요.")
+    private String minAge;
+
+    @NotEmpty(message = "최대 모집 연령을 선택해주세요.")
+    private String maxAge;
 
     // ArticleDto -> Article 변환
     public static Article toEntity(ArticleCreateForm articleCreateForm) {
@@ -36,12 +39,13 @@ public class ArticleCreateForm {
         return Article.builder()
                 .title(articleCreateForm.getTitle())
                 .contents(articleCreateForm.getContents())
-                .maxRecruitNum(articleCreateForm.getMaxRecruitNum())
+                .maxRecruitNum(Integer.parseInt(articleCreateForm.getMaxRecruitNum()))
                 .recruitStatus(true)    // default: 모집중
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .gender(articleCreateForm.getGender())
-                .ageRange(articleCreateForm.getAgeRange())
+//                .ageRange(articleCreateForm.getAgeRange())
+                .ageRange(articleCreateForm.getMinAge() + " ~ " + articleCreateForm.getMaxAge())
                 .build();
     }
 }

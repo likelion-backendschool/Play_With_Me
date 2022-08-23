@@ -17,3 +17,7 @@ textarea {
 html > body {
     font-family: 'GmarketSansMedium';
 }
+
+.badge {
+    font-size: 15px;
+}

@@ -2,13 +2,10 @@ package com.idea5.playwithme.article.Controller;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.ArticleCreateForm;
-import com.idea5.playwithme.article.dto.ArticleResponseDto;
 import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.event.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +24,20 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+    // 게시글 작성폼
+    @GetMapping("/write/{board_id}")
+    public String createForm(@PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+        return "article_create_form";
+    }
+
     // 게시글 작성
     @PostMapping("/write/{board_id}")
-    @ResponseBody
-    public ResponseEntity<ArticleResponseDto> create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
+    public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+//            System.out.println(bindingResult.getAllErrors());
+            return "article_create_form";
+        }
+
         // TODO : 입력되지 않은 데이터 처리
         if (bindingResult.hasErrors()) {
             System.out.println("오류");
@@ -39,7 +46,8 @@ public class ArticleController {
         Long articleId = articleService.create(boardId, articleCreateForm);
         Article article = articleService.findById(articleId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(ArticleResponseDto.toDto(article));
+//        return ResponseEntity.status(HttpStatus.OK).body(ArticleResponseDto.toDto(article));
+        return "redirect:/board/%d/%d".formatted(boardId, article.getId());
     }
 
     // 게시글 전체 조회
