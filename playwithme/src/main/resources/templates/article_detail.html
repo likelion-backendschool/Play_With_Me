@@ -37,7 +37,7 @@
             </div>
 
                 <!--자식 댓글-->
-            <div class="card my-3" th:each="child : ${comment.childList}">
+            <div th:each="child : ${comment.childList}">
 
                 <div class="d-flex justify-content-start m-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right m-1" viewBox="0 0 16 16">
