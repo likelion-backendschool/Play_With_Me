@@ -17,6 +17,7 @@ import java.util.List;
  * TODO
  * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )
  * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
+ * 애러 처리
  *
  */
 @RequiredArgsConstructor
@@ -53,12 +54,10 @@ public class CommentController {
     {
         if(bindingResult.hasErrors()){
             System.out.println("바인딩 에러 발생");
-            /**
-             * Todo
-             * 에러 처리
-             */
+            return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
-        System.out.println("createForm.isSecretStatus() = " + createForm.isSecretStatus());
+
+        System.out.println("createForm.getContents() = " + createForm.getContents());
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
@@ -67,8 +66,13 @@ public class CommentController {
      * 대댓글 작성
      */
     @PostMapping("/write/{board_id}/{article_id}/{comment_id}")
-    public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
+    public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
     {
+        if(bindingResult.hasErrors()){
+            System.out.println("바인딩 에러 발생");
+            return "redirect:/board/%d/%d".formatted(boardId, articleId);
+        }
+
         commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
@@ -79,8 +83,6 @@ public class CommentController {
      */
     @PostMapping("/modify/{comment_id}")
     public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm) {
-
-        System.out.println("id = " + id);
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
         return null;
     }

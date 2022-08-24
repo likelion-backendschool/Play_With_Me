@@ -28,12 +28,22 @@
             <span th:unless="${true} == ${comment.secretStatus}" th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;"></span>
 
             <div class="d-flex justify-content-start fs-6 align-items-center">
-                <div class="badge bg-light text-secondary p-2 text-start ">
-                    <div class="p-1 mb-1 bg-primary text-white" th:if="${article.member == comment.member}" th:text="글쓴이"></div>
+
+                <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                    <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                 </div>
                 <div class="badge bg-light text-secondary p-2 text-start ">
                     <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
+
+                <div class="my-3">
+                    <a class="btn btn-sm btn-outline-secondary" th:text="수정"></a>
+                </div>
+
+                <div class="my-3">
+                    <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                </div>
+
             </div>
 
                 <!--자식 댓글-->
