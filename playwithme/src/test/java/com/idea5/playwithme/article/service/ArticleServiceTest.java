@@ -66,14 +66,18 @@ class ArticleServiceTest {
         Member member = new Member();
         memberRepository.save(member);
 
+        String[] genders = {"여성", "남성", "성별무관"};
+        String[] minAge = {"10", "20", "30", "40", "50"};
+        String[] maxAge = {"19", "29", "39", "49", "59"};
+
         IntStream.rangeClosed(1, 20).forEach(id -> {
             ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
                     .title("제목 %d".formatted(id))
                     .contents("내용 %d".formatted(id))
                     .maxRecruitNum(Integer.toString(id % 5 + 1))
-                    .gender("Female")
-                    .minAge("10")
-                    .maxAge("20")
+                    .gender(genders[id % 3])
+                    .minAge(minAge[id % 5])
+                    .maxAge(maxAge[id % 5])
                     .build();
             articleService.create(1L, articleCreateForm);
         });
