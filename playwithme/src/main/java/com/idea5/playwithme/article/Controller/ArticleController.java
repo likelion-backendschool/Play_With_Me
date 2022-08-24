@@ -89,7 +89,7 @@ public class ArticleController {
     @PostMapping("/modify/{board_id}/{article_id}")
     public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
         articleService.update(articleId, articleUpdateForm);
-        
+
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -102,9 +102,10 @@ public class ArticleController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/delete/{board_id}/{article_id}")
-    @ResponseBody
-    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    @GetMapping("/delete/{board_id}/{article_id}")
+    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         articleService.delete(articleId);
+        // TODO: 게시글 리스트 페이지로 리다이렉트
+        return "test";
     }
 }

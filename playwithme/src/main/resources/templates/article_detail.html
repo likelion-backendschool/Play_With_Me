@@ -6,7 +6,8 @@
         <h2 th:text="${article.title}"></h2>
         <div class="border-bottom my-2 py-2" >
             <span class="badge bg-light text-dark fs-6" th:text="${#temporals.format(article.createdAt, 'yyyy.MM.dd hh:mm')}"></span>
-            <a class="mx-3" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+            <a class="mx-1 badge rounded-pill text-bg-dark" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+            <a class="mx-1 badge rounded-pill text-bg-dark" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
         </div>
         <div class="card my-3">
             <div class="card-body">
