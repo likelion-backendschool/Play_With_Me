@@ -24,8 +24,8 @@
     <div th:each="comment : ${commentList}">
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
-            <span th:if="${true} == ${comment.secretStatus}" class="text-black-50" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
-            <span th:unless="${true} == ${comment.secretStatus}" th:text="${comment.contents}" class="card-text fs-5" style="white-space: pre-line;"></span>
+            <span th:if="${true} == ${comment.secretStatus}" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
+            <span th:unless="${true} == ${comment.secretStatus}" th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;"></span>
 
             <div class="d-flex justify-content-start fs-6 align-items-center">
                 <div class="badge bg-light text-secondary p-2 text-start ">
@@ -43,8 +43,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right m-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
                     </svg>
-                    <span th:if="${true} == ${child.secretStatus}" class="text-black-50" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
-                    <span th:unless="${true} == ${child.secretStatus}" th:text="${child.contents}" class="card-text fs-5" style="white-space: pre-line;"></span>
+                    <span th:if="${true} == ${child.secretStatus}" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
+                    <span th:unless="${true} == ${child.secretStatus}" th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;"></span>
 <!--                    <div th:text="${child.contents}" class="card-text fs-5" style="white-space: pre-line;"></div>-->
                 </div>
 

@@ -72,9 +72,7 @@ public class CommentController {
     @PostMapping("/write/{board_id}/{article_id}/{comment_id}")
     public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, CommentCreateForm createForm)
     {
-        System.out.println("--------------------대댓글 작성--------------------");
         commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
-
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 

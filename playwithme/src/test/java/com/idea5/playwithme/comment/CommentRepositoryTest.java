@@ -74,8 +74,8 @@ class CommentRepositoryTest {
 
         memberRepository.save(member);
         ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
-                .title("제목")
-                .contents("내용")
+                .title("20대 남성분 중에 흠뻑쇼 가실분")
+                .contents("댓글 남겨주시면 오픈채팅방 드리곘습니다.")
                 .maxRecruitNum(5)
                 .gender("Female")
                 .ageRange("10~20")
