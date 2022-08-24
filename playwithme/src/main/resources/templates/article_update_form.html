@@ -6,7 +6,7 @@
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">게시글 수정</h5>
 
-    <form th:action="@{|/board/modify/${board_id}|}" th:object="${articleUpdateForm}" method="post">
+    <form th:action="@{|/board/modify/${board_id}/${article_id}|}" th:object="${articleUpdateForm}" method="post">
         <div class="mb-3">
             <div class="mb-1">제목</div>
             <input type="text" th:field="*{title}" class="form-control">

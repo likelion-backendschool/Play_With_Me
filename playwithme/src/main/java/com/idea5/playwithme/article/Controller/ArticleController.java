@@ -87,9 +87,10 @@ public class ArticleController {
 
     // 게시글 수정
     @PostMapping("/modify/{board_id}/{article_id}")
-    @ResponseBody
-    public void modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+    public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
         articleService.update(articleId, articleUpdateForm);
+        
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
     // 게시글 모집 상태 완료로 변경
