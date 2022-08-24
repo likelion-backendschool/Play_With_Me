@@ -15,7 +15,8 @@ import java.util.List;
 
 /**
  * TODO
- * 비밀 상태 : 수정
+ * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )
+ * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
  *
  */
 @RequiredArgsConstructor
@@ -23,12 +24,8 @@ import java.util.List;
 @RequestMapping("/board/comment")
 public class CommentController {
     private final CommentService commentService;
-    /**
-     * 게시글에 달려있던 댓글 리스트 조회
-     * Todo
-     * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
-     *
-     */
+
+
     @GetMapping("/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
 

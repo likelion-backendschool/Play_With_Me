@@ -40,7 +40,8 @@ public class CommentService {
 
     @Transactional
     public Long commentSave(Long articleId, CommentCreateForm dto) {
-        Article article = articleRepository.findById(articleId).orElse(null);
+        Article article = articleRepository.findById(articleId).orElseThrow(() ->
+                new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
         dto.setArticle(article);
         dto.setMember(null);
 
@@ -54,8 +55,12 @@ public class CommentService {
      * 세션 기능 완료된 후에는 이 메서드를 사용.
      */
     public Long commentSave(Long memberId, Long articleId, CommentCreateForm dto) {
-        Article article = articleRepository.findById(articleId).orElse(null);
-        Member member = memberRepository.findById(memberId).orElse(null);
+        Article article = articleRepository.findById(articleId).orElseThrow(()->
+                    new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
+
+        Member member = memberRepository.findById(memberId).orElseThrow(()->
+                    new IllegalArgumentException("%d번 사용자는 존재하지 않습니다.".formatted(memberId)));
+
         dto.setArticle(article);
         dto.setMember(member);
 
