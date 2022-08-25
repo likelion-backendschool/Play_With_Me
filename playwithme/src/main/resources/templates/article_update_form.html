@@ -58,7 +58,11 @@
             <div class="mb-1">내용</div>
             <textarea th:field="*{contents}" class="form-control" rows="10"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">수정</button>
+        <div class="d-flex justify-content-center">
+            <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
+            <button type="submit" class="btn btn-primary m-2">수정</button>
+        </div>
+
     </form>
 </div>
 

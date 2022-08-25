@@ -63,7 +63,10 @@
             <div class="mb-1">내용</div>
             <textarea name="contents" class="form-control" rows="10"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">등록</button>
+        <div class="d-flex justify-content-center">
+            <a th:href="@{|/board/${board_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
+            <button type="submit" class="btn btn-primary m-2">등록</button>
+        </div>
     </form>
 </div>
 
