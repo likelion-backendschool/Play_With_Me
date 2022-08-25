@@ -46,6 +46,8 @@ public class Article {
     @Column(length = 20)
     private String ageRange;
 
+    private Integer views;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;

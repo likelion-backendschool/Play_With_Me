@@ -10,8 +10,8 @@ import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,9 +36,12 @@ public class ArticleService {
         return saveArticle.getId();
     }
 
+    // 게시글 상세조회
     public Article getDetails(Long boardId, Long articleId) {
         return findById(articleId);
     }
+
+    @Transactional(readOnly = true)
     public Article findById(Long articleId) {
         return articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
@@ -56,12 +59,15 @@ public class ArticleService {
     }
 
     // 게시글 삭제
+    @Transactional
     public void delete(Long articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
         articleRepository.delete(article);
     }
 
+    // 게시글 상태 모집완료(false)로 변경
+    @Transactional
     public void updateStatus(Long articleId) {
         // 모집 완료(false)로 변경
         Article article = articleRepository.findById(articleId)
@@ -69,7 +75,13 @@ public class ArticleService {
         article.setRecruitStatus(false);
 
         articleRepository.save(article);
-        // TODO: 동행 테이블에 댓글 남긴 자동으로 회원 정보 저장?..(선택 시점 확인 필요)
-        // TODO: 공연 날짜 이후에 게시글 작성자가 동행 인원 확정하기 -> 확정 인원을 바탕으로 매너 평가
+    }
+
+    // 게시글 조회수 증가
+    @Transactional
+    public void updateViews(Article article) {
+        // TODO: 새로 쿼리를 짜야하는지, 여기서 바로 set으로 넣는게 괜찮은지
+        article.setViews(article.getViews() + 1);
+        articleRepository.save(article);
     }
 }

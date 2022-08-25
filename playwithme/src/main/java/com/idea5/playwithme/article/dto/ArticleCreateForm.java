@@ -35,7 +35,7 @@ public class ArticleCreateForm {
 
     // ArticleDto -> Article 변환
     public static Article toEntity(ArticleCreateForm articleCreateForm) {
-        // default: 모집 상태, 작성 일시, 수정 일시
+        // default: 모집 상태, 작성 일시, 수정 일시, 조회수
         return Article.builder()
                 .title(articleCreateForm.getTitle())
                 .contents(articleCreateForm.getContents())
@@ -44,8 +44,8 @@ public class ArticleCreateForm {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .gender(articleCreateForm.getGender())
-//                .ageRange(articleCreateForm.getAgeRange())
                 .ageRange(articleCreateForm.getMinAge() + "~" + articleCreateForm.getMaxAge())
+                .views(0)   // default
                 .build();
     }
 }

@@ -34,36 +34,27 @@ public class ArticleController {
     @PostMapping("/write/{board_id}")
     public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-//            System.out.println(bindingResult.getAllErrors());
             return "article_create_form";
-        }
-
-        // TODO : 입력되지 않은 데이터 처리
-        if (bindingResult.hasErrors()) {
-            System.out.println("오류");
         }
         // TODO: member session 처리
         Long articleId = articleService.create(boardId, articleCreateForm);
         Article article = articleService.findById(articleId);
 
-//        return ResponseEntity.status(HttpStatus.OK).body(ArticleResponseDto.toDto(article));
         return "redirect:/board/%d/%d".formatted(boardId, article.getId());
     }
-
-    // 게시글 전체 조회
 
     // 게시글 상세 조회
     // TODO: board_id url에 꼭 넣어야 하는가
     @GetMapping("/{board_id}/{article_id}")
     public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         Article article = articleService.getDetails(boardId, articleId);
+        articleService.updateViews(article);
+
+
         Event event = article.getBoard().getEvent();
         model.addAttribute("article", article);
         model.addAttribute("event", event);
-//        System.out.println(event.getName());
-//        System.out.println(event.getLocation());
-//        return ResponseEntity.status(HttpStatus.OK).body(article);
-//        return ResponseEntity.status(HttpStatus.OK).body(ArticleDto.toDto(article));
+
         return "article_detail";
     }
 
