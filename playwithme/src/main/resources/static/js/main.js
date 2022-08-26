@@ -113,6 +113,7 @@ function date_click(event) {
      // ajax로 "/getEvent?category=categoryName_2&date=dateString" 호출해서 List<Event> 받아오기
      $.ajax({
        type:"GET",
+       async: false, // 동기 호출
        url:"/getEvent?" + params,
        dataType:"JSON",
 
