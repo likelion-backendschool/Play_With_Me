@@ -119,7 +119,17 @@ function date_click(event) {
 
        success: function(data){
              console.log("통신성공");
-             console.log(data);
+             //console.log("data:")
+             //console.log(data); // 데이터는 클릭시 계속 잘 담아와짐
+             console.log("push하기 전 event_data2");
+             console.log(event_data2);
+             console.log("push하기 전 event_data2[0]");
+             console.log(event_data2[0]);
+             event_data2.push(data); // 아래 미작동시 후보코드, 문제: 이 코드는 배열 속 배열 생성
+             //event_data2 = data.slice();
+             console.log(event_data2[0]);
+             console.log(event_data2[0].length);
+             event_data2.length=0; // 객체 비워주기
         },
        error:function(){
              console.log("통신에러");
@@ -260,6 +270,8 @@ function check_events(day, month, year) {
     }
     return events;
 }
+// ajax로 가져온 이벤트 리스트 담을 배열
+var event_data2=[];
 
 // Given data for events in JSON format
 var event_data = {
