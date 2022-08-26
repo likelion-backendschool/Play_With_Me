@@ -120,16 +120,40 @@ function date_click(event) {
        success: function(data){
              console.log("통신성공");
              //console.log("data:")
-             //console.log(data); // 데이터는 클릭시 계속 잘 담아와짐
+             //console.log(data);
              console.log("push하기 전 event_data2");
              console.log(event_data2);
              console.log("push하기 전 event_data2[0]");
              console.log(event_data2[0]);
-             event_data2.push(data); // 아래 미작동시 후보코드, 문제: 이 코드는 배열 속 배열 생성
+             event_data2.push(data);
              //event_data2 = data.slice();
              console.log(event_data2[0]);
              console.log(event_data2[0].length);
-             event_data2.length=0; // 객체 비워주기
+
+             // event-container에 event를 event-card에 담아 전달
+              $(".events-container").empty();
+              $(".events-container").show(250);
+              if(event_data2[0].length===0) {
+                 var event_card = $("<div class='event-card'></div>");
+                 var event_name = $("<div class='event-name'>There are no events planned for Today.</div>");
+                 $(event_card).css({ "border-left": "10px solid #FF1744" });
+                 $(event_card).append(event_name);
+                 $(".events-container").append(event_card);
+                  }
+              else {
+                   for(var i=0; i<event_data2[0].length; i++) {
+                       var event_card = $("<div class='event-card'></div>");
+                       var event_name = $("<div class='event-name'>"+event_data2[0][i].name+"</div>");
+                       var event_location = $("<div class='event-location'>"+event_data2[0][i].location+"</div>");
+                       var event_dateString = $("<div class='event-dateString'>"+event_data2[0][i].date.split("T")[0]+"</div>");
+                       var event_urlNotice = $("<div class='event-urlNotice'> 모집 게시판 바로가기 </div>");
+                       $(event_card).append(event_name).append(event_location).append(event_dateString).append(event_urlNotice);
+                       $(".events-container").append(event_card);
+                   }
+              }
+
+             // 객체 비워주기
+             event_data2.length=0;
         },
        error:function(){
              console.log("통신에러");
