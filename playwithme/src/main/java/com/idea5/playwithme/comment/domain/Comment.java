@@ -52,7 +52,7 @@ public class Comment {
      *  * child List들 정렬해서 보내주면 되지 않을까
      */
     //== 부모 댓글을 삭제해도 자식 댓글은 남아있음 ==//
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> childList = new ArrayList<>();
 
 
@@ -100,7 +100,9 @@ public class Comment {
                 .parent(parent)
                 .member(member)
                 .childList(childList)
+                .article(article)
                 .build();
+
         return commentDto;
 
     }

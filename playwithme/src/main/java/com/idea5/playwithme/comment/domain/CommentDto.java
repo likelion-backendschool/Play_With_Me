@@ -26,6 +26,8 @@ public class CommentDto {
 
     private boolean secretStatus;
 
+    private Article article;
+
     private Member member;
 
     private Comment parent;

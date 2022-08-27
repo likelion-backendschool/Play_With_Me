@@ -94,7 +94,7 @@ public class CommentService {
 
     @Transactional
     public CommentDto findComment(Long id) {
-        Comment comment = commentRepository.findById(id).orElse(null);
+        Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
         return comment.toCommentDto();
     }
 

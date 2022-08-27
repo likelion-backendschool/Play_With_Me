@@ -2,6 +2,7 @@ package com.idea5.playwithme.comment;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
+import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import lombok.RequiredArgsConstructor;
@@ -94,11 +95,13 @@ public class CommentController {
     /**
      * 삭제
      */
-
-    @DeleteMapping("/delete/{comment_id}")
-    public ResponseEntity delete(@PathVariable("comment_id") Long id) {
+    @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
+    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
+        System.out.println("삭제");
+        CommentDto comment = commentService.findComment(id);
         commentService.delete(id);
-        return null;
+
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
 

@@ -60,7 +60,8 @@
 
 
                     <div class="my-3">
-                        <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}"
+                           class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
                     </div>
 
                 </div>
@@ -74,20 +75,47 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right m-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
                     </svg>
-                    <span th:if="${true} == ${child.secretStatus}" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
-                    <span th:unless="${true} == ${child.secretStatus}" th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;"></span>
-<!--                    <div th:text="${child.contents}" class="card-text fs-5" style="white-space: pre-line;"></div>-->
-                </div>
 
+                    <div th:classappend="${child.id}">
 
-                <div class="d-flex justify-content-start fs-6 ms-4  align-items-center">
-                    <div class="badge bg-light text-secondary p-2 text-start ">
-                        <div class="p-1 mb-1 bg-primary text-white" th:if="${article.member == child.member}" th:text="글쓴이"></div>
-                    </div>
-                    <div class="badge bg-light text-secondary p-2 text-start ">
-                        <div th:text="${#temporals.format(child.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                        <div th:if="${true} == ${child.secretStatus}">
+                            <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                        </div>
+                        <div th:unless="${true} == ${child.secretStatus}">
+                            <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                        </div>
                     </div>
                 </div>
+
+                <form class="collapse" th:classappend="'multi-collapse-'+${child.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${child.id}|}" method="post">
+                    <div class="form-group">
+                        <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${child.contents}"></textarea>
+                    </div>
+                    <input type="hidden" id="comment-id" value="{{id}}">
+                    <input type="hidden" id="comment-author" value="{{author}}">
+                    <button type="submit" class="btn btn-primary my-2">수정 완료</button>
+                </form>
+
+                <div th:classappend="${child.id}" >
+                    <div class="d-flex justify-content-start fs-6 ms-4 align-items-center">
+
+                        <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                            <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
+                        </div>
+                        <div class="badge bg-light text-secondary p-2 text-start ">
+                            <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+
+                        <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>
+
+
+                        <div class="my-3">
+                            <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                        </div>
+
+                    </div>
+                </div>
+
 
             </div>
 
@@ -105,8 +133,6 @@
                     <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
                     <label class="form-check-label" for="check">비밀</label>
                 </div>
-
-
             </form>
         </div>
     </div>
@@ -125,8 +151,6 @@
             <textarea th:field="*{contents}" class="form-control" rows="1"></textarea>
             <input type="submit" value="답변등록" class="btn btn-primary my-2">
         </div>
-
-
 <!--        비밀 표시-->
         <div class="form-check ms-5 align-items-center">
             <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
@@ -134,35 +158,26 @@
         </div>
     </form>
 
-    <div class="wrapper">
-        <input type="hidden" placeholder="e.g. www.google.com" id="txtHiddenUname" />
-        <span>http://</span>
-        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="modify()">수정</button>
-<!--        <a th:text="수정"></a>-->
-    </div>
-
-    <div class="119"> hello </div>
 
 </div>
 
 <script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
 
     function findHideId(id){
         const find = document.getElementsByClassName(id);
         console.log(find.length);
         for(var i = 0; i < find.length; i++){
-            // console.log(find[i].className);
-            // const className = find[i].className;
             find[i].style.display ='none';
-            // hide.style.display = 'none';
 
         }
-
-        // const find = '.'+document.getElementsByClassName(id);
-        // $(find).hide();
-        // for(var i = 0; i < find.length; i++){
-        //     $(find[i]).hide();
-        // }
     }
 
 </script>
