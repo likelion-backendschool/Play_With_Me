@@ -86,6 +86,7 @@ public class CommentController {
      */
     @PostMapping("/modify/{comment_id}")
     public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm) {
+        System.out.println("수정");
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
         return null;
     }

@@ -88,6 +88,7 @@ public class CommentService {
     public Long commentUpdate(Long id, CommentCreateForm dto) {
         Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
         comment.update(dto.getContents());
+        commentRepository.save(comment);
         return comment.getId();
     }
 

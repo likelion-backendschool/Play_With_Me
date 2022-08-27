@@ -38,13 +38,13 @@
                     </div>
                 </div>
 
-            <form class="collapse"th:classappend="'multi-collapse-'+${comment.id}">
+            <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${comment.id}|}" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" id="comment-content" rows="3" th:text="${comment.contents}"></textarea>
+                        <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
                     </div>
                     <input type="hidden" id="comment-id" value="{{id}}">
                     <input type="hidden" id="comment-author" value="{{author}}">
-                    <button type="button" class="btn btn-info comment-update-btn">수정 완료</button>
+                    <button type="submit" class="btn btn-info comment-update-btn">수정 완료</button>
             </form>
 
 
@@ -55,7 +55,7 @@
                     <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                 </div>
                 <div class="badge bg-light text-secondary p-2 text-start ">
-                    <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                    <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
 
                 <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
@@ -141,12 +141,6 @@
 <!--        <a th:text="수정"></a>-->
     </div>
 
-
-    <button class="delete" type="button">hihi</button>
-    <button class="delete" type="button">h2h2</button>
-    <button class="delete123" type="button">h2h2</button>
-    <button onclick="findHideId(110)" type="button">h2h2</button>
-    <div id="110">qweqweqweqweqweqweqweqweqweqwe</div>
 
 </div>
 
