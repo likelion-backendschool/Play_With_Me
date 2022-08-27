@@ -61,8 +61,9 @@ public class Comment {
      * 댓글 수정 메소드
      * 수정 사항
      */
-    public void update(String contents) {
+    public void update(String contents, Boolean secretStatus) {
         this.contents = contents;
+        this.secretStatus =secretStatus;
         updatedAt = LocalDateTime.now().withNano(0);
     }
 

@@ -62,6 +62,7 @@ public class CommentController {
         }
 
         System.out.println("createForm.getContents() = " + createForm.getContents());
+        System.out.println("createForm.isSecretStatus() = " + createForm.isSecretStatus());
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }

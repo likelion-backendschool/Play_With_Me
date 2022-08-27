@@ -36,13 +36,20 @@
                 </div>
             </div>
 
-            <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" method="post">
+            <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" th:object="${createForm}" method="post">
                     <div class="form-group">
                         <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
                     </div>
                     <input type="hidden" id="comment-id" value="{{id}}">
                     <input type="hidden" id="comment-author" value="{{author}}">
-                    <button type="submit" class="btn btn-primary my-2">수정 완료</button>
+                    <div class="d-flex justify-content-start form-check ms-2 align-items-center">
+                        <div class = "aalign-middle">
+                            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
+                            <label class="form-check-label" for="check">비밀</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                    </div>
+
             </form>
 
 
@@ -87,13 +94,17 @@
                     </div>
                 </div>
 
-                <form class="collapse" th:classappend="'multi-collapse-'+${child.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${child.id}|}" method="post">
+                <form class="collapse" th:classappend="'multi-collapse-'+${child.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${child.id}|}" th:object="${createForm}" method="post">
                     <div class="form-group">
                         <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${child.contents}"></textarea>
                     </div>
-                    <input type="hidden" id="comment-id" value="{{id}}">
-                    <input type="hidden" id="comment-author" value="{{author}}">
-                    <button type="submit" class="btn btn-primary my-2">수정 완료</button>
+                    <div class="d-flex justify-content-start form-check ms-2 align-items-center">
+                        <div class = "aalign-middle">
+                            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
+                            <label class="form-check-label" for="check">비밀</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                    </div>
                 </form>
 
                 <div th:classappend="${child.id}" >
