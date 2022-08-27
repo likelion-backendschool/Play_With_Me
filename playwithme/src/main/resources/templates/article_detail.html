@@ -57,7 +57,7 @@
                     <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
 
-                <a href="#" class="btn btn-sm btn-outline-secondary modify" th:classappend="${comment.id}" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
+                <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
 
 
                 <div class="my-3">
@@ -144,7 +144,8 @@
     <button class="delete" type="button">hihi</button>
     <button class="delete" type="button">h2h2</button>
     <button class="delete123" type="button">h2h2</button>
-    <button id="tesetteset" type="button">h2h2</button>
+    <button onclick="findHideId(110)" type="button">h2h2</button>
+    <div id="110">qweqweqweqweqweqweqweqweqweqwe</div>
 
 </div>
 
@@ -158,22 +159,34 @@
     //     });
     // });
 
-    const updateBtns = document.querySelectorAll('.modify');
-    // 모든 수정 버튼별, 이벤트 등록
-    updateBtns.forEach(function(item) {
-        console.log("hello");
-        item.addEventListener('click', function() { // 클릭 이벤트 발생시,
+    function findHideId(id){
+        console.log(id);
+        const hideId = '#'+id;
+        console.log(hideId);
+        $(hideId).collapse('hide');
+        // document.getElementById(id)
+        document.getElementById(id).innerHTML = "HIHIHIHI";
 
-            const className = this.className.split(' ').pop(); // 마지막 문자열(id값) 가져오기
-            const hideId = document.getElementById(className);
-            hideId.style.display ='none';
 
-            // console.log("test");
-            // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
-            // console.log(form.getElementsByClassName);
-            // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
-        });
-    });
+    }
+
+
+    // const updateBtns = document.querySelectorAll('.modify');
+    // // 모든 수정 버튼별, 이벤트 등록
+    // updateBtns.forEach(function(item) {
+    //     console.log("hello");
+    //     item.addEventListener('click', function() { // 클릭 이벤트 발생시,
+    //
+    //         const className = this.className.split(' ').pop(); // 마지막 문자열(id값) 가져오기
+    //         const hideId = document.getElementById(className);
+    //         hideId.style.display ='none';
+    //
+    //         // console.log("test");
+    //         // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
+    //         // console.log(form.getElementsByClassName);
+    //         // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
+    //     });
+    // });
 
 
     // var comment ={
