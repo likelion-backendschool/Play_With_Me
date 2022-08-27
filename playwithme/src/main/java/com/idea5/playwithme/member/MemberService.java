@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.RoleType;
 import com.idea5.playwithme.member.dto.KakaoUser;
-import com.idea5.playwithme.member.dto.MemberInfoDTO;
+
+
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.apache.tomcat.util.buf.UEncoder;
@@ -15,33 +16,18 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
-import java.beans.Encoder;
-import java.net.Authenticator;
-import java.net.URLEncoder;
-import java.time.LocalDateTime;
-import java.util.Base64;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-    @Value("${cos.key}")
-    private String cosKey;
-
     private final MemberRepository memberRepository;
 //    private final AuthenticationManager authenticationManager;
 
@@ -127,11 +113,10 @@ public class MemberService {
         Long id = jsonNode.get("id").asLong();
         String email = jsonNode.get("kakao_account").get("email").asText();
         String ageRange = jsonNode.get("kakao_account").get("age_range").asText();
-        String nickname = jsonNode.get("properties").get("nickname").asText();
+        String name = jsonNode.get("properties").get("nickname").asText();
         String gender = jsonNode.get("kakao_account").get("gender").asText();
-        String username = email + "_" + id;  // PWM의 유저 아이디 = 카카오이메일 + 카카오회원번호
 
-        return new KakaoUser(id, username, email, ageRange, nickname, gender);
+        return new KakaoUser(id, email, ageRange, name, gender);
     }
 
     @Transactional
@@ -141,13 +126,15 @@ public class MemberService {
 
 //        String rawPassword = UUID.randomUUID().toString();                 // PWM의 회원 원문 비밀번호 => UUID
 //        String encPassword = encoder.encode(rawPassword);                  // PWM의 비밀번호 해쉬 값 변환
+        String nickname = kakaoUser.getAgeRange() + " " +
+                            kakaoUser.getGender() + " " +
+                            kakaoUser.getId() + "호";
 
         member.setName(kakaoUser.getName());
-        member.setUsername(kakaoUser.getUsername());
-        member.setPassword(cosKey);
+        member.setNickname(nickname);
         member.setEmail(kakaoUser.getEmail());
         member.setAgeRange(kakaoUser.getAgeRange());
-        member.setMannerTemp(50);
+        member.setMannerTemp(36);
         member.setGender(kakaoUser.getGender());
         member.setRole(RoleType.USER);
 

@@ -23,10 +23,10 @@ public class Member {
     private String name;
 
     @Column(nullable = false, length = 100, unique = true)
-    private String username;        // 아이디
+    private String nickname;        // 닉네임 겸 아이디 -
 
-    @Column(nullable = false, length = 100)
-    private String password;        // 비밀번호 => 해쉬(비밀번호 암호화)
+//    @Column(nullable = false, length = 100)
+//    private String password;        // 비밀번호 => 해쉬(비밀번호 암호화)
 
     @Column(length = 50)
     private String email;
@@ -50,7 +50,5 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-
-
 
 }

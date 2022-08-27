@@ -1,10 +1,10 @@
+#Database
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/playwithme
-    username: sa
+    url: jdbc:mariadb://localhost:3306/playwithme?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    username: root
     password:
-    driver-class-name: org.h2.Driver
-
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
@@ -12,13 +12,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        # show_sql: true
-
+        show_sql: true
+        use_sql_comments: true
 
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
-
-cos:
-  key: cos1234
+    org.hibernate.type.descriptor: trace
