@@ -27,15 +27,16 @@
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
 
-            <p class="collapse show" th:classappend="'multi-collapse-'+${comment.id}" th:id="${comment.id}">
-                <div th:if="${true} == ${comment.secretStatus}">
-                    <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
-                </div>
-                <div th:unless="${true} == ${comment.secretStatus}">
-                    <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
-                </div>
-            </p>
 
+
+                <div th:id="${comment.id}">
+                    <div th:if="${true} == ${comment.secretStatus}">
+                        <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                    </div>
+                    <div th:unless="${true} == ${comment.secretStatus}">
+                        <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                    </div>
+                </div>
 
             <form class="collapse"th:classappend="'multi-collapse-'+${comment.id}">
                     <div class="form-group">
@@ -150,66 +151,10 @@
 </div>
 
 <script layout:fragment="script" type='text/javascript'>
-    // const delete_elements = document.getElementsByClassName("delete");
-    // Array.from(delete_elements).forEach(function(element) {
-    //     element.addEventListener('click', function() {
-    //         if(confirm("정말로 삭제하시겠습니까?")) {
-    //             location.href = this.dataset.uri;
-    //         };
-    //     });
-    // });
 
     function findHideId(id){
-        console.log(id);
-        const hideId = '#'+id;
-        console.log(hideId);
-        $(hideId).collapse('hide');
-        // document.getElementById(id)
-        document.getElementById(id).innerHTML = "HIHIHIHI";
-
-
+        document.getElementById(id).style.display = "none";
     }
-
-
-    // const updateBtns = document.querySelectorAll('.modify');
-    // // 모든 수정 버튼별, 이벤트 등록
-    // updateBtns.forEach(function(item) {
-    //     console.log("hello");
-    //     item.addEventListener('click', function() { // 클릭 이벤트 발생시,
-    //
-    //         const className = this.className.split(' ').pop(); // 마지막 문자열(id값) 가져오기
-    //         const hideId = document.getElementById(className);
-    //         hideId.style.display ='none';
-    //
-    //         // console.log("test");
-    //         // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
-    //         // console.log(form.getElementsByClassName);
-    //         // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
-    //     });
-    // });
-
-
-    // var comment ={
-    //     init: function() {
-    //         var _this = this;
-    //         // 수정 버튼 변수화
-    //         const updateBtns = document.querySelectorAll('.test');
-    //         // 모든 수정 버튼별, 이벤트 등록
-    //         updateBtns.forEach(function(item) {
-    //             console.log("hello");
-    //             item.addEventListener('click', function() { // 클릭 이벤트 발생시,
-    //                 console.log(this.getById);
-    //                 console.log(this.getElementsByClassName);
-    //                 console.log(this.length);
-    //                 // console.log("test");
-    //                 // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
-    //                 // console.log(form.getElementsByClassName);
-    //                 // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
-    //             });
-    //         });
-    //     }
-    // };
-    // comment.init();
 
 </script>
 
