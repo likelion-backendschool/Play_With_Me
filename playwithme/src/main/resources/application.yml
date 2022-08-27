@@ -1,15 +1,10 @@
+#Database
 spring:
   datasource:
-#    url: jdbc:h2:tcp://localhost/~/playwithme
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
-    url: jdbc:mariadb://localhost:3306/play_with_me?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3306/playwithme?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
     username: root
-    password: race1020
-    driverClassName: org.mariadb.jdbc.Driver
-
-
+    password:
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
@@ -17,10 +12,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        # show_sql: true
-
+        show_sql: true
+        use_sql_comments: true
 
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org.hibernate.type.descriptor: trace

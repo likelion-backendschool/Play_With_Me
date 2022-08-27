@@ -16,17 +16,26 @@ import java.util.List;
 @Setter
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mebmer_id")
+    @Column(name = "member_id")
     private Long id;
+
+    @Column(length = 20)
+    private String name;
+
+    @Column(nullable = false, length = 100, unique = true)
+    private String username;        // 카카오 정보 식별을 위한 key
+
+    @Column(nullable = false, length = 100)
+    private String password;
+
+    @Column(length = 50)
+    private String nickname;
 
     @Column(length = 50)
     private String email;
 
     @Column(length = 20)
     private String ageRange;
-
-    @Column(length = 20)
-    private String name;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -36,12 +45,13 @@ public class Member {
     @Column(length = 20)
     private String gender;
 
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Article> articleList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-
-
 
 }
