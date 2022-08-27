@@ -1,5 +1,6 @@
 package com.idea5.playwithme.comment;
 
+import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
@@ -17,7 +18,8 @@ import java.util.List;
  * TODO
  * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )
  * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
- * 애러 처리
+ * 애러 처리 서비스 -> 컨트롤러
+ * board_ID 처리
  *
  */
 @RequiredArgsConstructor
@@ -52,6 +54,7 @@ public class CommentController {
     @PostMapping("/write/{board_id}/{article_id}")
     public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
     {
+        Article findArticle = articleService.findById(articleId);
         if(bindingResult.hasErrors()){
             System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);

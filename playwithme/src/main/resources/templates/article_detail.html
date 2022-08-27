@@ -1,7 +1,9 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout}">
 
-<div class="container my-3">
+<div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2" th:text="${article.title}"></h2>
 
     <div class="card my-3">
@@ -24,8 +26,27 @@
     <div th:each="comment : ${commentList}">
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
-            <span th:if="${true} == ${comment.secretStatus}" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</span>
-            <span th:unless="${true} == ${comment.secretStatus}" th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;"></span>
+
+            <p class="collapse show" th:classappend="'multi-collapse-'+${comment.id}" th:id="${comment.id}">
+                <div th:if="${true} == ${comment.secretStatus}">
+                    <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                </div>
+                <div th:unless="${true} == ${comment.secretStatus}">
+                    <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                </div>
+            </p>
+
+
+            <form class="collapse"th:classappend="'multi-collapse-'+${comment.id}">
+                    <div class="form-group">
+                        <textarea class="form-control" id="comment-content" rows="3" th:text="${comment.contents}"></textarea>
+                    </div>
+                    <input type="hidden" id="comment-id" value="{{id}}">
+                    <input type="hidden" id="comment-author" value="{{author}}">
+                    <button type="button" class="btn btn-info comment-update-btn">수정 완료</button>
+            </form>
+
+
 
             <div class="d-flex justify-content-start fs-6 align-items-center">
 
@@ -36,9 +57,8 @@
                     <div th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
                 </div>
 
-                <div class="my-3">
-                    <a class="btn btn-sm btn-outline-secondary" th:text="수정"></a>
-                </div>
+                <a href="#" class="btn btn-sm btn-outline-secondary modify" th:classappend="${comment.id}" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
+
 
                 <div class="my-3">
                     <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
@@ -113,4 +133,73 @@
         </div>
     </form>
 
+    <div class="wrapper">
+        <input type="hidden" placeholder="e.g. www.google.com" id="txtHiddenUname" />
+        <span>http://</span>
+        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="modify()">수정</button>
+<!--        <a th:text="수정"></a>-->
+    </div>
+
+
+    <button class="delete" type="button">hihi</button>
+    <button class="delete" type="button">h2h2</button>
+    <button class="delete123" type="button">h2h2</button>
+    <button id="tesetteset" type="button">h2h2</button>
+
 </div>
+
+<script layout:fragment="script" type='text/javascript'>
+    // const delete_elements = document.getElementsByClassName("delete");
+    // Array.from(delete_elements).forEach(function(element) {
+    //     element.addEventListener('click', function() {
+    //         if(confirm("정말로 삭제하시겠습니까?")) {
+    //             location.href = this.dataset.uri;
+    //         };
+    //     });
+    // });
+
+    const updateBtns = document.querySelectorAll('.modify');
+    // 모든 수정 버튼별, 이벤트 등록
+    updateBtns.forEach(function(item) {
+        console.log("hello");
+        item.addEventListener('click', function() { // 클릭 이벤트 발생시,
+
+            const className = this.className.split(' ').pop(); // 마지막 문자열(id값) 가져오기
+            const hideId = document.getElementById(className);
+            hideId.style.display ='none';
+
+            // console.log("test");
+            // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
+            // console.log(form.getElementsByClassName);
+            // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
+        });
+    });
+
+
+    // var comment ={
+    //     init: function() {
+    //         var _this = this;
+    //         // 수정 버튼 변수화
+    //         const updateBtns = document.querySelectorAll('.test');
+    //         // 모든 수정 버튼별, 이벤트 등록
+    //         updateBtns.forEach(function(item) {
+    //             console.log("hello");
+    //             item.addEventListener('click', function() { // 클릭 이벤트 발생시,
+    //                 console.log(this.getById);
+    //                 console.log(this.getElementsByClassName);
+    //                 console.log(this.length);
+    //                 // console.log("test");
+    //                 // var form = this.closest('p'); // 클릭 이벤트가 발생한 버튼에 제일 가까운 폼을 찾고,
+    //                 // console.log(form.getElementsByClassName);
+    //                 // _this.update(form); // 해당 폼으로, 업데이트 수행한다!
+    //             });
+    //         });
+    //     }
+    // };
+    // comment.init();
+
+</script>
+
+
+</html>
+
