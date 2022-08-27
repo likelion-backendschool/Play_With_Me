@@ -19,7 +19,7 @@ import java.util.List;
  * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )
  * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
  * 애러 처리 서비스 -> 컨트롤러
- * board_ID 처리
+ * board_ID 처리(O)
  *
  */
 @RequiredArgsConstructor
@@ -84,11 +84,11 @@ public class CommentController {
     /**
      * 수정
      */
-    @PostMapping("/modify/{comment_id}")
-    public ResponseEntity<CommentDto> modifyComment(@PathVariable("comment_id") Long id, CommentCreateForm createForm) {
+    @PostMapping("/modify/{board_id}/{article_id}/{comment_id}")
+    public String modifyComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id, CommentCreateForm createForm) {
         System.out.println("수정");
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
-        return null;
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
     /**

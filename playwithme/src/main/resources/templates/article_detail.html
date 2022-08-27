@@ -27,45 +27,45 @@
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
 
-
-
-                <div th:id="${comment.id}">
-                    <div th:if="${true} == ${comment.secretStatus}">
-                        <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
-                    </div>
-                    <div th:unless="${true} == ${comment.secretStatus}">
-                        <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
-                    </div>
+            <div th:classappend="${comment.id}">
+                <div th:if="${true} == ${comment.secretStatus}">
+                    <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
                 </div>
+                <div th:unless="${true} == ${comment.secretStatus}">
+                       <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                </div>
+            </div>
 
-            <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${comment.id}|}" method="post">
+            <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" method="post">
                     <div class="form-group">
                         <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
                     </div>
                     <input type="hidden" id="comment-id" value="{{id}}">
                     <input type="hidden" id="comment-author" value="{{author}}">
-                    <button type="submit" class="btn btn-info comment-update-btn">수정 완료</button>
+                    <button type="submit" class="btn btn-primary my-2">수정 완료</button>
             </form>
 
 
+            <div th:classappend="${comment.id}" >
+                <div class="d-flex justify-content-start fs-6 align-items-center">
 
-            <div class="d-flex justify-content-start fs-6 align-items-center">
+                    <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                        <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
+                    </div>
+                    <div class="badge bg-light text-secondary p-2 text-start ">
+                        <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
+                    </div>
 
-                <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary p-2 text-start ">
-                    <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
+                    <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
+
+
+                    <div class="my-3">
+                        <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                    </div>
+
                 </div>
-                <div class="badge bg-light text-secondary p-2 text-start ">
-                    <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
-                </div>
-
-                <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
-
-
-                <div class="my-3">
-                    <a class="btn btn-sm btn-outline-secondary" th:text="삭제"></a>
-                </div>
-
             </div>
+
 
                 <!--자식 댓글-->
             <div th:each="child : ${comment.childList}">
@@ -141,13 +141,28 @@
 <!--        <a th:text="수정"></a>-->
     </div>
 
+    <div class="119"> hello </div>
 
 </div>
 
 <script layout:fragment="script" type='text/javascript'>
 
     function findHideId(id){
-        document.getElementById(id).style.display = "none";
+        const find = document.getElementsByClassName(id);
+        console.log(find.length);
+        for(var i = 0; i < find.length; i++){
+            // console.log(find[i].className);
+            // const className = find[i].className;
+            find[i].style.display ='none';
+            // hide.style.display = 'none';
+
+        }
+
+        // const find = '.'+document.getElementsByClassName(id);
+        // $(find).hide();
+        // for(var i = 0; i < find.length; i++){
+        //     $(find[i]).hide();
+        // }
     }
 
 </script>
