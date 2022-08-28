@@ -4,9 +4,12 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.dto.ArticleCreateForm;
 import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.service.ArticleService;
+import com.idea5.playwithme.board.domain.Board;
+import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final BoardService boardService;
 
     // 게시글 작성폼
     @GetMapping("/write/{board_id}")
@@ -40,6 +44,16 @@ public class ArticleController {
         Article article = articleService.findById(articleId);
 
         return "redirect:/board/%d/%d".formatted(boardId, article.getId());
+    }
+
+    // 게시글 리스트 조회
+    @GetMapping("/{board_id}")
+    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Board board = boardService.findById(boardId);
+        Page<Article> paging = articleService.getList(boardId, page);
+        model.addAttribute("paging", paging);
+        System.out.println(paging.getSize());
+        return "board";
     }
 
     // 게시글 상세 조회

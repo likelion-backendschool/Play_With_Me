@@ -9,6 +9,8 @@ import com.idea5.playwithme.board.domain.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,5 +85,10 @@ public class ArticleService {
         // TODO: 새로 쿼리를 짜야하는지, 여기서 바로 set으로 넣는게 괜찮은지
         article.setViews(article.getViews() + 1);
         articleRepository.save(article);
+    }
+
+    public Page<Article> getList(Long boardId, int page) {
+        PageRequest pageable = PageRequest.of(page, 10);
+        return articleRepository.findByBoard_Id(boardId, pageable);
     }
 }
