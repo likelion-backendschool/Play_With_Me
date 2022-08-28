@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/pwm
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-#    url: jdbc:mariadb://localhost:3306/play_with_me?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
-#    username: root
-#    password: 0114
-#    driverClassName: org.mariadb.jdbc.Driver
+#    url: jdbc:h2:tcp://localhost/~/pwm
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+    username: root
+    url: jdbc:mariadb://localhost:3306/play_with_me?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    driverClassName: org.mariadb.jdbc.Driver
+    password: '0114'
 
   jpa:
     hibernate:
