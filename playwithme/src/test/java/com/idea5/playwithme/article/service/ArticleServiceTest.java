@@ -59,11 +59,20 @@ class ArticleServiceTest {
 
         Board board = Board.builder()
                 .createdAt(LocalDateTime.now())
-                .isBlind(true)
+                .isBlind(false)
+                .Event(event)
                 .build();
         board.setEvent(event);
         boardRepository.save(board);
-        Member member = new Member();
+
+        Member member = Member.builder()
+                .createdAt(LocalDateTime.now())
+                .ageRange("10~19")
+                .email("user1@test.com")
+                .gender("Female")
+                .mannerTemp(100)
+                .name("강해린")
+                .build();
         memberRepository.save(member);
 
         String[] genders = {"여성", "남성", "성별무관"};
