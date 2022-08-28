@@ -5,6 +5,7 @@ import com.idea5.playwithme.article.dto.ArticleCreateForm;
 import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.event.domain.Event;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +16,16 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class ArticleController {
 
     private final ArticleService articleService;
 
-    @Autowired
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
-
     // 게시글 작성폼
     @GetMapping("/write/{board_id}")
     public String createForm(@PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+        // TODO: board 정보 가져와야할 듯함
+
         return "article_create_form";
     }
 

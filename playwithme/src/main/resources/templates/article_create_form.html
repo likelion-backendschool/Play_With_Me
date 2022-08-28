@@ -2,7 +2,9 @@
 <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 
 <div class="container">
-    <h5 class="my-3 border-bottom pb-2">게시글 등록</h5>
+    <h2 class="my-3 border-bottom ft-">게시글 등록</h2>
+
+    <div class="badge bg-light text-dark fs-5 mb-3">공연명</div>
 
     <form th:action="@{|/board/write/${board_id}|}" th:object="${articleCreateForm}" method="post">
         <div class="mb-3">
