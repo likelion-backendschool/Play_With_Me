@@ -42,6 +42,7 @@ public class CommentService {
     public Long commentSave(Long articleId, CommentCreateForm dto) {
         Article article = articleRepository.findById(articleId).orElseThrow(() ->
                 new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
+
         dto.setArticle(article);
         dto.setMember(null);
 
@@ -74,11 +75,11 @@ public class CommentService {
     @Transactional
     public void commentReSave(Long articleId, CommentCreateForm createForm, Long parentId) {
         Comment comment = createForm.toEntity();
-        //Todo
-        // orElseThrow 처리 해야됨.
+        comment.confirmArticle(articleRepository.findById(articleId).orElseThrow(() ->
+                new IllegalArgumentException("%d번 게시글은 존재 하지 않습니다.".formatted(articleId))));
 
-        comment.confirmArticle(articleRepository.findById(articleId).orElseThrow());
-        comment.confirmParent(commentRepository.findById(parentId).orElseThrow());
+        comment.confirmParent(commentRepository.findById(parentId).orElseThrow(() ->
+                new IllegalArgumentException("%d번 부모 댓글 존재하지 않습니다.".formatted(parentId))));
 
         commentRepository.save(comment);
 

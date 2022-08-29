@@ -18,10 +18,6 @@
         </div>
     </div>
 
-<!--    &lt;!&ndash; 답변의 갯수 표시 &ndash;&gt;-->
-<!--    <h5 class="border-bottom my-3 py-2"-->
-<!--        th:text="|${#lists.size(commentList.size())}개의 답변이 있습니다.|"></h5>-->
-
     <!-- 답변 반복 시작 -->
     <div th:each="comment : ${commentList}">
 
@@ -29,7 +25,7 @@
 
             <div th:classappend="${comment.id}">
                 <div th:if="${true} == ${comment.secretStatus}">
-                    <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                    <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
                 </div>
                 <div th:unless="${true} == ${comment.secretStatus}">
                        <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
@@ -43,8 +39,9 @@
                     <input type="hidden" id="comment-id" value="{{id}}">
                     <input type="hidden" id="comment-author" value="{{author}}">
                     <div class="d-flex justify-content-start form-check ms-2 align-items-center">
-                        <div class = "aalign-middle">
-                            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
+                        <div class="align-middle">
+
+                            <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
                             <label class="form-check-label" for="check">비밀</label>
                         </div>
                         <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
@@ -85,8 +82,8 @@
 
                     <div th:classappend="${child.id}">
 
-                        <div th:if="${true} == ${child.secretStatus}">
-                            <input type="hidden" class="text-black-50 fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                        <div class="text-primary fs-6" th:if="${true} == ${child.secretStatus}">
+                            <input type="hidden" class="text-primary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
                         </div>
                         <div th:unless="${true} == ${child.secretStatus}">
                             <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
@@ -99,8 +96,8 @@
                         <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${child.contents}"></textarea>
                     </div>
                     <div class="d-flex justify-content-start form-check ms-2 align-items-center">
-                        <div class = "aalign-middle">
-                            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
+                        <div class = "align-middle">
+                            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input">
                             <label class="form-check-label" for="check">비밀</label>
                         </div>
                         <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
@@ -131,7 +128,10 @@
 
             </div>
 
-            <form th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"  th:object="${createForm}"  method="post" class="my-3">
+            <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"  th:object="${createForm}"  method="post" class="my-3">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+                    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                </div>
                 <!--        <div th:replace="form_errors :: formErrorsFragment"></div>-->
                 <div class = "d-flex justify-content-start m-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right m-1" viewBox="0 0 16 16">
@@ -148,22 +148,21 @@
             </form>
         </div>
     </div>
-    <!-- 답변 반복 끝  -->
 
-    <!-- 답변 작성 -->
 <!--    Todo
         th:object="${answerForm}" post요청
         th:action="@{|/answer/create/${question.id}|}"
         sec:authorize="isAnonymous(), isAutthenticated() 추가
 -->
 
-    <form th:action="@{|/board/comment/write/${board_id}/${article.id}|}" th:object="${createForm}" method="post" class="my-3">
-        <!--        댓글 작성-->
+    <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}|}" th:object="${createForm}" method="post" class="my-3">
+        <!--     댓글 작성-->
         <div class = "d-flex justify-content-start align-items-center">
             <textarea th:field="*{contents}" class="form-control" rows="1"></textarea>
+<!--            <input type="text" name="query" placeholder="검색어">-->
             <input type="submit" value="답변등록" class="btn btn-primary my-2">
         </div>
-<!--        비밀 표시-->
+<!--     비밀 표시-->
         <div class="form-check ms-5 align-items-center">
             <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
             <label class="form-check-label" for="check">비밀</label>
@@ -192,8 +191,20 @@
         }
     }
 
+    function spaceCheck(form){
+
+        const isSpace = form.querySelector('.form-control').value.trim();
+        if (isSpace.length == 0) {
+            alert("내용을 입력해주세요.");
+            // form.query.focus();
+            return;
+        }
+
+        form.submit();
+    }
+
+
+
 </script>
-
-
 </html>
 

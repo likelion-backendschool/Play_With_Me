@@ -28,6 +28,7 @@ import java.util.List;
 @RequestMapping("/board/comment")
 public class CommentController {
     private final CommentService commentService;
+    private final ArticleService articleService;
 
 
     @GetMapping("/{article_id}")
@@ -60,9 +61,6 @@ public class CommentController {
             System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
-
-        System.out.println("createForm.getContents() = " + createForm.getContents());
-        System.out.println("createForm.isSecretStatus() = " + createForm.isSecretStatus());
         Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
@@ -88,7 +86,6 @@ public class CommentController {
      */
     @PostMapping("/modify/{board_id}/{article_id}/{comment_id}")
     public String modifyComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id, CommentCreateForm createForm) {
-        System.out.println("수정");
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
@@ -98,19 +95,11 @@ public class CommentController {
      */
     @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
-        System.out.println("삭제");
         CommentDto comment = commentService.findComment(id);
         commentService.delete(id);
-
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
 
-    @Autowired
-    ArticleService articleService;
-    @GetMapping("/article_save")
-    public void testSave(){
-//        articleService.test();
-    }
 
 }
