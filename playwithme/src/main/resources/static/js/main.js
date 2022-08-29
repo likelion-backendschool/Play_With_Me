@@ -135,7 +135,7 @@ function date_click(event) {
               $(".events-container").show(250);
               if(event_data2[0].length===0) {
                  var event_card = $("<div class='event-card'></div>");
-                 var event_name = $("<div class='event-name'>There are no events planned for Today.</div>");
+                 var event_name = $("<div class='event-name'> 해당 날짜는 일정이 없습니다 😵 </div>");
                  $(event_card).css({ "border-left": "10px solid #FF1744" });
                  $(event_card).append(event_name);
                  $(".events-container").append(event_card);
@@ -146,7 +146,12 @@ function date_click(event) {
                        var event_name = $("<div class='event-name'>"+event_data2[0][i].name+"</div>");
                        var event_location = $("<div class='event-location'>"+event_data2[0][i].location+"</div>");
                        var event_dateString = $("<div class='event-dateString'>"+event_data2[0][i].date.split("T")[0]+"</div>");
-                       var event_urlNotice = $("<div class='event-urlNotice'> 모집 게시판 바로가기 </div>");
+                       var event_urlNotice = $("<div class='event-urlNotice'> 모집 게시판 바로가기 </div>")
+                                                      .click(function() {
+                                                          $(this).addClass("underline");
+
+                                                                                 window.location.href = "test.html"
+                                                                                                        });
                        $(event_card).append(event_name).append(event_location).append(event_dateString).append(event_urlNotice);
                        $(".events-container").append(event_card);
                    }
@@ -258,7 +263,7 @@ function show_events(events, month, day) {
     // If there are no events for this date, notify the user
     if(events.length===0) {
         var event_card = $("<div class='event-card'></div>");
-        var event_name = $("<div class='event-name'>There are no events planned for "+month+" "+day+".</div>");
+        var event_name = $("<div class='event-name'> 📆 원하는 날짜를 클릭해보세요! </div>");
         $(event_card).css({ "border-left": "10px solid #FF1744" });
         $(event_card).append(event_name);
         $(".events-container").append(event_card);
@@ -300,6 +305,7 @@ var event_data2=[];
 // Given data for events in JSON format
 var event_data = {
     "events": [
+    /*
     {
         "occasion": " Repeated Test Event ",
         "invited_count": 120,
@@ -383,8 +389,10 @@ var event_data = {
         "month": 5,
         "day": 11
     }
+    */
     ]
 };
+
 
 const months = [
     1,

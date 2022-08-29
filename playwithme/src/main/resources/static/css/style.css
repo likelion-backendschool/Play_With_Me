@@ -4,6 +4,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ /* #7e0cf5 -> #155cd6, cd4dcc -> #51a9db 로 테마 컬러 변경 */
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8151,7 +8152,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #7e0cf5; }
+  color: #155cd6; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8166,7 +8167,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .bg-primary {
-  background: #7e0cf5 !important; }
+  background: #155cd6 !important; } //TODO: 여기 한번 바꿔보기
 
 .ftco-section {
   padding: 7em 0; }
@@ -8194,7 +8195,7 @@ h1, h2, h3, h4, h5,
   height: 500px;
   position: relative;
   margin: 20px auto;
-  background: #7e0cf5; }
+  background: #155cd6; }
 
 /*  Events display */
 .events-container {
@@ -8239,6 +8240,8 @@ h1, h2, h3, h4, h5,
 .event-urlNotice {
   font-family: 'HoengseongHanu';
   padding-right: 0;
+  text-decoration : underline;
+  cursor:pointer;
 }
 
 .event-count  {
@@ -8248,11 +8251,11 @@ h1, h2, h3, h4, h5,
 .event-name, .event-location, .event-dateString {
   font-family: 'HoengseongHanu';
   padding-right: 0;
-  color: #7e0cf5;
+  color: #51a9db;
   text-align: left; }
 
 .event-cancelled {
-  color: #cd4dcc;
+  color: #51a9db;
   text-align: right; }
 
 /*  Calendar wrapper */
@@ -8262,7 +8265,8 @@ h1, h2, h3, h4, h5,
   height: 100%;
   width: 50%;
   background: #fff;
-  font: 13px Helvetica, Arial, san-serif;
+  /* Calendar font-size, font-family */
+  font: 13px 'HoengseongHanu', Helvetica, Arial, san-serif;
   display: inline-block;
   padding: 20px;
   float: left; }
@@ -8313,7 +8317,7 @@ h1, h2, h3, h4, h5,
       -o-transition: none;
       transition: none; } }
   .left-button:hover, .right-button:hover {
-    color: #7e0cf5 !important; }
+    color: #155cd6 !important; }
 
 .left-button {
   left: 0; }
@@ -8337,7 +8341,7 @@ h1, h2, h3, h4, h5,
   transition: .2s ease all;
   color: white;
   border: none;
-  background: #7e0cf5; }
+  background: #155cd6; }
   .button.button-white {
     background: #fff;
     color: #000; }
@@ -8347,7 +8351,7 @@ h1, h2, h3, h4, h5,
     outline: none; }
 
 #cancel-button {
-  background: #cd4dcc; }
+  background: #51a9db; }
 
 #add-button {
   display: block;
@@ -8405,7 +8409,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .month:hover {
-  color: #cd4dcc; }
+  color: #51a9db; }
 
 /*  Dates table */
 .table-date {
@@ -8425,11 +8429,11 @@ h1, h2, h3, h4, h5,
   position: relative; }
 
 .table-date:not(.nil):hover {
-  border-color: #cd4dcc; }
+  border-color: #51a9db; }
 
 .event-date {
-  border-color: #7e0cf5;
-  background: #7e0cf5;
+  border-color: #155cd6;
+  background: #155cd6;
   color: #fff; }
   .event-date:after {
     position: absolute;
@@ -8442,11 +8446,11 @@ h1, h2, h3, h4, h5,
     background: #28a745; }
 
 .active-date {
-  background: #cd4dcc;
+  background: #51a9db;
   color: #fff; }
 
 .event-date.active-date {
-  background: #7e0cf5; }
+  background: #155cd6; }
 
 /* input dialog */
 .dialog {
@@ -8496,4 +8500,4 @@ h1, h2, h3, h4, h5,
   border-color: #fff; }
 
 .error-input {
-  border-color: #cd4dcc; }
+  border-color: #51a9db; }
