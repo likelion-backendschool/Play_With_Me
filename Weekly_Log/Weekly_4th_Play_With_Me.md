@@ -41,11 +41,10 @@
 >- 댓글 수정 시, 내용 및 비밀 체크기능 구현 
 
 >주민지 : 
->- 캘린더 날짜 클릭시 페이지 갱신 없이 category, date가 반영된 URL로 변경되도록 구현
->- 날짜 클릭시 JS에서 ajax로 URL파라미터 category, date를 controller 인수로 전달
->- ajax로 Event List를 JSON으로 파싱하여 JS에 전달
->- controller에서 전달받은 JSON 데이터 JS에 저장
->- 클릭시 Event List 리턴하도록 구현 (진행중)
+>- (ajax를 비동기에서 동기 요청으로 변경하여 가져온 데이터 꼬이지 않도록 배열에 저장)
+>- 캘린더 날짜 클릭시 Event List 리턴하도록 구현
+>- 각 이벤트 클릭시 전송한 url이 각 게시글 리스트(Board)로 redirect하도록 controller 구현
+>- 각 이벤트 클릭시 event id가 유지된 채로 URL 파라미터에 담아 게시글 리스트(Board) 요청 (진행중)
 
 >최승근 : 
 >- 카카오 인증을 통한 자동 회원가입 기능 구현
