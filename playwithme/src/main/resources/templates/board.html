@@ -10,7 +10,7 @@
                 <a th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
                    th:text="${article.title}"></a>
             </td>
-            <td th:text="${article.member.name}">작성자</td>
+<!--            <td th:text="${article.member.name}">작성자</td>-->
             <td th:text="${article.views}"></td>
             <td th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}">작성일시</td>
         </div>
@@ -32,14 +32,14 @@
                 <a th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
                    th:text="${article.title}"></a>
             </td>
-            <td th:text="${article.member.name}">작성자</td>
+<!--            <td th:text="${article.member.name}">작성자</td>-->
             <td th:text="${article.views}"></td>
             <td th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}">작성일시</td>
         </tr>
         </tbody>
     </table>
 
-<!--    pagination-->
+    <!--    pagination-->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">

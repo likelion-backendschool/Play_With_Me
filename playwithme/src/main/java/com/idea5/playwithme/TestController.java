@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class TestController {
-    @GetMapping("/")
-    public String test(Model model) {
-        model.addAttribute("data", "test page");
-        return "test";
-    }
+//    @GetMapping("/")
+//    public String test(Model model) {
+//        model.addAttribute("data", "test page");
+//        return "test";
+//    }
 
     // TODO: 모집 인원 확정 폼(임시 추후 옮겨야함)
     @GetMapping("/recruit/{board_id}/{article_id}")

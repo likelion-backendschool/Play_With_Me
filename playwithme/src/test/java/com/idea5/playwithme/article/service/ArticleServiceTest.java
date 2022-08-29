@@ -9,7 +9,7 @@ import com.idea5.playwithme.board.domain.repository.BoardRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.member.domain.repository.MemberRepository;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ class ArticleServiceTest {
                 .ageRange("10~19")
                 .email("user1@test.com")
                 .gender("Female")
-                .mannerTemp(100)
+                .mannerTemp(100F)
                 .name("강해린")
                 .build();
         memberRepository.save(member);
