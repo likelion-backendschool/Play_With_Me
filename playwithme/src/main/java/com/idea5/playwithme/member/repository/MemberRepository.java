@@ -1,4 +1,4 @@
-package com.idea5.playwithme.member;
+package com.idea5.playwithme.member.repository;
 
 import com.idea5.playwithme.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

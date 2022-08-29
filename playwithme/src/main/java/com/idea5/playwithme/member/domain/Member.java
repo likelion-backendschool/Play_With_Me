@@ -40,7 +40,7 @@ public class Member {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    private Integer mannerTemp;
+    private Float mannerTemp;
 
     @Column(length = 20)
     private String gender;

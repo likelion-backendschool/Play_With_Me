@@ -1,4 +1,4 @@
-package com.idea5.playwithme.member;
+package com.idea5.playwithme.member.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -6,19 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.MemberRole;
 import com.idea5.playwithme.member.dto.KakaoUser;
-
-
-import com.idea5.playwithme.member.exception.MemberNotFoundException;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,21 +26,12 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 @Slf4j
-@RequiredArgsConstructor
-public class MemberService {
-    private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
+@Service
+public class KakaoService {
 
     public String getAccessToken(String code) throws JsonProcessingException {
         String host = "https://kauth.kakao.com/oauth/token";
@@ -110,6 +95,27 @@ public class MemberService {
         return new KakaoUser(id, email, ageRange, nickname, gender);
     }
 
+    public void kakaoLogin(Member member) {
+        log.info("로그인 진행...");
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if ("ROLE_ADMIN".equals(member.getRole())) {
+            authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+        } else {
+            authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
+        }
+        log.info("authorities" + authorities);
+
+        // Security Authentication 설정
+        User user = new User(member.getUsername(), member.getPassword(), authorities);
+        log.info("user : " + user);
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+        log.info("authentication : " + authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
     public void kakaoLogout(String accessToken) throws JsonProcessingException {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
 
@@ -132,73 +138,6 @@ public class MemberService {
         String logoutId = jsonNode.get("id").asText();
 
         log.info("logout id : " + logoutId);
-    }
-
-    @Transactional
-    public Member join(KakaoUser kakaoUser) {
-        log.info("회원가입 진행중...");
-        Member member = new Member();
-
-        // Member 값 생성
-        String username = kakaoUser.getEmail() + "_" + kakaoUser.getId();
-        String password = kakaoUser.getEmail() + kakaoUser.getGender() + kakaoUser.getId();
-        String nickname = null;
-        if (kakaoUser.getGender().equals("male")) {
-            nickname = "남자 " + kakaoUser.getId() + "호";
-        } else {
-            nickname = "여자 " + kakaoUser.getId() + "호";
-        }
-
-        // Member 초기화
-        member.setName(kakaoUser.getNickname());
-        member.setUsername(username);
-        member.setPassword(passwordEncoder.encode(password));       // 암호화
-        member.setNickname(nickname);
-        member.setEmail(kakaoUser.getEmail());
-        member.setAgeRange(kakaoUser.getAgeRange());
-        member.setCreatedAt(LocalDateTime.now());
-        member.setMannerTemp(36);
-        member.setGender(kakaoUser.getGender());
-        member.setRole(MemberRole.USER);
-
-        return memberRepository.save(member);
-    }
-
-    public void kakaoLogin(Member member) {
-        log.info("로그인 진행...");
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if ("ROLE_ADMIN".equals(member.getRole())) {
-            authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
-        } else {
-            authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
-        }
-        log.info("authorities" + authorities);
-
-        // Security Authentication 설정
-        User user = new User(member.getUsername(), member.getPassword(), authorities);
-        log.info("user : " + user);
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-        log.info("authentication : " + authentication);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
-
-    public Member findMember(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(() -> {
-            log.warn("Member Not Found...");
-            throw new MemberNotFoundException("멤버가 없습니다.");
-        });
-        return member;
-    }
-
-    public Member findMember(String username) {
-        Member member = memberRepository.findByUsername(username).orElseThrow(() -> {
-            log.warn("Member Not Found...");
-            throw new MemberNotFoundException("멤버가 없습니다.");
-        });
-        return member;
     }
 
 }

@@ -14,18 +14,17 @@
     <title>Play With Me</title>
 </head>
 
-<body style="min-height:100vh;" class="d-flex flex-column">
+<body style="min-height:100vh;" class="container d-flex flex-column">
+    <!-- 네비게이션바 -->
+    <header th:replace="fragment/navbar :: navbarFragment"></header>
 
-<!-- 네비게이션바 -->
-<header th:replace="fragment/navbar :: navbarFragment"></header>
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+    <main class="flex-grow-1">
+        <th:block layout:fragment="content"></th:block>
+    </main>
+    <!-- 기본 템플릿 안에 삽입될 내용 End -->
 
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<main class="flex-grow-1">
-    <th:block layout:fragment="content"></th:block>
-</main>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-
-<footer th:replace="fragment/footer :: footer"> </footer>
-
+    <!-- footer   /-->
+    <footer th:replace="fragment/footer :: footer"> </footer>
 </body>
 </html>
