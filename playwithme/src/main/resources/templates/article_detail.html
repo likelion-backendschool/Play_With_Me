@@ -1,7 +1,7 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        xmlns:th="http://www.thymeleaf.org"
-        layout:decorate="~{layout}">
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}">
 
 <div layout:fragment="content" class="container my-3">
     <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
@@ -71,7 +71,23 @@
         </div>
     </div>
 
+    <!-- 답변의 갯수 표시 -->
+    <h5 class="border-bottom my-3 py-2"
+        th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
 
+    <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}|}" th:object="${createForm}" method="post" class="mt-2">
+        <!--     댓글 작성-->
+        <div class = "d-flex justify-content-start align-items-center">
+            <textarea th:field="*{contents}" class="form-control" rows="3"></textarea>
+            <!--            <input type="text" name="query" placeholder="검색어">-->
+            <input type="submit" value="답변등록" class="btn btn-primary my-2">
+        </div>
+        <!--     비밀 표시-->
+        <div class="form-check ms-5 align-items-center">
+            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
+            <label class="form-check-label" for="check">비밀</label>
+        </div>
+    </form>
 
     <!-- 답변 반복 시작 -->
     <div th:each="comment : ${commentList}">
@@ -85,8 +101,11 @@
                 </div>
 
                 <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == comment.member.username}">
-                    <div th:if="${true} == ${comment.secretStatus}">
-                        <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                    <div class="text-black-50 fs-6" th:if="${true} == ${comment.secretStatus}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                        <input type="hidden" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
                     </div>
                     <div th:unless="${true} == ${comment.secretStatus}">
                         <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
@@ -234,19 +253,7 @@
         sec:authorize="isAnonymous(), isAutthenticated() 추가
 -->
 
-    <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}|}" th:object="${createForm}" method="post" class="my-3">
-        <!--     댓글 작성-->
-        <div class = "d-flex justify-content-start align-items-center">
-            <textarea th:field="*{contents}" class="form-control" rows="1"></textarea>
-<!--            <input type="text" name="query" placeholder="검색어">-->
-            <input type="submit" value="답변등록" class="btn btn-primary my-2">
-        </div>
-<!--     비밀 표시-->
-        <div class="form-check ms-5 align-items-center">
-            <input type="checkbox" th:field="*{secretStatus}" class="form-check-input" id="check">
-            <label class="form-check-label" for="check">비밀</label>
-        </div>
-    </form>
+
 
 
 </div>
