@@ -5,42 +5,25 @@
 <div class="container my-3">
     <div th:each="article : ${paging}" class="card m-2">
         <div class="card-body">
-            <td th:text="${article.id}"></td>
-            <td>
-                <a th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
+            <div>
+                <span class="badge rounded-pill text-bg-primary mx-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+                <span class="badge rounded-pill text-bg-secondary mx-1" th:unless="${article.recruitStatus == true}" th:text="모집마감"></span>
+
+                <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.ageRange}"></span>
+                <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.gender}"></span>
+            </div>
+            <div class="mx-1 my-2">
+                <a class="fs-4" th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
                    th:text="${article.title}"></a>
-            </td>
+            </div>
+            <div th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}"></div>
 <!--            <td th:text="${article.member.name}">작성자</td>-->
-            <td th:text="${article.views}"></td>
-            <td th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}">작성일시</td>
+<!--            <td th:text="${article.views}"></td>-->
         </div>
     </div>
-    <table class="table  table-hover">
-        <thead class="table-dark">
-        <tr>
-            <th scope="col">번호</th>
-            <th scope="col">제목</th>
-            <th scope="col">작성자</th>
-            <th scope="col">조회수</th>
-            <th scope="col">작성일시</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="article : ${paging}">
-            <td th:text="${article.id}"></td>
-            <td>
-                <a th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
-                   th:text="${article.title}"></a>
-            </td>
-<!--            <td th:text="${article.member.name}">작성자</td>-->
-            <td th:text="${article.views}"></td>
-            <td th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}">작성일시</td>
-        </tr>
-        </tbody>
-    </table>
 
     <!--    pagination-->
-    <nav aria-label="Page navigation example">
+    <nav class="my-5" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link"><<</a>
