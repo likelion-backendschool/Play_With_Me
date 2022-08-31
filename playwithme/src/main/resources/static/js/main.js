@@ -133,6 +133,7 @@ function date_click(event) {
              // event-container에 event를 event-card에 담아 전달
               $(".events-container").empty();
               $(".events-container").show(250);
+              // 이벤트가 없을 경우
               if(event_data2[0].length===0) {
                  var event_card = $("<div class='event-card'></div>");
                  var event_name = $("<div class='event-name'> 해당 날짜는 일정이 없습니다 😵 </div>");
@@ -140,21 +141,55 @@ function date_click(event) {
                  $(event_card).append(event_name);
                  $(".events-container").append(event_card);
                   }
+              // 이벤트가 있는 경우
               else {
                    for(var i=0; i<event_data2[0].length; i++) {
                        var event_card = $("<div class='event-card'></div>");
                        var event_name = $("<div class='event-name'>"+event_data2[0][i].name+"</div>");
                        var event_location = $("<div class='event-location'>"+event_data2[0][i].location+"</div>");
                        var event_dateString = $("<div class='event-dateString'>"+event_data2[0][i].date.split("T")[0]+"</div>");
-                       var event_urlNotice = $("<div class='event-urlNotice'> 모집 게시판 바로가기 </div>")
-                                                      .click(function() {
-                                                          $(this).addClass("underline");
-
-                                                                                 window.location.href = "test.html"
-                                                                                                        });
+                       var event_urlNotice = $("<div class='id event-urlNotice'> 모집 게시판 바로가기 </div>");
                        $(event_card).append(event_name).append(event_location).append(event_dateString).append(event_urlNotice);
                        $(".events-container").append(event_card);
                    }
+
+                   // 모집 게시판 클릭시 해당 BoardId 리턴하도록
+                   const event_cards = document.querySelectorAll(".id");
+                   event_cards.forEach(el => {
+                     el.onclick = (e) => {
+                       const nodes = [...e.target.parentElement.parentElement.children]; // event_card의 부모인 events_container 자식들(계층적 단위) 저장
+                       //console.log(e.target.parentElement.parentElement, nodes);
+                       const event_cards_index = nodes.indexOf(e.target.parentElement); // 해당 event_card가 events_container의 몇 번째 자식인지 index 리턴
+
+                       // ajax로 boardId 받아오도록 event_cards_index를 URL 파라미터에 추가
+                       let params = (new URL(document.location)).searchParams;
+                        params.set("index",event_cards_index);
+
+                       // ajax로 BoardId 요청
+                       $.ajax({
+                              type:"GET",
+                              async: false,
+                              url:"/getBoardId?" + params,
+                              dataType:"JSON",
+
+                              success: function(data){
+                                    console.log("통신성공");
+                                    var board_id= data; // 받아온 데이터 board_id에 저장
+
+                                    // boardId만을 URL 파라미터로 설정하여 해당 이벤트와 일대일 관계인 board 페이지로 이동
+                                    let params = (new URL(document.location)).searchParams;
+                                    params.delete('date');
+                                    params.delete('category');
+                                    params.set("id",board_id);
+
+                                    window.location.href = "/event/board?" + params
+                              },
+                              error:function(){
+                                    console.log("통신에러");
+                              }
+                          }) // ajax 요청 끝
+                       }
+                   }); // 이벤트 카드 클릭 이벤트 핸들러 끝
               }
 
              // 객체 비워주기
