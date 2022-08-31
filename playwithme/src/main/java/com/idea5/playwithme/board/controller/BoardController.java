@@ -17,4 +17,5 @@ public class BoardController {
 //        Board board = boardService.findById(boardId);
 //        return "board";
 //    }
+
 }

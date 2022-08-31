@@ -8,7 +8,7 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.member.domain.repository.MemberRepository;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,9 +76,9 @@ class CommentRepositoryTest {
         ArticleCreateForm articleCreateForm = ArticleCreateForm.builder()
                 .title("20대 남성분 중에 흠뻑쇼 가실분")
                 .contents("댓글 남겨주시면 오픈채팅방 드리곘습니다.")
-                .maxRecruitNum(5)
+//                .maxRecruitNum(5)
                 .gender("Female")
-                .ageRange("10~20")
+//                .ageRange("10~20")
                 .build();
         Article article = ArticleCreateForm.toEntity(articleCreateForm);
         article.setMember(member1);

@@ -5,6 +5,7 @@
     font-style: normal;
 }
 
+
 html > body {
     font-family: "GmarketSansMedium";
     text-underline-position: under;
@@ -24,4 +25,18 @@ textarea#exampleTextarea {
 .checkbox-lg .custom-control-label {
     padding-top: 13px;
     padding-left: 6px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+textarea {
+    resize : none;
+}
+
+
+.badge {
+    font-size: 15px;
 }

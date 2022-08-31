@@ -6,7 +6,7 @@ import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.member.domain.repository.MemberRepository;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

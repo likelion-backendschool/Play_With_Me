@@ -33,6 +33,4 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Article> articleList = new ArrayList<>();
-
-
 }

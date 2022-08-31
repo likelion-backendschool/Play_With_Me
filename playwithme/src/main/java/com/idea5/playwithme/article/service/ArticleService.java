@@ -7,12 +7,13 @@ import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.member.domain.repository.MemberRepository;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -37,11 +38,16 @@ public class ArticleService {
         return saveArticle.getId();
     }
 
+    // 게시글 상세조회
     public Article getDetails(Long boardId, Long articleId) {
         return findById(articleId);
     }
+
+    @Transactional(readOnly = true)
     public Article findById(Long articleId) {
-        return articleRepository.findById(articleId).orElse(null);
+        return articleRepository.findById(articleId)
+                .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
+//        return articleRepository.findById(articleId).orElse(null);
     }
 
     // 게시글 내용 수정
@@ -49,24 +55,21 @@ public class ArticleService {
     public void update(Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
-        // TODO: 수정될  수 있는 값(모집 상태 바꾸는 요청은 따로?)
-        article.setTitle(articleUpdateForm.getTitle());
-        article.setContents(articleUpdateForm.getContents());
-        article.setMaxRecruitNum(articleUpdateForm.getMaxRecruitNum());
-        article.setGender(articleUpdateForm.getGender());
-        article.setAgeRange(articleUpdateForm.getAgeRange());
-        article.setUpdatedAt(LocalDateTime.now());
 
+        articleUpdateForm.toEntity(article, articleUpdateForm);
         articleRepository.save(article);
     }
 
     // 게시글 삭제
+    @Transactional
     public void delete(Long articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new NullPointerException("%d 게시물 not found".formatted(articleId)));
         articleRepository.delete(article);
     }
 
+    // 게시글 상태 모집완료(false)로 변경
+    @Transactional
     public void updateStatus(Long articleId) {
         // 모집 완료(false)로 변경
         Article article = articleRepository.findById(articleId)
@@ -74,7 +77,18 @@ public class ArticleService {
         article.setRecruitStatus(false);
 
         articleRepository.save(article);
-        // TODO: 동행 테이블에 댓글 남긴 자동으로 회원 정보 저장?..(선택 시점 확인 필요)
-        // TODO: 공연 날짜 이후에 게시글 작성자가 동행 인원 확정하기 -> 확정 인원을 바탕으로 매너 평가
+    }
+
+    // 게시글 조회수 증가
+    @Transactional
+    public void updateViews(Article article) {
+        // TODO: 새로 쿼리를 짜야하는지, 여기서 바로 set으로 넣는게 괜찮은지
+        article.setViews(article.getViews() + 1);
+        articleRepository.save(article);
+    }
+
+    public Page<Article> getList(Long boardId, int page) {
+        PageRequest pageable = PageRequest.of(page, 10);
+        return articleRepository.findByBoard_Id(boardId, pageable);
     }
 }

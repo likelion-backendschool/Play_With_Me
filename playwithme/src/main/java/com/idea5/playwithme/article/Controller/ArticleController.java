@@ -1,14 +1,18 @@
 package com.idea5.playwithme.article.Controller;
 
 import com.idea5.playwithme.article.domain.Article;
-import com.idea5.playwithme.article.dto.*;
+import com.idea5.playwithme.article.dto.ArticleCreateForm;
+import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.service.ArticleService;
+import com.idea5.playwithme.board.domain.Board;
+import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.comment.CommentService;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.comment.domain.CommentDto;
+import com.idea5.playwithme.event.domain.Event;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,68 +23,102 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class ArticleController {
 
     private final ArticleService articleService;
     private final CommentService commentService;
+    private final BoardService boardService;
 
-    @Autowired
-    public ArticleController(ArticleService articleService, CommentService commentService) {
-        this.articleService = articleService;
-        this.commentService = commentService;
+    // 게시글 작성폼
+    @GetMapping("/write/{board_id}")
+    public String createForm(@PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+        // TODO: board 정보 가져와야할 듯함
+
+        return "article_create_form";
     }
 
     // 게시글 작성
     @PostMapping("/write/{board_id}")
-    public ResponseEntity<ArticleResponseDto> create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
-        // TODO : 입력되지 않은 데이터 처리
+    public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("오류");
+            return "article_create_form";
         }
         // TODO: member session 처리
         Long articleId = articleService.create(boardId, articleCreateForm);
         Article article = articleService.findById(articleId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(ArticleResponseDto.toDto(article));
+        return "redirect:/board/%d/%d".formatted(boardId, article.getId());
     }
 
-    // 게시글 전체 조회
+    // 게시글 리스트 조회
+    @GetMapping("/{board_id}")
+    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Board board = boardService.findById(boardId);
+        Page<Article> paging = articleService.getList(boardId, page);
+        model.addAttribute("paging", paging);
+        System.out.println(paging.getSize());
+        return "board";
+    }
 
     // 게시글 상세 조회
     // TODO: board_id url에 꼭 넣어야 하는가
     @GetMapping("/{board_id}/{article_id}")
-    public String getDetails(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Model model) {
+    public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         Article article = articleService.getDetails(boardId, articleId);
-        List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
-        model.addAttribute("article", article);
+            List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
+        articleService.updateViews(article);
+
+        Event event = article.getBoard().getEvent();
         model.addAttribute("commentList", findCommenets);
         model.addAttribute("createForm", new CommentCreateForm());
         model.addAttribute("board_id", boardId);
-        for (CommentDto i : findCommenets) {
-            System.out.println("i.getMember() = " + i.getMember());
-            System.out.println("i.getContents() = " + i.getContents());
-            System.out.println("i.getParent() = " + i.getParent());
-        }
+        model.addAttribute("article", article);
+        model.addAttribute("event", event);
 
         return "article_detail";
     }
 
+    // 게시글 수정폼
+    @GetMapping("/modify/{board_id}/{article_id}")
+    public String modifyForm(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
+        Article article = articleService.findById(articleId);
+        // 기존 값 넣기
+        articleUpdateForm.setTitle(article.getTitle());
+        articleUpdateForm.setContents(article.getContents());
+        articleUpdateForm.setGender(article.getGender());
+        // 연령대
+        String[] ages = article.getAgeRange().split("~");
+        articleUpdateForm.setMinAge(ages[0]);
+        articleUpdateForm.setMaxAge(ages[1]);
+        articleUpdateForm.setMaxRecruitNum(Integer.toString(article.getMaxRecruitNum()));
+
+        return "article_update_form";
+
+    }
+
+
     // 게시글 수정
     @PostMapping("/modify/{board_id}/{article_id}")
-    public void update(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+    public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
         articleService.update(articleId, articleUpdateForm);
+
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
     // 게시글 모집 상태 완료로 변경
     @GetMapping("/complete/{board_id}/{article_id}")
+    @ResponseBody
     public void updateStatus(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         articleService.updateStatus(articleId);
         // TODO: 게시글 리스트 페이지 redirect
     }
 
     // 게시글 삭제
-    @DeleteMapping("/delete/{board_id}/{article_id}")
-    public void delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    @GetMapping("/delete/{board_id}/{article_id}")
+    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         articleService.delete(articleId);
+        // TODO: 게시글 리스트 페이지로 리다이렉트
+        return "test";
     }
 }
