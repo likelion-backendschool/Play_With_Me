@@ -1,18 +1,18 @@
 package com.idea5.playwithme.event.domain;
 
+import lombok.*;
 import com.idea5.playwithme.board.domain.Board;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Event {
 
@@ -28,6 +28,7 @@ public class Event {
     @Column(length = 200)
     private String location;
 
+    // TODO: 크롤링 시간으로 들어옴
     @CreatedDate
     private LocalDateTime date;
 

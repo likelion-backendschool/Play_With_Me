@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="container my-3">
+    <div th:each="article : ${paging}" class="card m-2">
+        <div class="card-body">
+            <div>
+                <span class="badge rounded-pill text-bg-primary mx-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+                <span class="badge rounded-pill text-bg-secondary mx-1" th:unless="${article.recruitStatus == true}" th:text="모집마감"></span>
+
+                <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.ageRange}"></span>
+                <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.gender}"></span>
+            </div>
+            <div class="mx-1 my-2">
+                <a class="fs-4" th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
+                   th:text="${article.title}"></a>
+            </div>
+            <div th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}"></div>
+<!--            <td th:text="${article.member.name}">작성자</td>-->
+<!--            <td th:text="${article.views}"></td>-->
+        </div>
+    </div>
+
+    <!--    pagination-->
+    <nav class="my-5" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link"><<</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link">이전</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">다음</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">>></a>
+            </li>
+        </ul>
+    </nav>
+</div>

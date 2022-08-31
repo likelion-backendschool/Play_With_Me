@@ -3,10 +3,8 @@ package com.idea5.playwithme.article.domain;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.member.domain.Member;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -17,6 +15,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Article {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +30,9 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String contents;
 
-    private int maxRecruitNum;
+    private Integer maxRecruitNum;
 
-    private boolean recruitStatus;
+    private Boolean recruitStatus;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -45,6 +46,8 @@ public class Article {
     @Column(length = 20)
     private String ageRange;
 
+    private Integer views;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
@@ -56,6 +59,5 @@ public class Article {
     // V
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-
 
 }
