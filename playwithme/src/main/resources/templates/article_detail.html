@@ -1,37 +1,97 @@
-<<<<<<< HEAD
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:th="http://www.thymeleaf.org"
         layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container my-3">
-    <h2 class="border-bottom py-2" th:text="${article.title}"></h2>
+    <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
+    <div class="d-flex justify-content-end">
+        <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/recruit/${board_id}/${article_id}|}" th:text="모집완료"></a>
+    </div>
+    <h2 th:text="${article.title}"></h2>
+    <div class="border-bottom my-2 py-2 d-flex">
+        <span class="badge bg-light text-dark fs-6 me-2" th:text="${#temporals.format(article.createdAt, 'yyyy.MM.dd hh:mm')}"></span>
+        <div class="badge bg-light text-dark fs-6 me-2">
+            <span class="me-1" th:text="조회수"></span>
+            <span th:text="${article.views}"></span>
 
+        </div>
+        <span class="badge rounded-pill text-bg-primary me-3" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+
+        <div class="flex-grow-1"></div>
+        <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+        <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
+    </div>
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${article.contents}"></div>
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">공연명</th>
+                    <td>
+                        <div th:text="${event.name}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">장소</th>
+                    <td>
+                        <div th:text="${event.location}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">일시</th>
+                    <td>
+                        <span th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}"></span>
+                        <span th:text="${#temporals.dayOfWeekName(event.date)}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">모집인원</th>
+                    <td>
+                        <div th:text="${article.maxRecruitNum}"></div>
+                    </td>
+                </tr>
 
-            <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2 text-start">
-                    <div th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
-                </div>
-            </div>
+                <tr>
+                    <th scope="row">내용</th>
+                    <td>
+                        <div th:text="${article.contents}"></div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.ageRange}"></span>
+            <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.gender}"></span>
         </div>
     </div>
+
+
 
     <!-- 답변 반복 시작 -->
     <div th:each="comment : ${commentList}">
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
 
+<!--            th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}"-->
             <div th:classappend="${comment.id}">
-                <div th:if="${true} == ${comment.secretStatus}">
-                    <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == comment.member.username}">
+                    <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
                 </div>
-                <div th:unless="${true} == ${comment.secretStatus}">
-                       <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+
+                <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == comment.member.username}">
+                    <div th:if="${true} == ${comment.secretStatus}">
+                        <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                    </div>
+                    <div th:unless="${true} == ${comment.secretStatus}">
+                        <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                    </div>
                 </div>
             </div>
+
 
             <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" th:object="${createForm}" method="post">
                     <div class="form-group">
@@ -57,16 +117,18 @@
                     <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary p-2 text-start ">
                         <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                     </div>
+                    <div th:unless="${article.member == comment.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                        <div class="p-1 mb-1 bg-primary text-white" th:text="${comment.member.nickname}"></div>
+                    </div>
                     <div class="badge bg-light text-secondary p-2 text-start ">
                         <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
 
-                    <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
-
-
                     <div class="my-3">
-                        <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}"
-                           class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                        <div >
+                            <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
+                            <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                        </div>
                     </div>
 
                 </div>
@@ -82,14 +144,20 @@
                     </svg>
 
                     <div th:classappend="${child.id}">
-
-                        <div class="text-primary fs-6" th:if="${true} == ${child.secretStatus}">
-                            <input type="hidden" class="text-primary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                        <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
+                            <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
                         </div>
-                        <div th:unless="${true} == ${child.secretStatus}">
-                            <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
+
+                        <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
+                            <div th:if="${true} == ${comment.secretStatus}">
+                                <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                            </div>
+                            <div th:unless="${true} == ${comment.secretStatus}">
+                                <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
                 <form class="collapse" th:classappend="'multi-collapse-'+${child.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${child.id}|}" th:object="${createForm}" method="post">
@@ -111,17 +179,25 @@
                         <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
                             <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                         </div>
+
                         <div class="badge bg-light text-secondary p-2 text-start ">
                             <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                         </div>
 
-                        <a href="#" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>
-
-
                         <div class="my-3">
-                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"
-                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                            <div>
+                                <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>
+                                <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                            </div>
                         </div>
+
+<!--                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>-->
+
+
+<!--                        <div class="my-3">-->
+<!--                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"-->
+<!--                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -209,74 +285,3 @@
 </script>
 </html>
 
-=======
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-
-<div class="container my-3">
-    <div class="container my-3">
-        <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
-        <div class="d-flex justify-content-end">
-            <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/recruit/${board_id}/${article_id}|}" th:text="모집완료"></a>
-        </div>
-        <h2 th:text="${article.title}"></h2>
-        <div class="border-bottom my-2 py-2 d-flex">
-            <span class="badge bg-light text-dark fs-6 me-2" th:text="${#temporals.format(article.createdAt, 'yyyy.MM.dd hh:mm')}"></span>
-            <div class="badge bg-light text-dark fs-6 me-2">
-                <span class="me-1" th:text="조회수"></span>
-                <span th:text="${article.views}"></span>
-
-            </div>
-            <span class="badge rounded-pill text-bg-primary me-3" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
-
-            <div class="flex-grow-1"></div>
-            <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
-            <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
-        </div>
-        <div class="card my-3">
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">공연명</th>
-                            <td>
-                                <div th:text="${event.name}"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">장소</th>
-                            <td>
-                                <div th:text="${event.location}"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">일시</th>
-                            <td>
-                                <span th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}"></span>
-                                <span th:text="${#temporals.dayOfWeekName(event.date)}"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">모집인원</th>
-                            <td>
-                                <div th:text="${article.maxRecruitNum}"></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.ageRange}"></span>
-                <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.gender}"></span>
-            </div>
-        </div>
-        <div class="card my-3">
-            <div class="card-body">
-                <div th:text="${article.contents}"></div>
-            </div>
-        </div>
-        <div class="border-bottom"></div>
-    </div>
-</div>
->>>>>>> c51593e75eeb95587d346d33037eac2fc395cf06

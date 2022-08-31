@@ -43,7 +43,7 @@ class CommentRepositoryTest {
     private ArticleService articleService;
 
 //    @BeforeEach
-    @BeforeEach
+//    @BeforeEach
     public void beforeEach(){
         commentRepository.deleteAll();
         articleRepository.deleteAll();
@@ -158,7 +158,7 @@ class CommentRepositoryTest {
 
     @Test
     public void 테스트(){
-
+        System.out.println("test");
     }
 
 

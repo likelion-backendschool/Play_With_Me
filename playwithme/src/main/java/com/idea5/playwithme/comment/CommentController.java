@@ -5,6 +5,8 @@ import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -30,6 +33,7 @@ public class CommentController {
     private final CommentService commentService;
     private final ArticleService articleService;
 
+    private final MemberService memberService;
 
     @GetMapping("/{article_id}")
     public ResponseEntity<List<CommentDto>> getComments(@PathVariable("board_id") Long boardId, @PathVariable("article_id")Long articleId){
@@ -54,14 +58,17 @@ public class CommentController {
      */
     //localhost:
     @PostMapping("/write/{board_id}/{article_id}")
-    public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
+    public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
+        System.out.println("작성 메서드 실행");
         Article findArticle = articleService.findById(articleId);
         if(bindingResult.hasErrors()){
             System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
-        Long commentId = commentService.commentSave(articleId, createForm); // 로그인 세션 추가되면 변경해야 됨.
+        String name = principal.getName();
+        Member findMember = memberService.findMember(name);
+        Long commentId = commentService.commentSave(articleId, createForm, findMember); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -69,14 +76,15 @@ public class CommentController {
      * 대댓글 작성
      */
     @PostMapping("/write/{board_id}/{article_id}/{comment_id}")
-    public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, @Valid CommentCreateForm createForm, BindingResult bindingResult)
+    public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
         if(bindingResult.hasErrors()){
             System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
-
-        commentService.commentReSave(articleId, createForm, commentId); // 로그인 세션 추가되면 변경해야 됨.
+        String name = principal.getName();
+        Member findMember = memberService.findMember(name);
+        commentService.commentReSave(articleId, createForm, commentId,findMember); // 로그인 세션 추가되면 변경해야 됨.
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 

@@ -38,29 +38,24 @@ public class CommentService {
         return dtoList;
     }
 
+//    @Transactional
+//    public Long commentSave(Long articleId, CommentCreateForm dto) {
+//        Article article = articleRepository.findById(articleId).orElseThrow(() ->
+//                new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
+//
+//        dto.setArticle(article);
+//        dto.setMember(null);
+//
+//        Comment comment = dto.toEntity();
+//        commentRepository.save(comment);
+//
+//        return dto.getId();
+//    }
+
     @Transactional
-    public Long commentSave(Long articleId, CommentCreateForm dto) {
-        Article article = articleRepository.findById(articleId).orElseThrow(() ->
-                new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
-
-        dto.setArticle(article);
-        dto.setMember(null);
-
-        Comment comment = dto.toEntity();
-        commentRepository.save(comment);
-
-        return dto.getId();
-    }
-
-    /**
-     * 세션 기능 완료된 후에는 이 메서드를 사용.
-     */
-    public Long commentSave(Long memberId, Long articleId, CommentCreateForm dto) {
+    public Long commentSave(Long articleId, CommentCreateForm dto, Member member) {
         Article article = articleRepository.findById(articleId).orElseThrow(()->
                     new IllegalArgumentException("%d번 게시글은 존재하지 않습니다.".formatted(articleId)));
-
-        Member member = memberRepository.findById(memberId).orElseThrow(()->
-                    new IllegalArgumentException("%d번 사용자는 존재하지 않습니다.".formatted(memberId)));
 
         dto.setArticle(article);
         dto.setMember(member);
@@ -73,7 +68,8 @@ public class CommentService {
     }
 
     @Transactional
-    public void commentReSave(Long articleId, CommentCreateForm createForm, Long parentId) {
+    public void commentReSave(Long articleId, CommentCreateForm createForm, Long parentId, Member member) {
+        createForm.setMember(member);
         Comment comment = createForm.toEntity();
         comment.confirmArticle(articleRepository.findById(articleId).orElseThrow(() ->
                 new IllegalArgumentException("%d번 게시글은 존재 하지 않습니다.".formatted(articleId))));
