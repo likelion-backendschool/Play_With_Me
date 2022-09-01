@@ -53,7 +53,8 @@ public class ArticleController {
         Board board = boardService.findById(boardId);
         Page<Article> paging = articleService.getList(boardId, page);
         model.addAttribute("paging", paging);
-        System.out.println(paging.getSize());
+        model.addAttribute("eventName", board.getEvent().getName());
+
         return "board";
     }
 

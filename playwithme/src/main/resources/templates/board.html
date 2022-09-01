@@ -8,6 +8,8 @@
 />
 
 <div class="container my-3">
+    <div class="m-2 fs-4" th:text="${eventName}"></div>
+
     <div class="d-flex justify-content-end">
         <a class="btn btn-outline-primary m-2" th:href="@{|/board/write/${board_id}|}" th:text="글쓰기"></a>
     </div>
