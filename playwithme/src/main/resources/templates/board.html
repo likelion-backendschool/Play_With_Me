@@ -19,7 +19,7 @@
                     <span class="badge rounded-pill text-bg-primary mx-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
                     <span class="badge rounded-pill text-bg-secondary mx-1" th:unless="${article.recruitStatus == true}" th:text="모집마감"></span>
 
-                    <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.ageRange}"></span>
+                    <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="|${article.ageRange}세|"></span>
                     <span class="badge rounded-pill text-bg-warning text-white mx-1" th:text="${article.gender}"></span>
                 </div>
                 <div class="mx-1 my-2">

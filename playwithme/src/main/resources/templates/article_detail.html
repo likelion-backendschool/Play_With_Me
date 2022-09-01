@@ -1,8 +1,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+/>
 
 <div class="container my-3">
     <div class="container my-3">
+        <div class="my-3">
+            <i class="fa fa-chevron-right"></i>
+            <a class="fs-5 mx-1" th:href="@{|/board/${board_id}|}" th:text="${article.getBoard().getEvent().getName()}"></a>
+        </div>
         <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
         <div class="d-flex justify-content-end">
             <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/recruit/${board_id}/${article_id}|}" th:text="모집완료"></a>
@@ -21,6 +29,22 @@
             <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
             <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
         </div>
+        <!--글쓴이 정보-->
+        <div class="card">
+            <div class="card-body d-flex align-items-center">
+                <i class="fa fa-user-circle fa-2x"></i>
+                <div class="mx-2">
+                    <span class="badge bg-black">글쓴이</span>
+                    <span th:text="${article.getMember().getNickname()}"></span>
+                    <span class="me-2 text-danger" th:text="|(${article.getMember().getMannerTemp()} &deg;)|"></span>
+                    <span class="badge rounded-pill text-bg-light mx-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
+                    <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'Female') ? '여성' : '남성'})">
+                        <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
         <div class="card my-3">
             <div class="card-body">
                 <table class="table">
@@ -52,10 +76,11 @@
                                 <div th:text="${article.maxRecruitNum}"></div>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
 
-                <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.ageRange}"></span>
+                <span class="badge rounded-pill text-bg-primary mx-1" th:text="|${article.ageRange}세|"></span>
                 <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.gender}"></span>
             </div>
         </div>
