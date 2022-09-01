@@ -33,12 +33,8 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 
-    // 아래 코드 주석시, 테스트 코드 작동 잘됨
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
-
-
-

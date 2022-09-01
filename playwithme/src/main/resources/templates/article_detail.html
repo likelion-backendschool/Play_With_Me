@@ -171,11 +171,31 @@
                         </div>
 
                         <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
-                            <div th:if="${true} == ${comment.secretStatus}">
-                                <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                            <div th:if="${true} == ${child.secretStatus}">
+
+                                <!--현재 로그인한 사람 == 부모 댓글 작성자 -->
+                                <div th:if="${#authentication.getPrincipal().getUsername() == comment.member.username}">
+
+                                    <div th:if="${article.member.username == child.member.username}">
+                                        <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                                    </div>
+                                    <div class="text-black-50" th:unless="${article.member.username == child.member.username}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                        </svg>
+                                        <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                                    </div>
+                                </div>
+
+                                <div class="text-black-50" th:unless="${#authentication.getPrincipal().getUsername() == comment.member.username}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                    <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                                </div>
                             </div>
-                            <div th:unless="${true} == ${comment.secretStatus}">
-                                <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                            <div th:unless="${true} == ${child.secretStatus}">
+                                <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
                             </div>
                         </div>
                     </div>
