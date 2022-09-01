@@ -167,7 +167,7 @@
 
                     <div th:classappend="${child.id}">
                         <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
-                            <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                            <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
                         </div>
 
                         <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
@@ -201,6 +201,9 @@
                         <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
                             <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                         </div>
+                        <div th:unless="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                            <div class="p-1 mb-1 bg-primary text-white" th:text="${child.member.nickname}"></div>
+                        </div>
 
                         <div class="badge bg-light text-secondary p-2 text-start ">
                             <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
@@ -226,7 +229,6 @@
 
 
             </div>
-
             <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"  th:object="${createForm}"  method="post" class="my-3">
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
                     <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
@@ -245,6 +247,7 @@
                     <label class="form-check-label" for="check">비밀</label>
                 </div>
             </form>
+
         </div>
     </div>
 
