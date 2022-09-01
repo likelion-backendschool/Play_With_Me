@@ -20,10 +20,11 @@ import java.util.List;
 
 /**
  * TODO
- * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )
- * 댓글 뷰에 닉네임 추가. 마이페이지 이동.
- * 애러 처리 서비스 -> 컨트롤러
- * board_ID 처리(O)
+ * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )  V
+ * 댓글 뷰에 닉네임 클릭 시. 마이페이지 이동.
+ * 애러 처리 서비스 -> 컨트롤러 ( V )
+ * board_ID 처리( V )
+ *
  *
  */
 @RequiredArgsConstructor
@@ -103,6 +104,7 @@ public class CommentController {
      */
     @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
+        System.out.println("삭제 됐나요??");
         CommentDto comment = commentService.findComment(id);
         commentService.delete(id);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);

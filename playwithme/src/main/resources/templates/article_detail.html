@@ -1,7 +1,7 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:th="http://thymeleaf.org"
-        layout:decorate="~{fragment/layout}">
+        layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container my-3">
     <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
@@ -149,6 +149,7 @@
                         <div >
                             <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
                             <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+
                         </div>
                     </div>
 
@@ -288,8 +289,6 @@
 
         form.submit();
     }
-
-
 
 </script>
 </html>
