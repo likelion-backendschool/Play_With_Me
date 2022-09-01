@@ -1,14 +1,13 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-/>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
 
-<div class="container my-3">
+<div layout:fragment="content" class="container my-3">
     <div class="container my-3">
-        <div class="my-3">
-            <i class="fa fa-chevron-right"></i>
+        <div class="my-4">
+            <i class="fa fa-chevron-circle-right"></i>
             <a class="fs-5 mx-1" th:href="@{|/board/${board_id}|}" th:text="${article.getBoard().getEvent().getName()}"></a>
         </div>
         <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
@@ -36,7 +35,10 @@
                 <div class="mx-2">
                     <span class="badge bg-black">글쓴이</span>
                     <span th:text="${article.getMember().getNickname()}"></span>
-                    <span class="me-2 text-danger" th:text="|(${article.getMember().getMannerTemp()} &deg;)|"></span>
+                    <span class="mx-2">
+                        <i class="fa fa-thermometer-three-quarters text-danger"></i>
+                        <span class="me-2 text-danger" th:text="|${article.getMember().getMannerTemp()} &deg;|"></span>
+                    </span>
                     <span class="badge rounded-pill text-bg-light mx-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
                     <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'Female') ? '여성' : '남성'})">
                         <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
