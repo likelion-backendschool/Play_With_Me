@@ -27,8 +27,9 @@ public class ArticleController {
 
     // 게시글 작성폼
     @GetMapping("/write/{board_id}")
-    public String createForm(@PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
-        // TODO: board 정보 가져와야할 듯함
+    public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+        Board board = boardService.findById(boardId);
+        model.addAttribute("eventName", board.getEvent().getName());
 
         return "article_create_form";
     }
@@ -73,7 +74,7 @@ public class ArticleController {
 
     // 게시글 수정폼
     @GetMapping("/modify/{board_id}/{article_id}")
-    public String modifyForm(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
+    public String modifyForm(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleService.findById(articleId);
         // 기존 값 넣기
         articleUpdateForm.setTitle(article.getTitle());
@@ -84,6 +85,9 @@ public class ArticleController {
         articleUpdateForm.setMinAge(ages[0]);
         articleUpdateForm.setMaxAge(ages[1]);
         articleUpdateForm.setMaxRecruitNum(Integer.toString(article.getMaxRecruitNum()));
+
+        Board board = boardService.findById(boardId);
+        model.addAttribute("eventName", board.getEvent().getName());
 
         return "article_update_form";
     }

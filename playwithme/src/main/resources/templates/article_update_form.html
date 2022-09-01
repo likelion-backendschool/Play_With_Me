@@ -4,7 +4,7 @@
 <div class="container">
     <h2 class="my-3 border-bottom pb-2">게시글 수정</h2>
 
-    <div class="badge bg-light text-dark fs-5 mb-3">공연명</div>
+    <div class="badge bg-light text-dark fs-5 mb-3" th:text="${eventName}"></div>
 
     <form th:action="@{|/board/modify/${board_id}/${article_id}|}" th:object="${articleUpdateForm}" method="post">
         <div class="mb-3">
