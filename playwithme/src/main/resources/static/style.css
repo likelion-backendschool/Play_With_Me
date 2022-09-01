@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html > body {
+    font-family: "GmarketSansMedium";
+    text-underline-position: under;
+}
+
+textarea#exampleTextarea {
+    background: gray;
+}
+
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+    top: .8rem;
+    width: 1.55rem;
+    height: 1.55rem;
+}
+
+.checkbox-lg .custom-control-label {
+    padding-top: 13px;
+    padding-left: 6px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+textarea {
+    resize : none;
+}
+
+
+.badge {
+    font-size: 15px;
+}

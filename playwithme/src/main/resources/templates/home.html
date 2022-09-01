@@ -1,0 +1,16 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}">
+
+<div layout:fragment="content" class="container my-3">
+    <h1>메인 화면</h1>
+
+    <div sec:authorize="isAnonymous()">
+        <p>로그인 안하면 보임</p>
+    </div>
+    <div sec:authorize = "isAuthenticated()">
+        <p>로그인하면 보임</p>
+    </div>
+
+</div>

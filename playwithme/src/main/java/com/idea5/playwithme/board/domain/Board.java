@@ -2,13 +2,10 @@ package com.idea5.playwithme.board.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.sql.Array;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Board {
     @CreatedDate
     private LocalDateTime createdAt;
     // 카멜케이스
-    private boolean isBlind;
+    private Boolean isBlind;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
@@ -33,6 +33,4 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Article> articleList = new ArrayList<>();
-
-
 }

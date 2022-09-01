@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">모집 인원 확정</h5>
+
+    <form method="post">
+        <div class="my-5 d-flex justify-content-center">
+            <div class="card w-50">
+                <div class="card-body">
+                    <div class="mx-3">동행할 회원의 닉네임을 *최소 1개 이상 선택해주세요.</div>
+                    <div class="form-check m-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            닉네임1
+                        </label>
+                    </div>
+                    <div class="form-check m-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            닉네임2
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
+            <button onclick="if(!confirm('동행 인원을 확정하시겠습니까?')) return false;" type="submit" class="btn btn-primary m-2">확인</button>
+        </div>
+    </form>
+</div>
