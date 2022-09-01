@@ -1,14 +1,11 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-<html xmlns:th="http://www.thymeleaf.org">
-<!--font awsome-->
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-/>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
 
-<div class="container my-3">
-    <div class="m-2 fs-4" th:text="${eventName}"></div>
+<div layout:fragment="content" class="container my-3">
+    <div class="m-2 fs-5" th:text="${eventName}"></div>
 
     <div class="d-flex justify-content-end">
         <a class="btn btn-outline-primary m-2" th:href="@{|/board/write/${board_id}|}" th:text="글쓰기"></a>
