@@ -11,8 +11,12 @@ import com.idea5.playwithme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -88,7 +92,12 @@ public class ArticleService {
     }
 
     public Page<Article> getList(Long boardId, int page) {
-        PageRequest pageable = PageRequest.of(page, 10);
+        // TODO: 10개씩 나오도록 추후 수정
+        // 한 페이지 10 개씩 id 내림차순
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        PageRequest pageable = PageRequest.of(page, 2, Sort.by(sorts));
+
         return articleRepository.findByBoard_Id(boardId, pageable);
     }
 }
