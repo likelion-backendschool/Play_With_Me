@@ -1,8 +1,11 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
 
-<div class="container">
-    <h2 class="my-3 border-bottom ft-">게시글 등록</h2>
+<div layout:fragment="content" class="container">
+    <h2 class="border-bottom mt-4 mb-3">게시글 등록</h2>
 
     <div class="badge bg-light text-dark fs-5 mb-3" th:text="${eventName}"></div>
 

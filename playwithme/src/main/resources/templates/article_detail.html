@@ -18,7 +18,7 @@
         <div class="border-bottom my-2 py-2 d-flex">
             <span class="badge bg-light text-dark fs-6 me-2" th:text="${#temporals.format(article.createdAt, 'yyyy.MM.dd hh:mm')}"></span>
             <div class="badge bg-light text-dark fs-6 me-2">
-                <span class="me-1" th:text="조회수"></span>
+                <i class="fa fa-eye me-1"></i>
                 <span th:text="${article.views}"></span>
 
             </div>
