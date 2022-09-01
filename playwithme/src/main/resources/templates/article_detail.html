@@ -94,7 +94,7 @@
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
 
-<!--            th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}"-->
+            <!--            th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}"-->
             <div th:classappend="${comment.id}">
                 <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == comment.member.username}">
                     <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
@@ -115,19 +115,19 @@
 
 
             <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" th:object="${createForm}" method="post">
-                    <div class="form-group">
-                        <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
-                    </div>
-                    <input type="hidden" id="comment-id" value="{{id}}">
-                    <input type="hidden" id="comment-author" value="{{author}}">
-                    <div class="d-flex justify-content-start form-check ms-2 align-items-center">
-                        <div class="align-middle">
+                <div class="form-group">
+                    <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
+                </div>
+                <input type="hidden" id="comment-id" value="{{id}}">
+                <input type="hidden" id="comment-author" value="{{author}}">
+                <div class="d-flex justify-content-start form-check ms-2 align-items-center">
+                    <div class="align-middle">
 
-                            <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
-                            <label class="form-check-label" for="check">비밀</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                        <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
+                        <label class="form-check-label" for="check">비밀</label>
                     </div>
+                    <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                </div>
 
             </form>
 
@@ -157,7 +157,7 @@
             </div>
 
 
-                <!--자식 댓글-->
+            <!--자식 댓글-->
             <div th:each="child : ${comment.childList}">
 
                 <div class="d-flex justify-content-start m-2">
@@ -236,13 +236,13 @@
                             </div>
                         </div>
 
-<!--                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>-->
+                        <!--                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>-->
 
 
-<!--                        <div class="my-3">-->
-<!--                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"-->
-<!--                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>-->
-<!--                        </div>-->
+                        <!--                        <div class="my-3">-->
+                        <!--                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"-->
+                        <!--                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>-->
+                        <!--                        </div>-->
 
                     </div>
                 </div>
@@ -271,11 +271,11 @@
         </div>
     </div>
 
-<!--    Todo
-        th:object="${answerForm}" post요청
-        th:action="@{|/answer/create/${question.id}|}"
-        sec:authorize="isAnonymous(), isAutthenticated() 추가
--->
+    <!--    Todo
+            th:object="${answerForm}" post요청
+            th:action="@{|/answer/create/${question.id}|}"
+            sec:authorize="isAnonymous(), isAutthenticated() 추가
+    -->
 
 
 
@@ -315,4 +315,3 @@
 
 </script>
 </html>
-
