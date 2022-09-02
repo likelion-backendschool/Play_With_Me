@@ -123,7 +123,7 @@ public class ArticleController {
     @GetMapping("/delete/{board_id}/{article_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         articleService.delete(articleId);
-        // TODO: 게시글 리스트 페이지로 리다이렉트
-        return "test";
+
+        return "redirect:/board/%d".formatted(boardId);
     }
 }
