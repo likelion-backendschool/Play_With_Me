@@ -13,4 +13,6 @@ public class BoardService {
     public Board findById(Long boardId) {
         return boardRepository.findById(boardId).orElseThrow();
     }
+
+
 }

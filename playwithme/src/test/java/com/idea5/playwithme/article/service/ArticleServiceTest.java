@@ -44,6 +44,7 @@ class ArticleServiceTest {
 
     @Test
     void findById() {
+
     }
 
     @Test
@@ -55,7 +56,7 @@ class ArticleServiceTest {
                 .name("싸이 흠뻑쇼 SUMMER SWAG - 서울")
                 .build();
         // TODO : 주석 제거하면 오류
-        //eventRepository.save(event);
+        eventRepository.save(event);
 
         Board board = Board.builder()
                 .createdAt(LocalDateTime.now())

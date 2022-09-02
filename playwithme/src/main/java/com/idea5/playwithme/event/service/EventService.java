@@ -2,8 +2,7 @@ package com.idea5.playwithme.event.service;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,21 +11,25 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EventService {
-
-    @Autowired
-    private EventRepository eventRepository;
-
-    public List<Event> getEventsByCategoryAndDate(Integer categoryId, LocalDate searchDate) {
-        LocalDateTime start = LocalDateTime.of(searchDate, LocalTime.MIN);
-        LocalDateTime end = LocalDateTime.of(searchDate, LocalTime.MAX);
-
-        List<Event> events = eventRepository.findAllByDateBetweenAndCategoryId(start, end, categoryId);
-        return events;
-    }
+    private final EventRepository eventRepository;
 
     public List<Event> getAllEvents(){
         List<Event> events = eventRepository.findAll();
         return events;
     }
+
+    public List<Event> findByCategoryId(Integer id) {
+        return eventRepository.findByCategoryId(id);
+
+    }
+
+    public List<Event> getEventsByCategoryAndDate(Integer categoryId, LocalDate searchDate) {
+        LocalDateTime start = LocalDateTime.of(searchDate, LocalTime.MIN);
+        LocalDateTime end = LocalDateTime.of(searchDate, LocalTime.MAX);
+        List<Event> events = eventRepository.findAllByDateBetweenAndCategoryId(start, end, categoryId);
+        return events;
+    }
 }
+

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <title>Hello, sbb!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body style="min-height:100vh;" class="d-flex flex-column">
+
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<main class="flex-grow-1">
+    <th:block layout:fragment="content"></th:block>
+</main>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<footer class="bg-dark text-light">
+    <div class="container py-3 d-flex justify-content-center">
+        Copyright all rights reserved
+    </div>
+</footer>
+
+<th:block layout:fragment="script"></th:block>
+<!-- HTML이 전부 로딩 된 후, 실행되어야 하는 녀석(자바스크립트 코드)들은 밑에 두는게 좋다. -->
+<script>
+    $("select[value]").each((index, node) => {
+        const $select = $(node);
+        const value = $select.attr("value");
+        $select.find(`option[value="${value}"]`).prop("selected", true);
+    });
+</script>
+
+
+</body>
+</html>

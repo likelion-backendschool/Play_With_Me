@@ -6,6 +6,9 @@ import com.idea5.playwithme.article.dto.ArticleUpdateForm;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.service.BoardService;
+import com.idea5.playwithme.comment.CommentService;
+import com.idea5.playwithme.comment.domain.CommentCreateForm;
+import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -23,6 +27,7 @@ import javax.validation.Valid;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
     private final BoardService boardService;
 
     // 게시글 작성폼
@@ -63,10 +68,13 @@ public class ArticleController {
     @GetMapping("/{board_id}/{article_id}")
     public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         Article article = articleService.getDetails(boardId, articleId);
+            List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         articleService.updateViews(article);
 
-
         Event event = article.getBoard().getEvent();
+        model.addAttribute("commentList", findCommenets);
+        model.addAttribute("createForm", new CommentCreateForm());
+        model.addAttribute("board_id", boardId);
         model.addAttribute("article", article);
         model.addAttribute("event", event);
 
@@ -91,6 +99,7 @@ public class ArticleController {
         model.addAttribute("eventName", board.getEvent().getName());
 
         return "article_update_form";
+
     }
 
 
