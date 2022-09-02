@@ -94,7 +94,7 @@
 
         <div th:if="${comment.parent == null}" class="card my-3 card-body">
 
-<!--            th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}"-->
+            <!--            th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}"-->
             <div th:classappend="${comment.id}">
                 <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == comment.member.username}">
                     <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
@@ -115,19 +115,19 @@
 
 
             <form class="collapse" th:classappend="'multi-collapse-'+${comment.id}" th:action="@{|/board/comment/modify/${board_id}/${article_id}/${comment.id}|}" th:object="${createForm}" method="post">
-                    <div class="form-group">
-                        <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
-                    </div>
-                    <input type="hidden" id="comment-id" value="{{id}}">
-                    <input type="hidden" id="comment-author" value="{{author}}">
-                    <div class="d-flex justify-content-start form-check ms-2 align-items-center">
-                        <div class="align-middle">
+                <div class="form-group">
+                    <textarea class="form-control" id="comment-content" rows="3" name="contents" th:text="${comment.contents}"></textarea>
+                </div>
+                <input type="hidden" id="comment-id" value="{{id}}">
+                <input type="hidden" id="comment-author" value="{{author}}">
+                <div class="d-flex justify-content-start form-check ms-2 align-items-center">
+                    <div class="align-middle">
 
-                            <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
-                            <label class="form-check-label" for="check">비밀</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                        <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
+                        <label class="form-check-label" for="check">비밀</label>
                     </div>
+                    <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                </div>
 
             </form>
 
@@ -157,7 +157,7 @@
             </div>
 
 
-                <!--자식 댓글-->
+            <!--자식 댓글-->
             <div th:each="child : ${comment.childList}">
 
                 <div class="d-flex justify-content-start m-2">
@@ -167,15 +167,35 @@
 
                     <div th:classappend="${child.id}">
                         <div sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
-                            <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                            <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
                         </div>
 
                         <div sec:authorize="isAuthenticated()" th:unless="${#authentication.getPrincipal().getUsername() == article.member.username or #authentication.getPrincipal().getUsername() == child.member.username}">
-                            <div th:if="${true} == ${comment.secretStatus}">
-                                <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                            <div th:if="${true} == ${child.secretStatus}">
+
+                                <!--현재 로그인한 사람 == 부모 댓글 작성자 -->
+                                <div th:if="${#authentication.getPrincipal().getUsername() == comment.member.username}">
+
+                                    <div th:if="${article.member.username == child.member.username}">
+                                        <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                                    </div>
+                                    <div class="text-black-50" th:unless="${article.member.username == child.member.username}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                        </svg>
+                                        <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                                    </div>
+                                </div>
+
+                                <div class="text-black-50" th:unless="${#authentication.getPrincipal().getUsername() == comment.member.username}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                    </svg>
+                                    <input type="hidden" class="text-secondary fs-6" style="white-space: pre-line;" >비밀 댓글 입니다.</input>
+                                </div>
                             </div>
-                            <div th:unless="${true} == ${comment.secretStatus}">
-                                <input type="hidden"  th:text="${comment.contents}" class="card-text fs-6" style="white-space: pre-line;">
+                            <div th:unless="${true} == ${child.secretStatus}">
+                                <input type="hidden"  th:text="${child.contents}" class="card-text fs-6" style="white-space: pre-line;">
                             </div>
                         </div>
                     </div>
@@ -201,6 +221,9 @@
                         <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
                             <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
                         </div>
+                        <div th:unless="${article.member == child.member}"  class="badge bg-light text-secondary p-2 text-start ">
+                            <div class="p-1 mb-1 bg-primary text-white" th:text="${child.member.nickname}"></div>
+                        </div>
 
                         <div class="badge bg-light text-secondary p-2 text-start ">
                             <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
@@ -213,20 +236,19 @@
                             </div>
                         </div>
 
-<!--                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>-->
+                        <!--                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>-->
 
 
-<!--                        <div class="my-3">-->
-<!--                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"-->
-<!--                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>-->
-<!--                        </div>-->
+                        <!--                        <div class="my-3">-->
+                        <!--                            <a href="javascript:void(0);" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}"-->
+                        <!--                               class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>-->
+                        <!--                        </div>-->
 
                     </div>
                 </div>
 
 
             </div>
-
             <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"  th:object="${createForm}"  method="post" class="my-3">
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
                     <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
@@ -245,14 +267,15 @@
                     <label class="form-check-label" for="check">비밀</label>
                 </div>
             </form>
+
         </div>
     </div>
 
-<!--    Todo
-        th:object="${answerForm}" post요청
-        th:action="@{|/answer/create/${question.id}|}"
-        sec:authorize="isAnonymous(), isAutthenticated() 추가
--->
+    <!--    Todo
+            th:object="${answerForm}" post요청
+            th:action="@{|/answer/create/${question.id}|}"
+            sec:authorize="isAnonymous(), isAutthenticated() 추가
+    -->
 
 
 
@@ -292,4 +315,3 @@
 
 </script>
 </html>
-
