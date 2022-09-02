@@ -21,11 +21,18 @@
             <span th:text="${article.views}"></span>
         </div>
         <span class="badge rounded-pill text-bg-primary me-3" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+        <span class="badge rounded-pill text-bg-secondary me-3" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
+        </th:block>
 
         <div class="flex-grow-1"></div>
-        <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
-            <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
-            <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
+        <th:block
+                sec:authorize="isAuthenticated()"
+                th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
+            <!--모집중일 때만 수정, 삭제 가능-->
+            <th:block th:if="${article.recruitStatus == true}" >
+                <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
+            </th:block>
         </th:block>
     </div>
 
@@ -100,7 +107,11 @@
     <h5 class="border-bottom my-3 py-2"
         th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
 
-    <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}|}" th:object="${createForm}" method="post" class="mt-2">
+    <form onsubmit="spaceCheck(this); return false;"
+          th:action="@{|/board/comment/write/${board_id}/${article.id}|}"
+          th:object="${createForm}"
+          th:if="${article.recruitStatus == true}"
+          method="post" class="mt-2">
         <!--     댓글 작성-->
         <div class = "d-flex justify-content-start align-items-center">
             <textarea th:field="*{contents}" class="form-control" rows="3"></textarea>
