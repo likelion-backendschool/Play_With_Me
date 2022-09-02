@@ -40,7 +40,7 @@
                         <span class="me-2 text-danger" th:text="|${article.getMember().getMannerTemp()} &deg;|"></span>
                     </span>
                     <span class="badge rounded-pill text-bg-light mx-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
-                    <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'Female') ? '여성' : '남성'})">
+                    <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'female') ? '여성' : '남성'})">
                         <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
                     </th:block>
                 </div>
