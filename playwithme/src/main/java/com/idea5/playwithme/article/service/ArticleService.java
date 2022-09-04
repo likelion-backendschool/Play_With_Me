@@ -27,18 +27,16 @@ public class ArticleService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long create(Long boardId, ArticleCreateForm articleCreateForm) {
+    public Long create(Long boardId, ArticleCreateForm articleCreateForm, Member member) {
         Board board = boardRepository.findById(boardId).orElse(null);
-        // TODO: member 처리(테스트를 위해 무조건 memberId 1로 세팅해놓음)
-        Member member = memberRepository.findById(1L).orElse(null);
         
-        // 변환 후 값 채우기
+        // TODO: 리팩토링(변환 후 값 채우기)
         Article article = ArticleCreateForm.toEntity(articleCreateForm);
         article.setBoard(board);
         article.setMember(member);
         // 게시글 저장 후 ID 반환
         Article saveArticle = articleRepository.save(article);
-        System.out.println(saveArticle.getId());
+
         return saveArticle.getId();
     }
 
@@ -99,7 +97,7 @@ public class ArticleService {
         sorts.add(Sort.Order.desc("recruitStatus"));
         sorts.add(Sort.Order.desc("id"));
 
-        PageRequest pageable = PageRequest.of(page, 2, Sort.by(sorts));
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
 
         return articleRepository.findByBoard_Id(boardId, pageable);
     }

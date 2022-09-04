@@ -10,6 +10,8 @@ import com.idea5.playwithme.comment.CommentService;
 import com.idea5.playwithme.comment.domain.CommentCreateForm;
 import com.idea5.playwithme.comment.domain.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -29,6 +32,7 @@ public class ArticleController {
     private final ArticleService articleService;
     private final CommentService commentService;
     private final BoardService boardService;
+    private final MemberService memberService;
 
     // 게시글 작성폼
     @GetMapping("/write/{board_id}")
@@ -41,12 +45,12 @@ public class ArticleController {
 
     // 게시글 작성
     @PostMapping("/write/{board_id}")
-    public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult) {
+    public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "article_create_form";
         }
-        // TODO: member session 처리
-        Long articleId = articleService.create(boardId, articleCreateForm);
+        Member member = memberService.findMember(principal.getName());
+        Long articleId = articleService.create(boardId, articleCreateForm, member);
         Article article = articleService.findById(articleId);
 
         return "redirect:/board/%d/%d".formatted(boardId, article.getId());
