@@ -1,10 +1,13 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
 
-<div class="container">
-    <h2 class="my-3 border-bottom pb-2">게시글 수정</h2>
+<div layout:fragment="content" class="container">
+    <h2 class="border-bottom mt-4 mb-3">게시글 수정</h2>
 
-    <div class="badge bg-light text-dark fs-5 mb-3">공연명</div>
+    <div class="badge bg-light text-dark fs-5 mb-3" th:text="${eventName}"></div>
 
     <form th:action="@{|/board/modify/${board_id}/${article_id}|}" th:object="${articleUpdateForm}" method="post">
         <div class="mb-3">
@@ -51,6 +54,10 @@
                     <option th:selected="${articleUpdateForm.maxAge} == '59'">59</option>
                 </select>
             </div>
+            <div class="text-danger mt-2" th:if="${#fields.hasErrors('minAge')}" >
+                <span>*</span>
+                <span th:errors="*{minAge}"></span>
+            </div>
         </div>
 
         <!-- 추후 에디터 적용될 수 있음 -->
@@ -62,6 +69,5 @@
             <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
             <button type="submit" class="btn btn-primary m-2">수정</button>
         </div>
-
     </form>
 </div>

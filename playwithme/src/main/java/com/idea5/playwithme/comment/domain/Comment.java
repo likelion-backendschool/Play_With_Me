@@ -1,9 +1,9 @@
 package com.idea5.playwithme.comment.domain;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.member.domain.Member;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 

@@ -55,8 +55,7 @@ class ArticleServiceTest {
                 .location("잠실종합운동장 내 보조경기장")
                 .name("싸이 흠뻑쇼 SUMMER SWAG - 서울")
                 .build();
-        // TODO : 주석 제거하면 오류
-        eventRepository.save(event);
+//        eventRepository.save(event);
 
         Board board = Board.builder()
                 .createdAt(LocalDateTime.now())
@@ -66,15 +65,16 @@ class ArticleServiceTest {
         board.setEvent(event);
         boardRepository.save(board);
 
-        Member member = Member.builder()
-                .createdAt(LocalDateTime.now())
-                .ageRange("10~19")
-                .email("user1@test.com")
-                .gender("Female")
-                .mannerTemp(100F)
-                .name("강해린")
-                .build();
-        memberRepository.save(member);
+//        Member member = Member.builder()
+//                .createdAt(LocalDateTime.now())
+//                .ageRange("10~19")
+//                .email("user1@test.com")
+//                .gender("Female")
+//                .mannerTemp(100F)
+//                .name("강해린")
+//                .build();
+//        memberRepository.save(member);
+        Member member = memberRepository.findById(1L).orElse(null);
 
         String[] genders = {"여성", "남성", "성별무관"};
         String[] minAge = {"10", "20", "30", "40", "50"};
@@ -89,7 +89,7 @@ class ArticleServiceTest {
                     .minAge(minAge[id % 5])
                     .maxAge(maxAge[id % 5])
                     .build();
-            articleService.create(1L, articleCreateForm);
+            articleService.create(1L, articleCreateForm, member);
         });
     }
 
@@ -112,7 +112,7 @@ class ArticleServiceTest {
                 .maxAge("20")
                 .build();
         // when
-        articleService.create(1L, articleCreateForm);
+        articleService.create(1L, articleCreateForm, member);
         // then
         Article findArticle = articleRepository.findById(1L).orElse(null);
         assertThat(findArticle.getTitle()).isEqualTo("제목");
