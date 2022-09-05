@@ -7,7 +7,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <<<<<<< HEAD
     <title>Bootstrap Navbar with Inline Login Form in Dropdown</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -51,32 +50,3 @@
         $select.find(`option[value="${value}"]`).prop("selected", true);
     });
 </script>
-=======
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
-<!--font awsome-->
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-/>
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-<title>Play With Me</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-
-<body style="min-height:100vh;" class="container d-flex flex-column">
-<!-- 네비게이션바 -->
-<header th:replace="fragment/navbar :: navbarFragment"></header>
-
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<main class="flex-grow-1">
-    <th:block layout:fragment="content"></th:block>
-</main>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-
-<!-- footer   /-->
-<footer th:replace="fragment/footer :: footer"> </footer>
-</body>
-</html>
->>>>>>> a0e05c79b9abe92d6e98dbab7622bfe3430ad328
