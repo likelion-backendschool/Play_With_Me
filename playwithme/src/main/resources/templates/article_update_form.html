@@ -54,6 +54,10 @@
                     <option th:selected="${articleUpdateForm.maxAge} == '59'">59</option>
                 </select>
             </div>
+            <div class="text-danger mt-2" th:if="${#fields.hasErrors('minAge')}" >
+                <span>*</span>
+                <span th:errors="*{minAge}"></span>
+            </div>
         </div>
 
         <!-- 추후 에디터 적용될 수 있음 -->
@@ -65,6 +69,5 @@
             <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
             <button type="submit" class="btn btn-primary m-2">수정</button>
         </div>
-
     </form>
 </div>

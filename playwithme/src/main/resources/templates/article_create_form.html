@@ -57,6 +57,10 @@
                     <option th:selected="${articleCreateForm.maxAge} == '59'">59</option>
                 </select>
             </div>
+            <div class="text-danger mt-2" th:if="${#fields.hasErrors('minAge')}" >
+                <span>*</span>
+                <span th:errors="*{minAge}"></span>
+            </div>
         </div>
 
         <!-- 추후 에디터 적용될 수 있음 -->
