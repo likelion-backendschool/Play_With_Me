@@ -1,14 +1,13 @@
-package com.idea5.playwithme.comment;
+package com.idea5.playwithme.comment.controller;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
-import com.idea5.playwithme.board.domain.Board;
-import com.idea5.playwithme.comment.domain.CommentDto;
-import com.idea5.playwithme.comment.domain.CommentCreateForm;
+import com.idea5.playwithme.comment.service.CommentService;
+import com.idea5.playwithme.comment.dto.CommentDto;
+import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
