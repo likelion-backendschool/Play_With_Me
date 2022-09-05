@@ -1,4 +1,4 @@
-package com.idea5.playwithme.comment;
+package com.idea5.playwithme.comment.repository;
 
 
 import com.idea5.playwithme.comment.domain.Comment;

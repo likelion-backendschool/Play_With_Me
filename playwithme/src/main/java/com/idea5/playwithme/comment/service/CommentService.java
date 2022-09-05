@@ -1,20 +1,19 @@
-package com.idea5.playwithme.comment;
+package com.idea5.playwithme.comment.service;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.comment.domain.Comment;
-import com.idea5.playwithme.comment.domain.CommentDto;
-import com.idea5.playwithme.comment.domain.CommentCreateForm;
+import com.idea5.playwithme.comment.dto.CommentDto;
+import com.idea5.playwithme.comment.dto.CommentCreateForm;
+import com.idea5.playwithme.comment.repository.CommentRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
-import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

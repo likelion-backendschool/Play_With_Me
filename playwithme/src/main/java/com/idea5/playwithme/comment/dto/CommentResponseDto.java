@@ -1,6 +1,7 @@
-package com.idea5.playwithme.comment.domain;
+package com.idea5.playwithme.comment.dto;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
