@@ -34,7 +34,6 @@ public class MemberController {
     private final EventService eventService;
 
     private List<Together> togethers = new ArrayList<>();
-    private List<Event> events = new ArrayList<>();
 
 
     @GetMapping("/login/oauth/kakao/callback")
@@ -100,10 +99,10 @@ public class MemberController {
     }
 
 
-    @GetMapping("/mypage/timeline")
-    public String showTimeline(Model model, Principal principal, @RequestParam(defaultValue = "0") int page)  {
+    @GetMapping("/mypage/timeline") //TODO: 새로고침하면 리스트가 추가됨
+    public String showTimeline(Model model, Principal principal, @RequestParam(defaultValue = "0") int page) {
         // 현재 로그인한 회원 리턴
-       Member member = memberService.findMember(principal.getName());
+        Member member = memberService.findMember(principal.getName());
 
         // 해당 회원의 Together 리스트
         togethers = member.getTogetherList();
@@ -118,13 +117,15 @@ public class MemberController {
         List<Long> memberEventIdList = memberArticleBoardList.stream().map(Board::getId).collect(Collectors.toList());
 
         // 위 리스트 id에 해당하는 이벤트들 이벤트 리스트에 추가
+        List<Event> events = new ArrayList<>();
         for (Long t : memberEventIdList) {
             Event event = eventService.getEvent(t);
             events.add(event);
         }
 
-        model.addAttribute("events",events);
+        model.addAttribute("events", events);
 
         return "timeline";
     }
+
 }

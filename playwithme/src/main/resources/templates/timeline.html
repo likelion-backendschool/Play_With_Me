@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
-<head>
-    <meta charset="UTF-8">
-    <title>You Timeline</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>You Timeline</title>
+        <link rel="stylesheet" href="/timeline/style.css" />
+    </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th>행사명</th>
-        <th>장소</th>
-        <th>날짜</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="events : ${events}">
-        <td th:text="${events.name}"></td>
-        <td th:text="${events.location}"></td>
-        <td th:text="${events.date}"></td>
-    </tr>
-    </tbody>
-</table>
+<section class="intro">
+    <div class="container">
+        <h1> TimeLine <i class="fa fa-history" aria-hidden="true"></i> </h1>
+
+    </div>
+</section>
+
+<section class="timeline">
+    <ul>
+        <li th:each="events, num : ${events}" if="${num.count < events.size}">
+            <div>
+                <span>
+                    [[${events.date}]]
+                </span>
+                <h3>[[${events.name}]]</h3>
+                [[${events.location}]]
+            </div>
+        </li>
+    </ul>
+</section>
+<script src="/timeline/main.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </body>
 </html>
