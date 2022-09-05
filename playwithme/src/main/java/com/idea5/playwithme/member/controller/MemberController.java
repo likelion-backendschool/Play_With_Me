@@ -2,17 +2,27 @@ package com.idea5.playwithme.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.board.domain.Board;
+import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.KakaoUser;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.service.KakaoService;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -21,6 +31,11 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
     private final KakaoService kakaoService;
+    private final EventService eventService;
+
+    private List<Together> togethers = new ArrayList<>();
+    private List<Event> events = new ArrayList<>();
+
 
     @GetMapping("/login/oauth/kakao/callback")
     public String redirectKakaoLogin(@RequestParam String code, HttpSession session) throws JsonProcessingException {
@@ -84,4 +99,32 @@ public class MemberController {
         return "redirect:/";
     }
 
+
+    @GetMapping("/mypage/timeline")
+    public String showTimeline(Model model, Principal principal, @RequestParam(defaultValue = "0") int page)  {
+        // 현재 로그인한 회원 리턴
+       Member member = memberService.findMember(principal.getName());
+
+        // 해당 회원의 Together 리스트
+        togethers = member.getTogetherList();
+
+        // 위 리스트에서 게시글 객체만 추출한 리스트
+        List<Article> memberArticleList = togethers.stream().map(Together::getArticle).collect(Collectors.toList());
+
+        // 위 리스트에서 게시판 객체만 추출한 리스트
+        List<Board> memberArticleBoardList = memberArticleList.stream().map(Article::getBoard).collect(Collectors.toList());
+
+        // 위 리스트에서 이벤트 id만 추출한 리스트
+        List<Long> memberEventIdList = memberArticleBoardList.stream().map(Board::getId).collect(Collectors.toList());
+
+        // 위 리스트 id에 해당하는 이벤트들 이벤트 리스트에 추가
+        for (Long t : memberEventIdList) {
+            Event event = eventService.getEvent(t);
+            events.add(event);
+        }
+
+        model.addAttribute("events",events);
+
+        return "timeline";
+    }
 }

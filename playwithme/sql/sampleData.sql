@@ -2,6 +2,7 @@ SELECT * FROM MEMBER;
 SELECT * FROM article;
 SELECT * FROM COMMENT;
 SELECT * FROM board;
+SELECT * FROM together;
 
 # event
 INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-07-15', '잠실종합운동장 내 보조경기장', '싸이 흠뻑쇼 SUMMER SWAG - 서울');
@@ -36,6 +37,9 @@ INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, re
 VALUES('10~39', '흠뻑쇼 가실분 구합니다!', NOW(), '남성', 1, TRUE, '흠뻑쇼 가실분~', NOW(), 0, 1, 1);
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
 VALUES('10~49', '흠뻑쇼 가실분 구합니다!', NOW(), '성별무관', 2, TRUE, '흠뻑쇼 가실분~', NOW(), 0, 1, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~49', '인천 흠뻑쇼 가실분 구합니다!', NOW(), '성별무관', 2, TRUE, '흠뻑쇼 가실분~', NOW(), 0, 2, 1);
+
 
 INSERT INTO COMMENT(contents, created_at, secret_status, updated_at, article_id, member_id)
 VALUES('저는 작성자입니다', NOW(), FALSE, NOW(), 1, 1);
@@ -49,6 +53,10 @@ VALUES('저는 작성자입니다2', NOW(), FALSE, NOW(), 1, 1);
 --
 -- INSERT INTO COMMENT(contents, created_at, secret_status, updated_at, article_id, member_id, parent_id)
 -- VALUES('안녕하세요', NOW(), TRUE, NOW(), 1, 2,3);
+
+# together
+INSERT INTO together(article_id, member_id) VALUES(1,1);
+INSERT INTO together(article_id, member_id) VALUES(6,1);
 
 
 
