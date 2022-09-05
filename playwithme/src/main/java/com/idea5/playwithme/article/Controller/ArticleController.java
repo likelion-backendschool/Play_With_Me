@@ -15,6 +15,7 @@ import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ public class ArticleController {
     private final MemberService memberService;
 
     // 게시글 작성폼
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/write/{board_id}")
     public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
         Board board = boardService.findById(boardId);
@@ -44,11 +46,18 @@ public class ArticleController {
     }
 
     // 게시글 작성
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/write/{board_id}")
     public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "article_create_form";
         }
+        // 나이대 유효성 검사
+        if(Integer.parseInt(articleCreateForm.getMinAge()) > Integer.parseInt(articleCreateForm.getMaxAge())){
+            bindingResult.rejectValue("minAge", "MisMatch", "모집 나이대를 올바르게 설정해주세요.");
+            return "article_create_form";
+        }
+
         Member member = memberService.findMember(principal.getName());
         Long articleId = articleService.create(boardId, articleCreateForm, member);
         Article article = articleService.findById(articleId);
@@ -68,7 +77,6 @@ public class ArticleController {
     }
 
     // 게시글 상세 조회
-    // TODO: board_id url에 꼭 넣어야 하는가
     @GetMapping("/{board_id}/{article_id}")
     public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         Article article = articleService.getDetails(boardId, articleId);
@@ -85,7 +93,9 @@ public class ArticleController {
         return "article_detail";
     }
 
+
     // 게시글 수정폼
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{board_id}/{article_id}")
     public String modifyForm(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
         Article article = articleService.findById(articleId);
@@ -108,8 +118,19 @@ public class ArticleController {
 
 
     // 게시글 수정
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{board_id}/{article_id}")
     public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "article_update_form";
+        }
+
+        // 나이대 유효성 검사
+        if(Integer.parseInt(articleUpdateForm.getMinAge()) > Integer.parseInt(articleUpdateForm.getMaxAge())){
+            bindingResult.rejectValue("minAge", "MisMatch", "모집 나이대를 올바르게 설정해주세요.");
+            return "article_update_form";
+        }
+
         articleService.update(articleId, articleUpdateForm);
 
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
@@ -124,6 +145,7 @@ public class ArticleController {
     }
 
     // 게시글 삭제
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{board_id}/{article_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         articleService.delete(articleId);
