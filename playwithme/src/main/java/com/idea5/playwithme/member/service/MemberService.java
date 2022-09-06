@@ -86,4 +86,11 @@ public class MemberService {
         });
         return member;
     }
+
+    public List<Member> findRecruitMember(Long articleId, Long memberId){
+
+        List<Member> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
+        return recruitMember;
+    }
+
 }
