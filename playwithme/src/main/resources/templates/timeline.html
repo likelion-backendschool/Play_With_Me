@@ -15,10 +15,10 @@
 
 <section class="timeline">
     <ul>
-        <li th:each="events, num : ${events}" if="${num.count < events.size}">
+        <li th:each="events, num : ${events}">
             <div>
                 <span class="timeline-content-info-date">
-                    [[${events.date}]]
+                    [[${#strings.substring(events.date,0,10)}]]
                 </span>
                 <h3>
                     [[${events.name}]]
