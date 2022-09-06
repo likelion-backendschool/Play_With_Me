@@ -28,8 +28,8 @@ public class TogetherController {
     @Autowired
     MemberService memberService;
 
-    @GetMapping("/recruit/{article_id}/{member_id}")
-    public String recruit(@PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model){
+    @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
+    public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model){
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
         model.addAttribute("recruitMember", recruitMember);
 
