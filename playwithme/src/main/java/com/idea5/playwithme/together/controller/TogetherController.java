@@ -41,8 +41,8 @@ public class TogetherController {
         return "recruit_confirm_form";
     }
 
-    @PostMapping("/recruit/{article_id}/{member_id}")
-    public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
+    @PostMapping("/recruit/{board_id}/{article_id}/{member_id}")
+    public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
 
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
@@ -52,6 +52,6 @@ public class TogetherController {
         }
 
 
-        return "redirect:/";
+        return "redirect:/board/complete/%d/%d".formatted(boardId, articleId);
     }
 }
