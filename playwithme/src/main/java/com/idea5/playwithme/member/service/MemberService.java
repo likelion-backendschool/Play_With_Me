@@ -3,6 +3,8 @@ package com.idea5.playwithme.member.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
+import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.MemberRole;
@@ -32,6 +34,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -87,10 +90,17 @@ public class MemberService {
         return member;
     }
 
-    public List<Member> findRecruitMember(Long articleId, Long memberId){
+    public List<MemberRecruitDto> findRecruitMember(Long articleId, Long memberId){
 
-        List<Member> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
-        return recruitMember;
+        List<Object[]> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
+        List<MemberRecruitDto> list = new ArrayList<>();
+
+        for (Object[] objects : recruitMember) {
+            String ninckname = objects[0].toString();
+            Long id = (Long)objects[1];
+            list.add(new MemberRecruitDto(id, ninckname));
+        }
+        return list;
     }
 
 }

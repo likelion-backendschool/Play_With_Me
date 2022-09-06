@@ -1,6 +1,7 @@
 package com.idea5.playwithme.member.service;
 
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +25,10 @@ class MemberServiceTest {
 
     @Test
     public void test(){
-        List<Member> recruitMember = memberService.findRecruitMember(12L, 1L);
-        for (Member member : recruitMember) {
+        List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(12L, 1L);
+        for (MemberRecruitDto member : recruitMember) {
             System.out.println("member.getNickname() = " + member.getNickname());
+            System.out.println("member.getId() = " + member.getId());
         }
     }
 
