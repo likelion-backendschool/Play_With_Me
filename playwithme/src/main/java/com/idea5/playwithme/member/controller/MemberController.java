@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -123,9 +125,30 @@ public class MemberController {
             events.add(event);
         }
 
+
+        // 날짜(LocalDateTime) 내림차순 정렬 (최신 날짜가 상단에 오도록)
+        Collections.sort(events, new Comparator<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                if(o1.getDate().isAfter(o2.getDate())){
+                    return -1;
+                } else if(o1.getDate().isBefore(o2.getDate())){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+
         model.addAttribute("events", events);
 
         return "timeline";
     }
 
+
+
 }
+
+
+
