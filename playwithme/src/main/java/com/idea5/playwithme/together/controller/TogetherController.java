@@ -22,8 +22,8 @@ import java.util.Map;
 public class TogetherController {
     /**
      * Todo
-     * 게시글 작성자와
-     * 댓글 리스트들을 중복없이 데이터 뽑기.
+     * 쿼리 성능 향상
+     * 예외 처리
      */
 
 
