@@ -257,3 +257,30 @@ span {
   display: flex;
   margin-left: 4px;
 }
+
+
+  .timeline-content-info {
+    background: #2B343A;
+    padding: 5px 10px;
+    color: #024cf7;
+    font-size: 12px;
+    box-shadow:  inset 0 2px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 2px;
+    i {
+      margin-right: 5px;
+    }
+    .timeline-content-info-title, .timeline-content-info-date {
+      width: calc(50% - 2px);
+      display: inline-block;
+    }
+    @media (max-width: 500px) {
+      .timeline-content-info-title, .timeline-content-info-date {
+        display: block;
+        width:100%;
+      }
+    }
+  }
+
+  .h3 {
+    color: #024cf7;
+   }

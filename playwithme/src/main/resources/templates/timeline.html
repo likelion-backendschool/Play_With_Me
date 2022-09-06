@@ -17,11 +17,16 @@
     <ul>
         <li th:each="events, num : ${events}" if="${num.count < events.size}">
             <div>
-                <span>
+                <span class="timeline-content-info-date">
                     [[${events.date}]]
                 </span>
-                <h3>[[${events.name}]]</h3>
+                <h3>
+                    [[${events.name}]]
+                </h3>
+                <span class="timeline-content-info-title">
+                    <i class="fa fa-certificate" aria-hidden="true"></i>
                 [[${events.location}]]
+                </span>
             </div>
         </li>
     </ul>

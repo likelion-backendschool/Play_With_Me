@@ -14,6 +14,7 @@ import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,9 +101,15 @@ public class MemberController {
         return "redirect:/";
     }
 
+    //@PreAuthorize("isAuthenticated()")
+    @GetMapping("/mypage/timeline")
+    public String showTimeline(Model model, Principal principal) {
 
-    @GetMapping("/mypage/timeline") //TODO: 새로고침하면 리스트가 추가됨
-    public String showTimeline(Model model, Principal principal, @RequestParam(defaultValue = "0") int page) {
+        if (principal == null) {
+            log.info("You are Logged out. Login or Signin Please!");
+            return "redirect:/";
+        }
+
         // 현재 로그인한 회원 리턴
         Member member = memberService.findMember(principal.getName());
 
@@ -124,7 +131,6 @@ public class MemberController {
             Event event = eventService.getEvent(t);
             events.add(event);
         }
-
 
         // 날짜(LocalDateTime) 내림차순 정렬 (최신 날짜가 상단에 오도록)
         Collections.sort(events, new Comparator<Event>() {
