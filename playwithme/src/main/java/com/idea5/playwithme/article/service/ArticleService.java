@@ -8,6 +8,7 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.domain.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
+import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
