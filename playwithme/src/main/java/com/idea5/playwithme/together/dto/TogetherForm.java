@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class TogetherForm {
-    private List<String> nickname;
+    private List<Long> ids;
 }
