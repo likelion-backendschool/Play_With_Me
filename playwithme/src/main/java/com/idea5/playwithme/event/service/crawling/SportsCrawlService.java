@@ -1,5 +1,7 @@
 package com.idea5.playwithme.event.service.crawling;
 
+import com.idea5.playwithme.board.domain.Board;
+import com.idea5.playwithme.board.repository.BoardRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
 import lombok.Getter;
@@ -24,6 +26,9 @@ public class SportsCrawlService implements CrawlService{
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private BoardRepository boardRepository;
     @Getter
     private static String url = "";
     // 축구 url : https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bjA5&qvt=0&query=2022%EB%85%84%208%EC%9B%94%2013%EC%9D%BC%20K%EB%A6%AC%EA%B7%B81%EA%B2%BD%EA%B8%B0%EC%9D%BC%EC%A0%95"
@@ -132,6 +137,11 @@ public class SportsCrawlService implements CrawlService{
             event.setCategoryId(category);
 
             eventRepository.save(event);
+
+            Board board = new Board();
+            board.setEvent(event);
+            board.setIsBlind(false);
+            boardRepository.save(board);
         }
     }
 }
