@@ -177,6 +177,10 @@ public class EventController {
         return  "redirect:/board/%d".formatted(boardId);
     }
 
+    @GetMapping("/event/search")
+    public String searchEvent (@RequestParam("kw")String kw){
+        return null;
+    }
 }
 
 
