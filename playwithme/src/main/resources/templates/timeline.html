@@ -3,7 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Your Timeline</title>
+        <!-- 버튼 부트스트랩 -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <!-- 폰트어썸 아이콘 -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="/mypage/timeline/style.css" />
+
     </head>
 <body>
 <section class="intro">
@@ -22,16 +27,31 @@
                 </span>
                 <h3>
                     [[${events.name}]]
+
                 </h3>
                 <span class="timeline-content-info-title">
                     <i class="fa fa-certificate" aria-hidden="true"></i>
                 [[${events.location}]]
+                </span>
+
+                <span th:each="timelines, num2 : ${timelines}">
+                    <span th:if="${num.index}==${num2.index}">
+                    [[${timelines.memo}]]
+
+                    <form onsubmit="spaceCheck(this); return false;" th:action="@{|/mypage/timeline/memo/${timelines.id}|}" method="post">
+
+                        <input type="hidden" id="togethersId"  th:value="${timelines.id}">
+
+                            <textarea th:if="${timelines.memo}==null" th:field="${requestDto.memo}" id="memo" class="form-control" rows="3" placeholder="Write your own memo here!"></textarea>
+                         <input type="submit" value="수정 및 저장" class="btn btn-dark btn-sm" id="btn-memo-save">
+                        <input type="submit" value="삭제" class="btn btn-dark btn-sm" id="btn-memo-delete">
+                    </form>
+                    </span>
                 </span>
             </div>
         </li>
     </ul>
 </section>
 <script src="/mypage/timeline/main.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </body>
 </html>

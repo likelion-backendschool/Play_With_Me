@@ -30,3 +30,14 @@
   window.addEventListener("resize", callbackFunc);
   window.addEventListener("scroll", callbackFunc);
 })();
+
+// memo form check
+function spaceCheck(form){
+const isSpace = form.querySelector('.form-control').value.trim();
+    if (isSpace.length == 0) {
+        alert("내용을 입력해주세요.");
+            // form.query.focus();
+        return;
+        }
+        form.submit();
+}

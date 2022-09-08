@@ -282,5 +282,18 @@ span {
   }
 
   .h3 {
-    color: #024cf7;
+   color: #024cf7;
    }
+
+  #memo, #btn-memo-delete, #btn-memo-save {
+    font-family: 'HoengseongHanu';
+    margin: 3px;
+    }
+
+    #memo {
+     box-shadow:  inset 0 2px 0 rgba(0, 0, 0, 0.08);
+     padding: 5px;
+     width: 80%;
+     border-radius: 2px;
+    }
+    .
