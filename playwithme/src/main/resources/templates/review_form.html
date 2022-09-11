@@ -6,8 +6,7 @@
 
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">동행 인원 평가폼</h5>
-
-    <form method="post">
+    <form th:action="@{|/review/${article_id}|}" method="post">
         <div class="my-5">
 
             <div class="mb-3">각 회원에 대한 동행 만족도를 평가해주세요.</div>

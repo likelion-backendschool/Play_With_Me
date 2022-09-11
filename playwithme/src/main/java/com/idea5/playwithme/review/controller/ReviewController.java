@@ -5,17 +5,18 @@ import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
+import com.idea5.playwithme.review.domain.ReviewForm;
 import com.idea5.playwithme.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,10 +29,10 @@ public class ReviewController {
     private final MemberService memberService;
     private final ArticleService articleService;
 
-    // 회원 만족도 평가폼
+    // 회원 매너 평가폼
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("")
-    public String reviewForm(Model model, @RequestParam("article_id") Long articleId, Principal principal) {
+    @GetMapping("/{article_id}")
+    public String reviewForm(Model model, @PathVariable("article_id") Long articleId, Principal principal) {
         Article article = articleService.findById(articleId);
         Member member = memberService.findMember(principal.getName());
 
@@ -51,6 +52,16 @@ public class ReviewController {
 
         model.addAttribute("reviewList", reviewList);
 
+        return "review_form";
+    }
+
+    // 회원 매너 평가
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{article_id}")
+    public String review(@PathVariable("article_id") Long articleId, @Valid ReviewForm reviewForm, BindingResult bindingResult, Principal principal) {
+
+
+        // TODO: 리뷰하기 페이지로 redirect 변경하기
         return "review_form";
     }
 }
