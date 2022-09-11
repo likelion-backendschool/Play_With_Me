@@ -28,6 +28,7 @@
                     </td>
                     <td th:each="score : ${#numbers.sequence(1, 5)}">
                         <div class="form-check form-check-inline">
+                            <input hidden th:field="*{reviewList[__${itemStat.index}__].id}" th:value="${review.id}">
                             <input hidden th:field="*{reviewList[__${itemStat.index}__].reviewee}" th:value="${review.reviewee}">
                             <input class="form-check-input" type="radio" th:field="*{reviewList[__${itemStat.index}__].score}" th:value="${score}">
                         </div>
