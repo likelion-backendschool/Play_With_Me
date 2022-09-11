@@ -1,5 +1,6 @@
 package com.idea5.playwithme.timeline.controller;
 
+import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.timeline.domain.Timeline;
@@ -90,7 +91,7 @@ public class TimelineController {
 
     // 타임라인 메모 작성, 수정
     @PostMapping("/memo/{timeline_id}")
-    public String memoSave(Principal principal, @PathVariable("timeline_id") Long id, @Valid TimelineRequestDto timelineRequestDto) {
+    public String saveMemo(Principal principal, @PathVariable("timeline_id") Long id, @Valid TimelineRequestDto timelineRequestDto) {
         // 로그인 회원 리턴
         Member member = memberService.findMember(principal.getName());
 
@@ -103,6 +104,12 @@ public class TimelineController {
 
         timelineService.memoSave(id, member, together, timelineRequestDto, event);
 
+        return "redirect:/mypage/timeline";
+    }
+
+    @PostMapping("/memo/modify/{timeline_id}")
+    public String modifyMemo(@PathVariable("timeline_id") Long id, TimelineRequestDto timelineRequestDto) {
+        timelineService.memoUpdate(id, timelineRequestDto);
         return "redirect:/mypage/timeline";
     }
 

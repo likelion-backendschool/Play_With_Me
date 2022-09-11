@@ -1,9 +1,12 @@
 package com.idea5.playwithme.timeline.service;
 
+import com.idea5.playwithme.comment.domain.Comment;
+import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.timeline.domain.Timeline;
 import com.idea5.playwithme.timeline.dto.TimelineRequestDto;
+import com.idea5.playwithme.timeline.exception.DataNotFoundException;
 import com.idea5.playwithme.timeline.repository.TimelineRepository;
 import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +29,7 @@ public class TimelineService {
         return timeline;
     }
 */
-    // CREATE, UPDATE
+    // CREATE
     @Transactional
     public void memoSave(Long id, Member member, Together together, TimelineRequestDto timelineRequestDto, Event event) {
         Timeline timeline = findById(id);
@@ -35,7 +38,15 @@ public class TimelineService {
     }
 
     public Timeline findById(Long id){
-        return timelineRepository.findById(id).orElse(new Timeline());
+        return timelineRepository.findById(id).orElseThrow(()-> new DataNotFoundException("해당 타임라인이 존재하지 않습니다"));
+    }
+
+    // UPDATE
+    @Transactional
+    public void memoUpdate(Long id, TimelineRequestDto timelineRequestDto) {
+        Timeline timeline = findById(id);
+        timeline.update(timelineRequestDto.getMemo());
+        timelineRepository.save(timeline);
     }
 
 }

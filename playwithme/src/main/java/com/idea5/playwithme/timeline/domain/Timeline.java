@@ -31,22 +31,19 @@ public class Timeline {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    // 멤버 다대일
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // 투게더 일대일
     @OneToOne
     @JoinColumn(name = "together_id")
     private Together together;
 
-    public void update(String memo) {
-        this.memo = memo;
-    }
-
-    // 이벤트 다대일
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
+
+    public void update(String memo) {
+        this.memo = memo;
+    }
 }
