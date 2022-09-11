@@ -6,7 +6,7 @@
 
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">동행 인원 평가폼</h5>
-    <form th:action="@{|/review/${article_id}|}" method="post">
+    <form th:action="@{|/review/${article_id}|}" method="post" th:object="${reviewDto}">
         <div class="my-5">
 
             <div class="mb-3">각 회원에 대한 동행 만족도를 평가해주세요.</div>
@@ -22,13 +22,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="review : ${reviewList}">
+                <tr th:each="review, itemStat : *{reviewList}">
                     <td class="col-3">
                         <span th:text="${review.getReviewee().getNickname()}"></span>
                     </td>
                     <td th:each="score : ${#numbers.sequence(1, 5)}">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" th:filed="*{review.id}" th:name="${review.id}" th:value="${score}">
+                            <input hidden th:field="*{reviewList[__${itemStat.index}__].reviewee}" th:value="${review.reviewee}">
+                            <input class="form-check-input" type="radio" th:field="*{reviewList[__${itemStat.index}__].score}" th:value="${score}">
                         </div>
                     </td>
                 </tr>
