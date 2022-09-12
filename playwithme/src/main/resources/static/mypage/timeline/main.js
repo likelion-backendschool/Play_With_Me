@@ -45,7 +45,7 @@ const isSpace = form.querySelector('.form-control').value.trim();
 function findIdToHide(id){
     const find = document.getElementsByClassName(id);
     for(var i = 0; i < find.length; i++){
-        console.log('숨김완료')
+        //console.log('숨김완료')
         find[i].style.display ='none';
     }
 }
@@ -56,4 +56,12 @@ function findIdToShow(id){
     for(var i = 0; i < find.length; i++){
         find[i].style.display ='block';
     }
+}
+
+// 메모 삭제 전 confirm
+function confirmMsg(name,id){
+    if ( !confirm(name + " 메모를 삭제할까요?") ) {
+        return false;
+        }
+    window.location.href = "/mypage/timeline/memo/delete/"+id;
 }

@@ -31,7 +31,7 @@ public class TimelineService {
 */
     // CREATE
     @Transactional
-    public void memoSave(Long id, Member member, Together together, TimelineRequestDto timelineRequestDto, Event event) {
+    public void saveMemo(Long id, Member member, Together together, TimelineRequestDto timelineRequestDto, Event event) {
         Timeline timeline = findById(id);
         timeline.update(timelineRequestDto.getMemo());
         timelineRepository.save(timeline);
@@ -43,10 +43,18 @@ public class TimelineService {
 
     // UPDATE
     @Transactional
-    public void memoUpdate(Long id, TimelineRequestDto timelineRequestDto) {
+    public void updateMemo(Long id, TimelineRequestDto timelineRequestDto) {
         Timeline timeline = findById(id);
         timeline.update(timelineRequestDto.getMemo());
         timelineRepository.save(timeline);
     }
 
+    // DELETE
+    // timeline (x) timeline.memo (o)
+    @Transactional
+    public void deleteMemo(Long id) {
+        Timeline timeline = findById(id);
+        timeline.update();
+        timelineRepository.save(timeline);
+    }
 }

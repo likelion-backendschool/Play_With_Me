@@ -1,6 +1,7 @@
 package com.idea5.playwithme.timeline.controller;
 
 import com.idea5.playwithme.comment.dto.CommentCreateForm;
+import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.timeline.domain.Timeline;
@@ -28,9 +29,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/mypage/timeline")
 public class TimelineController {
     private final MemberService memberService;
-    private final TimelineService timelineMemoService;
-    private final TogetherService togetherService;
     private final TimelineService timelineService;
+    private final TogetherService togetherService;
 
     //@PreAuthorize("isAuthenticated()")
     @GetMapping("")
@@ -102,14 +102,20 @@ public class TimelineController {
 
         Event event = together.getArticle().getBoard().getEvent();
 
-        timelineService.memoSave(id, member, together, timelineRequestDto, event);
+        timelineService.saveMemo(id, member, together, timelineRequestDto, event);
 
         return "redirect:/mypage/timeline";
     }
 
     @PostMapping("/memo/modify/{timeline_id}")
     public String modifyMemo(@PathVariable("timeline_id") Long id, TimelineRequestDto timelineRequestDto) {
-        timelineService.memoUpdate(id, timelineRequestDto);
+        timelineService.updateMemo(id, timelineRequestDto);
+        return "redirect:/mypage/timeline";
+    }
+
+    @GetMapping("/memo/delete/{timeline_id}")
+    public String deleteMemo(@PathVariable("timeline_id") Long id) {
+        timelineService.deleteMemo(id);
         return "redirect:/mypage/timeline";
     }
 

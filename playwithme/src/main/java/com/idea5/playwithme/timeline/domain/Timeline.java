@@ -46,4 +46,7 @@ public class Timeline {
     public void update(String memo) {
         this.memo = memo;
     }
+
+    public void update() {
+        this.memo = null;    }
 }
