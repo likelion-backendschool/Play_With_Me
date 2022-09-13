@@ -15,5 +15,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     // 이정도 쿼리는 spring data jpa로 충분히 가능하다.
     List<Object[]> findRecruitMember(Long articleId, Long memberId);
 
+    /**
+     *
+     * findDistinctByCommentList_articleIdAndMemberIdNot(articleId, memberId)
+     */
+
 
 }
