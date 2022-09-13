@@ -1,17 +1,20 @@
 package com.idea5.playwithme.member.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MemberInfoDTO {
-    private String name;
-    private String username;
-    private String password;
-    private String email;
+
+    private Long memberId;
+    private String nickname;
     private String ageRange;
-    private String gender;
+    private String email;
+    private String mannerTemp;
+    private String createDate;
 }

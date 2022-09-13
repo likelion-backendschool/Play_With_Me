@@ -1,0 +1,86 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}">
+
+<div layout:fragment="content" class="container my-3">
+    <h1>마이페이지</h1>
+
+    <div class="px-3">
+        <!-- 프로필 부분 -->
+        <div class="my-5">
+            <h3>프로필</h3>
+            <div class="d-flex justify-content-around p-5 bg-primary text-white rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+                <div class="align-self-center">
+                    <h1 th:text="${memberInfo.nickname}"></h1>
+                </div>
+                <div class="align-self-center">
+                    <h5 th:text="'나이대 : ' + ${memberInfo.ageRange} + '대'">나이대</h5>
+                    <h5 th:text="'이메일 : ' + ${memberInfo.email}">이메일</h5>
+                    <h5 th:text="'가입일자 : ' + ${memberInfo.createDate}">가입일자</h5>
+                </div>
+            </div>
+        </div>
+        <!-- 매너온도 부분 -->
+        <div class="my-5">
+            <h3>사용자 매너온도</h3>
+            <div class="px-4 py-2">
+                <div class="d-flex justify-content-end">
+                    <h5 th:text="'현재온도 : ' + ${memberInfo.mannerTemp} + '°C'">36.5</h5>
+                </div>
+                <div class="progress" style="height: 15px;">
+                    <div class="progress-bar" role="progressbar" th:style="|width: ${memberInfo.mannerTemp}%|"
+                         th:aria-valuenow="${memberInfo.mannerTemp}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 메뉴 부분 -->
+        <div class="my-5">
+            <h3>마이메뉴</h3>
+            <div class="px-4 py-2">
+
+            </div>
+        </div>
+
+        <!--        &lt;!&ndash; 메뉴 부분 &ndash;&gt;-->
+        <!--        <div class="my-4 p-3">-->
+        <!--            <h3>마이 메뉴</h3>-->
+        <!--            &lt;!&ndash; 동행리뷰, 타임라인, 게시물 관리 &ndash;&gt;-->
+        <!--            <div class="d-flex justify-content-between">-->
+        <!--                &lt;!&ndash;  &ndash;&gt;-->
+        <!--                <div class="w-25">-->
+        <!--                    <a th:href="@{|/mypage/review|}" class="btn btn-light">-->
+        <!--                        리뷰타임라인 버튼 이미지 보여주기-->
+        <!--                    </a>-->
+        <!--                    <p>타임라인</p>-->
+        <!--                </div>-->
+        <!--                &lt;!&ndash;  &ndash;&gt;-->
+        <!--                <div class="w-25">-->
+        <!--                    <a th:href="@{|/mypage/timeline|}" class="btn btn-light">-->
+        <!--                        타임라인 버튼 이미지 보여주기-->
+        <!--                    </a>-->
+        <!--                    <p>타임라인</p>-->
+        <!--                </div>-->
+        <!--                &lt;!&ndash;  &ndash;&gt;-->
+        <!--                <div class="w-25">-->
+        <!--                    <a th:href="@{|/mypage/article|}" class="btn btn-light">-->
+        <!--                        게시글 관리 버튼 이미지 보여주기-->
+        <!--                    </a>-->
+        <!--                    <p>게시물 관리</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+</div>
+
+<!-- 기본 내부 형식 -->
+<!--        <div class="my-5">-->
+<!--            <h3>마이메뉴</h3>-->
+<!--            <div class="px-3 py-2">-->
+
+<!--            </div>-->
+<!--        </div>-->

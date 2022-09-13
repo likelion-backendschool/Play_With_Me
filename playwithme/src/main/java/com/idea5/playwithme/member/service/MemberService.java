@@ -80,10 +80,9 @@ public class MemberService {
     }
 
     public Member findMember(String username) {
-        Member member = memberRepository.findByUsername(username).orElseThrow(() -> {
+        return memberRepository.findByUsername(username).orElseThrow(() -> {
             log.warn("Member Not Found...");
             throw new MemberNotFoundException("멤버가 없습니다.");
         });
-        return member;
     }
 }
