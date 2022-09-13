@@ -1,25 +1,55 @@
 <!doctype html>
 <html lang="ko"
-      xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://thymeleaf.org"
 >
-<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Play With Me</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Play With Me</title>
+</head>
+
+    <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="/image/LOGO.png" height="50px" >
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <!--로그아웃일 때만 랜더링 -->
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{|${login}|}">로그인</a>
-                    <!-- 로그인 상태일때만 랜더링 -->
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|${logout}|}">로그아웃</a>
-                </li>
-            </ul>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+            <div class="navbar-nav">
+                <a href="/" class="nav-item nav-link">Home</a>
+                <div class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categories</a>
+                    <div class="dropdown-menu">
+                        <a th:href="@{|/event?category=baseball|}" class="dropdown-item">Baseball</a>
+                        <a th:href="@{|/event?category=soccer|} " class="dropdown-item">Soccer</a>
+                        <a th:href="@{|/event?category=basketball|}"  class="dropdown-item">Basketball</a>
+                        <a th:href="@{|/event?category=musical|}"  class="dropdown-item">Musical</a>
+                        <a th:href="@{|/event?category=concert|}"  class="dropdown-item">Concert</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-nav ml-auto">
+                <form class="navbar-form form-inline search-form" action="/event/search" method="get">
+                    <div class="input-group mt-2">
+                        <input class="form-control"  type="text" name="kw"  placeholder="Search..." th:value="${param.kw}">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default mr-2" >
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <div class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{|${@KakaoAddress.kakaoLogin(#request.requestURI)}|}">Login</a>
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|${@KakaoAddress.kakaoLogout(#request.requestURI)}|}">Logout</a>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </html>
+

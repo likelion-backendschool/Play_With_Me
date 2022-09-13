@@ -1,14 +1,19 @@
 package com.idea5.playwithme.event.service;
 
+import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
 import com.idea5.playwithme.timeline.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,6 +41,15 @@ public class EventService {
     public Event getEvent(Long id) {
         return eventRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("no %d question not found,".formatted(id)));
+    }
+
+    public Page<Event> getList(String kw, int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
+
+        return eventRepository.findByNameContainsOrLocationContains(kw, kw,pageable);
     }
 }
 

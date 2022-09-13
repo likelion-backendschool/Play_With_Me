@@ -1,6 +1,9 @@
 package com.idea5.playwithme.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+
+import com.idea5.playwithme.KakaoAddress;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.KakaoUser;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;

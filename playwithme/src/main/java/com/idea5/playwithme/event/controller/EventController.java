@@ -1,5 +1,6 @@
 package com.idea5.playwithme.event.controller;
 
+import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
@@ -177,6 +178,16 @@ public class EventController {
         return  "redirect:/board/%d".formatted(boardId);
     }
 
+    @GetMapping("/event/search")
+    public String searchEvent (Model model, @RequestParam("kw")String kw, @RequestParam(value = "page", defaultValue = "0") int page){
+        Page<Event> paging = eventService.getList(kw, page);
+        for (Event event : paging) {
+            System.out.println(event.getName());
+        }
+        model.addAttribute("paging", paging);
+
+        return "event_search";
+    }
 }
 
 
