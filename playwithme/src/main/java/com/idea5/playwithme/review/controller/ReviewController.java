@@ -68,7 +68,6 @@ public class ReviewController {
 
         reviewService.review(reviewDto);
 
-
         // TODO: 리뷰하기 페이지로 redirect 변경하기
         return "ㅎㅎ";
     }
