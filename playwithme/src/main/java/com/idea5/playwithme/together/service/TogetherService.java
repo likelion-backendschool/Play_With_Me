@@ -4,12 +4,17 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
+import com.idea5.playwithme.review.repository.ReviewRepository;
+import com.idea5.playwithme.review.service.ReviewService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.repository.TogetherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.web.servlet.oauth2.resourceserver.OAuth2ResourceServerSecurityMarker;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +28,9 @@ public class TogetherService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    ReviewService reviewService;
 
     public void save(Long articleId, Long memberId){
 
@@ -40,5 +48,23 @@ public class TogetherService {
 
         togetherRepository.save(together);
 
+    }
+
+    @Transactional
+    public void saveTogetherAndReview(Long articleId, List<Long> ids) {
+        for(int i = 0; i < ids.size(); i++){
+            this.save(articleId, ids.get(i));
+
+            Long reviewerId = ids.get(i);
+            for(int j = 0; j < ids.size(); j++){
+                Long revieweeId = ids.get(j);
+                if(reviewerId != revieweeId){
+                    System.out.println("revieweeId = " + revieweeId);
+                    System.out.println("reviewerId = " + reviewerId);
+                    reviewService.save(articleId, revieweeId, reviewerId);
+                }
+
+            }
+        }
     }
 }

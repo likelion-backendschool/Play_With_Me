@@ -53,20 +53,7 @@ public class TogetherController {
         ids.add(memberId); // 작성자 아이디
         System.out.println("ids.size() = " + ids.size());
 
-        for(int i = 0; i < ids.size(); i++){
-            togetherService.save(articleId, ids.get(i));
-
-            Long reviewerId = ids.get(i);
-            for(int j = 0; j < ids.size(); j++){
-                Long revieweeId = ids.get(j);
-                if(reviewerId != revieweeId){
-                    System.out.println("revieweeId = " + revieweeId);
-                    System.out.println("reviewerId = " + reviewerId);
-                    reviewService.save(articleId, revieweeId, reviewerId);
-                }
-
-            }
-        }
+        togetherService.saveTogetherAndReview(articleId, ids);
 
         /**
          * 2명 (A, B) -- 2개
@@ -95,6 +82,6 @@ public class TogetherController {
          *
          */
 
-        return "redirect:/board/complete/%d/%d".formatted(boardId, articleId);
+        return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 }

@@ -36,6 +36,7 @@ public class ReviewService {
                 .article(article)
                 .reviewer(reviewerMember)
                 .reviewee(revieweeMember)
+                .score(0)
                 .build();
 
         reviewRepository.save(review);
