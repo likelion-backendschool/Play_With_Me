@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class TimelineService {
@@ -24,9 +26,11 @@ public class TimelineService {
         Event event = article.getBoard().getEvent();
 
         Timeline timeline = Timeline.builder()
-                .together(together)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .event(event)
                 .member(member)
+                .together(together)
                 .build();
 
         timelineRepository.save(timeline);
