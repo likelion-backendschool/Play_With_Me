@@ -1,5 +1,6 @@
 package com.idea5.playwithme.timeline.service;
 
+import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.event.domain.Event;
@@ -17,18 +18,20 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TimelineService {
     private final TimelineRepository timelineRepository;
-/* entity 직접 사용
-    public Timeline create(Together together, String memo, Member member) {
-        Timeline timeline = new Timeline();
-        timeline.setMemo(memo);
-        timeline.setTogether(together);
-        timeline.setMember(member);
+
+    // Together 저장 -> Timeline 자동 생성되도록
+    public void create(Together together, Member member, Article article) {
+        Event event = article.getBoard().getEvent();
+
+        Timeline timeline = Timeline.builder()
+                .together(together)
+                .event(event)
+                .member(member)
+                .build();
 
         timelineRepository.save(timeline);
-
-        return timeline;
     }
-*/
+
     // CREATE
     @Transactional
     public void saveMemo(Long id, Member member, Together together, TimelineRequestDto timelineRequestDto, Event event) {
