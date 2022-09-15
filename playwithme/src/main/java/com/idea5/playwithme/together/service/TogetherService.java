@@ -1,8 +1,8 @@
 package com.idea5.playwithme.together.service;
 
 
-import com.idea5.playwithme.timeline.exception.DataNotFoundException;
-import com.idea5.playwithme.timeline.service.TimelineService;
+import com.idea5.playwithme.mypage.exception.DataNotFoundException;
+import com.idea5.playwithme.mypage.service.TimelineService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.repository.TogetherRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +10,7 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
-import com.idea5.playwithme.together.domain.Together;
-import com.idea5.playwithme.together.repository.TogetherRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.web.servlet.oauth2.resourceserver.OAuth2ResourceServerSecurityMarker;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -2,7 +2,6 @@ package com.idea5.playwithme.together.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.timeline.domain.Timeline;
 import lombok.*;
 
 import javax.persistence.*;

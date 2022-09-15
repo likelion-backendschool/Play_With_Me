@@ -1,13 +1,11 @@
-package com.idea5.playwithme.timeline.controller;
+package com.idea5.playwithme.mypage.controller;
 
-import com.idea5.playwithme.comment.dto.CommentCreateForm;
-import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.timeline.domain.Timeline;
-import com.idea5.playwithme.timeline.dto.TimelineRequestDto;
+import com.idea5.playwithme.mypage.domain.Timeline;
+import com.idea5.playwithme.mypage.dto.TimelineRequestDto;
 import com.idea5.playwithme.member.service.MemberService;
-import com.idea5.playwithme.timeline.service.TimelineService;
+import com.idea5.playwithme.mypage.service.TimelineService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;

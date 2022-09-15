@@ -1,4 +1,4 @@
-package com.idea5.playwithme.timeline.domain;
+package com.idea5.playwithme.mypage.domain;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
