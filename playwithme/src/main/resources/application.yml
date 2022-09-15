@@ -15,7 +15,12 @@ spring:
         show_sql: true
         use_sql_comments: true
 
+  mvc:
+    static-path-pattern: /static/**
+
+
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor: trace
+

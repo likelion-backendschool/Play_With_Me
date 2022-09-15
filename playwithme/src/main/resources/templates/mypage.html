@@ -10,10 +10,12 @@
         <!-- 프로필 부분 -->
         <div class="my-5">
             <h3>프로필</h3>
-            <div class="d-flex justify-content-around p-5 bg-primary text-white rounded">
-                <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <div class="d-flex justify-content-around p-5 my-3 bg-primary text-white rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor"
+                     class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    <path fill-rule="evenodd"
+                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                 </svg>
                 <div class="align-self-center">
                     <h1 th:text="${memberInfo.nickname}"></h1>
@@ -28,7 +30,7 @@
         <!-- 매너온도 부분 -->
         <div class="my-5">
             <h3>사용자 매너온도</h3>
-            <div class="px-4 py-2">
+            <div class="px-4 py-2 my-3 ">
                 <div class="d-flex justify-content-end">
                     <h5 th:text="'현재온도 : ' + ${memberInfo.mannerTemp} + '°C'">36.5</h5>
                 </div>
@@ -41,39 +43,38 @@
         <!-- 메뉴 부분 -->
         <div class="my-5">
             <h3>마이메뉴</h3>
-            <div class="px-4 py-2">
-
-            </div>
+            <div class="px-4 py-2 my-3 d-flex justify-content-between">
+                <div class="justify-content-center">
+                    <a th:href="@{|/mypage/timeline|}">
+                        <div class="rounded-circle  border border-4 border-primary">
+                            <img th:src="@{/static/image/} + 'timeline.png'" th:alt="articles">
+                        </div>
+                    </a>
+                    <div class="d-flex justify-content-center my-3">
+                        <h5>타임라인</h5>
+                    </div>
+                </div>
+                <div class="justify-content-center">
+                    <a th:href="@{|/mypage/article|}">
+                        <div class="rounded-circle  border border-4 border-primary">
+                            <img th:src="@{/static/image/} + 'review.png'" th:alt="articles">
+                        </div>
+                    </a>
+                    <div class="d-flex justify-content-center my-3">
+                        <h5>리뷰 관리</h5>
+                    </div>
+                </div>
+                <div class="justify-content-center">
+                    <a th:href="@{|/review/articles|}">
+                        <div class="rounded-circle  border border-4 border-primary">
+                            <img th:src="@{/static/image/} + 'articles.png'" th:alt="articles">
+                        </div>
+                    </a>
+                    <div class="d-flex justify-content-center my-3">
+                        <h5>게시글 관리</h5>
+                    </div>
+                </div>
         </div>
-
-        <!--        &lt;!&ndash; 메뉴 부분 &ndash;&gt;-->
-        <!--        <div class="my-4 p-3">-->
-        <!--            <h3>마이 메뉴</h3>-->
-        <!--            &lt;!&ndash; 동행리뷰, 타임라인, 게시물 관리 &ndash;&gt;-->
-        <!--            <div class="d-flex justify-content-between">-->
-        <!--                &lt;!&ndash;  &ndash;&gt;-->
-        <!--                <div class="w-25">-->
-        <!--                    <a th:href="@{|/mypage/review|}" class="btn btn-light">-->
-        <!--                        리뷰타임라인 버튼 이미지 보여주기-->
-        <!--                    </a>-->
-        <!--                    <p>타임라인</p>-->
-        <!--                </div>-->
-        <!--                &lt;!&ndash;  &ndash;&gt;-->
-        <!--                <div class="w-25">-->
-        <!--                    <a th:href="@{|/mypage/timeline|}" class="btn btn-light">-->
-        <!--                        타임라인 버튼 이미지 보여주기-->
-        <!--                    </a>-->
-        <!--                    <p>타임라인</p>-->
-        <!--                </div>-->
-        <!--                &lt;!&ndash;  &ndash;&gt;-->
-        <!--                <div class="w-25">-->
-        <!--                    <a th:href="@{|/mypage/article|}" class="btn btn-light">-->
-        <!--                        게시글 관리 버튼 이미지 보여주기-->
-        <!--                    </a>-->
-        <!--                    <p>게시물 관리</p>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
 </div>
 
