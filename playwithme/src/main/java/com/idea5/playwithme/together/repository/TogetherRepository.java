@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TogetherRepository extends JpaRepository<Together, Long> {
-
+    List<Together> findByMemberId(long memberId);
 }

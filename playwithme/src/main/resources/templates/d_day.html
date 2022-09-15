@@ -5,7 +5,7 @@
 >
 
 <div layout:fragment="content" class="container my-3">
-  <div th:each="event : ${paging}" class="card m-2">
+  <div th:each="event : ${events}" class="card m-2">
     <div class="card-body">
       <div th:text="${event.name}"></div>
       <div th:text="${event.location}"></div>
