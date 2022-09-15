@@ -11,7 +11,7 @@
     </div>
     <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
     <div class="d-flex justify-content-end" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
-        <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/recruit/${board_id}/${article_id}|}" th:text="모집완료"></a>
+        <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/together/recruit/${board_id}/${article_id}/${article.member.getId()}|}" th:text="모집완료"></a>
     </div>
     <h2 th:text="${article.title}"></h2>
     <div class="border-bottom my-2 py-2 d-flex">
@@ -323,8 +323,7 @@
     Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
             if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
+                location.href = this.dataset.urigp
         });
     });
 

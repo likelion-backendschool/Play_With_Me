@@ -1,6 +1,9 @@
 package com.idea5.playwithme.review.service;
 
+import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
 import com.idea5.playwithme.review.domain.ReviewDto;
@@ -16,6 +19,27 @@ import java.util.List;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
+    private final ArticleRepository articleRepository;
+
+    /**
+     * Todo
+     * 예외처리
+     */
+    public void save(Long articleId, Long revieweeId, Long reviewerId){
+        Member revieweeMember = memberRepository.findById(revieweeId).orElse(null);
+        Member reviewerMember = memberRepository.findById(reviewerId).orElse(null);
+        Article article = articleRepository.findById(articleId).orElse(null);
+
+        Review review = Review.builder()
+                .article(article)
+                .reviewer(reviewerMember)
+                .reviewee(revieweeMember)
+                .build();
+
+        reviewRepository.save(review);
+
+    }
 
     public List<Review> getReviewList(Long articleId, Long reviewerId) {
         // 아직 평가를 진행하지 않은 사람만 조회
