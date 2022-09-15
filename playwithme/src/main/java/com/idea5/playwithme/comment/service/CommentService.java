@@ -5,8 +5,10 @@ import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.comment.dto.CommentCreateForm;
+import com.idea5.playwithme.comment.exception.CommentNotFoundException;
 import com.idea5.playwithme.comment.repository.CommentRepository;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -74,7 +76,8 @@ public class CommentService {
                 new IllegalArgumentException("%d번 게시글은 존재 하지 않습니다.".formatted(articleId))));
 
         comment.confirmParent(commentRepository.findById(parentId).orElseThrow(() ->
-                new IllegalArgumentException("%d번 부모 댓글 존재하지 않습니다.".formatted(parentId))));
+                new CommentNotFoundException("parent_comment is not found :" + parentId)));
+
 
         commentRepository.save(comment);
 
@@ -82,7 +85,8 @@ public class CommentService {
 
     @Transactional
     public Long commentUpdate(Long id, CommentCreateForm dto) {
-        Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
+        Comment comment = commentRepository.findById(id).orElseThrow(()->
+                new CommentNotFoundException("comment is not found :" + id));
         comment.update(dto.getContents(), dto.isSecretStatus());
         commentRepository.save(comment);
         return comment.getId();
@@ -90,14 +94,15 @@ public class CommentService {
 
     @Transactional
     public CommentDto findComment(Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 댓글이 없습니다. id="+id));
+        Comment comment = commentRepository.findById(id).orElseThrow(()->
+                new CommentNotFoundException("comment is not found :" + id));
         return comment.toCommentDto();
     }
 
     @Transactional
     public void delete(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("해당 댓글이 존재하지 않습니다." + id));
+                new CommentNotFoundException("comment is not found :" + id));
 
         commentRepository.delete(comment);
     }

@@ -20,11 +20,7 @@ import java.util.List;
 
 /**
  * TODO
- * 자신이 작성한 댓글은 수정,삭제 버튼이 보여야 됨. ( 로그인 세션 완료 되면 진행 )  V
- * 댓글 뷰에 닉네임 클릭 시. 마이페이지 이동.
- * 애러 처리 서비스 -> 컨트롤러 ( V )
- * board_ID 처리( V )
- *
+ * 예외처리
  *
  */
 @RequiredArgsConstructor
@@ -63,14 +59,14 @@ public class CommentController {
     public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
         System.out.println("작성 메서드 실행");
-        Article findArticle = articleService.findById(articleId);
+
         if(bindingResult.hasErrors()){
             System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
         String name = principal.getName();
         Member findMember = memberService.findMember(name);
-        Long commentId = commentService.commentSave(articleId, createForm, findMember); // 로그인 세션 추가되면 변경해야 됨.
+        commentService.commentSave(articleId, createForm, findMember);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -87,7 +83,7 @@ public class CommentController {
         }
         String name = principal.getName();
         Member findMember = memberService.findMember(name);
-        commentService.commentReSave(articleId, createForm, commentId,findMember); // 로그인 세션 추가되면 변경해야 됨.
+        commentService.commentReSave(articleId, createForm, commentId,findMember);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -97,8 +93,13 @@ public class CommentController {
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{board_id}/{article_id}/{comment_id}")
-    public String modifyComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id, CommentCreateForm createForm) {
-        Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
+    public String modifyComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id, @Valid CommentCreateForm createForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            System.out.println("바인딩 에러 발생");
+            return "redirect:/board/%d/%d".formatted(boardId, articleId);
+        }
+
+        commentService.commentUpdate(id, createForm);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -108,8 +109,6 @@ public class CommentController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
-        System.out.println("삭제 됐나요??");
-        CommentDto comment = commentService.findComment(id);
         commentService.delete(id);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
