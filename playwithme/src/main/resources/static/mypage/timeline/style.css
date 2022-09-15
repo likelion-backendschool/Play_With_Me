@@ -1,3 +1,4 @@
+/* #39d1e6 -> #7abdff로 테마컬러 변경 */
 *,
 *::before,
 *::after {
@@ -6,19 +7,11 @@
   box-sizing: border-box;
 }
 
-@font-face {
-    font-family: 'HoengseongHanu';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/HoengseongHanu.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-  font: normal 16px/1.5 'HoengseongHanu', "Helvetica Neue", sans-serif;
+  font: normal 16px/1.5 'GmarketSansMedium', "Helvetica Neue", sans-serif;
   background: #fff;
   color: #000;
   overflow-x: hidden;
-  padding-bottom: 50px;
 }
 
 
@@ -77,7 +70,7 @@ h1 {
   bottom: 0;
   width: 400px;
   padding: 15px;
-  background:  #39d1e6;
+  background:  #7abdff;
 }
 
 .timeline ul li div::before {
@@ -96,7 +89,7 @@ h1 {
 .timeline ul li:nth-child(odd) div::before {
   left: -15px;
   border-width: 8px 16px 8px 0;
-  border-color: transparent  #39d1e6 transparent transparent;
+  border-color: transparent  #7abdff transparent transparent;
 }
 
 .timeline ul li:nth-child(even) div {
@@ -106,7 +99,7 @@ h1 {
 .timeline ul li:nth-child(even) div::before {
   right: -15px;
   border-width: 8px 0 8px 16px;
-  border-color: transparent transparent transparent  #39d1e6;
+  border-color: transparent transparent transparent  #7abdff;
 }
 
 span {
@@ -125,7 +118,7 @@ span {
 }
 
 .timeline ul li.in-view::after {
-  background:  #39d1e6;
+  background:  #7abdff;
 }
 
 .timeline ul li div {
@@ -175,7 +168,7 @@ span {
   .timeline ul li:nth-child(even) div::before {
     left: -15px;
     border-width: 8px 16px 8px 0;
-    border-color: transparent  #39d1e6 transparent transparent;
+    border-color: transparent  #7abdff transparent transparent;
   }
 }
 
@@ -240,25 +233,6 @@ span {
 }
 
 
-/* FOOTER STYLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.page-footer {
-  position: fixed;
-  right: 0;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  color: black;
-  background: rgba(255, 255, 255, 0.65);
-}
-
-.page-footer a {
-  display: flex;
-  margin-left: 4px;
-}
-
-
   .timeline-content-info {
     background: #2B343A;
     padding: 5px 10px;
@@ -306,7 +280,7 @@ span {
       }
 
   #new-memo, #update-memo, .btn btn-dark btn-sm {
-    font-family: 'HoengseongHanu';
+    font-family: 'GmarketSansMedium';
     margin: 3px;
     }
 
