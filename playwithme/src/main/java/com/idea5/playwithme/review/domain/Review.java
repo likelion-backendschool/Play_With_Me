@@ -1,8 +1,7 @@
-package com.idea5.playwithme.together.domain;
+package com.idea5.playwithme.review.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.timeline.domain.Timeline;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,24 +12,22 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Together {
-
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "together_id")
     private Long id;
+
+    private Integer score;      // reviwer가 reviewee를 평가한 점수
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "reviewer_id")
+    private Member reviewer;    // 평가한 회원
 
-//    @OneToOne(cascade = CascadeType.REMOVE)
-//    @JoinColumn(name = "timeline_id")
-//    private Timeline timeline; // 읽기 전용
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reviewee_id")
+    private Member reviewee;    // 평가받은 회원
 }
-
