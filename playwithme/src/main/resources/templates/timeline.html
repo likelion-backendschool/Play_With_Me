@@ -19,6 +19,8 @@
 <section class="intro">
     <div class="container">
         <h1> TimeLine <i class="fa fa-history" aria-hidden="true"></i> </h1>
+
+        <h5 th:if="${#lists.size(events)} == 0"> 다녀온 일정이 없습니다. PWM를 통해 다양한 사람들과 동행해보세요!</h5>
     </div>
 </section>
 
