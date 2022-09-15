@@ -121,14 +121,14 @@ function date_click(event) {
              console.log("통신성공");
              //console.log("data:")
              //console.log(data);
-             console.log("push하기 전 event_data2");
-             console.log(event_data2);
-             console.log("push하기 전 event_data2[0]");
-             console.log(event_data2[0]);
+             //console.log("push하기 전 event_data2");
+             //console.log(event_data2);
+             //console.log("push하기 전 event_data2[0]");
+             //console.log(event_data2[0]);
              event_data2.push(data);
              //event_data2 = data.slice();
-             console.log(event_data2[0]);
-             console.log(event_data2[0].length);
+             //console.log(event_data2[0]);
+             //console.log(event_data2[0].length);
 
              // event-container에 event를 event-card에 담아 전달
               $(".events-container").empty();
@@ -294,7 +294,7 @@ function show_events(events, month, day) {
     // Clear the dates container
     $(".events-container").empty();
     $(".events-container").show(250);
-    console.log(event_data["events"]);
+    //console.log(event_data["events"]);
     // If there are no events for this date, notify the user
     if(events.length===0) {
         var event_card = $("<div class='event-card'></div>");
