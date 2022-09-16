@@ -11,6 +11,8 @@
     </div>
     <div sec:authorize = "isAuthenticated()">
         <p>로그인하면 보임</p>
+        <th:block th:replace ="/d_day :: d_day">
+        </th:block>
     </div>
 
 </div>
