@@ -1,9 +1,8 @@
 package com.idea5.playwithme.event.service;
 
-import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
-import com.idea5.playwithme.timeline.exception.DataNotFoundException;
+import com.idea5.playwithme.mypage.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

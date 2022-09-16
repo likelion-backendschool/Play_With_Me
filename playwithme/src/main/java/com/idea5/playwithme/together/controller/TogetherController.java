@@ -3,7 +3,7 @@ package com.idea5.playwithme.together.controller;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.service.ReviewService;
-import com.idea5.playwithme.timeline.service.TimelineService;
+import com.idea5.playwithme.mypage.service.TimelineService;
 import com.idea5.playwithme.together.dto.TogetherForm;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
