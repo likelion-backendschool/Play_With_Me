@@ -1,4 +1,4 @@
-package com.idea5.playwithme;
+package com.idea5.playwithme.home.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,6 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("data", "홈 화면입니다.");
 
-        return "home";
+        return "com/idea5/playwithme/home";
     }
 }
