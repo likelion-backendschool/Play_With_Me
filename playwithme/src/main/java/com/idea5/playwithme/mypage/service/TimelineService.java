@@ -1,15 +1,16 @@
-package com.idea5.playwithme.timeline.service;
+package com.idea5.playwithme.mypage.service;
 
 import com.idea5.playwithme.article.domain.Article;
-import com.idea5.playwithme.comment.domain.Comment;
-import com.idea5.playwithme.comment.dto.CommentCreateForm;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.timeline.domain.Timeline;
-import com.idea5.playwithme.timeline.dto.TimelineRequestDto;
-import com.idea5.playwithme.timeline.exception.DataNotFoundException;
-import com.idea5.playwithme.timeline.repository.TimelineRepository;
+import com.idea5.playwithme.member.repository.MemberRepository;
+import com.idea5.playwithme.mypage.domain.Timeline;
+import com.idea5.playwithme.mypage.dto.TimelineRequestDto;
+import com.idea5.playwithme.mypage.exception.DataNotFoundException;
+import com.idea5.playwithme.mypage.repository.TimelineRepository;
 import com.idea5.playwithme.together.domain.Together;
+import com.idea5.playwithme.together.repository.TogetherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +21,22 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class TimelineService {
     private final TimelineRepository timelineRepository;
+    private final TogetherRepository togetherRepository;
+    private final ArticleRepository articleRepository;
+    private final MemberRepository memberRepository;
 
-    // Together 저장 -> Timeline 자동 생성되도록
-    public void create(Together together, Member member, Article article) {
+
+
+    // 동행 확정 폼 처리 시 -> Timeline 자동 생성되도록
+    @Transactional
+    public void save(Long articleId, Long memberId) {
+        Article article = articleRepository.findById(articleId).orElse(null);
+
+        Member member = memberRepository.findById(memberId).orElse(null);
+
         Event event = article.getBoard().getEvent();
+
+        Together together = togetherRepository.findByArticle_IdAndMember_Id(articleId, memberId);
 
         Timeline timeline = Timeline.builder()
                 .createdAt(LocalDateTime.now())
