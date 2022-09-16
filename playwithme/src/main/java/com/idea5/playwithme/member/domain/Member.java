@@ -2,6 +2,7 @@ package com.idea5.playwithme.member.domain;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.comment.domain.Comment;
+import com.idea5.playwithme.timeline.domain.Timeline;
 import com.idea5.playwithme.together.domain.Together;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -59,5 +60,8 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Together> togetherList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Timeline> timelineList = new ArrayList<>();
 
 }
