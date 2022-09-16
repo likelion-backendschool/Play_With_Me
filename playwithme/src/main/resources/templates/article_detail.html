@@ -170,33 +170,37 @@
 
             <div th:classappend="${comment.id}" >
                 <div class="d-flex justify-content-start fs-6 align-items-center">
+<!--                글쓴이 정보-->
+                    <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
+                        <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
 
-                    <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
-                        <div class="p-1 bg-primary text-white" th:text="글쓴이"></div>
-                    </div>
-                    <div th:unless="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
-                        <div class="p-1 mb-1 bg-primary text-white" th:text="${comment.member.nickname}"></div>
-                    </div>
+                            <div data-bs-toggle="tooltip" data-html='true' class="p-1 bg-primary text-white" data-color="secondary" th:title="|${comment.getMember().getMannerTemp()}&deg;<br>${comment.getMember().getAgeRange()}세</br>${gender}|" data-placement="left" th:text="글쓴이"></div>
+                        </div>
+                        <div th:unless="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
+                            <div data-bs-toggle="tooltip" data-html='true' class="p-1 bg-primary text-white" data-color="secondary" th:title="|${comment.getMember().getMannerTemp()}&deg;<br>${comment.getMember().getAgeRange()}세</br>${gender}|" data-placement="left" th:text="${comment.member.nickname}"></div>
+                        </div>
+                    </th:block>
+
                     <div class="badge bg-light text-secondary p-2 text-start ">
                         <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
 
-                    <div >
+                    <div class="my-3">
                         <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
                         <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
                     </div>
 
                 </div>
 
-                <div class="d-flex px-1 mb-3">
-                    <!--            매너온도, 연령대, 성별, -->
-                    <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                    <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                    <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
-                    <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                        <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
-                    </th:block>
-                </div>
+<!--                <div class="d-flex px-1 mb-3">-->
+<!--                    &lt;!&ndash;            매너온도, 연령대, 성별, &ndash;&gt;-->
+<!--                    <i class="fa fa-thermometer-three-quarters text-danger"></i>-->
+<!--                    <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>-->
+<!--                    <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>-->
+<!--                    <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">-->
+<!--                        <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>-->
+<!--                    </th:block>-->
+<!--                </div>-->
 
 
             </div>
@@ -262,32 +266,33 @@
 
                 <div th:classappend="${child.id}" >
                     <div class="d-flex justify-content-start fs-6 ms-4 align-items-center">
-
-                        <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
-                            <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
-                        </div>
-                        <div th:unless="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
-                            <div class="p-1 mb-1 bg-primary text-white" th:text="${child.member.nickname}"></div>
-                        </div>
+                        <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
+                            <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
+                                <div data-bs-toggle="tooltip" data-html='true' class="p-1 bg-primary text-white" data-color="secondary" th:title="|${comment.getMember().getMannerTemp()}&deg;<br>${comment.getMember().getAgeRange()}세</br>${gender}|"  data-placement="left"  th:text="글쓴이"></div>
+                            </div>
+                            <div th:unless="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
+                                <div data-bs-toggle="tooltip" data-html='true' class="p-1 bg-primary text-white" data-color="secondary" th:title="|${comment.getMember().getMannerTemp()}&deg;<br>${comment.getMember().getAgeRange()}세</br>${gender}|"   data-placement="left" th:text="${child.member.nickname}"></div>
+                            </div>
+                        </th:block>
 
                         <div class="badge bg-light text-secondary p-2 text-start ">
                             <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                         </div>
 
-                        <div>
+                        <div class="my-3">
                             <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>
                             <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
                         </div>
                     </div>
-                    <div class="d-flex px-4 mb-3">
-                        <!--            매너온도, 연령대, 성별, -->
-                        <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                        <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                        <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
-                        <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                            <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
-                        </th:block>
-                    </div>
+<!--                    <div class="d-flex px-4 mb-3">-->
+<!--                        &lt;!&ndash;            매너온도, 연령대, 성별, &ndash;&gt;-->
+<!--                        <i class="fa fa-thermometer-three-quarters text-danger"></i>-->
+<!--                        <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>-->
+<!--                        <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>-->
+<!--                        <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">-->
+<!--                            <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>-->
+<!--                        </th:block>-->
+<!--                    </div>-->
                 </div>
 
 
@@ -359,6 +364,25 @@
 
         form.submit();
     }
+
+    // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    //     return new bootstrap.Tooltip(tooltipTriggerEl)
+    // })
+
+
+
+    (function (window, document, $, undefined) {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        $("div").hover(function () {
+            $(".tooltip-inner").css({ "background-color": "var(--bs-" + $(this).data("color") + ")" });
+        });
+    })(window, document, jQuery);
+
 
 </script>
 </html>
