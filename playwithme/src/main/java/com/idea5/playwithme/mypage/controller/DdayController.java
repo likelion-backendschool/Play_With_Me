@@ -29,6 +29,6 @@ public class DdayController {
         List<Event> events = togetherService.findByMemberId(member.getId());
 
         model.addAttribute("events",events);
-        return "d_day";
+        return "d_day_list";
     }
 }
