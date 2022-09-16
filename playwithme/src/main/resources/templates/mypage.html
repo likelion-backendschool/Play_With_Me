@@ -1,14 +1,14 @@
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:th="http://thymeleaf.org"
-        layout:decorate="~{fragment/layout}">
+        layout:decorate="~{layout}">
 
 <div layout:fragment="content" class="container my-3">
     <h1>마이페이지</h1>
 
     <div class="px-3">
         <!-- 프로필 부분 -->
-        <div class="my-5">
+        <div class="my-4">
             <h3>프로필</h3>
             <div class="d-flex justify-content-around p-5 my-3 bg-primary text-white rounded">
                 <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor"
@@ -28,7 +28,7 @@
             </div>
         </div>
         <!-- 매너온도 부분 -->
-        <div class="my-5">
+        <div class="my-4">
             <h3>사용자 매너온도</h3>
             <div class="px-4 py-2 my-3 ">
                 <div class="d-flex justify-content-end">
@@ -41,32 +41,57 @@
             </div>
         </div>
         <!-- 메뉴 부분 -->
-        <div class="my-5">
+        <div class="my-4">
             <h3>마이메뉴</h3>
             <div class="px-4 py-2 my-3 d-flex justify-content-between">
+                <!-- timeline -->
                 <div class="justify-content-center">
                     <a th:href="@{|/mypage/timeline|}">
-                        <div class="rounded-circle  border border-4 border-primary">
-                            <img th:src="@{/static/image/} + 'timeline.png'" th:alt="articles">
+                        <div class="btn btn-outline-primary border border-primary border-4">
+                            <img th:src="@{/static/image/} + 'timeline.png'" th:alt="timeline">
                         </div>
                     </a>
                     <div class="d-flex justify-content-center my-3">
                         <h5>타임라인</h5>
                     </div>
                 </div>
+                <!-- d-day -->
                 <div class="justify-content-center">
-                    <a th:href="@{|/mypage/article|}">
-                        <div class="rounded-circle  border border-4 border-primary">
-                            <img th:src="@{/static/image/} + 'review.png'" th:alt="articles">
+                    <a th:href="@{|/mypage/d-day|}">
+                        <div class="btn btn-outline-primary border border-primary border-4">
+                            <img th:src="@{/static/image/} + 'd-day.png'" th:alt="D-day">
+                        </div>
+                    </a>
+                    <div class="d-flex justify-content-center my-3">
+                        <h5>D-day</h5>
+                    </div>
+                </div>
+                <!-- together -->
+                <div class="justify-content-center">
+                    <a th:href="@{|/mypage/together|}">
+                        <div class="btn btn-outline-primary border border-primary border-4">
+                            <img th:src="@{/static/image/} + 'together.png'" th:alt="together">
+                        </div>
+                    </a>
+                    <div class="d-flex justify-content-center my-3">
+                        <h5>동행 관리</h5>
+                    </div>
+                </div>
+                <!-- review -->
+                <div class="justify-content-center">
+                    <a th:href="@{|/review/articles|}">
+                        <div class="btn btn-outline-primary border border-primary border-4">
+                            <img th:src="@{/static/image/} + 'review.png'" th:alt="review">
                         </div>
                     </a>
                     <div class="d-flex justify-content-center my-3">
                         <h5>리뷰 관리</h5>
                     </div>
                 </div>
+                <!-- articles -->
                 <div class="justify-content-center">
-                    <a th:href="@{|/review/articles|}">
-                        <div class="rounded-circle  border border-4 border-primary">
+                    <a th:href="@{|/mypage/articles|}">
+                        <div class="btn btn-outline-primary border border-primary border-4">
                             <img th:src="@{/static/image/} + 'articles.png'" th:alt="articles">
                         </div>
                     </a>
@@ -74,14 +99,7 @@
                         <h5>게시글 관리</h5>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- 기본 내부 형식 -->
-<!--        <div class="my-5">-->
-<!--            <h3>마이메뉴</h3>-->
-<!--            <div class="px-3 py-2">-->
-
-<!--            </div>-->
-<!--        </div>-->
