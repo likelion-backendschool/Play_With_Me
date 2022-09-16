@@ -90,15 +90,26 @@ public class MemberService {
         return member;
     }
 
+
+    @Transactional
     public List<MemberRecruitDto> findRecruitMember(Long articleId, Long memberId){
 
         List<Object[]> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
+        if (recruitMember == null || recruitMember.isEmpty())
+            throw new MemberNotFoundException("Member is Not Found");
+
         List<MemberRecruitDto> list = new ArrayList<>();
 
         for (Object[] objects : recruitMember) {
             String ninckname = objects[0].toString();
             Long id = (Long)objects[1];
-            list.add(new MemberRecruitDto(id, ninckname));
+
+            Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member is Not Found..."));
+            MemberRecruitDto memberDto = MemberRecruitDto.builder()
+                    .id(member.getId())
+                    .nickname(ninckname)
+                    .build();
+            list.add(memberDto);
         }
         return list;
     }

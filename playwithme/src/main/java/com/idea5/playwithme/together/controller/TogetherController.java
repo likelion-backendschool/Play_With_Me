@@ -28,15 +28,13 @@ public class TogetherController {
      * 예외 처리
      */
 
+    private final MemberService memberService;
 
-    @Autowired
-    MemberService memberService;
+    private final TogetherService togetherService;
 
-    @Autowired
-    TogetherService togetherService;
+    private final ReviewService reviewService;
 
-    @Autowired
-    ReviewService reviewService;
+    private final ArticleService articleService;
 
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
@@ -48,39 +46,19 @@ public class TogetherController {
 
     @PostMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
+        
 
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
+
+        List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
+
+
         System.out.println("ids.size() = " + ids.size());
 
         togetherService.saveTogetherAndReview(articleId, ids);
+        articleService.updateStatus(articleId);
 
-        /**
-         * 2명 (A, B) -- 2개
-         * A -> B
-         * B -> A
-         *
-         * 3명 (A, B, C) -- 6개
-         * A -> B
-         * A -> C
-         * B -> A
-         * B - >C
-         * C -> A
-         * C- > B
-         *
-         * 4명(A, B, C, D) - 12개
-         * A -> B
-         * A -> C
-         * A - >D
-         *
-         * 5명(A, B, C, D, E) - 20개 - 4 x 5
-         * A -> B
-         * A -> C
-         * A -> D
-         * A -> E
-         *
-         *
-         */
 
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }

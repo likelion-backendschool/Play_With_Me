@@ -3,6 +3,7 @@ package com.idea5.playwithme.together.service;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.review.repository.ReviewRepository;
 import com.idea5.playwithme.review.service.ReviewService;
@@ -32,6 +33,7 @@ public class TogetherService {
     @Autowired
     ReviewService reviewService;
 
+    @Transactional
     public void save(Long articleId, Long memberId){
 
         /**
@@ -39,7 +41,10 @@ public class TogetherService {
          * 예외처리
          */
         Article article = articleRepository.findById(articleId).orElse(null);
-        Member member = memberRepository.findById(memberId).orElse(null);
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> {
+            throw new MemberNotFoundException("Member is Not Found");
+        });
+
 
         Together together = Together.builder()
                 .article(article)
