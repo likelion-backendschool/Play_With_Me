@@ -1,7 +1,9 @@
 package com.idea5.playwithme.review.controller;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.article.service.ArticleService;
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
@@ -18,6 +20,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -27,6 +32,51 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final MemberService memberService;
     private final ArticleService articleService;
+
+    // 매너 평가 게시글 리스트
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/articles")
+    public String reviewList(Model model, Principal principal) {
+        Member member = memberService.findMember(principal.getName());
+
+        // 로그인한 회원 중 아직 리뷰를 완료하지 않은 게시글
+        List<Article> articleList = articleService.getReviewArticelList(member.getId());
+
+        articleList.sort(new Comparator<Article>() {
+            @Override
+            public int compare(Article o1, Article o2) {
+                LocalDate d1 = o1.getBoard().getEvent().getDate().toLocalDate();
+                LocalDate d2 = o2.getBoard().getEvent().getDate().toLocalDate();
+
+                if(d1.isEqual(d2)) {
+                    // article id 오름차순 정렬
+                    return (int) (o1.getId() - o2.getId());
+                }
+                // event 날짜 오름차순 정렬
+                return d1.compareTo(d2);
+            }
+        });
+
+        // TODO: 평가날짜(오늘 날짜)가 이벤트 날짜보다 전이면 평가X
+        int i = 0;
+        while(true) {
+            if(articleList.size() - 1 < i) {
+                break;
+            }
+            Article article = articleList.get(i);
+            LocalDate eventDate = article.getBoard().getEvent().getDate().toLocalDate();
+            if(LocalDate.now().compareTo(eventDate) <= 0) {
+                articleList.remove(article);
+                continue;
+            }
+            i++;
+        }
+
+        model.addAttribute("articleList", articleList);
+        model.addAttribute("localDate", LocalDate.now());
+
+        return "review_list";
+    }
 
     // 회원 매너 평가폼
     @PreAuthorize("isAuthenticated()")
@@ -40,7 +90,6 @@ public class ReviewController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "평가 권한이 없습니다.");
         }
 
-        // TODO: event 일시 가져올 때 이렇게 가져와도 되는지
         // 평가날짜(오늘 날짜)가 이벤트 날짜보다 전이면 평가X
         LocalDate eventDate = article.getBoard().getEvent().getDate().toLocalDate();
         if(LocalDate.now().compareTo(eventDate) <= 0) {
@@ -58,7 +107,6 @@ public class ReviewController {
     // 회원 매너 평가
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{article_id}")
-    @ResponseBody
     public String review(@PathVariable("article_id") Long articleId, ReviewDto reviewDto, BindingResult bindingResult, Principal principal) {
         List<Review> reviewList = reviewDto.getReviewList();
         for (Review r : reviewList) {
@@ -68,7 +116,6 @@ public class ReviewController {
 
         reviewService.review(reviewDto);
 
-        // TODO: 리뷰하기 페이지로 redirect 변경하기
-        return "ㅎㅎ";
+        return "redirect:/review/articles";
     }
 }

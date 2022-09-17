@@ -2,6 +2,7 @@ package com.idea5.playwithme.review.service;
 
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.member.service.MemberService;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,6 +43,18 @@ public class ReviewService {
 
     }
 
+//    public List<Event> getReviewList(Long reviewerId) {
+//        List<Event> eventList = new ArrayList<>();
+//
+//        // 아직 평가를 하지 않은
+//        List<Long> articleList = reviewRepository.findByReviewer_IdLikeAndScoreLike(reviewerId, 0);
+//        for(Long articleId : articleList) {
+//            Article article = articleRepository.findById(articleId).orElse(null);
+//            eventList.add(article.getBoard().getEvent());
+//        }
+//        return eventList;
+//    }
+
     public List<Review> getReviewList(Long articleId, Long reviewerId) {
         // 아직 평가를 진행하지 않은 사람만 조회
         return reviewRepository.findByArticle_IdAndReviewerIdAndScoreLike(articleId, reviewerId, 0);
@@ -63,7 +77,7 @@ public class ReviewService {
 
             // member 테이블에 매너온도 수정
             Member reviewee = memberService.findMember(r.getReviewee().getId());
-            float score = (float) ((r.getScore() - 3) / (reviewList.size() - 1) * 0.1); // 보정 점수
+            float score = (float) ((r.getScore() - 3) / reviewList.size() * 0.1); // 보정 점수
 //            System.out.println("score = " + score);
             reviewee.modify(score);
         }

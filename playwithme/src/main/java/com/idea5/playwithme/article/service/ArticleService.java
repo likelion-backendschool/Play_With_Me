@@ -102,4 +102,8 @@ public class ArticleService {
 
         return articleRepository.findByBoard_Id(boardId, pageable);
     }
+
+    public List<Article> getReviewArticelList(Long reviewerId) {
+        return articleRepository.findReviewArticles(reviewerId);
+    }
 }
