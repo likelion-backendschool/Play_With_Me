@@ -1,6 +1,8 @@
 package com.idea5.playwithme.together.service;
 
 
+import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.timeline.exception.DataNotFoundException;
 import com.idea5.playwithme.timeline.service.TimelineService;
 import com.idea5.playwithme.together.domain.Together;
@@ -41,22 +43,30 @@ public class TogetherService {
     @Autowired
     TimelineService timelineService;
 
+    @Autowired
+    EventService eventService;
+
 
     public void save(Long articleId, Long memberId){
 
         /**
          * Todo
-         * 예외처리
+         * article 예외처리
          */
-        Article article = articleRepository.findById(articleId).orElse(null);
+
         Member member = memberRepository.findById(memberId).orElseThrow(() -> {
             throw new MemberNotFoundException("Member is Not Found");
         });
+
+        Article article = articleRepository.findById(articleId).orElse(null);
+        Long eventId = article.getEventIdByBoard();
+        Event event = eventService.getEvent(eventId);
 
 
         Together together = Together.builder()
                 .article(article)
                 .member(member)
+                .event(event)
                 .build();
 
         togetherRepository.save(together);
