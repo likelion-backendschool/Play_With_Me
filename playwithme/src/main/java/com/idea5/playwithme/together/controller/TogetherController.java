@@ -11,10 +11,12 @@ import com.idea5.playwithme.together.dto.TogetherForm;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +26,10 @@ import java.util.Map;
 public class TogetherController {
     /**
      * Todo
-     * 쿼리 성능 향상
-     * 예외 처리
+     * 쿼리 성능 향상 V
+     * 예외 처리 V
+     * 이벤트랑 외래키 걸기 -> [ 이벤트 : 동행 ]
+     *                     [  1   :   N  ]
      */
 
     private final MemberService memberService;
@@ -36,6 +40,14 @@ public class TogetherController {
 
     private final ArticleService articleService;
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/manage")
+    public String showManage(Principal principal){
+        String name = principal.getName();
+        Member member = memberService.findMember(name);
+//        togetherService.findTogetherListByMemberId(member);
+        return null;
+    }
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);

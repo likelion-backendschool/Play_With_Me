@@ -1,6 +1,7 @@
 package com.idea5.playwithme.together.domain;
 
 import com.idea5.playwithme.article.domain.Article;
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.timeline.domain.Timeline;
 import lombok.*;
@@ -27,6 +28,18 @@ public class Together {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @ManyToOne
+    private Event event;
+
+    // 양방향 연관관계 메서드
+    public void setEvent(Event event){
+        if (this.event != null)
+            this.event.getTogethers().remove(this);
+
+        this.event = event;
+        event.getTogethers().add(this);
+    }
 
 //    @OneToOne(cascade = CascadeType.REMOVE)
 //    @JoinColumn(name = "timeline_id")

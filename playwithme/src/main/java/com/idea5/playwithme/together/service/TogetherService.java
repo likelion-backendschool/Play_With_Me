@@ -87,4 +87,7 @@ public class TogetherService {
             }
         }
     }
+
+//    public  findTogetherListByMemberId(Member member) {
+//    }
 }

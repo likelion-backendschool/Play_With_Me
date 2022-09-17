@@ -2,8 +2,10 @@ package com.idea5.playwithme.event.domain;
 
 import com.idea5.playwithme.comment.domain.Comment;
 import com.idea5.playwithme.timeline.domain.Timeline;
+import com.idea5.playwithme.together.domain.Together;
 import lombok.*;
 import com.idea5.playwithme.board.domain.Board;
+import net.bytebuddy.matcher.FilterableList;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -20,7 +22,8 @@ import java.util.List;
 @ToString
 public class Event {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
     private Long id;
 
@@ -43,5 +46,6 @@ public class Event {
 //    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
 //    private List<Timeline> timelines = new ArrayList<>(); // 일대다 양방향 매핑 (읽기 전용)
 
-
+    @OneToMany(mappedBy = "event")
+    private List<Together> togethers = new ArrayList<>();
 }
