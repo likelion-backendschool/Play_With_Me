@@ -5,10 +5,12 @@ import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
+import com.idea5.playwithme.timeline.domain.Timeline;
 import com.idea5.playwithme.timeline.exception.DataNotFoundException;
 import com.idea5.playwithme.timeline.service.TimelineService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.domain.TogetherInfoDto;
+import com.idea5.playwithme.together.exception.TogetherNotFoundException;
 import com.idea5.playwithme.together.repository.TogetherRepository;
 import lombok.RequiredArgsConstructor;
 import com.idea5.playwithme.article.domain.Article;
@@ -126,7 +128,7 @@ public class TogetherService {
                 togetherInfoDto.addMembers(memberDto);
             }
             togetherInfoDto.setEventDto(eventDto);
-
+            togetherInfoDto.setId(together.getId());
             lists.add(togetherInfoDto);
         }
 
@@ -144,5 +146,19 @@ public class TogetherService {
     
     public Long getArticleId(Together together){
         return together.getArticle().getId();
+    }
+
+    @Transactional
+    public void doDelete(Long togetherId) {
+        Together together = togetherRepository.findById(togetherId).orElseThrow(() ->
+                new TogetherNotFoundException("Together is Not Found...."));
+
+        Timeline timeline = timelineService.findByTogetherId(togetherId);
+        timeline.setTogether(null);
+        timelineService.deleteTimeline(timeline.getId());
+
+        togetherRepository.deleteById(togetherId);
+        log.info("together is deleted ...");
+
     }
 }

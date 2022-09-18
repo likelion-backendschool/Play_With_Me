@@ -46,6 +46,6 @@ public class Event {
 //    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
 //    private List<Timeline> timelines = new ArrayList<>(); // 일대다 양방향 매핑 (읽기 전용)
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Together> togethers = new ArrayList<>();
 }

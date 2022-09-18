@@ -88,6 +88,14 @@ public class TogetherController {
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
+    @GetMapping("delete/{together_id}")
+    public String doDelete(@PathVariable("together_id") Long togetherId){
+
+        togetherService.doDelete(togetherId);
+        return "redirect:/together/manage";
+
+    }
+
 
 
 }

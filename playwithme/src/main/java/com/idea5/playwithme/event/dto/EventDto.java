@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class EventDto {
+
     private Integer categoryId;
 
     private String name;

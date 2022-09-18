@@ -56,7 +56,7 @@
                 <li th:text="${member.nickname}"></li>
             </div>
             <div class="d-flex justify-content-center mt-5">
-              <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" class="btn btn-primary justify-content-center text-white">동행 취소</a>
+              <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary justify-content-center text-white">동행 취소</a>
             </div>
 
             <div class="mt-5">
