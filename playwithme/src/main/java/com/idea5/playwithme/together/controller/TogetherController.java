@@ -47,17 +47,20 @@ public class TogetherController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/manage")
-    public String showManage(Principal principal){
+    public String showManage(Principal principal, Model model) {
         String name = principal.getName();
 
         if (name == null || name.isEmpty()) {
             log.info("The name does not exist.......");
         }
         Member member = memberService.findMember(name);
-        List<TogetherInfoDto> togetherListByMemberId = togetherService.findTogetherListByMemberId(member.getId());
+        System.out.println("member.getId() = " + member.getId());
+        List<TogetherInfoDto> togetherInfos = togetherService.findTogetherListByMemberId(member.getId());
+        model.addAttribute("togetherInfos", togetherInfos);
 
-        return null;
+        return "together_manage";
     }
+
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
@@ -68,7 +71,7 @@ public class TogetherController {
 
     @PostMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
-        
+
 
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
@@ -84,4 +87,7 @@ public class TogetherController {
 
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
+
+
+
 }
