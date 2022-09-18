@@ -1,5 +1,6 @@
 package com.idea5.playwithme.board.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import lombok.*;
@@ -29,7 +30,7 @@ public class Board {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
-    private Event Event;
+    private Event event;
 
     @OneToMany(mappedBy = "board")
     private List<Article> articleList = new ArrayList<>();
