@@ -1,5 +1,6 @@
 package com.idea5.playwithme.together.controller;
 
+import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.service.CommentService;
 import com.idea5.playwithme.event.dto.EventDto;
@@ -72,14 +73,19 @@ public class TogetherController {
     @PostMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
 
+        Article article = articleService.findById(articleId);
+        //이미 모집완료가 된 상태
+        if(!article.getRecruitStatus()){
+            log.warn("이미 모집완료가 된 게시판 입니다.");
+            return "redirect:/board/%d/%d".formatted(boardId, articleId);
+        }
 
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
 
+
+
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
-
-
-        System.out.println("ids.size() = " + ids.size());
 
         togetherService.saveTogetherAndReview(articleId, ids);
         articleService.updateStatus(articleId);
