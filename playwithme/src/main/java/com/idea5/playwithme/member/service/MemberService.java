@@ -1,10 +1,6 @@
 package com.idea5.playwithme.member.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.member.domain.Member;
@@ -22,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -82,7 +77,7 @@ public class MemberService {
     @Transactional
     public List<MemberRecruitDto> findRecruitMember(Long articleId, Long memberId){
 
-        List<Object[]> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
+        List<Object[]> recruitMember = memberRepository.findRecruitMembers(articleId, memberId);
         if (recruitMember == null || recruitMember.isEmpty())
             throw new MemberNotFoundException("Member is Not Found");
 

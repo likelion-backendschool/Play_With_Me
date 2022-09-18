@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TogetherRepository extends JpaRepository<Together, Long> {
 
+    List<Together> findByMemberId(Long id);
+    List<Together> findByArticleIdAndMemberIdNot(Long articleId, Long MemberId);
 }

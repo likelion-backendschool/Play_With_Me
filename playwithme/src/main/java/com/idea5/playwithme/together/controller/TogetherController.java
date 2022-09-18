@@ -2,14 +2,17 @@ package com.idea5.playwithme.together.controller;
 
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.service.CommentService;
+import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
 import com.idea5.playwithme.review.service.ReviewService;
+import com.idea5.playwithme.together.domain.TogetherInfoDto;
 import com.idea5.playwithme.together.dto.TogetherForm;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/together")
@@ -30,6 +34,7 @@ public class TogetherController {
      * 예외 처리 V
      * 이벤트랑 외래키 걸기 -> [ 이벤트 : 동행 ]
      *                     [  1   :   N  ]
+     * 모집인원 보다 많으면 많다고 출력
      */
 
     private final MemberService memberService;
@@ -44,8 +49,13 @@ public class TogetherController {
     @GetMapping("/manage")
     public String showManage(Principal principal){
         String name = principal.getName();
+
+        if (name == null || name.isEmpty()) {
+            log.info("The name does not exist.......");
+        }
         Member member = memberService.findMember(name);
-//        togetherService.findTogetherListByMemberId(member);
+        List<TogetherInfoDto> togetherListByMemberId = togetherService.findTogetherListByMemberId(member.getId());
+
         return null;
     }
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")

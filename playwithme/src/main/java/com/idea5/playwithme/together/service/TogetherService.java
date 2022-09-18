@@ -2,10 +2,13 @@ package com.idea5.playwithme.together.service;
 
 
 import com.idea5.playwithme.event.domain.Event;
+import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.event.service.EventService;
+import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.timeline.exception.DataNotFoundException;
 import com.idea5.playwithme.timeline.service.TimelineService;
 import com.idea5.playwithme.together.domain.Together;
+import com.idea5.playwithme.together.domain.TogetherInfoDto;
 import com.idea5.playwithme.together.repository.TogetherRepository;
 import lombok.RequiredArgsConstructor;
 import com.idea5.playwithme.article.domain.Article;
@@ -13,18 +16,18 @@ import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
-import com.idea5.playwithme.review.repository.ReviewRepository;
 import com.idea5.playwithme.review.service.ReviewService;
-import com.idea5.playwithme.together.domain.Together;
-import com.idea5.playwithme.together.repository.TogetherRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.web.servlet.oauth2.resourceserver.OAuth2ResourceServerSecurityMarker;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TogetherService {
@@ -98,6 +101,48 @@ public class TogetherService {
         }
     }
 
-//    public  findTogetherListByMemberId(Member member) {
-//    }
+    public List<TogetherInfoDto> findTogetherListByMemberId(Long member_id) {
+
+        List<TogetherInfoDto> lists = new ArrayList<>();
+        List<Together> togethers = togetherRepository.findByMemberId(member_id);
+        for (Together together : togethers) {
+            TogetherInfoDto togetherInfoDto = new TogetherInfoDto();
+            
+            Event event = together.getEvent();
+            EventDto eventDto = EventDto.getDtoFromEntity(event);
+
+            List<Object[]> members = memberRepository.findMembersByArticleIdAndMemberIdNot(getArticleId(together), member_id);
+
+            for (Object[] objects : members) {
+                String ninckname = objects[0].toString();
+                Long id = (Long)objects[1];
+
+                Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member is Not Found..."));
+                MemberRecruitDto memberDto = MemberRecruitDto.builder()
+                        .id(member.getId())
+                        .nickname(ninckname)
+                        .build();
+
+                togetherInfoDto.addMembers(memberDto);
+            }
+            togetherInfoDto.setEventDto(eventDto);
+
+            lists.add(togetherInfoDto);
+        }
+
+        for (TogetherInfoDto list : lists) {
+            log.info("이벤트명 = " + list.getEventDto().getName());
+            List<MemberRecruitDto> members = list.getMembers();
+            for (MemberRecruitDto member : members) {
+                log.info("이름 : " + member.getNickname());
+            }
+        }
+
+
+        return lists;
+    }
+    
+    public Long getArticleId(Together together){
+        return together.getArticle().getId();
+    }
 }
