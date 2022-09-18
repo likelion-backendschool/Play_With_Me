@@ -52,5 +52,9 @@ textarea {
     display: inline-block;
 }
 
+.thumbnail:hover {
+    background-color: lightgray;
+    opacity: 0.5;
+}
 
 

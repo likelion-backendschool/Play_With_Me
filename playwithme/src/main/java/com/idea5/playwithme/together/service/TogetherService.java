@@ -1,6 +1,7 @@
 package com.idea5.playwithme.together.service;
 
 
+import com.idea5.playwithme.article.dto.ArticleDto;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.event.service.EventService;
@@ -129,6 +130,7 @@ public class TogetherService {
             }
             togetherInfoDto.setEventDto(eventDto);
             togetherInfoDto.setId(together.getId());
+            togetherInfoDto.setArticleDto(ArticleDto.toDto(together.getArticle()));
             lists.add(togetherInfoDto);
         }
 

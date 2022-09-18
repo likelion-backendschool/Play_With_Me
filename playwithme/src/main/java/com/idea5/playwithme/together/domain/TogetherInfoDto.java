@@ -1,5 +1,6 @@
 package com.idea5.playwithme.together.domain;
 
+import com.idea5.playwithme.article.dto.ArticleDto;
 import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 public class TogetherInfoDto {
     private Long id;
+    private ArticleDto articleDto;
     private EventDto eventDto;
     private List<MemberRecruitDto> members = new ArrayList<>();
 

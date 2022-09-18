@@ -12,7 +12,10 @@
       <!--    col-md-4는 화면에서 1/3을 차지한다는 것을 의미한다.  -->
       <!--     기준 -> 12 -->
       <div class="col-md-4" th:each="info : ${togetherInfos}">
-        <div class="card p-3 mb-2">
+        <div class="card p-3 mb-2 thumbnail">
+
+          <a style="display: none;" th:href="@{|/board/${info.articleDto.boardId}/${info.articleDto.id}|}" class="btn btn-primary justify-content-center text-white">게시물 바로가기</a>
+
 
           <span class="eventTitle mb-4 fs-6" th:text="${info.eventDto.name}"></span>
 
@@ -32,6 +35,8 @@
             </svg>
             <div class="ms-2 align-content-center" th:text="${#temporals.format(info.eventDto.date, 'yyyy.MM.dd')}"></div>
           </div>
+
+
 
 
           <!--          <div class="d-flex justify-content-between">-->
@@ -56,7 +61,9 @@
             <div th:each="member : ${info.members}">
                 <li th:text="${member.nickname}"></li>
             </div>
-            <div class="d-flex justify-content-center mt-5">
+
+
+            <div class="d-flex justify-content-center mt-2">
               <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary justify-content-center text-white">동행 취소</a>
             </div>
 
@@ -74,3 +81,13 @@
   </div>
 
 </div>
+<script layout:fragment="script" type='text/javascript'>
+
+
+  $('.card').on('click', function(){
+    // console.log($(this).children('a').attr('href'));
+    location.href = $(this).children('a').attr('href');
+  });
+
+</script>
+</html>
