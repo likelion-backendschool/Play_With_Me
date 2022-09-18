@@ -14,9 +14,8 @@ import static com.idea5.playwithme.event.domain.QEvent.event;
 public class EventRepositoryImpl implements EventRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
-    StringPath aliasQuantity = Expressions.stringPath("count");
     @Override
-    public Event findTopEventByArticleCount(Integer categoryNo){
+    public Event findTopEventByArticleCount(Integer categoryNo){ // TODO: QueryDSL 사용하지 않고 최대한 JPA 사용하는 방향으로 리팩토링
         return jpaQueryFactory
                 .select(event)
                 .from(event)

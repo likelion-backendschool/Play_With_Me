@@ -16,7 +16,7 @@ public class HomeController {
     private final BoardService boardService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model) { // TODO : 중복 제거 리팩토링
         Event baseballTop = eventService.findTopEventByArticleCount(1);
         Event soccerTop = eventService.findTopEventByArticleCount(2);
         Event basketballTop = eventService.findTopEventByArticleCount(3);
