@@ -12,33 +12,44 @@
 
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            <li th:each="num: ${#numbers.sequence(0, events.size-1)}"
+                data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>
         </ol>
         <div>
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
                     <div class ="card bg-info" style="width: 100%">
-                        <div class="card-body mr-5 ml-5">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div class="card-body mb-3 mr-5 ml-5">
+                            <div class="mr-5 ml-5">
+                                <div style="color: black;">동행 예정 이벤트 알림!</div>
+                                <div style="color: black;">이벤트 장소</div>
+                                <div th:text="${#calendars.format(#calendars.createNow(), 'yyyy.MM.dd')}" style="color: black;"></div>
+                                <div class="d-flex justify-content-end">
+                                    <a th:href="@{|/board/${event.id}|}" class="btn btn-primary">
+                                        현재 인기 게시판 바로가기
+                                    </a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-item">
                     <div class ="card bg-info" style="width: 100%">
-                        <div class="card-body mr-5 ml-5 mb-3">
-                            <div th:text="${event.name}" style="color: black;"></div>
-                            <div th:text="${event.location}" style="color: black;"></div>
-                            <div th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
-                            <div class="d-flex justify-content-end">
-                                <a th:href="@{|/board/${event.id}|}">
-                                    모집 게시판 바로가기
-                                </a>
+                        <div class="card-body mb-3 mr-5 ml-5">
+                            <div class="mr-5 ml-5">
+                                <div th:text="${event.name}" style="color: black;"></div>
+                                <div th:text="${event.location}" style="color: black;"></div>
+                                <div th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
+                                <div class="d-flex justify-content-end">
+                                    <a th:href="@{|/board/${event.id}|}" class="btn btn-primary">
+                                        모집 게시판 바로가기
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
