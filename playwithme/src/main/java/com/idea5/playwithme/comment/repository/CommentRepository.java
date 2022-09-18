@@ -1,4 +1,4 @@
-package com.idea5.playwithme.comment;
+package com.idea5.playwithme.comment.repository;
 
 
 import com.idea5.playwithme.comment.domain.Comment;
@@ -10,5 +10,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     List<Comment> findByArticleId(Long id);
+
+
 
 }

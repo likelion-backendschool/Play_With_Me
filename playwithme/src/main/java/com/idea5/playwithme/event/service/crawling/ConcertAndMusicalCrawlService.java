@@ -1,5 +1,7 @@
 package com.idea5.playwithme.event.service.crawling;
 
+import com.idea5.playwithme.board.domain.Board;
+import com.idea5.playwithme.board.repository.BoardRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
 import lombok.Getter;
@@ -27,6 +29,8 @@ public class ConcertAndMusicalCrawlService implements CrawlService{
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private BoardRepository boardRepository;
 
     private final String musicalId = "01011";
     private final String concertId = "01003";
@@ -110,6 +114,11 @@ public class ConcertAndMusicalCrawlService implements CrawlService{
             event.setName(names.get(i));
             event.setLocation(locations.get(i));
             eventRepository.save(event);
+
+            Board board = new Board();
+            board.setEvent(event);
+            board.setIsBlind(false);
+            boardRepository.save(board);
         }
     }
 }

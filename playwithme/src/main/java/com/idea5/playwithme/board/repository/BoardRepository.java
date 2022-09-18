@@ -1,4 +1,4 @@
-package com.idea5.playwithme.board.domain.repository;
+package com.idea5.playwithme.board.repository;
 
 import com.idea5.playwithme.board.domain.Board;
 import org.springframework.data.jpa.repository.JpaRepository;

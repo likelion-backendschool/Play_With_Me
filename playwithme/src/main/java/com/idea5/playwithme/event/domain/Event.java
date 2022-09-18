@@ -1,7 +1,6 @@
 package com.idea5.playwithme.event.domain;
 
 import lombok.*;
-import com.idea5.playwithme.board.domain.Board;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -35,6 +34,9 @@ public class Event {
 
 //    @OneToOne(mappedBy = "event", fetch = FetchType.LAZY)
 //    private Board board; // 일대일 양방향 매핑 ( 읽기 전용 )
+
+//    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
+//    private List<Timeline> timelines = new ArrayList<>(); // 일대다 양방향 매핑 (읽기 전용)
 
 
 }
