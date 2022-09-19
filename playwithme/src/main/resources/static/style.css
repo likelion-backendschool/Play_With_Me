@@ -53,8 +53,10 @@ textarea {
 }
 
 .thumbnail:hover {
-    background-color: lightgray;
-    opacity: 0.5;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, blue 0%, skyblue 100%);
+    border-image-slice: 1;
 }
+
 
 

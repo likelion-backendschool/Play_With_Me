@@ -119,11 +119,13 @@ public class TogetherService {
             for (Object[] objects : members) {
                 String ninckname = objects[0].toString();
                 Long id = (Long)objects[1];
+                String username = objects[2].toString();
 
                 Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member is Not Found..."));
                 MemberRecruitDto memberDto = MemberRecruitDto.builder()
                         .id(member.getId())
                         .nickname(ninckname)
+                        .username(username)
                         .build();
 
                 togetherInfoDto.addMembers(memberDto);

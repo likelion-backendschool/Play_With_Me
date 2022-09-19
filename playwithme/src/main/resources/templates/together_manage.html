@@ -13,8 +13,7 @@
       <!--     기준 -> 12 -->
       <div class="col-md-4" th:each="info : ${togetherInfos}">
         <div class="card p-3 mb-2 thumbnail">
-
-          <a style="display: none;" th:href="@{|/board/${info.articleDto.boardId}/${info.articleDto.id}|}" class="btn btn-primary justify-content-center text-white">게시물 바로가기</a>
+          <a style="display: none;" th:href="@{|/board/${info.articleDto.boardId}/${info.articleDto.id}|}" class="isCheck">게시물 바로가기</a>
 
 
           <span class="eventTitle mb-4 fs-6" th:text="${info.eventDto.name}"></span>
@@ -49,7 +48,7 @@
           <!--            </div>-->
           <!--            <div class="badge"> <span>Design</span> </div>-->
           <!--          </div>-->
-          <div class="mt-3">
+          <span class="mt-3">
 
             <div class="d-flex">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-card-checklist mt-1" viewBox="0 0 16 16">
@@ -58,22 +57,39 @@
               </svg>
               <div class="ml-1">동행 리스트</div>
             </div>
+<!--            <th:block th:if="${#lists.size(info.size)} <= 0" >text="없습니다."</th:block>-->
+            <div th:if="${#lists.size(info.members) <= 0}">
+                동행 인원이 없습니다.
+            </div>
+<!--            [[${#authentication.getPrincipal().username}]]-->
+                  <li>
+                     본인
+                     <span class="badge badge-primary">Leader</span>
+                   </li>
+
             <div th:each="member : ${info.members}">
+<!--                 <h1 th:text="${member.username}"></h1>-->
+<!--              <div th:if="${#authentication.getPrincipal().username == member.username}">-->
+
+<!--                <li>-->
+<!--                  본인-->
+<!--                  <span class="badge badge-primary">Leader</span>-->
+<!--                </li>-->
+<!--              </div>-->
                 <li th:text="${member.nickname}"></li>
             </div>
-
 
             <div class="d-flex justify-content-center mt-2">
               <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary justify-content-center text-white">동행 취소</a>
             </div>
 
-            <div class="mt-5">
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
-            </div>
-          </div>
+<!--            <div class="mt-5">-->
+<!--              <div class="progress">-->
+<!--                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--              </div>-->
+<!--              <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>-->
+<!--            </div>-->
+          </span>
         </div>
       </div>
 
@@ -84,9 +100,18 @@
 <script layout:fragment="script" type='text/javascript'>
 
 
+  var isChecked = true;
   $('.card').on('click', function(){
-    // console.log($(this).children('a').attr('href'));
-    location.href = $(this).children('a').attr('href');
+
+    // 동행 취소 a 태그까지 포함하기 때문에, 걸어둔 제어문
+    // $('.isCheck').on('click', function (){
+    //   isChecked = false;
+    // });
+    // console.log(Boolean(isChecked));
+   // if(Boolean(isChecked) == false)
+   //    return;
+
+   location.href = $(this).children('a').attr('href');
   });
 
 </script>

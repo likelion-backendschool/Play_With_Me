@@ -15,7 +15,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     // 이정도 쿼리는 spring data jpa로 충분히 가능하다.
     List<Object[]> findRecruitMembers(Long articleId, Long memberId);
 
-    @Query("select m.nickname, m.id From Member m join m.togetherList t where t.article.id = ?1 and t.member.id != ?2")
+    @Query("select m.nickname, m.id, m.username From Member m join m.togetherList t where t.article.id = ?1 and t.member.id != ?2")
     List<Object[]> findMembersByArticleIdAndMemberIdNot(Long articleId, Long memberId);
 
     /**

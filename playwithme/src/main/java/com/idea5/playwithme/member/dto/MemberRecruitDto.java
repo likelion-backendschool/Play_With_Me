@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class MemberRecruitDto {
 
     private Long id;
+    private String username; // 식별용 키
     private String nickname;
+
 
 }
