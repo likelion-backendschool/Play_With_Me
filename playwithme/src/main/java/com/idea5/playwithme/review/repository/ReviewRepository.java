@@ -16,4 +16,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
      */
     List<Review> findByArticleIdAndReviewerIdOrArticleIdAndRevieweeId(Long ArticleId1, Long reviewerId, Long ArticleId2, Long revieweeId);
 
+    // 리더가 동행을 취소할 경우
+    void deleteByArticleId(Long articleId);
 }

@@ -62,10 +62,7 @@
                 동행 인원이 없습니다.
             </div>
 <!--            [[${#authentication.getPrincipal().username}]]-->
-                  <li>
-                     본인
-                     <span class="badge badge-primary">Leader</span>
-                   </li>
+            <li>본인<span class="badge badge-primary">Leader</span></li>
 
             <div th:each="member : ${info.members}">
 <!--                 <h1 th:text="${member.username}"></h1>-->
@@ -78,9 +75,15 @@
 <!--              </div>-->
                 <li th:text="${member.nickname}"></li>
             </div>
-
-            <div class="d-flex justify-content-center mt-2">
-              <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary justify-content-center text-white">동행 취소</a>
+<!--            동행 취소 남은 유효기간 표시  -->
+<!--             동행 기간이 지났는지 -->
+            <div th:if="${info.isCancel == true}" class="d-flex flex-column mt-2">
+              <span class="mt-2" th:text="|동행 취소할 수 있는 날짜가 지났습니다.|"></span>
+               <a onclick="alert('동행 취소할 수 있는 날짜가 지났습니다.'); return false;" class="btn btn-secondary d-flex justify-content-center text-white">동행 취소</a>
+            </div>
+            <div th:unless="${info.isCancel == true}" class="d-flex flex-column mt-2">
+              <span class="d-flex justify-content-center mt-2" th:text="|동행 취소 D-day : ${info.remainDays}일|"></span>
+              <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary d-flex justify-content-center text-white">동행 취소</a>
             </div>
 
 <!--            <div class="mt-5">-->

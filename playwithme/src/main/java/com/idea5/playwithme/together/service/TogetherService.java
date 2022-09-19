@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,7 +135,10 @@ public class TogetherService {
             }
             togetherInfoDto.setEventDto(eventDto);
             togetherInfoDto.setId(together.getId());
+            togetherInfoDto.setCreatedAt(together.getCreatedAt());
             togetherInfoDto.setArticleDto(ArticleDto.toDto(together.getArticle()));
+            togetherInfoDto.setIsCancel(betweenDate(together.getCreatedAt()));
+            togetherInfoDto.setRemainDays(remainDay(together.getCreatedAt()));
             lists.add(togetherInfoDto);
         }
 
@@ -164,5 +170,28 @@ public class TogetherService {
         reviewService.deleteReview(getArticleId(together), memberId);
         log.info("together is deleted ...");
 
+    }
+
+    public Boolean betweenDate(LocalDateTime createdTime){
+        //        LocalDate now = LocalDateTime.of(2022,9,26,0,0).toLocalDate();
+        LocalDate now = LocalDateTime.now().toLocalDate();
+        LocalDate togetherCreatedTime = createdTime.toLocalDate();
+//        System.out.println("now = " + now);
+//        System.out.println("togetherCreatedTime = " + togetherCreatedTime);
+
+//        ChronoUnit.DAYS.between(a, b) between 파라미터의 순서는 반드시 이른 시간이 앞에, 늦은 시간이 뒤에 위치해야 한다.
+        long between = ChronoUnit.DAYS.between(togetherCreatedTime, now)+1;
+        log.info("between = " + between);
+
+
+        return (between > 7) ? true : false;
+
+    }
+
+    public Long remainDay(LocalDateTime localDateTime){
+        LocalDate now = LocalDateTime.now().toLocalDate();
+        LocalDate deadLineDay = localDateTime.now().toLocalDate().plusDays(6);
+
+        return ChronoUnit.DAYS.between(now, deadLineDay)+1;
     }
 }

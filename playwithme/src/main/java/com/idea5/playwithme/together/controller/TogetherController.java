@@ -21,6 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +70,7 @@ public class TogetherController {
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
         model.addAttribute("recruitMember", recruitMember);
         model.addAttribute("togetherForm", new TogetherForm());
+
         return "recruit_confirm_form";
     }
 

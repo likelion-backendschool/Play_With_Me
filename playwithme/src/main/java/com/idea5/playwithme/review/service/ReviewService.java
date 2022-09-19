@@ -54,4 +54,8 @@ public class ReviewService {
             reviewRepository.deleteById(review.getId());
     }
 
+    @Transactional
+    public void deleteAllReview(Long articleId){
+        reviewRepository.deleteByArticleId(articleId);
+    }
 }
