@@ -14,5 +14,7 @@ public class BoardService {
         return boardRepository.findById(boardId).orElseThrow();
     }
 
-
+    public Board findByEvent_Id(Long id) {
+        return boardRepository.findByEvent_Id(id).orElse(null);
+    }
 }
