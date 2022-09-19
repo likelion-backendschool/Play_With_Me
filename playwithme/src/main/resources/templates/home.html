@@ -1,6 +1,7 @@
 <!doctype html>
 <html
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         xmlns:th="http://thymeleaf.org"
         layout:decorate="~{fragment/layout}"
 >
@@ -29,7 +30,7 @@
 
 
 
-<div class="custom-hero">
+<div class="custom-hero" sec:authorize="isAnonymous()">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -38,7 +39,7 @@
 
                 <div  class="line js-line mx-auto mb-3 my-10"></div>
                 <p><br></p>
-                <p class="sub-text">공연을 함께 갈 동행인을 모집해보세요! 리뷰기능과 매너온도, 원하는 모집 상대 필터링을 통해 더욱 의미있는 동행 </p>
+                <p class="sub-text">행사를 함께 갈 동행인을 모집해보세요! 리뷰기능과 매너온도, <br> 원하는 모집 상대 필터링을 통해 맞춤화된 모집이 가능합니다 </p>
 
                 <p class="sub-text">Study With Me? 우리는 Play With Me!</p>
             </div>
@@ -49,7 +50,7 @@
 
 
 
-<div class="section">
+<div class="section" sec:authorize="isAnonymous()">
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="0">
@@ -71,7 +72,7 @@
                     </div>
                     <div class="text">
                         <h3>이벤트 캘린더</h3>
-                        <p>각 카테고리 달력을 통해 일자별, 월별 공연을 한눈에 확인 가능해요</p>
+                        <p>각 카테고리 달력을 통해 일자별 이벤트를 한눈에 확인 가능해요</p>
                     </div>
                 </div>
             </div>
@@ -128,6 +129,69 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+<div class="container pb-5 mb-5" sec:authorize="isAnonymous()">
+    <div class="row justify-content-around">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+
+            <h2 class="mb-4">How to?</h2>
+            <div class="line my-3"></div>
+
+            <p class="mt-5"><a href="#accordion_1" class="btn btn-primary">옆에서 Play With Me 사용법 알아보기 -> </a></p>
+
+        </div>
+        <div class="col-lg-7">
+            <div class="custom-accordion" id="accordion_1">
+                <div class="accordion-item">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">1. 원하는 이벤트 찾기</button>
+                    </h2>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion_1">
+                        <div class="accordion-body">
+                            <p>1-1. 검색창 : 검색창으로 원하는 이벤트명이나 장소 검색하기</p>
+                            <p>1-2. 카테고리 : 카테고리로 분류된 이벤트 캘린더에서 찾기 </p>
+                        </div>
+                    </div>
+                </div> <!-- .accordion-item -->
+
+                <div class="accordion-item">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">2. 동행인 찾기</button>
+                    </h2>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_1">
+                        <div class="accordion-body">
+                            <p> 2-1. 로그인 : 카카오 소셜 로그인으로 간편하게 가입하기</p>
+                            <p> 2-2. 게시글 작성 : 모집 성별, 모집 나이대로 필터링된 게시글 작성하기</p>
+                            <p> 2-3. 댓글 작성 : 댓글로 서로 연락할 방법 공유하기</p>
+                        </div>
+                    </div>
+                </div> <!-- .accordion-item -->
+                <div class="accordion-item">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">3. 모집 완료 후 평가하기 (매너온도에 반영)</button>
+                    </h2>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion_1">
+                        <div class="accordion-body">
+                            <p>모집완료 버튼을 통해 동행인을 확정하고 이벤트 일정 후에 서로를 평가해주세요! 리뷰 평점은 개인의 매너온도에 반영됩니다</p>
+                        </div>
+                    </div>
+
+                </div> <!-- .accordion-item -->
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 
 
@@ -338,65 +402,6 @@
 
 
 
-<div class="container pb-5 mb-5 border-bottom">
-    <div class="row justify-content-around">
-        <div class="col-lg-4 mb-4 mb-lg-0">
-
-            <h2 class="mb-4">How to?</h2>
-            <div class="line my-3"></div>
-
-
-
-            <p class="mt-5"><a href="#collapseOne" class="btn btn-primary">옆에서 Play With Me 사용법 알아보기 -> </a></p>
-
-
-        </div>
-        <div class="col-lg-7">
-            <div class="custom-accordion" id="accordion_1">
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">1. 원하는 이벤트 찾기</button>
-                    </h2>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p>1-1. 검색창 : 검색창으로 원하는 이벤트명이나 장소 검색하기</p>
-                            <p>1-2. 카테고리 : 카테고리로 분류된 이벤트 캘린더에서 찾기 </p>
-                        </div>
-                    </div>
-                </div> <!-- .accordion-item -->
-
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">2. 동행인 찾기</button>
-                    </h2>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p> 2-1. 로그인 : 카카오 소셜 로그인으로 간편하게 가입</p>
-                            <p> 2-2. 게시글 작성 : 모집 성별, 모집 나이대로 필터링된 게시글 작성하기</p>
-                            <p> 2-3. 댓글 작성 : 댓글로 서로 연락할 방법 주고받기</p>
-                        </div>
-                    </div>
-                </div> <!-- .accordion-item -->
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">3. 모집 완료 후 평가하기 (매너온도에 반영)</button>
-                    </h2>
-
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p>모집완료 버튼을 통해 동행인을 확정하고 이벤트 일정 후에 서로를 평가해주세요! 리뷰 평점은 개인의 매너온도에 반영됩니다</p>
-                        </div>
-                    </div>
-
-                </div> <!-- .accordion-item -->
-
-            </div>
-
-        </div>
-
-    </div>
-</div>
 
 
 <script src="home/js/jquery-migrate-3.0.0.min.js"></script>
