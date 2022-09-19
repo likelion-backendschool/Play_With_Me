@@ -4,7 +4,7 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
- /* #7e0cf5 -> #155cd6, cd4dcc -> #51a9db 로 테마 컬러 변경 */
+ /* #7e0cf5 -> #155cd6 -> #74a2e3, cd4dcc -> #51a9db 로 테마 컬러 변경 */
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8152,7 +8152,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #155cd6; }
+  color: #74a2e3; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8163,11 +8163,11 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   line-height: 1.5;
   font-weight: 400;
-  font-family: 'HoengseongHanu',"Lato", Arial, sans-serif;
+  font-family: 'GmarketSansMedium',"Lato", Arial, sans-serif;
   color: #000; }
 
 .bg-primary {
-  background: #155cd6 !important; } //TODO: 여기 한번 바꿔보기
+  background: #74a2e3 !important; } //TODO: 여기 한번 바꿔보기
 
 .ftco-section {
   padding: 7em 0; }
@@ -8195,7 +8195,7 @@ h1, h2, h3, h4, h5,
   height: 500px;
   position: relative;
   margin: 20px auto;
-  background: #155cd6; }
+  background: #74a2e3; }
 
 /*  Events display */
 .events-container {
@@ -8238,18 +8238,18 @@ h1, h2, h3, h4, h5,
   font-size: 1rem; }
 
 .event-urlNotice {
-  font-family: 'HoengseongHanu';
+  font-family: 'GmarketSansMedium';
   padding-right: 0;
   text-decoration : underline;
   cursor:pointer;
 }
 
 .event-count  {
-  font-family: 'HoengseongHanu';
+  font-family: 'GmarketSansMedium';
   text-align: right; }
 
 .event-name, .event-location, .event-dateString {
-  font-family: 'HoengseongHanu';
+  font-family: 'GmarketSansMedium';
   padding-right: 0;
   color: #51a9db;
   text-align: left; }
@@ -8266,7 +8266,7 @@ h1, h2, h3, h4, h5,
   width: 50%;
   background: #fff;
   /* Calendar font-size, font-family */
-  font: 13px 'HoengseongHanu', Helvetica, Arial, san-serif;
+  font: 13px 'GmarketSansMedium', Helvetica, Arial, san-serif;
   display: inline-block;
   padding: 20px;
   float: left; }
@@ -8317,7 +8317,7 @@ h1, h2, h3, h4, h5,
       -o-transition: none;
       transition: none; } }
   .left-button:hover, .right-button:hover {
-    color: #155cd6 !important; }
+    color: #74a2e3 !important; }
 
 .left-button {
   left: 0; }
@@ -8341,7 +8341,7 @@ h1, h2, h3, h4, h5,
   transition: .2s ease all;
   color: white;
   border: none;
-  background: #155cd6; }
+  background: #74a2e3; }
   .button.button-white {
     background: #fff;
     color: #000; }
@@ -8392,7 +8392,7 @@ h1, h2, h3, h4, h5,
   padding-top: 10px;
   line-height: 26px;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
   color: #cccccc;
   -webkit-transition: all 250ms;
   -o-transition: all 250ms;
@@ -8432,8 +8432,8 @@ h1, h2, h3, h4, h5,
   border-color: #51a9db; }
 
 .event-date {
-  border-color: #155cd6;
-  background: #155cd6;
+  border-color: #74a2e3;
+  background: #74a2e3;
   color: #fff; }
   .event-date:after {
     position: absolute;
@@ -8450,7 +8450,7 @@ h1, h2, h3, h4, h5,
   color: #fff; }
 
 .event-date.active-date {
-  background: #155cd6; }
+  background: #74a2e3; }
 
 /* input dialog */
 .dialog {

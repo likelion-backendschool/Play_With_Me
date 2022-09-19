@@ -1,8 +1,6 @@
 package com.idea5.playwithme.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
-import com.idea5.playwithme.KakaoAddress;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.KakaoUser;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
@@ -11,7 +9,9 @@ import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final MemberService memberService;
     private final KakaoService kakaoService;
+
 
     @GetMapping("/login/oauth/kakao/callback")
     public String redirectKakaoLogin(@RequestParam String code, HttpSession session) throws JsonProcessingException {

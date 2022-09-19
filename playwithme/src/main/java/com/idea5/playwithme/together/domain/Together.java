@@ -26,5 +26,10 @@ public class Together {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+//    @OneToOne(cascade = CascadeType.REMOVE)
+//    @JoinColumn(name = "timeline_id")
+//    private Timeline timeline; // 읽기 전용
+
 }
 

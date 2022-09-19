@@ -1,8 +1,8 @@
 package com.idea5.playwithme.event.service;
 
-import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.repository.EventRepository;
+import com.idea5.playwithme.mypage.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +35,11 @@ public class EventService {
         LocalDateTime end = LocalDateTime.of(searchDate, LocalTime.MAX);
         List<Event> events = eventRepository.findAllByDateBetweenAndCategoryId(start, end, categoryId);
         return events;
+    }
+
+    public Event getEvent(Long id) {
+        return eventRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("no %d question not found,".formatted(id)));
     }
 
     public Page<Event> getList(String kw, int page) {
