@@ -30,4 +30,9 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewee_id")
     private Member reviewee;    // 평가받은 회원
+
+    // 평가 점수 수정
+    public void modify(Integer score) {
+        this.score = score;
+    }
 }

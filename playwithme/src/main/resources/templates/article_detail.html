@@ -107,7 +107,7 @@
     <h5 class="border-bottom my-3 py-2"
         th:text="|${#lists.size(article.commentList)}개의 답변이 있습니다.|"></h5>
 
-    <form onsubmit="spaceCheck(this); return false;"
+    <form onsubmit="spaceCheck(this); return false; "
           th:action="@{|/board/comment/write/${board_id}/${article.id}|}"
           th:object="${createForm}"
           th:if="${article.recruitStatus == true}"
@@ -285,7 +285,11 @@
 
 
             </div>
-            <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"  th:object="${createForm}"  method="post" class="my-3">
+            <form onsubmit="spaceCheck(this); return false;" th:action="@{|/board/comment/write/${board_id}/${article.id}/${comment.id}|}"
+                  th:object="${createForm}"
+                  th:if="${article.recruitStatus == true}"
+                  method="post" class="my-3">
+
                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
                     <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
                 </div>
@@ -323,7 +327,8 @@
     Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
             if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.urigp
+                location.href = this.dataset.uri;
+            };
         });
     });
 

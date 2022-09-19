@@ -60,7 +60,7 @@ class ArticleServiceTest {
         Board board = Board.builder()
                 .createdAt(LocalDateTime.now())
                 .isBlind(false)
-                .Event(event)
+                .event(event)
                 .build();
         board.setEvent(event);
         boardRepository.save(board);
