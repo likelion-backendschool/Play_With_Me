@@ -3,12 +3,17 @@ package com.idea5.playwithme.review.service;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.review.domain.Review;
+import com.idea5.playwithme.review.exception.ReviewerNotFoundException;
 import com.idea5.playwithme.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,4 +47,12 @@ public class ReviewService {
         reviewRepository.save(review);
 
     }
+
+    @Transactional
+    public void deleteReview(Long articleId, Long memberId){
+        List<Review> ReviewList = reviewRepository.findByArticleIdAndReviewerIdOrArticleIdAndRevieweeId(articleId, memberId, articleId, memberId);
+        for (Review review : ReviewList)
+            reviewRepository.deleteById(review.getId());
+    }
+
 }

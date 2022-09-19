@@ -5,8 +5,11 @@ import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.timeline.domain.Timeline;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -32,6 +35,9 @@ public class Together {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Event event;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     // 양방향 연관관계 메서드
     public void setEvent(Event event){

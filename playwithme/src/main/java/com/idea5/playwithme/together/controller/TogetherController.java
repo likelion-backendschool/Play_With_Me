@@ -95,9 +95,16 @@ public class TogetherController {
     }
 
     @GetMapping("delete/{together_id}")
-    public String doDelete(@PathVariable("together_id") Long togetherId){
+    public String doDelete(@PathVariable("together_id") Long togetherId, Principal principal){
 
-        togetherService.doDelete(togetherId);
+        String name = principal.getName();
+
+        if (name == null || name.isEmpty()) {
+            log.info("The name does not exist.......");
+        }
+        Long memberId = memberService.findMember(name).getId();
+
+        togetherService.doDelete(togetherId, memberId);
         return "redirect:/together/manage";
 
     }

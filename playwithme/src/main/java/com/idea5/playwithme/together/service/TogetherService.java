@@ -153,15 +153,15 @@ public class TogetherService {
     }
 
     @Transactional
-    public void doDelete(Long togetherId) {
+    public void doDelete(Long togetherId, Long memberId) {
         Together together = togetherRepository.findById(togetherId).orElseThrow(() ->
                 new TogetherNotFoundException("Together is Not Found...."));
 
         Timeline timeline = timelineService.findByTogetherId(togetherId);
         timeline.setTogether(null);
         timelineService.deleteTimeline(timeline.getId());
-
         togetherRepository.deleteById(togetherId);
+        reviewService.deleteReview(getArticleId(together), memberId);
         log.info("together is deleted ...");
 
     }

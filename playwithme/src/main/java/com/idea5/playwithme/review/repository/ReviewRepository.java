@@ -3,5 +3,17 @@ package com.idea5.playwithme.review.repository;
 import com.idea5.playwithme.review.domain.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+    List<Review> findByArticleIdAndReviewerId(Long ArticleId, Long reviewerId);
+    List<Review> findByArticleIdAndRevieweeId(Long ArticleId, Long revieweeId);
+
+    /**
+     * findByFirstElementAndCriteriaOrSecondElementAndCriteria
+     * (첫 번째 & 조건) OR ( 두 번째 & 조건) --> 조건 & ( 첫 번째 또는 두 번째)
+     */
+    List<Review> findByArticleIdAndReviewerIdOrArticleIdAndRevieweeId(Long ArticleId1, Long reviewerId, Long ArticleId2, Long revieweeId);
+
 }
