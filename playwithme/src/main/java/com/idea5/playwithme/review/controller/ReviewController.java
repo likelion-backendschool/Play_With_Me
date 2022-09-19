@@ -35,7 +35,7 @@ public class ReviewController {
 
     // 매너 평가 게시글 리스트
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/articles")
+    @GetMapping("")
     public String reviewList(Model model, Principal principal) {
         Member member = memberService.findMember(principal.getName());
 
@@ -57,7 +57,7 @@ public class ReviewController {
             }
         });
 
-        // TODO: 평가날짜(오늘 날짜)가 이벤트 날짜보다 전이면 평가X
+        // 평가날짜(오늘 날짜)가 이벤트 날짜보다 전이면 평가X
         int i = 0;
         while(true) {
             if(articleList.size() - 1 < i) {
