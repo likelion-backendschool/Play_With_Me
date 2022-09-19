@@ -226,7 +226,7 @@
                         <h3 th:if="${baseballTop}!=null"><a href="single.html"></a> ✨ Baseball : [[${baseballTop?.name}]]</h3>
 
                         <span th:if="${baseballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${baseballTop}!=null" class="date"> [[${baseballTop?.date}]]</span>
+                        <span th:if="${baseballTop}!=null" class="date">  [[${#strings.substring(baseballTop?.date,0,10)}]]</span>
 
                         <p th:if="${baseballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
                         <p th:if="${baseballTop}!=null"> [[${baseballTop?.location}]]</p>
@@ -245,7 +245,7 @@
                         <h3 th:if="${soccerTop}!=null"><a href="single.html"></a> ✨ Soccer : [[${soccerTop?.name}]]</h3>
 
                         <span th:if="${soccerTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${soccerTop}!=null" class="date"> [[${soccerTop?.date}]]</span>
+                        <span th:if="${soccerTop}!=null" class="date"> [[${#strings.substring(soccerTop?.date,0,10)}]]</span>
 
                         <p th:if="${soccerTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
                         <p th:if="${soccerTop}!=null"> [[${soccerTop?.location}]]</p>
@@ -264,7 +264,7 @@
                         <h3 th:if="${basketballTop}!=null"><a href="single.html"></a> ✨ Basketball : [[${basketballTop?.name}]]</h3>
 
                         <span th:if="${basketballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${basketballTop}!=null" class="date"> [[${basketballTop?.date}]]</span>
+                        <span th:if="${basketballTop}!=null" class="date"> [[${#strings.substring(basketballTop?.date,0,10)}]]</span>
 
                         <p th:if="${basketballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
                         <p th:if="${basketballTop}!=null"> [[${basketballTop?.location}]]</p>
@@ -297,7 +297,7 @@
                             <h3 th:if="${musicalTop}!=null"><a href="single.html"></a> ✨ Musical : [[${musicalTop?.name}]]</h3>
 
                             <span th:if="${musicalTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${musicalTop}!=null" class="date"> [[${musicalTop?.date}]]</span>
+                            <span th:if="${musicalTop}!=null" class="date"> [[${#strings.substring(musicalTop?.date,0,10)}]]</span>
 
                             <p th:if="${musicalTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
                             <p th:if="${musicalTop}!=null"> [[${musicalTop?.location}]]</p>
@@ -316,7 +316,7 @@
                             <h3 th:if="${concertTop}!=null"><a href="single.html"></a> ✨ Concert : [[${concertTop?.name}]]</h3>
 
                             <span th:if="${concertTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${concertTop}!=null" class="date"> [[${concertTop?.date}]]</span>
+                            <span th:if="${concertTop}!=null" class="date"> [[${#strings.substring(concertTop?.date,0,10)}]]</span>
 
                             <p th:if="${concertTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
                             <p th:if="${concertTop}!=null"> [[${concertTop?.location}]]</p>
