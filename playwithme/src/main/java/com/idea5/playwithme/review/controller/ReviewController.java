@@ -1,9 +1,7 @@
 package com.idea5.playwithme.review.controller;
 
 import com.idea5.playwithme.article.domain.Article;
-import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.article.service.ArticleService;
-import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
@@ -15,13 +13,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -116,6 +115,6 @@ public class ReviewController {
 
         reviewService.review(reviewDto);
 
-        return "redirect:/review/articles";
+        return "redirect:/review";
     }
 }
