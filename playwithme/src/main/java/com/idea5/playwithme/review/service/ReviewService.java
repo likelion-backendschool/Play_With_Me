@@ -6,7 +6,6 @@ import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.review.domain.Review;
-import com.idea5.playwithme.review.exception.ReviewerNotFoundException;
 import com.idea5.playwithme.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
