@@ -1,0 +1,46 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
+
+<div layout:fragment="content" class="container">
+    <h5 class="my-3 border-bottom pb-2">동행 인원 평가폼</h5>
+    <form th:action="@{|/review/${article_id}|}" method="post" th:object="${reviewDto}">
+        <div class="my-5">
+
+            <div class="mb-3">각 회원에 대한 동행 만족도를 평가해주세요.</div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">닉네임</th>
+                    <th scope="col" >1</th>
+                    <th scope="col" >2</th>
+                    <th scope="col" >3</th>
+                    <th scope="col" >4</th>
+                    <th scope="col" >5</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="review, itemStat : *{reviewList}">
+                    <td class="col-3">
+                        <span th:text="${review.getReviewee().getNickname()}"></span>
+                    </td>
+                    <td th:each="score : ${#numbers.sequence(1, 5)}">
+                        <div class="form-check form-check-inline">
+                            <input hidden th:field="*{reviewList[__${itemStat.index}__].id}" th:value="${review.id}">
+                            <input hidden th:field="*{reviewList[__${itemStat.index}__].reviewee}" th:value="${review.reviewee}">
+                            <input class="form-check-input" type="radio" th:field="*{reviewList[__${itemStat.index}__].score}" th:value="${score}">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" onclick="if(!confirm('제출하시겠습니까?')) return false;"
+                    th:text="확인" class="btn btn-primary m-2"></button>
+        </div>
+    </form>
+</div>
