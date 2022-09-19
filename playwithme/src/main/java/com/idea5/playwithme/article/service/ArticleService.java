@@ -8,7 +8,6 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
-import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -105,5 +104,16 @@ public class ArticleService {
 
     public List<Article> getReviewArticelList(Long reviewerId) {
         return articleRepository.findReviewArticles(reviewerId);
+    }
+
+    public Page<Article> getMyList(Long authorId, int page) {
+        // TODO: 10개씩 나오도록 추후 수정
+        // 한 페이지 10 개씩 모집중-> id 내림차순
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
+
+        return articleRepository.findByMember_Id(authorId, pageable);
     }
 }

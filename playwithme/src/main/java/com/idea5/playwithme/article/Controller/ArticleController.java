@@ -79,7 +79,7 @@ public class ArticleController {
     @GetMapping("/{board_id}/{article_id}")
     public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
         Article article = articleService.getDetails(boardId, articleId);
-            List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
+        List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         articleService.updateViews(article);
 
         Event event = article.getBoard().getEvent();
@@ -150,5 +150,17 @@ public class ArticleController {
         articleService.delete(articleId);
 
         return "redirect:/board/%d".formatted(boardId);
+    }
+
+    // 게시글 관리
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/manage")
+    public String manage(@RequestParam(defaultValue = "0") int page, Principal principal, Model model) {
+        Member member = memberService.findMember(principal.getName());
+
+        Page<Article> paging = articleService.getMyList(member.getId(), page);
+        model.addAttribute("paging", paging);
+
+        return "article_manage";
     }
 }
