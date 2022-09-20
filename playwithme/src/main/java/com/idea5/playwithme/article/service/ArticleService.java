@@ -8,6 +8,7 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
+import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -100,5 +101,9 @@ public class ArticleService {
         PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
 
         return articleRepository.findByBoard_Id(boardId, pageable);
+    }
+
+    public List<Article> getReviewArticelList(Long reviewerId) {
+        return articleRepository.findReviewArticles(reviewerId);
     }
 }
