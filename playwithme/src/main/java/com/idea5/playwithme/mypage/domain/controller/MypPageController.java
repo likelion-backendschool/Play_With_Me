@@ -1,10 +1,12 @@
 package com.idea5.playwithme.mypage.domain.controller;
 
 
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +19,10 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -24,7 +30,8 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/mypage")
 public class MypPageController {
     private final MemberService memberService;
-
+    private final TogetherService togetherService;
+    
     @GetMapping("")
     public String showMyPage(Model model, Principal principal) {
         // principal null 체크
@@ -55,6 +62,21 @@ public class MypPageController {
 
         model.addAttribute("memberInfo", memberInfo);
         return "mypage";
+    }
+
+    @GetMapping("/dday")
+    public String showDday(Model model, Principal principal){
+        Member member = memberService.findMember(principal.getName());
+
+        List<Event> events = togetherService.findByMemberId(member.getId());
+        Map<Event,Long> map = new HashMap<>();
+
+        for (Event event : events) {
+            map.put(event, ChronoUnit.DAYS.between(LocalDateTime.now(), event.getDate()));
+        }
+//        model.addAttribute("events",events);
+        model.addAttribute("map",map);
+        return "d_day_list";
     }
 
 }

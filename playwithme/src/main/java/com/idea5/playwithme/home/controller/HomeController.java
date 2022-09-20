@@ -4,19 +4,30 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.service.TogetherService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+import java.util.List;
+
+@Slf4j
 @AllArgsConstructor
 @Controller
 public class HomeController {
     private final EventService eventService;
     private final BoardService boardService;
+    private final TogetherService togetherService;
+    private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(Model model) { // TODO : 중복 제거 리팩토링
+    public String home(Model model, Principal principal) { // TODO : 중복 제거 리팩토링
+
         Event baseballTop = eventService.findTopEventByArticleCount(1);
         Event soccerTop = eventService.findTopEventByArticleCount(2);
         Event basketballTop = eventService.findTopEventByArticleCount(3);
@@ -29,6 +40,11 @@ public class HomeController {
         Board musicalTopBoard = musicalTop!=null? boardService.findByEvent_Id(musicalTop.getId()):null;
         Board concertTopBoard = concertTop!=null? boardService.findByEvent_Id(concertTop.getId()):null;
 
+        log.info("baseballTopBoard = {}", baseballTopBoard.getId());
+        log.info("soccerTopBoard = {}", soccerTopBoard.getId());
+        log.info("basketballTopBoard = {}", basketballTopBoard.getId());
+        log.info("musicalTopBoard = {}", musicalTopBoard.getId());
+        log.info("concertTopBoard = {}", concertTopBoard.getId());
 
         model.addAttribute("baseballTop",baseballTop);
         model.addAttribute("soccerTop", soccerTop);
@@ -42,7 +58,20 @@ public class HomeController {
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
 
+        if(principal!=null){
+            Member member = memberService.findMember(principal.getName());
 
+            List<Event> events = togetherService.findByMemberId(member.getId());
+            log.info("events.size = {}", events.size());
+
+            if (events.size() == 0) {
+                log.info("회원의 동행하는 이벤트가 없습니다.");
+                return "home";
+            }
+            model.addAttribute("firstEvent",events.get(0));
+            events.remove(0);
+            model.addAttribute("events",events);
+        }
         return "home";
     }
 }
