@@ -64,6 +64,7 @@ public class TogetherService {
         List<Event> collect = togetherList.stream()
                 .filter(t -> t.getArticle().getBoard().getEvent().getDate().isAfter(now))
                 .map(t -> t.getArticle().getBoard().getEvent())
+                .sorted((e1,e2)-> e1.getDate().compareTo(e2.getDate()))
                 .collect(Collectors.toList());
         return collect;
     }

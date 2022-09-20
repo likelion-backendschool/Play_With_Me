@@ -20,9 +20,11 @@ import java.util.List;
 public class HomeController {
     private final EventService eventService;
     private final BoardService boardService;
+    private final TogetherService togetherService;
+    private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(Model model) { // TODO : 중복 제거 리팩토링
+    public String home(Model model, Principal principal) { // TODO : 중복 제거 리팩토링
         Event baseballTop = eventService.findTopEventByArticleCount(1);
         Event soccerTop = eventService.findTopEventByArticleCount(2);
         Event basketballTop = eventService.findTopEventByArticleCount(3);
@@ -36,6 +38,7 @@ public class HomeController {
         Board concertTopBoard = concertTop!=null? boardService.findByEvent_Id(concertTop.getId()):null;
 
 
+
         model.addAttribute("baseballTop",baseballTop);
         model.addAttribute("soccerTop", soccerTop);
         model.addAttribute("basketballTop", basketballTop);
@@ -47,23 +50,18 @@ public class HomeController {
         model.addAttribute("basketballTopBoard", basketballTopBoard);
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
-//        private final TogetherService togetherService;
-//        private final MemberService memberService;
-//        @GetMapping("/")
-//        public String home(Model model, Principal principal) {
-//            model.addAttribute("data", "홈 화면입니다.");
-//            if(principal!=null){
-//                Member member = memberService.findMember(principal.getName());
-//
-//                List<Event> events = togetherService.findByMemberId(member.getId());
-//                System.out.println("asd "+ events.size());
-//                model.addAttribute("events",events);
-//            }
-//
-//
-//            return "home";
-//        }
 
+        if(principal!=null){
+            Member member = memberService.findMember(principal.getName());
+
+            List<Event> events = togetherService.findByMemberId(member.getId());
+            System.out.println("asd "+ events.size());
+
+            model.addAttribute("firstEvent",events.get(0));
+
+            events.remove(0);
+            model.addAttribute("events",events);
+        }
         return "home";
     }
 }
