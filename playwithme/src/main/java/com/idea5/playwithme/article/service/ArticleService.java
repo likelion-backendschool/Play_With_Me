@@ -106,14 +106,35 @@ public class ArticleService {
         return articleRepository.findReviewArticles(reviewerId);
     }
 
-    public Page<Article> getMyList(Long authorId, int page) {
-        // TODO: 10개씩 나오도록 추후 수정
+    public Page<Article> getMyList(Long authorId, int page, String category) {
         // 한 페이지 10 개씩 모집중-> id 내림차순
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
 
         PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Page<Article> paging = null;
 
-        return articleRepository.findByMember_Id(authorId, pageable);
+        switch (category) {
+            case "all":
+                paging = articleRepository.findByMember_Id(authorId, pageable);
+                break;
+            case "baseball":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 1, pageable);
+                break;
+            case "soccer":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 2, pageable);
+                break;
+            case "basketball":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 3, pageable);
+                break;
+            case "musical":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 4, pageable);
+                break;
+            case "concert":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 5, pageable);
+                break;
+        }
+
+        return paging;
     }
 }

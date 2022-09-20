@@ -29,7 +29,7 @@ public class Board {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
-    private Event Event;
+    private Event event;
 
     @OneToMany(mappedBy = "board")
     private List<Article> articleList = new ArrayList<>();
