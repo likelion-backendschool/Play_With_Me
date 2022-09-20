@@ -12,7 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,8 +34,13 @@ public class DdayController {
         Member member = memberService.findMember(principal.getName());
 
         List<Event> events = togetherService.findByMemberId(member.getId());
+        Map<Event,Long> map = new HashMap<>();
 
-        model.addAttribute("events",events);
+        for (Event event : events) {
+            map.put(event,ChronoUnit.DAYS.between(LocalDateTime.now(), event.getDate()));
+        }
+//        model.addAttribute("events",events);
+        model.addAttribute("map",map);
         return "d_day_list";
     }
 }
