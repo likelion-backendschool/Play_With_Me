@@ -4,19 +4,27 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.service.TogetherService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
 public class HomeController {
     private final EventService eventService;
     private final BoardService boardService;
+    private final TogetherService togetherService;
+    private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(Model model) { // TODO : 중복 제거 리팩토링
+    public String home(Model model, Principal principal) { // TODO : 중복 제거 리팩토링
         Event baseballTop = eventService.findTopEventByArticleCount(1);
         Event soccerTop = eventService.findTopEventByArticleCount(2);
         Event basketballTop = eventService.findTopEventByArticleCount(3);
@@ -28,6 +36,7 @@ public class HomeController {
         Board basketballTopBoard = basketballTop!=null? boardService.findByEvent_Id(basketballTop.getId()):null;
         Board musicalTopBoard = musicalTop!=null? boardService.findByEvent_Id(musicalTop.getId()):null;
         Board concertTopBoard = concertTop!=null? boardService.findByEvent_Id(concertTop.getId()):null;
+
 
 
         model.addAttribute("baseballTop",baseballTop);
@@ -42,7 +51,17 @@ public class HomeController {
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
 
+        if(principal!=null){
+            Member member = memberService.findMember(principal.getName());
 
+            List<Event> events = togetherService.findByMemberId(member.getId());
+            System.out.println("asd "+ events.size());
+
+            model.addAttribute("firstEvent",events.get(0));
+
+            events.remove(0);
+            model.addAttribute("events",events);
+        }
         return "home";
     }
 }

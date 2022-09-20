@@ -45,6 +45,9 @@
                     </div>
                 </form>
                 <div class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|/mypage|}">Mypage</a>
+                </div>
+                <div class="nav-item">
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{|${@KakaoAddress.kakaoLogin(#request.requestURI)}|}">Login</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|${@KakaoAddress.kakaoLogout(#request.requestURI)}|}">Logout</a>
                 </div>
