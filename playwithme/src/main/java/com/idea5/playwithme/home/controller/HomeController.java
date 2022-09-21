@@ -52,16 +52,6 @@ public class HomeController {
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
 
-//        if(principal!=null){
-//            Member member = memberService.findMember(principal.getName());
-//
-//            List<Event> events = togetherService.findByMemberId(member.getId());
-//            log.info("events.size = {}", events.size());
-//
-//            model.addAttribute("firstEvent",events.get(0));
-//            events.remove(0);
-//            model.addAttribute("events",events);
-//        }
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
 
