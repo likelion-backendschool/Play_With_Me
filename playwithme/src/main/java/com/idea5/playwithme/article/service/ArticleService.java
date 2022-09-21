@@ -8,7 +8,6 @@ import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.board.repository.BoardRepository;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.repository.MemberRepository;
-import com.idea5.playwithme.together.domain.Together;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -105,5 +104,42 @@ public class ArticleService {
 
     public List<Article> getReviewArticelList(Long reviewerId) {
         return articleRepository.findReviewArticles(reviewerId);
+    }
+
+    public Page<Article> getMyList(Long authorId, int page, String category, String sortCode) {
+        // 한 페이지 10 개씩 모집중-> id 내림차순
+        List<Sort.Order> sorts = new ArrayList<>();
+        switch (sortCode) {
+            case "new":
+                sorts.add(Sort.Order.desc("id"));
+            case "old":
+                sorts.add(Sort.Order.asc("id"));
+        }
+
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Page<Article> paging = null;
+
+        switch (category) {
+            case "all":
+                paging = articleRepository.findByMember_Id(authorId, pageable);
+                break;
+            case "baseball":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 1, pageable);
+                break;
+            case "soccer":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 2, pageable);
+                break;
+            case "basketball":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 3, pageable);
+                break;
+            case "musical":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 4, pageable);
+                break;
+            case "concert":
+                paging = articleRepository.findByMember_IdAndBoard_Event_categoryId(authorId, 5, pageable);
+                break;
+        }
+
+        return paging;
     }
 }
