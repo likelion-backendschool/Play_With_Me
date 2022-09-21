@@ -64,10 +64,6 @@ public class HomeController {
             List<Event> events = togetherService.findByMemberId(member.getId());
             log.info("events.size = {}", events.size());
 
-            if (events.size() == 0) {
-                log.info("회원의 동행하는 이벤트가 없습니다.");
-                return "home";
-            }
             model.addAttribute("firstEvent",events.get(0));
             events.remove(0);
             model.addAttribute("events",events);

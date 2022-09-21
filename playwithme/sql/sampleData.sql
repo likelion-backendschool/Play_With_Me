@@ -20,13 +20,13 @@ INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(7, '2022-10-28', 'ì„
 
 # board
 INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 2);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
 
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 3);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 4);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 5);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 6);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 7);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
 
 
 
