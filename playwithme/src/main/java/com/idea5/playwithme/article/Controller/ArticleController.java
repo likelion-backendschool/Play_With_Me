@@ -155,12 +155,13 @@ public class ArticleController {
     // 게시글 관리
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/manage")
-    public String manage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "all") String category, Principal principal, Model model) {
+    public String manage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "all") String category, @RequestParam(defaultValue = "new") String sortCode, Principal principal, Model model) {
         Member member = memberService.findMember(principal.getName());
 
-        Page<Article> paging = articleService.getMyList(member.getId(), page, category);
+        Page<Article> paging = articleService.getMyList(member.getId(), page, category, sortCode);
         model.addAttribute("paging", paging);
         model.addAttribute("category", category);
+        model.addAttribute("sortCode", sortCode);
 
         return "article_manage";
     }

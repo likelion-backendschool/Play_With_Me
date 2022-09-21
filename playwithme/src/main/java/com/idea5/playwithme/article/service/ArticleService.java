@@ -106,10 +106,15 @@ public class ArticleService {
         return articleRepository.findReviewArticles(reviewerId);
     }
 
-    public Page<Article> getMyList(Long authorId, int page, String category) {
+    public Page<Article> getMyList(Long authorId, int page, String category, String sortCode) {
         // 한 페이지 10 개씩 모집중-> id 내림차순
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("id"));
+        switch (sortCode) {
+            case "new":
+                sorts.add(Sort.Order.desc("id"));
+            case "old":
+                sorts.add(Sort.Order.asc("id"));
+        }
 
         PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
         Page<Article> paging = null;
