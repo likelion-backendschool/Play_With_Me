@@ -11,6 +11,7 @@ import com.idea5.playwithme.event.service.crawling.SportsCrawlService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class EventController {
 
     @GetMapping("/crawl")
     @ResponseBody
+//    @Scheduled(cron =  "0 0 02 * * ?") 매일 새벽 두시에 실행하도록 설정
     public String crawl(){
 
         for(int i=1;i<=3;i++){

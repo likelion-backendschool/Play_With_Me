@@ -1,4 +1,4 @@
-package com.idea5.playwithme.mypage.controller;
+package com.idea5.playwithme.mypage.domain.controller;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;

@@ -1,5 +1,6 @@
 package com.idea5.playwithme.board.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import lombok.*;
