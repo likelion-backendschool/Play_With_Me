@@ -188,9 +188,12 @@ public class TogetherService {
 
     }
 
-    public Long remainDay(LocalDateTime localDateTime){
+    public Long remainDay(LocalDateTime createdTime){
         LocalDate now = LocalDateTime.now().toLocalDate();
-        LocalDate deadLineDay = localDateTime.now().toLocalDate().plusDays(6);
+        LocalDate deadLineDay = createdTime.toLocalDate().plusDays(6);
+        log.info("now : " + now);
+        log.info("deadLineDay : " + deadLineDay);
+        log.info("remainDay : " + (ChronoUnit.DAYS.between(now, deadLineDay)));
 
         return ChronoUnit.DAYS.between(now, deadLineDay)+1;
     }

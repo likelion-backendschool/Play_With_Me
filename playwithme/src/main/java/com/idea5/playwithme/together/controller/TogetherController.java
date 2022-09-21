@@ -36,9 +36,9 @@ public class TogetherController {
      * Todo
      * 쿼리 성능 향상 V
      * 예외 처리 V
-     * 이벤트랑 외래키 걸기 -> [ 이벤트 : 동행 ]
+     * 이벤트랑 외래키 걸기 -> [ 이벤트 : 동행 ] V
      *                     [  1   :   N  ]
-     * 모집인원 보다 많으면 많다고 출력
+     * 동행 취소, 비활성화 기간 -> 이벤트 날짜 반영
      */
 
     private final MemberService memberService;
