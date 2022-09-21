@@ -32,9 +32,9 @@ public class ReviewController {
     private final MemberService memberService;
     private final ArticleService articleService;
 
-    // 매너 평가 게시글 리스트
+    // 리뷰 관리
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("")
+    @GetMapping("/manage")
     public String reviewList(Model model, Principal principal) {
         Member member = memberService.findMember(principal.getName());
 
@@ -115,6 +115,6 @@ public class ReviewController {
 
         reviewService.review(reviewDto);
 
-        return "redirect:/review";
+        return "redirect:/review/manage";
     }
 }
