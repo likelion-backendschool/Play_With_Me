@@ -40,12 +40,6 @@ public class HomeController {
         Board musicalTopBoard = musicalTop!=null? boardService.findByEvent_Id(musicalTop.getId()):null;
         Board concertTopBoard = concertTop!=null? boardService.findByEvent_Id(concertTop.getId()):null;
 
-        log.info("baseballTopBoard = {}", baseballTopBoard.getId());
-        log.info("soccerTopBoard = {}", soccerTopBoard.getId());
-        log.info("basketballTopBoard = {}", basketballTopBoard.getId());
-        log.info("musicalTopBoard = {}", musicalTopBoard.getId());
-        log.info("concertTopBoard = {}", concertTopBoard.getId());
-
         model.addAttribute("baseballTop",baseballTop);
         model.addAttribute("soccerTop", soccerTop);
         model.addAttribute("basketballTop", basketballTop);
@@ -62,7 +56,10 @@ public class HomeController {
             Member member = memberService.findMember(principal.getName());
 
             List<Event> events = togetherService.findByMemberId(member.getId());
-            log.info("events.size = {}", events.size());
+            if (events.size() == 0) {
+                log.info("events.size = {}", events.size());
+                return "home";
+            }
 
             model.addAttribute("firstEvent",events.get(0));
             events.remove(0);

@@ -112,6 +112,8 @@ public class TogetherService {
             this.save(articleId, ids.get(i));
 
             Long reviewerId = ids.get(i);
+            // 동행 확정 폼 처리 시 -> Timeline 자동 생성되도록
+            timelineService.save(articleId, ids.get(i));
             for(int j = 0; j < ids.size(); j++){
                 Long revieweeId = ids.get(j);
                 if(reviewerId != revieweeId){
@@ -130,7 +132,7 @@ public class TogetherService {
         List<Together> togethers = togetherRepository.findByMemberId(member_id);
         for (Together together : togethers) {
             TogetherInfoDto togetherInfoDto = new TogetherInfoDto();
-            
+
             Event event = together.getEvent();
             EventDto eventDto = EventDto.getDtoFromEntity(event);
 
@@ -170,7 +172,7 @@ public class TogetherService {
 
         return lists;
     }
-    
+
     public Long getArticleId(Together together){
         return together.getArticle().getId();
     }
@@ -188,6 +190,7 @@ public class TogetherService {
         log.info("together is deleted ...");
 
     }
+
 
     public Boolean betweenDate(LocalDateTime createdTime){
         //        LocalDate now = LocalDateTime.of(2022,9,26,0,0).toLocalDate();

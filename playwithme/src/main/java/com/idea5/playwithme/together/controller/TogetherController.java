@@ -53,6 +53,9 @@ public class TogetherController {
 
     private final ArticleService articleService;
 
+
+    private final TimelineService timelineService;
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/manage")
     public String showManage(Principal principal, Model model) {
@@ -69,8 +72,7 @@ public class TogetherController {
         return "together_manage";
     }
 
-    @Autowired
-    TimelineService timelineService;
+
 
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
@@ -94,24 +96,6 @@ public class TogetherController {
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
 
-
-        for(int i = 0; i < ids.size(); i++){
-            togetherService.save(articleId, ids.get(i));
-
-            // 동행 확정 폼 처리 시 -> Timeline 자동 생성되도록
-            timelineService.save(articleId, ids.get(i));
-
-            Long reviewerId = ids.get(i);
-            for(int j = 0; j < ids.size(); j++){
-                Long revieweeId = ids.get(j);
-                if(reviewerId != revieweeId){
-                    System.out.println("revieweeId = " + revieweeId);
-                    System.out.println("reviewerId = " + reviewerId);
-                    reviewService.save(articleId, revieweeId, reviewerId);
-                }
-
-            }
-        }
 
 
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);

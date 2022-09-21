@@ -62,7 +62,7 @@ public class TimelineService {
     }
 
     public Timeline findByTogetherId(Long togetherId) {
-        return timelineRepository.findById(togetherId).orElseThrow(() -> new DataNotFoundException("해당 타임라인이 존재하지 않습니다"));
+        return timelineRepository.findByTogetherId(togetherId).orElseThrow(() -> new DataNotFoundException("해당 동행이 존재하지 않습니다"));
     }
 
     public void deleteTimeline(Long id){
