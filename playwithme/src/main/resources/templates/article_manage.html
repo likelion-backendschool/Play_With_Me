@@ -8,11 +8,11 @@
     <h2 class="border-bottom mt-4 mb-3">게시글 관리</h2>
     <form class="input-group p-2 d-flex justify-content-end">
         <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="sortCode" th:value="${param.sortCode}">
-            <option selected value="new">new</option>
+            <option value="new">new</option>
             <option value="old">old</option>
         </select>
         <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="category" th:value="${param.category}">
-            <option selected value="all">all</option>
+            <option value="all">all</option>
             <option value="baseball">baseball</option>
             <option value="soccer">soccer</option>
             <option value="basketball">basketball</option>
