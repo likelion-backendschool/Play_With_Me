@@ -9,8 +9,6 @@ import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 
 
-
-import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.mypage.domain.Timeline;
 import com.idea5.playwithme.mypage.exception.DataNotFoundException;
 import com.idea5.playwithme.mypage.service.TimelineService;
@@ -156,7 +154,7 @@ public class TogetherService {
             togetherInfoDto.setId(together.getId());
             togetherInfoDto.setCreatedAt(together.getCreatedAt());
             togetherInfoDto.setArticleDto(ArticleDto.toDto(together.getArticle()));
-            togetherInfoDto.setIsCancel(betweenDate(together.getCreatedAt()));
+            togetherInfoDto.setIsCancel(isDeadLine(together.getCreatedAt(), eventDto.getDate()));
             togetherInfoDto.setRemainDays(remainDay(together.getCreatedAt()));
             lists.add(togetherInfoDto);
         }
@@ -192,7 +190,10 @@ public class TogetherService {
     }
 
 
-    public Boolean betweenDate(LocalDateTime createdTime){
+    /**
+     * 마감 기한 지났는지
+     */
+    public Boolean isDeadLineFromTogetherDate(LocalDateTime createdTime){
         //        LocalDate now = LocalDateTime.of(2022,9,26,0,0).toLocalDate();
         LocalDate now = LocalDateTime.now().toLocalDate();
         LocalDate togetherCreatedTime = createdTime.toLocalDate();
@@ -207,6 +208,26 @@ public class TogetherService {
         return (between > 7) ? true : false;
 
     }
+
+    /**
+     * 이벤트 날짜 지났는지
+     */
+    public Boolean isDeadLineFromEventDate(LocalDateTime createdTime){
+        LocalDateTime now = LocalDateTime.now();
+        return createdTime.isBefore(now) ? true : false;
+    }
+
+    public Boolean isDeadLine(LocalDateTime togetherCreatedTime, LocalDateTime eventTime){
+        /**
+         * true : 마감기한이 지났음
+         */
+        Boolean state = isDeadLineFromTogetherDate(togetherCreatedTime);
+        if(!state){
+            state = isDeadLineFromEventDate(eventTime);
+        }
+        return state;
+    }
+
 
     public Long remainDay(LocalDateTime createdTime){
         LocalDate now = LocalDateTime.now().toLocalDate();
