@@ -1,0 +1,24 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
+
+<div layout:fragment="content" class="container my-3">
+  <div th:each="event : ${map}" class="card m-2">
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div th:text="${event.key.name}"></div>
+        <h2 th:text="'D-'+${event.value}">
+        </h2>
+      </div>
+      <div th:text="${event.key.location}"></div>
+      <div th:text="${#temporals.format(event.key.date, 'yyyy.MM.dd')}"></div>
+      <div class="d-flex justify-content-end">
+        <a th:href="@{|/board/${event.key.id}|}">
+          모집 게시판 바로가기
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

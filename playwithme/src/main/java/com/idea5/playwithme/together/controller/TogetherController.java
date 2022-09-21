@@ -1,15 +1,20 @@
 package com.idea5.playwithme.together.controller;
 
+
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.comment.service.CommentService;
 import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.member.domain.Member;
+
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.service.MemberService;
-import com.idea5.playwithme.review.domain.Review;
 import com.idea5.playwithme.review.service.ReviewService;
+
 import com.idea5.playwithme.together.domain.TogetherInfoDto;
+
+import com.idea5.playwithme.mypage.service.TimelineService;
+
 import com.idea5.playwithme.together.dto.TogetherForm;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +30,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -65,6 +69,9 @@ public class TogetherController {
         return "together_manage";
     }
 
+    @Autowired
+    TimelineService timelineService;
+
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
@@ -87,6 +94,24 @@ public class TogetherController {
         List<Long> ids = togetherForm.getIds(); // 작성자가 선택한 댓글 작성자들
         ids.add(memberId); // 작성자 아이디
 
+
+        for(int i = 0; i < ids.size(); i++){
+            togetherService.save(articleId, ids.get(i));
+
+            // 동행 확정 폼 처리 시 -> Timeline 자동 생성되도록
+            timelineService.save(articleId, ids.get(i));
+
+            Long reviewerId = ids.get(i);
+            for(int j = 0; j < ids.size(); j++){
+                Long revieweeId = ids.get(j);
+                if(reviewerId != revieweeId){
+                    System.out.println("revieweeId = " + revieweeId);
+                    System.out.println("reviewerId = " + reviewerId);
+                    reviewService.save(articleId, revieweeId, reviewerId);
+                }
+
+            }
+        }
 
 
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);

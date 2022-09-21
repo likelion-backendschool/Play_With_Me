@@ -4,7 +4,11 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+<<<<<<< HEAD
 /* #7e0cf5 -> #155cd6, cd4dcc -> #51a9db 로 테마 컬러 변경 */
+=======
+/* #7e0cf5 -> #155cd6 -> #74a2e3, cd4dcc -> #51a9db 로 테마 컬러 변경 */
+>>>>>>> e0a0b48f9c0f287e90afd2f70210badb5957509a
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8152,7 +8156,11 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
+<<<<<<< HEAD
   color: #155cd6; }
+=======
+  color: #74a2e3; }
+>>>>>>> e0a0b48f9c0f287e90afd2f70210badb5957509a
 a:hover, a:focus {
   text-decoration: none !important;
   outline: none !important;
@@ -8317,7 +8325,9 @@ h1, h2, h3, h4, h5,
     -o-transition: none;
     transition: none; } }
 .left-button:hover, .right-button:hover {
-  color: #155cd6 !important; }
+
+  color: #74a2e3 !important; }
+
 
 .left-button {
   left: 0; }
@@ -8341,7 +8351,11 @@ h1, h2, h3, h4, h5,
   transition: .2s ease all;
   color: white;
   border: none;
+<<<<<<< HEAD
   background: #155cd6; }
+=======
+  background: #74a2e3; }
+>>>>>>> e0a0b48f9c0f287e90afd2f70210badb5957509a
 .button.button-white {
   background: #fff;
   color: #000; }

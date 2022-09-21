@@ -3,7 +3,6 @@ package com.idea5.playwithme.together.domain;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
-import com.idea5.playwithme.timeline.domain.Timeline;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

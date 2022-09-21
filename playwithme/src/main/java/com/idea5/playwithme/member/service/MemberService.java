@@ -1,17 +1,17 @@
 package com.idea5.playwithme.member.service;
 
 
+
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.repository.MemberRepository;
+
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.MemberRole;
 import com.idea5.playwithme.member.dto.KakaoUser;
-
-
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,11 +66,10 @@ public class MemberService {
     }
 
     public Member findMember(String username) {
-        Member member = memberRepository.findByUsername(username).orElseThrow(() -> {
+        return memberRepository.findByUsername(username).orElseThrow(() -> {
             log.warn("Member Not Found...");
             throw new MemberNotFoundException("멤버가 없습니다.");
         });
-        return member;
     }
 
 
