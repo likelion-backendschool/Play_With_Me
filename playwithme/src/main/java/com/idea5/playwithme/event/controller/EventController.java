@@ -36,7 +36,6 @@ public class EventController {
 
 
     @GetMapping("/crawl")
-    @ResponseBody
 //    @Scheduled(cron =  "0 0 02 * * ?") 매일 새벽 두시에 실행하도록 설정
     public String crawl(){
 
@@ -46,7 +45,7 @@ public class EventController {
         for(int i=4;i<=5;i++){
             concertAndMusicalCrawlService.saveEvent(i);
         }
-        return "ok";
+        return "redirect:/";
     }
 
     @GetMapping("/all")
