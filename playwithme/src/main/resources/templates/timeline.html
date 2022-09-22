@@ -1,0 +1,162 @@
+<!doctype html>
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
+<head>
+        <meta charset="UTF-8">
+        <title>Your Timeline</title>
+</head>
+
+<body layout:fragment="content">
+<!-- 버튼 부트스트랩 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<!-- 폰트어썸 아이콘 -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/mypage/timeline/style.css" />
+
+<section class="intro">
+    <div class="container">
+        <h1> TimeLine <i class="fa fa-history" aria-hidden="true"></i> </h1>
+
+        <h5 th:if="${#lists.size(events)} != 0"> 간단한 메모와 함께 다녀온 이벤트를 추억해보세요!</h5>
+        <h5 th:if="${#lists.size(events)} != 0"> (동행이 완료된 이벤트들만 보여요👀)</h5>
+        <h5 th:if="${#lists.size(events)} == 0"> 다녀온 일정이 없습니다. PWM를 통해 다양한 사람들과 동행해보세요!</h5>
+    </div>
+</section>
+
+<section class="timeline">
+    <ul>
+        <li th:each="events, num : ${events}">
+            <div>
+
+                <!--이벤트 날짜-->
+                <span class="timeline-content-info-date">
+                    [[${#strings.substring(events.date,0,10)}]]
+                </span>
+
+                <!-- 이벤트 이름-->
+                <h3>
+                    [[${events.name}]]
+                </h3>
+
+                <!-- 이벤트 장소-->
+                <span class="timeline-content-info-title">
+                    <!-- 아이콘 -->
+                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                    [[${events.location}]]
+                </span>
+
+                <!-- 메모 작성폼-->
+                <span th:each="timelines, num2 : ${timelines}">
+                    <span th:if="${num.index}==${num2.index}">
+                        <form onsubmit="spaceCheck(this); return false;"
+                              th:if="${timelines.memo}==null"
+                              th:action="@{|/mypage/timeline/memo/${timelines.id}|}" method="post"
+                              th:object="${requestDto}">
+                            <textarea th:field="*{memo}" id="new-memo" class="form-control" rows="3" placeholder="Write your own memo here!"></textarea>
+                            <input type="submit" value="등록" class="btn btn-dark btn-sm">
+                        </form>
+                    </span>
+                </span>
+
+                <span th:each="timelines, num2 : ${timelines}">
+                    <span th:if="${num.index}==${num2.index} and ${timelines.memo}!=null">
+                        <span id="show-memo-box" th:classappend="${timelines.id}">
+                            <!--메모 조회-->
+                            <span id="memo" th:text="${timelines.memo}" th:classappend="${timelines.id}"></span>
+                            <!-- 메모 수정 버튼-->
+                            <button id="btn-memo-update" class="btn btn-dark btn-sm" th:onclick="findIdToHide([[${timelines.id}]]); findIdToShow([[${num2.index}]]);" th:classappend="${timelines.id}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <!--메모 삭제 버튼--> <!--TODO-->
+                            <button id="btn-memo-delete" class="btn btn-dark btn-sm" th:onclick="confirmMsg([[${events.name}]],[[${timelines.id}]])" th:classappend="${timelines.id}"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        </span>
+                        <!--메모 수정폼-->
+                        <form id ="memo-update-form"
+                              th:classappend="${num2.index}"
+                              th:action="@{|/mypage/timeline/memo/modify/${timelines.id}|}" method="post">
+
+                            <input type="hidden" id="togethersId"  th:value="${timelines.id}">
+                            <textarea class="form-control" id="update-memo" rows="3" name="memo" th:text="${timelines.memo}"></textarea>
+
+                            <input type="submit" value="저장" class="btn btn-dark btn-sm">
+                            <input type="button" value="수정취소" onClick="window.location.reload()" class="btn btn-dark btn-sm">
+                        </form>
+                    </span>
+                </span>
+
+            </div>
+        </li>
+    </ul>
+</section>
+<script layout:fragment="script" type='text/javascript'>
+    (function () {
+  "use strict";
+
+  // define variables
+  var items = document.querySelectorAll(".timeline li");
+
+  // check if an element is in viewport
+  // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+  function isElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  function callbackFunc() {
+    for (var i = 0; i < items.length; i++) {
+      if (isElementInViewport(items[i])) {
+        items[i].classList.add("in-view");
+      }
+    }
+  }
+
+  // listen for events
+  window.addEventListener("load", callbackFunc);
+  window.addEventListener("resize", callbackFunc);
+  window.addEventListener("scroll", callbackFunc);
+})();
+
+// 메모 폼 체크
+function spaceCheck(form){
+const isSpace = form.querySelector('.form-control').value.trim();
+    if (isSpace.length == 0) {
+        alert("내용을 입력해주세요.");
+        return;
+        }
+        form.submit();
+}
+
+// 수정 버튼 클릭시 기존 메모와 수정버튼, 삭제버튼 안보이도록
+function findIdToHide(id){
+    const find = document.getElementsByClassName(id);
+    for(var i = 0; i < find.length; i++){
+        //console.log('숨김완료')
+        find[i].style.display ='none';
+    }
+}
+
+// 수정 버튼 클릭시 수정폼 나타도록
+function findIdToShow(id){
+    const find = document.getElementsByClassName(id);
+    for(var i = 0; i < find.length; i++){
+        find[i].style.display ='block';
+    }
+}
+
+// 메모 삭제 전 confirm
+function confirmMsg(name,id){
+    if ( !confirm(name + " 메모를 삭제할까요?") ) {
+        return false;
+        }
+    window.location.href = "/mypage/timeline/memo/delete/"+id;
+}
+</script>
+</body>
+</html>

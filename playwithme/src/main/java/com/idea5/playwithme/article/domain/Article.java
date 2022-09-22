@@ -2,7 +2,9 @@ package com.idea5.playwithme.article.domain;
 
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.Comment;
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.together.domain.Together;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -62,5 +64,12 @@ public class Article {
 
     public void addComment(Comment comment) {
         commentList.add(comment);
+    }
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    private List<Together> togetherList = new ArrayList<>();
+
+    public Long getEventIdByBoard(){
+        return getBoard().getEvent().getId();
     }
 }

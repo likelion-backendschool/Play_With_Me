@@ -1,7 +1,7 @@
 package com.idea5.playwithme.board.service;
 
 import com.idea5.playwithme.board.domain.Board;
-import com.idea5.playwithme.board.domain.repository.BoardRepository;
+import com.idea5.playwithme.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +14,7 @@ public class BoardService {
         return boardRepository.findById(boardId).orElseThrow();
     }
 
-
+    public Board findByEvent_Id(Long id) {
+        return boardRepository.findByEvent_Id(id).orElse(null);
+    }
 }
