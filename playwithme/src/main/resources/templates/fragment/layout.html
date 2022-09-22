@@ -43,14 +43,7 @@
 <footer th:replace="fragment/footer :: footer"> </footer>
 
 <th:block layout:fragment="script"></th:block>
-<!-- HTML이 전부 로딩 된 후, 실행되어야 하는 녀석(자바스크립트 코드)들은 밑에 두는게 좋다. -->
-<script>
-    $("select[value]").each((index, node) => {
-        const $select = $(node);
-        const value = $select.attr("value");
-        $select.find(`option[value="${value}"]`).prop("selected", true);
-    });
-</script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/js/jquery.min.js"></script>
@@ -82,5 +75,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<!-- HTML이 전부 로딩 된 후, 실행되어야 하는 녀석(자바스크립트 코드)들은 밑에 두는게 좋다. -->
+<script>
+    $("select[value]").each((index, node) => {
+        const $select = $(node);
+        const value = $select.attr("value");
+        $select.find(`option[value="${value}"]`).prop("selected", true);
+    });
+</script>
 </body>
 </html>
