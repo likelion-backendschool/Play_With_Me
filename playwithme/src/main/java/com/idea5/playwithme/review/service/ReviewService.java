@@ -4,6 +4,7 @@ import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
@@ -12,6 +13,7 @@ import com.idea5.playwithme.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,26 @@ public class ReviewService {
                 .article(article)
                 .reviewer(reviewerMember)
                 .reviewee(revieweeMember)
+                .score(0)
                 .build();
 
         reviewRepository.save(review);
 
     }
+
+
+    @Transactional
+    public void deleteReview(Long articleId, Long memberId){
+        List<Review> ReviewList = reviewRepository.findByArticleIdAndReviewerIdOrArticleIdAndRevieweeId(articleId, memberId, articleId, memberId);
+        for (Review review : ReviewList)
+            reviewRepository.deleteById(review.getId());
+    }
+
+    @Transactional
+    public void deleteAllReview(Long articleId){
+        reviewRepository.deleteByArticleId(articleId);
+    }
+
 
 //    public List<Event> getReviewList(Long reviewerId) {
 //        List<Event> eventList = new ArrayList<>();

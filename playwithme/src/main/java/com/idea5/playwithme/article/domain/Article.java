@@ -2,6 +2,7 @@ package com.idea5.playwithme.article.domain;
 
 import com.idea5.playwithme.board.domain.Board;
 import com.idea5.playwithme.comment.domain.Comment;
+import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.together.domain.Together;
 import lombok.*;
@@ -67,4 +68,8 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Together> togetherList = new ArrayList<>();
+
+    public Long getEventIdByBoard(){
+        return getBoard().getEvent().getId();
+    }
 }

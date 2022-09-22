@@ -40,3 +40,23 @@ textarea {
 .badge {
     font-size: 15px;
 }
+
+
+.eventTitle {
+    font-weight: 800;
+    color: #4294F2;
+    background: rgba(66, 148, 255, 0.26);
+    padding: 6px 20px;
+    font-weight: 400;
+    border-radius: 26px;
+    display: inline-block;
+}
+
+.thumbnail:hover {
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, blue 0%, skyblue 100%);
+    border-image-slice: 1;
+}
+
+
+

@@ -1,0 +1,126 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
+
+<div layout:fragment="content" class="container my-3">
+  <h2 class="heading-section d-flex justify-content-center">동행 관리 페이지</h2>
+  <div class="container mt-5 mb-3">
+    <div class="alert alert-success text-center">
+        <span>동행 완료 날짜기준, 7일 이내로 취소하실 수 있습니다.</span>
+    </div>
+    <div class="row">
+
+      <!--    col-md-4는 화면에서 1/3을 차지한다는 것을 의미한다.  -->
+      <!--     기준 -> 12 -->
+      <div class="col-md-4" th:each="info : ${togetherInfos}">
+        <div class="card p-3 mb-2 thumbnail">
+            <div class="up">
+                <a style="display: none;" th:href="@{|/board/${info.articleDto.boardId}/${info.articleDto.id}|}" class="isCheck">게시물 바로가기</a>
+
+
+                <span class="d-flex justify-content-center text-center eventTitle mb-4 fs-6" th:text="${info.eventDto.name}"></span>
+
+                <!--          장소-->
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-geo-alt-fill mt-1" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                    <div class="ms-2 align-content-center" th:text="${info.eventDto.location}"></div>
+                </div>
+                <!--          모집인원 수 -->
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-people mt-1" viewBox="0 0 16 16"><path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                    <div class="ms-2 align-content-center" th:text="|${#lists.size(info.members)+1}명(본인 포함)|"></div>
+                </div>
+                <!--         이벤트 날짜-->
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-calendar-check mt-1" viewBox="0 0 16 16"><path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    <div class="ms-2 align-content-center" th:text="|이벤트 날짜 : ${#temporals.format(info.eventDto.date, 'yyyy.MM.dd')}|"></div>
+                </div>
+
+                <!--            동행 취소 남은 유효기간 표시  -->
+                <!--             동행 기간이 지났는지 -->
+                <!--    동행 모집 날짜-->
+                <div class="d-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-calendar-check mt-1" viewBox="0 0 16 16">
+                        <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                    <div class="ms-2 align-content-center" th:text="|동행 완료 날짜 : ${#temporals.format(info.createdAt, 'yyyy.MM.dd')}|"></div>
+                </div>
+
+                <span class="mt-3">
+
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4aa8d8" class="bi bi-card-checklist mt-1" viewBox="0 0 16 16">
+                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        <div th:with="size=${#lists.size(info.members)}+1">
+                            <div class="ml-2" th:text="|동행 리스트 ( ${size}명 )|">동행 리스트</div>
+                        </div>
+
+
+
+                   </div>
+<!--                    <div th:if="${#lists.size(info.members) <= 0}">동행 인원이 없습니다.</div>-->
+<!--                    <div th:unless="${#lists.size(info.members) <= 0}"><li>본인</li></div>-->
+                    <li>본인</li>
+
+
+                    <div th:each="member : ${info.members}">
+        <!--                 <h1 th:text="${member.username}"></h1>-->
+                        <!--              <div th:if="${#authentication.getPrincipal().username == member.username}">-->
+
+                        <!--                <li>-->
+                        <!--                  본인-->
+                        <!--                  <span class="badge badge-primary">Leader</span>-->
+                        <!--                </li>-->
+                        <!--              </div>-->
+
+                        <div class="d-flex" th:if="${member.id == info.articleDto.memberId}">
+                            <li th:text="${member.nickname}"><span class="ms-1 badge badge-primary">Leader</span></li>
+
+                        </div>
+                        <div th:unless="${member.id == info.articleDto.memberId}">
+                            <li th:text="${member.nickname}"></li>
+                        </div>
+                    </div>
+
+                </span>
+
+            </div>
+<!--              날짜 지났음-->
+            <div th:if="${info.isCancel == true}" class="d-flex flex-column mt-2">
+              <span class="mt-2" th:text="|동행 취소할 수 있는 날짜가 지났습니다.|"></span>
+               <a onclick="alert('동행 취소할 수 있는 날짜가 지났습니다.'); return false;" class="btn btn-secondary d-flex justify-content-center text-white iscanceld">동행 취소</a>
+            </div>
+<!--             날짜 안지났음.-->
+            <div th:unless="${info.isCancel == true}" class="d-flex flex-column mt-2">
+              <span class="d-flex justify-content-center mt-2" th:text="|동행 취소 D-day : ${info.remainDays}일|"></span>
+              <a onclick="if(!confirm('동행을 정말 취소하겠습니까?')) return false;" th:href="@{|/together/delete/${info.id}|}" class="btn btn-primary d-flex justify-content-center text-white iscanceld">동행 취소</a>
+            </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    console.log('hi');
+  var isChecked = true;
+  $('.card > .up').on('click', function(){
+
+      // 버튼 이벤트(함수)
+
+      // retrun
+
+      location.href = $(this).children('a').attr('href');
+  });
+
+</script>
+</html>
