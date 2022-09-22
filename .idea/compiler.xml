@@ -12,5 +12,8 @@
         <module name="playwithme.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="playwithme.querydsl" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
