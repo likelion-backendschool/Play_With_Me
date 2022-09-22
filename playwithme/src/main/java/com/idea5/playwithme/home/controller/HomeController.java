@@ -58,6 +58,7 @@ public class HomeController {
             Member member = memberService.findMember(principal.getName());
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
+            System.out.println("asd "+togethers.size());
             if (togethers.size() == 0) {
                 log.info("togethers.size = {}", togethers.size());
                 return "home";

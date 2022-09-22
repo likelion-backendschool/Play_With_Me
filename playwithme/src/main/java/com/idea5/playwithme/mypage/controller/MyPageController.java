@@ -1,7 +1,6 @@
-package com.idea5.playwithme.mypage.domain.controller;
+package com.idea5.playwithme.mypage.controller;
 
 
-import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
@@ -10,18 +9,15 @@ import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +26,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/mypage")
-public class MypPageController {
+public class MyPageController {
     private final MemberService memberService;
     private final TogetherService togetherService;
     
@@ -69,10 +65,9 @@ public class MypPageController {
     @GetMapping("/dday")
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
-        System.out.println("zxc "+member.getId());
 
         List<Together> togethers = togetherService.findByMemberId(member.getId());
-        System.out.println("asd "+ togethers);
+
         Map<Together,Long> map = new LinkedHashMap<>();
 
 

@@ -98,7 +98,6 @@ public class TogetherService {
         if(togetherList.size()==0){
             return null;
         }
-        System.out.println("qwe "+togetherList);
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -106,7 +105,6 @@ public class TogetherService {
                 .filter(t -> t.getEvent().getDate().isAfter(now))
                 .sorted((e1,e2)-> e1.getEvent().getDate().compareTo(e2.getEvent().getDate()))
                 .collect(Collectors.toList());
-        System.out.println("sdf "+collect);
         return collect;
     }
 
