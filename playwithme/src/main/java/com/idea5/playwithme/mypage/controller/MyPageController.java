@@ -1,4 +1,4 @@
-package com.idea5.playwithme.mypage.domain.controller;
+package com.idea5.playwithme.mypage.controller;
 
 
 import com.idea5.playwithme.event.domain.Event;
@@ -9,14 +9,12 @@ import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -28,7 +26,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/mypage")
-public class MypPageController {
+public class MyPageController {
     private final MemberService memberService;
     private final TogetherService togetherService;
     
