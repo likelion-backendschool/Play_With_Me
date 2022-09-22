@@ -1,11 +1,11 @@
 package com.idea5.playwithme.mypage.controller;
 
 
-import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,15 +66,16 @@ public class MyPageController {
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
 
-        List<Event> events = togetherService.findByMemberId(member.getId());
-        Map<Event,Long> map = new HashMap<>();
+        List<Together> togethers = togetherService.findByMemberId(member.getId());
 
-        for (Event event : events) {
-            map.put(event, ChronoUnit.DAYS.between(LocalDateTime.now(), event.getDate()));
+        Map<Together,Long> map = new LinkedHashMap<>();
+
+
+        for (Together together : togethers) {
+            map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
         }
 //        model.addAttribute("events",events);
         model.addAttribute("map",map);
         return "d_day_list";
     }
-
 }
