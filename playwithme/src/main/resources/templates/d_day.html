@@ -22,8 +22,8 @@
                                 <div th:text="${first.event.location}" style="color: black;"></div>
                                 <div th:text="${#temporals.format(first.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
                                 <div class="d-flex justify-content-end">
-                                    <a th:href="@{|/board/${first.article.id}|}" class="btn btn-primary">
-                                        모집 게시글 바로가기
+                                    <a th:href="@{|/board/${first.event.id}/${first.article.id}|}" class="btn btn-primary">
+                                        모집 게시판 바로가기
                                     </a>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                 <div th:text="${#temporals.format(together.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
                                 <div class="d-flex justify-content-end">
                                     <a th:href="@{|/board/${together.article.id}|}" class="btn btn-primary">
-                                        모집 게시글 바로가기
+                                        모집 게시판 바로가기
                                     </a>
                                 </div>
                             </div>
