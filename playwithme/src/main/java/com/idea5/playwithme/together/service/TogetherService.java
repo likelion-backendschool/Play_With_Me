@@ -91,16 +91,22 @@ public class TogetherService {
                 .orElseThrow(() -> new DataNotFoundException("no %d timeline not found,".formatted(id)));
     }
 
-    public List<Event> findByMemberId(long memberId){
+    public List<Together> findByMemberId(long memberId){
         List<Together> togetherList = togetherRepository.findByMemberId(memberId);
+
+
+        if(togetherList.size()==0){
+            return null;
+        }
+        System.out.println("qwe "+togetherList);
 
         LocalDateTime now = LocalDateTime.now();
 
-        List<Event> collect = togetherList.stream()
-                .filter(t -> t.getArticle().getBoard().getEvent().getDate().isAfter(now))
-                .map(t -> t.getArticle().getBoard().getEvent())
-                .sorted((e1,e2)-> e1.getDate().compareTo(e2.getDate()))
+        List<Together> collect = togetherList.stream()
+                .filter(t -> t.getEvent().getDate().isAfter(now))
+                .sorted((e1,e2)-> e1.getEvent().getDate().compareTo(e2.getEvent().getDate()))
                 .collect(Collectors.toList());
+        System.out.println("sdf "+collect);
         return collect;
     }
 

@@ -6,6 +6,7 @@ import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -68,12 +69,15 @@ public class MypPageController {
     @GetMapping("/dday")
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
+        System.out.println("zxc "+member.getId());
 
-        List<Event> events = togetherService.findByMemberId(member.getId());
-        Map<Event,Long> map = new LinkedHashMap<>();
+        List<Together> togethers = togetherService.findByMemberId(member.getId());
+        System.out.println("asd "+ togethers);
+        Map<Together,Long> map = new LinkedHashMap<>();
 
-        for (Event event : events) {
-            map.put(event, ChronoUnit.DAYS.between(LocalDateTime.now(), event.getDate()));
+
+        for (Together together : togethers) {
+            map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
         }
 //        model.addAttribute("events",events);
         model.addAttribute("map",map);

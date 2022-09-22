@@ -6,6 +6,7 @@ import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,28 +53,21 @@ public class HomeController {
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
 
-//        if(principal!=null){
-//            Member member = memberService.findMember(principal.getName());
-//
-//            List<Event> events = togetherService.findByMemberId(member.getId());
-//            log.info("events.size = {}", events.size());
-//
-//            model.addAttribute("firstEvent",events.get(0));
-//            events.remove(0);
-//            model.addAttribute("events",events);
-//        }
+
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
 
-            List<Event> events = togetherService.findByMemberId(member.getId());
-            if (events.size() == 0) {
-                log.info("events.size = {}", events.size());
+            List<Together> togethers = togetherService.findByMemberId(member.getId());
+            if (togethers.size() == 0) {
+                log.info("togethers.size = {}", togethers.size());
                 return "home";
             }
 
-            model.addAttribute("firstEvent",events.get(0));
-            events.remove(0);
-            model.addAttribute("events",events);
+            else{
+                model.addAttribute("first",togethers.get(0));
+                togethers.remove(0);
+                model.addAttribute("events",togethers);
+            }
         }
 
         return "home";
