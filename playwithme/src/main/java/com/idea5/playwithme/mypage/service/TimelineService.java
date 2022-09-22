@@ -61,6 +61,14 @@ public class TimelineService {
         return timelineRepository.findById(id).orElseThrow(()-> new DataNotFoundException("해당 타임라인이 존재하지 않습니다"));
     }
 
+    public Timeline findByTogetherId(Long togetherId) {
+        return timelineRepository.findByTogetherId(togetherId).orElseThrow(() -> new DataNotFoundException("해당 동행이 존재하지 않습니다"));
+    }
+
+    public void deleteTimeline(Long id){
+        timelineRepository.deleteById(id);
+    }
+
     // UPDATE
     @Transactional
     public void updateMemo(Long id, TimelineRequestDto timelineRequestDto) {

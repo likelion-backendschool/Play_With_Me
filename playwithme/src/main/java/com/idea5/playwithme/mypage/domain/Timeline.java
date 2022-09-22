@@ -35,7 +35,7 @@ public class Timeline {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "together_id")
     private Together together;
 
