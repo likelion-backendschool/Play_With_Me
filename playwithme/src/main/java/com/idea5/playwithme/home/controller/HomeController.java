@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -58,13 +59,30 @@ public class HomeController {
             Member member = memberService.findMember(principal.getName());
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
-            if (togethers.size() == 0) {
-                log.info("togethers.size = {}", togethers.size());
-                return "home";
+
+            if (togethers == null) {
+                List<Event> events = new ArrayList<>();
+
+                if(baseballTop!=null){
+                    events.add(baseballTop);
+                }if(soccerTop!=null){
+                    events.add(soccerTop);
+                }if(basketballTop!=null){
+                    events.add(basketballTop);
+                }if(musicalTop!=null){
+                    events.add(musicalTop);
+                }if(concertTop!=null){
+                    events.add(concertTop);
+                }
+
+                model.addAttribute("check","empty");
+                model.addAttribute("first",events.get(0));
+                events.remove(0);
+                model.addAttribute("events",events);
             }
 
             else{
-                model.addAttribute("length", togethers.size());
+                model.addAttribute("check","full");
                 model.addAttribute("first",togethers.get(0));
                 togethers.remove(0);
                 model.addAttribute("togethers",togethers);
