@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -67,8 +69,15 @@ public class TimelineController {
         // 리스트에서 중복 이벤트 제거
         events = events.stream().filter(distinctByKey(Event::getName)).collect(Collectors.toList());
 
+        // 현재 날짜
+        List<Event> beforeNowEvents = new ArrayList<>();
+        for(int i=0; i< events.size();i++) {
+            if (LocalDateTime.now().isAfter(events.get(i).getDate())!=false) {
+                beforeNowEvents.add(events.get(i));
+            }
+        }
 
-        model.addAttribute("events", events);
+        model.addAttribute("events", beforeNowEvents);
         model.addAttribute("timelines", timelines);
         model.addAttribute("requestDto", new TimelineRequestDto());
 
