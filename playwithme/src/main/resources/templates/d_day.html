@@ -71,8 +71,8 @@
         <th:block th:if="${check} == 'empty'">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                <li th:each="num: ${#numbers.sequence(0, events.size-1)}"
-                    data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>
+<!--                <li th:each="num: ${#numbers.sequence(0, events.size-1)}"-->
+<!--                    data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>-->
             </ol>
             <div>
                 <div class="carousel-inner">

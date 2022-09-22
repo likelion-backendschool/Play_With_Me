@@ -62,7 +62,7 @@ public class HomeController {
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
             String check = "empty";
-            if (togethers == null) {
+            if (togethers == null || togethers.size()==0)  {
                 List<Event> events = new ArrayList<>();
 
                 if(baseballTop!=null){
@@ -77,9 +77,9 @@ public class HomeController {
                     events.add(concertTop);
                 }
 
-                model.addAttribute("first",events.get(0));
-                events.remove(0);
-                model.addAttribute("events",events);
+//                model.addAttribute("first",events.get(0));
+//                events.remove(0);
+//                model.addAttribute("events",events);
             }
 
             else{
