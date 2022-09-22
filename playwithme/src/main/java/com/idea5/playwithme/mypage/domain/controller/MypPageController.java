@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +70,7 @@ public class MypPageController {
         Member member = memberService.findMember(principal.getName());
 
         List<Event> events = togetherService.findByMemberId(member.getId());
-        Map<Event,Long> map = new HashMap<>();
+        Map<Event,Long> map = new LinkedHashMap<>();
 
         for (Event event : events) {
             map.put(event, ChronoUnit.DAYS.between(LocalDateTime.now(), event.getDate()));
@@ -78,5 +79,4 @@ public class MypPageController {
         model.addAttribute("map",map);
         return "d_day_list";
     }
-
 }
