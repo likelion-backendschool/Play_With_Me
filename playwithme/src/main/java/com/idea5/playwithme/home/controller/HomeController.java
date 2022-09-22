@@ -53,7 +53,9 @@ public class HomeController {
         model.addAttribute("basketballTopBoard", basketballTopBoard);
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
+        Long count = eventService.countEventAfterNow();
 
+        System.out.println("asd "+count);
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
@@ -86,7 +88,7 @@ public class HomeController {
                 togethers.remove(0);
                 model.addAttribute("togethers",togethers);
             }
-
+            model.addAttribute("count",count);
             model.addAttribute("check",check);
         }
 

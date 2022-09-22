@@ -54,5 +54,9 @@ public class EventService {
     public Event findTopEventByArticleCount(Integer categoryNo){
         return eventRepository.findTopEventByArticleCount(categoryNo);
     }
+
+    public Long countEventAfterNow(){
+        return eventRepository.countByDateAfter(LocalDateTime.now());
+    }
 }
 
