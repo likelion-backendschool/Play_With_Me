@@ -15,5 +15,6 @@ public interface EventRepository extends JpaRepository<Event, Long>, EventReposi
     List<Event> findByCategoryId(Integer id);
     List<Event> findAllByDateBetweenAndCategoryId(LocalDateTime start, LocalDateTime end, Integer categoryId);
     Page<Event> findByNameContainsOrLocationContains(String kw, String kw_,Pageable pageable);
+    Long countByDateAfter(LocalDateTime time);
 }
 

@@ -1,9 +1,9 @@
 package com.idea5.playwithme.mypage.service;
 
 import com.idea5.playwithme.article.domain.Article;
-import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.article.repository.ArticleRepository;
 import com.idea5.playwithme.member.repository.MemberRepository;
 import com.idea5.playwithme.mypage.domain.Timeline;
 import com.idea5.playwithme.mypage.dto.TimelineRequestDto;
@@ -59,6 +59,14 @@ public class TimelineService {
 
     public Timeline findById(Long id){
         return timelineRepository.findById(id).orElseThrow(()-> new DataNotFoundException("해당 타임라인이 존재하지 않습니다"));
+    }
+
+    public Timeline findByTogetherId(Long togetherId) {
+        return timelineRepository.findByTogetherId(togetherId).orElseThrow(() -> new DataNotFoundException("해당 동행이 존재하지 않습니다"));
+    }
+
+    public void deleteTimeline(Long id){
+        timelineRepository.deleteById(id);
     }
 
     // UPDATE

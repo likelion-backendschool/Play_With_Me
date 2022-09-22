@@ -6,13 +6,13 @@ SELECT * FROM together;
 
 # event
 INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-07-15', '잠실종합운동장 내 보조경기장', '싸이 흠뻑쇼 SUMMER SWAG - 서울');
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-07-09', '인천아시아드 주경기장', '싸이 흠뻑쇼 SUMMER SWAG 2022 - 인천');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(2, '2022-07-09', '인천아시아드 주경기장', '싸이 흠뻑쇼 SUMMER SWAG 2022 - 인천');
 
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-09-23', '난지 한강공원 일대', '2022 렛츠락 페스티벌');
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-09-24', '난지 한강공원 일대', '2022 렛츠락 페스티벌');
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-09-07', '서울숲', '서울숲 재즈 페스티벌');
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-10-15', '잠실종합운동장', '자이브 슈퍼라이브');
-INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-10-28', '세종문화회관', '폴킴 전국투어');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(3, '2022-09-23', '난지 한강공원 일대', '2022 렛츠락 페스티벌');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(4, '2022-09-24', '난지 한강공원 일대', '2022 렛츠락 페스티벌');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(5, '2022-09-07', '서울숲', '서울숲 재즈 페스티벌');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(6, '2022-10-15', '잠실종합운동장', '자이브 슈퍼라이브');
+INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(7, '2022-10-28', '세종문화회관', '폴킴 전국투어');
 
 
 
@@ -20,13 +20,13 @@ INSERT INTO EVENT(category_id, DATE, location, NAME) VALUES(1, '2022-10-28', '�
 
 # board
 INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 2);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
 
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 3);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 4);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 5);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 6);
-INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 7);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
+INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 1);
 
 
 

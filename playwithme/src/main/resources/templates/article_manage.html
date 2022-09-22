@@ -1,0 +1,105 @@
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
+
+<div layout:fragment="content" class="container my-3">
+    <h2 class="border-bottom mt-4 mb-3">게시글 관리</h2>
+    <form class="input-group p-2 d-flex justify-content-end">
+        <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="sortCode" th:value="${param.sortCode}">
+            <option value="new">new</option>
+            <option value="old">old</option>
+        </select>
+        <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="category" th:value="${param.category}">
+            <option value="all">all</option>
+            <option value="baseball">baseball</option>
+            <option value="soccer">soccer</option>
+            <option value="basketball">basketball</option>
+            <option value="musical">musical</option>
+            <option value="concert">concert</option>
+        </select>
+    </form>
+
+    <div th:each="article : ${paging}" class="card m-2">
+        <div class="card-body d-flex">
+            <div>
+                <span th:text="${article.getBoard().getEvent().getName()}"></span>
+                <span class="badge rounded-pill text-bg-primary mx-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+                <span class="badge rounded-pill text-bg-secondary mx-1" th:unless="${article.recruitStatus == true}" th:text="모집마감"></span>
+                <div class="mx-1 my-2">
+                    <a class="fs-4" th:href="@{/board/{boardId}/{articleId}(boardId=${article.getBoard().getId()}, articleId=${article.id})}"
+                       th:text="${article.title}"></a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-light text-dark fs-6 me-2" th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd hh:mm')}"></span>
+                    <div class="mx-2">
+                        <i class="fa fa-eye"></i>
+                        <span class="mx-1" th:text="${article.views}"></span>
+                    </div>
+                    <div class="mx-2">
+                        <i class="fa fa-comment"></i>
+                        <span class="mx-1" th:text="${article.commentList.size()}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-grow-1"></div>
+            <div class="d-flex flex-column justify-content-center">
+                <th:block th:if="${article.recruitStatus == true}" >
+                    <a class="my-1 btn btn-outline-primary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+                    <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="my-1 btn btn-outline-primary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <!-- 페이징처리 시작 -->
+    <div class="my-5" th:if="${!paging.isEmpty()}">
+        <nav th:with="
+        pageNumber=${paging.number},
+        totalPages=${paging.totalPages},
+        size=2,
+        startPage=${pageNumber - size},
+        endPage=${pageNumber + size},
+        sp=(${startPage < 0 ? -startPage : 0}),
+        ep=(${endPage > totalPages - 1 ? endPage - totalPages + 1 : 0}),
+        start=${startPage - ep},
+        end=${endPage + sp}
+        ">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=0&category=${category}&sortCode=${sortCode}|}">
+                        <span><<</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number - 1}&category=${category}&sortCode=${sortCode}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+
+                <!--pagination-->
+                <li th:each="page: ${#numbers.sequence(start, end)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${0 <= page and page < totalPages}"
+                    class="page-item">
+                    <a th:text="${page + 1}" class="page-link" th:href="@{|?page=${page}&category=${category}&sortCode=${sortCode}|}"></a>
+                </li>
+
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}&category=${category}&sortCode=${sortCode}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.totalPages-1}&category=${category}&sortCode=${sortCode}|}">
+                        <span>>></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- 페이징처리 끝 -->
+</div>

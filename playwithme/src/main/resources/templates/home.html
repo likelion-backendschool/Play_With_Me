@@ -10,25 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
     <link rel="shortcut icon" href="favicon.png">
-
     <meta name="description" content="" />
     <meta name="keywords" content="free template, bootstrap, bootstrap4" />
 
     <title>PWM Main Page</title>
 </head>
 <body layout:fragment="content">
-
-<link rel="stylesheet" href="home/css/bootstrap.min.css">
-<link rel="stylesheet" href="home/css/animate.min.css">
-<link rel="stylesheet" href="home/css/owl.carousel.min.css">
-<link rel="stylesheet" href="home/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="home/css/jquery.fancybox.min.css">
-<link rel="stylesheet" href="home/css/aos.css">
-<link rel="stylesheet" href="home/css/style.css">
-
-
-
-
 
 <div class="custom-hero" sec:authorize="isAnonymous()">
     <div class="container">
@@ -198,71 +185,32 @@
 
 <div class="section-4" sec:authorize = "isAuthenticated()">
 
+<!--    <div class="container">-->
+<!--        <div class="row mb-4 align-items-center">-->
+<!--            <div class="col-6">-->
+<!--                <h2 class="line-top">Your Own D-DAY</h2>-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <th:block th:replace ="~{/d_day :: d_day}"> </th:block>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="container">
         <div class="row mb-4 align-items-center">
             <div class="col-6">
+<!--                <th:block th:if="${check} == 'empty'">-->
+<!--                    <h2 class="line-top">Recommended Events</h2>-->
+<!--                </th:block>-->
+<!--                <th:block th:if="${check} == 'full'">-->
+<!--                    <h2 class="line-top">Your Own D-DAY</h2>-->
+<!--                </th:block>-->
                 <h2 class="line-top">Your Own D-DAY</h2>
-            </div>
-            <div class="col-6 text-right">
-                <a href="#" class="custom-prev-v2 js-custom-prev-v2">Prev</a>
-                <span class="mx-3">/</span>
-                <a href="#" class="custom-next-v2 js-custom-next-v2">Next</a>
             </div>
         </div>
 
-        <div>
-            <div class="owl-4-slider owl-carousel">
-                <div class="product">
-                    <a href="#" class="d-block">
-                        <!--img src="images/img_v_8-min.jpg" alt="Image" class="img-fluid"-->
-                    </a>
-                    <div class="text-center text-md-left">
-                        <h3>D-Day 기능1</h3>
-                        <p>이벤트 설명1</p>
-                    </div>
-                </div>
+        <div th:replace ="/d_day :: d_day">
 
-                <div class="product">
-                    <a href="#" class="d-block">
-                        <!-- img src="images/img_v_7-min.jpg" alt="Image" class="img-fluid"-->
-                    </a>
-                    <div class="text-center text-md-left">
-                        <h3>D-Day 기능2</h3>
-                        <p>이벤트 설명2</p>
-                    </div>
-                </div>
-
-                <div class="product">
-                    <a href="#" class="d-block">
-                        <!--img src="images/img_v_3-min.jpg" alt="Image" class="img-fluid"-->
-                    </a>
-                    <div class="text-center text-md-left">
-                        <h3>D-Day 기능3</h3>
-                        <p>이벤트 설명3</p>
-                    </div>
-                </div>
-
-                <div class="product">
-                    <a href="#" class="d-block">
-                        <!--img src="images/img_v_4-min.jpg" alt="Image" class="img-fluid"-->
-                    </a>
-                    <div class="text-center text-md-left">
-                        <h3>디데이 기능4</h3>
-                        <p>이벤트 설명4</p>
-                    </div>
-                </div>
-
-                <div class="product">
-                    <a href="#" class="d-block">
-                        <!--img src="images/img_v_6-min.jpg" alt="Image" class="img-fluid"-->
-                    </a>
-                    <div class="text-center text-md-left">
-                        <h3>디데이 기능5</h3>
-                        <p>이벤트 설명5</p>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 </div>
@@ -402,32 +350,6 @@
 
 
 
-
-
-<script src="home/js/jquery-migrate-3.0.0.min.js"></script>
-<script src="home/js/popper.min.js"></script>
-<script src="home/js/bootstrap.min.js"></script>
-<script src="home/js/owl.carousel.min.js"></script>
-<script src="home/js/aos.js"></script>
-<script src="home/js/imagesloaded.pkgd.js"></script>
-<script src="home/js/isotope.pkgd.min.js"></script>
-<script src="home/js/jquery.animateNumber.min.js"></script>
-<script src="home/js/jquery.stellar.min.js"></script>
-<script src="home/js/jarallax.min.js"></script>
-<script src="home/js/jarallax-element.min.js"></script>
-<script src="home/js/jquery.waypoints.min.js"></script>
-<script src="home/js/jquery.fancybox.min.js"></script>
-
-<script src="home/js/jquery.lettering.js"></script>
-
-
-<script src="home/js/TweenMax.min.js"></script>
-<script src="home/js/ScrollMagic.min.js"></script>
-<script src="home/js/scrollmagic.animation.gsap.min.js"></script>
-<script src="home/js/debug.addIndicators.min.js"></script>
-
-
-<script src="home/js/custom.js"></script>
 
 </body>
 </html>

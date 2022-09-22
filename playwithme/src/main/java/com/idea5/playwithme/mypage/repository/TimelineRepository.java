@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface TimelineRepository extends JpaRepository<Timeline, Long> {
     Optional<Timeline> findById(Long id);
+    Optional<Timeline> findByTogetherId(Long togetherId);
 
 }

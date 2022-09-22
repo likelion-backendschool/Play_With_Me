@@ -1,12 +1,15 @@
 package com.idea5.playwithme.member.service;
 
 
+
+import com.idea5.playwithme.member.dto.MemberRecruitDto;
+import com.idea5.playwithme.member.repository.MemberRepository;
+
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.MemberRole;
 import com.idea5.playwithme.member.dto.KakaoUser;
-import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.exception.MemberNotFoundException;
-import com.idea5.playwithme.member.repository.MemberRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -63,22 +66,32 @@ public class MemberService {
     }
 
     public Member findMember(String username) {
-        Member member = memberRepository.findByUsername(username).orElseThrow(() -> {
+        return memberRepository.findByUsername(username).orElseThrow(() -> {
             log.warn("Member Not Found...");
             throw new MemberNotFoundException("멤버가 없습니다.");
         });
-        return member;
     }
 
+
+    @Transactional
     public List<MemberRecruitDto> findRecruitMember(Long articleId, Long memberId){
 
-        List<Object[]> recruitMember = memberRepository.findRecruitMember(articleId, memberId);
+        List<Object[]> recruitMember = memberRepository.findRecruitMembers(articleId, memberId);
+        if (recruitMember == null || recruitMember.isEmpty())
+            throw new MemberNotFoundException("Member is Not Found");
+
         List<MemberRecruitDto> list = new ArrayList<>();
 
         for (Object[] objects : recruitMember) {
             String ninckname = objects[0].toString();
             Long id = (Long)objects[1];
-            list.add(new MemberRecruitDto(id, ninckname));
+
+            Member member = memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException("Member is Not Found..."));
+            MemberRecruitDto memberDto = MemberRecruitDto.builder()
+                    .id(member.getId())
+                    .nickname(ninckname)
+                    .build();
+            list.add(memberDto);
         }
         return list;
     }
