@@ -1,4 +1,9 @@
-/* #39d1e6 -> #7abdff로 테마컬러 변경 */
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 *,
 *::before,
 *::after {
@@ -28,13 +33,6 @@ body {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-h5 {
-    color: gray;
 }
 
 /* TIMELINE
@@ -255,12 +253,6 @@ i {
         width:100%;
     }
 }
-
-
-.h3 {
-    color: #024cf7;
-}
-
 #show-memo-box {
     box-sizing: border-box;
     padding: 1rem;
