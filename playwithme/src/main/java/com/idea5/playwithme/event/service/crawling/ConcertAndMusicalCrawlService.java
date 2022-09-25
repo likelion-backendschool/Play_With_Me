@@ -118,6 +118,7 @@ public class ConcertAndMusicalCrawlService implements CrawlService{
             Board board = new Board();
             board.setEvent(event);
             board.setIsBlind(false);
+            board.setCreatedAt(LocalDateTime.now());
             boardRepository.save(board);
         }
     }

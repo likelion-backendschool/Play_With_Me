@@ -6,6 +6,7 @@ import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
+import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -51,29 +53,43 @@ public class HomeController {
         model.addAttribute("basketballTopBoard", basketballTopBoard);
         model.addAttribute("musicalTopBoard", musicalTopBoard);
         model.addAttribute("concertTopBoard", concertTopBoard);
+        Long count = eventService.countEventAfterNow();
 
-//        if(principal!=null){
-//            Member member = memberService.findMember(principal.getName());
-//
-//            List<Event> events = togetherService.findByMemberId(member.getId());
-//            log.info("events.size = {}", events.size());
-//
-//            model.addAttribute("firstEvent",events.get(0));
-//            events.remove(0);
-//            model.addAttribute("events",events);
-//        }
+        System.out.println("asd "+count);
+
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
 
-            List<Event> events = togetherService.findByMemberId(member.getId());
-            if (events.size() == 0) {
-                log.info("events.size = {}", events.size());
-                return "home";
+            List<Together> togethers = togetherService.findByMemberId(member.getId());
+            String check = "empty";
+            if (togethers == null || togethers.size()==0)  {
+                List<Event> events = new ArrayList<>();
+
+                if(baseballTop!=null){
+                    events.add(baseballTop);
+                }if(soccerTop!=null){
+                    events.add(soccerTop);
+                }if(basketballTop!=null){
+                    events.add(basketballTop);
+                }if(musicalTop!=null){
+                    events.add(musicalTop);
+                }if(concertTop!=null){
+                    events.add(concertTop);
+                }
+
+//                model.addAttribute("first",events.get(0));
+//                events.remove(0);
+//                model.addAttribute("events",events);
             }
 
-            model.addAttribute("firstEvent",events.get(0));
-            events.remove(0);
-            model.addAttribute("events",events);
+            else{
+                check = "full";
+                model.addAttribute("first",togethers.get(0));
+                togethers.remove(0);
+                model.addAttribute("togethers",togethers);
+            }
+            model.addAttribute("count",count);
+            model.addAttribute("check",check);
         }
 
         return "home";

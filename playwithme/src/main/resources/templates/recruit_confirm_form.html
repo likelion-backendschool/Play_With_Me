@@ -1,7 +1,10 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<html
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://thymeleaf.org"
+        layout:decorate="~{fragment/layout}"
+>
 
-<div class="container">
+<div layout:fragment="content" class="container my-3">
     <h5 class="my-3 border-bottom pb-2">모집 인원 확정</h5>
 
     <form th:action="@{|/together/recruit/${board_id}/${article_id}/${member_id}|}" th:object="${togetherForm}" method="post">
@@ -23,7 +26,37 @@
 
         <div class="d-flex justify-content-center">
             <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
-            <button onclick="if(!confirm('동행 인원을 확정하시겠습니까?')) return false;" type="submit" class="btn btn-primary m-2">확인</button>
+<!--            <button onclick="if(!confirm('동행 인원을 확정하시겠습니까?')) return false;" type="submit" class="btn btn-primary m-2">확인</button>-->
+            <button onclick="isCheck(this.form); return false;" type="submit" class="btn btn-primary m-2">확인</button>
         </div>
     </form>
 </div>
+<script layout:fragment="script" type='text/javascript'>
+
+<!-- 동행 인원 체크 메서드-->
+    function isCheck(){
+        var cnt = 0;
+        for(var i = 0; i < document.getElementsByTagName('input').length; i++){
+            if(document.getElementsByTagName('input')[i].getAttribute('type') == 'checkbox')
+                if(document.getElementsByTagName('input')[i].checked)
+                    cnt++;
+        }
+
+
+        // 최소 1개 선택했는지
+        if(cnt <= 0){
+            alert('최소 1개 이상은 선택해주세요');
+            return;
+        }
+
+        // 모집 완료 할건지 재질문
+        if(!confirm('모집을 완료하시겠습니까?')){
+            return;
+        }
+
+        form.submit();
+
+    }
+</script>
+</html>
+
