@@ -28,7 +28,7 @@ public class HomeController {
     private final MemberService memberService;
 
     @GetMapping("/")
-    public String home(Model model, Principal principal) { // TODO : 중복 제거 리팩토링
+    public String home(Model model, Principal principal) {
 
         Event baseballTop = eventService.findTopEventByArticleCount(1);
         Event soccerTop = eventService.findTopEventByArticleCount(2);
@@ -93,5 +93,11 @@ public class HomeController {
         }
 
         return "home";
+    }
+
+    // 소개 페이지
+    @GetMapping("/about")
+    public String intro() {
+        return "about";
     }
 }
