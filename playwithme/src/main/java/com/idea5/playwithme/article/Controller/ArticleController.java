@@ -156,9 +156,15 @@ public class ArticleController {
     // 게시글 삭제
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{board_id}/{article_id}")
-    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId,
+                         @RequestParam("returnUrl") String returnUrl) {
         articleService.delete(articleId);
 
+        // 게시글 관리 페이지 -> 삭제 요청한 경우
+        if(returnUrl.equals("board-manage")) {
+            return "redirect:/board/manage";
+        }
+        // 게시글 상세 페이지 -> 삭제 요청한 경우
         return "redirect:/board/%d".formatted(boardId);
     }
 
