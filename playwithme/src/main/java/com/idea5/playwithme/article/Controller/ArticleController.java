@@ -49,6 +49,7 @@ public class ArticleController {
     @PostMapping("/write/{board_id}")
     public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult.getErrorCount());
             return "article_create_form";
         }
         // 나이대 유효성 검사

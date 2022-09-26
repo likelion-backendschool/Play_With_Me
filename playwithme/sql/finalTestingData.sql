@@ -1,4 +1,4 @@
-drop if exists database playwithme;
+drop database if exists playwithme;
 create database playwithme;
 use playwithme;
 
