@@ -8,16 +8,16 @@
     <h2 class="border-bottom mt-4 mb-3">게시글 관리</h2>
     <form class="input-group p-2 d-flex justify-content-end">
         <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="sortCode" th:value="${param.sortCode}">
-            <option value="new">new</option>
-            <option value="old">old</option>
+            <option value="new">최신순</option>
+            <option value="old">오래된순</option>
         </select>
         <select onchange="$(this).closest('form').submit();" class="form-select col-2" aria-label="Default select example" name="category" th:value="${param.category}">
-            <option value="all">all</option>
-            <option value="baseball">baseball</option>
-            <option value="soccer">soccer</option>
-            <option value="basketball">basketball</option>
-            <option value="musical">musical</option>
-            <option value="concert">concert</option>
+            <option value="all">전체</option>
+            <option value="baseball">야구</option>
+            <option value="soccer">축구</option>
+            <option value="basketball">농구</option>
+            <option value="musical">뮤지컬</option>
+            <option value="concert">콘서트</option>
         </select>
     </form>
 

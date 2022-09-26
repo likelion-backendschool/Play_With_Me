@@ -69,11 +69,11 @@ INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, re
 VALUES('20~39', '같이 보러 예매한 친구 못가게 되어서 같이보러갈 사람 구하고 있습니다. 킹키부츠 10월 18일 공연 R석입니다. 편하게 댓글 남겨주세요', NOW(), '남성', 2, TRUE, '함께 킹키부츠보러 가실 분 구합니다.', NOW(), 0, 12, 1);
 -- article-concert
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
-VALUES('20~29', '태양의 서커스 10월 20일 20:00시 공연 같이 보러가실 분 구합니다!', NOW(), '여성', 2, TRUE, '10월 20일 태양의 서커스 뮤지컬 보러가실 분 구합니다!', NOW(), 0, 10, 1);
+VALUES('20~29', '태양의 서커스 10월 20일 20:00시 공연 같이 보러가실 분 구합니다!', NOW(), '여성', 2, TRUE, '10월 20일 태양의 서커스 뮤지컬 보러가실 분 구합니다!', NOW(), 0, 13, 1);
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
-VALUES('10~29', '뮤지컬 마틸다 19:30분 같이 예매해서 보러가실 분 구하고 있습니다. 좌석은 S석 이상으로 생각하고 있습니다. ', NOW(), '남성', 2, TRUE, '마틸다 뮤지컬 같이 보러가실 분 한 분 구합니다', NOW(), 0, 11, 1);
+VALUES('10~29', '뮤지컬 마틸다 19:30분 같이 예매해서 보러가실 분 구하고 있습니다. 좌석은 S석 이상으로 생각하고 있습니다. ', NOW(), '남성', 2, TRUE, '마틸다 뮤지컬 같이 보러가실 분 한 분 구합니다', NOW(), 0, 14, 1);
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
-VALUES('20~39', '같이 보러 예매한 친구 못가게 되어서 같이보러갈 사람 구하고 있습니다. 킹키부츠 10월 18일 공연 R석입니다. 편하게 댓글 남겨주세요', NOW(), '남성', 2, TRUE, '함께 킹키부츠보러 가실 분 구합니다.', NOW(), 0, 12, 1);
+VALUES('20~39', '같이 보러 예매한 친구 못가게 되어서 같이보러갈 사람 구하고 있습니다. 킹키부츠 10월 18일 공연 R석입니다. 편하게 댓글 남겨주세요', NOW(), '남성', 2, TRUE, '함께 킹키부츠보러 가실 분 구합니다.', NOW(), 0, 15, 1);
 
 
 --comment
