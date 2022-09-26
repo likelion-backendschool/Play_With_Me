@@ -20,9 +20,8 @@
             <i class="fa fa-eye me-1"></i>
             <span th:text="${article.views}"></span>
         </div>
-        <span class="badge rounded-pill text-bg-primary me-3" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
-        <span class="badge rounded-pill text-bg-secondary me-3" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
-        </th:block>
+        <span class="badge rounded-pill text-bg-primary me-3 fs-6" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+        <span class="badge rounded-pill text-bg-secondary me-3 fs-6" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
 
         <div class="flex-grow-1"></div>
         <th:block
@@ -30,8 +29,8 @@
                 th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
             <!--모집중일 때만 수정, 삭제 가능-->
             <th:block th:if="${article.recruitStatus == true}" >
-                <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
-                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="삭제"></a>
+                <a class="mx-1 badge text-bg-secondary  fs-6" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
+                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary  fs-6" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="삭제"></a>
             </th:block>
         </th:block>
     </div>
@@ -41,15 +40,15 @@
         <div class="card-body d-flex align-items-center">
             <i class="fa fa-user-circle fa-2x"></i>
             <div class="mx-2">
-                <span class="badge bg-black">글쓴이</span>
+                <span class="badge bg-black fs-6">글쓴이</span>
                 <span th:text="${article.getMember().getNickname()}"></span>
                 <span class="mx-2">
                     <i class="fa fa-thermometer-three-quarters text-danger"></i>
                     <span class="me-2 text-danger" th:text="|${article.getMember().getMannerTemp()} &deg;|"></span>
                 </span>
-                <span class="badge rounded-pill text-bg-light mx-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
+                <span class="badge rounded-pill text-bg-light mx-1 fs-6" th:text="|${article.getMember().getAgeRange()}세|"></span>
                 <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                    <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
+                    <span class="badge rounded-pill text-bg-light mx-1 fs-6" th:text="${gender}"></span>
                 </th:block>
             </div>
         </div>
@@ -63,33 +62,33 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">공연명</th>
+                    <th class="col-2" scope="row">공연명</th>
                     <td>
                         <div th:text="${event.name}"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">장소</th>
+                    <th class="col-2" scope="row">장소</th>
                     <td>
                         <div th:text="${event.location}"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">일시</th>
+                    <th class="col-2" scope="row">일시</th>
                     <td>
                         <span th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}"></span>
                         <span th:text="${#temporals.dayOfWeekName(event.date)}"></span>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">모집인원</th>
+                    <th class="col-2" scope="row">모집인원</th>
                     <td>
                         <div th:text="${article.maxRecruitNum}"></div>
                     </td>
                 </tr>
 
                 <tr>
-                    <th scope="row">내용</th>
+                    <th class="col-2" scope="row">내용</th>
                     <td>
                         <div th:text="${article.contents}"></div>
                     </td>
@@ -98,8 +97,8 @@
                 </tbody>
             </table>
 
-            <span class="badge rounded-pill text-bg-primary mx-1" th:text="|${article.ageRange}세|"></span>
-            <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.gender}"></span>
+            <span class="badge rounded-pill text-bg-warning text-white mx-1 fs-6" th:text="|${article.ageRange}세|"></span>
+            <span class="badge rounded-pill text-bg-warning text-white mx-1 fs-6" th:text="${article.gender}"></span>
         </div>
     </div>
 
