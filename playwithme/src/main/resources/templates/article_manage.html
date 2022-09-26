@@ -46,7 +46,7 @@
             <div class="flex-grow-1"></div>
             <div class="d-flex flex-column justify-content-center">
                 <th:block th:if="${article.recruitStatus == true}" >
-                    <a class="my-1 btn btn-outline-primary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+                    <a class="my-1 btn btn-outline-primary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=board-manage|}" th:text="수정"></a>
                     <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="my-1 btn btn-outline-primary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
                 </th:block>
             </div>

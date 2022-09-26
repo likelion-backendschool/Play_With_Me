@@ -30,7 +30,7 @@
                 th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
             <!--모집중일 때만 수정, 삭제 가능-->
             <th:block th:if="${article.recruitStatus == true}" >
-                <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
+                <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
                 <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
             </th:block>
         </th:block>
