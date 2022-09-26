@@ -17,6 +17,67 @@
 </head>
 <body layout:fragment="content">
 
+
+<div class="container my-5">
+    <div class="row row-cols-5">
+        <div>
+            <div class="card category-card" onclick="location.href='/event?category=baseball'" style="cursor: pointer">
+                <div class="card-body baseball-card d-flex flex-column">
+                    <div class="fs-4">야구</div>
+                    <div class="flex-grow-1"></div>
+                    <div class="d-flex justify-content-end">
+                        <img src="/image/baseball.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card category-card" onclick="location.href='/event?category=soccer'" style="cursor: pointer">
+                <div class="card-body soccer-card d-flex flex-column">
+                    <div class="fs-4">축구</div>
+                    <div class="flex-grow-1"></div>
+                    <div class="d-flex justify-content-end">
+                        <img src="/image/soccer.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card category-card" onclick="location.href='/event?category=basketball'" style="cursor: pointer">
+                <div class="card-body basketball-card d-flex flex-column">
+                    <div class="fs-4">농구</div>
+                    <div class="flex-grow-1"></div>
+                    <div class="d-flex justify-content-end">
+                        <img src="/image/basketball.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card category-card" onclick="location.href='/event?category=musical'" style="cursor: pointer">
+                <div class="card-body musical-card d-flex flex-column">
+                    <div class="fs-4">뮤지컬</div>
+                    <div class="flex-grow-1"></div>
+                    <div class="d-flex justify-content-end">
+                        <img src="/image/musical.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card category-card" onclick="location.href='/event?category=concert'" style="cursor: pointer">
+                <div class="card-body concert-card d-flex flex-column">
+                    <div class="fs-4">콘서트</div>
+                    <div class="flex-grow-1"></div>
+                    <div class="d-flex justify-content-end">
+                        <img src="/image/concert.png" class="w-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="custom-hero" sec:authorize="isAnonymous()">
     <div class="container">
         <div class="row justify-content-center">
@@ -343,11 +404,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 

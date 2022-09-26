@@ -59,4 +59,44 @@ textarea {
 }
 
 
+.category-card {
+    height: 300px;
+    transition: box-shadow .3s;
+    border-radius:10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    float: left;
+}
+
+.category-card:hover {
+    margin-top: 5px;
+    box-shadow: 0 0 20px rgba(33,33,33,.2);
+}
+
+.baseball-card {
+    background-color: #B5DEFF;
+    height: inherit;
+}
+
+.soccer-card {
+    background-color: #C1FFD7;
+    height: inherit;
+}
+
+.basketball-card {
+    background-color: #FCFFA6;
+    height: inherit;
+}
+
+.musical-card {
+    background-color: #FFD1D1;
+    height: inherit;
+}
+
+.concert-card {
+    background-color: #CAB8FF;
+    height: inherit;
+}
+
+
 
