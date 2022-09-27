@@ -59,6 +59,7 @@ public class HomeController {
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
+            model.addAttribute("member", member);
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
             String check = "empty";
@@ -81,7 +82,6 @@ public class HomeController {
 //                events.remove(0);
 //                model.addAttribute("events",events);
             }
-
             else{
                 check = "full";
                 model.addAttribute("first",togethers.get(0));

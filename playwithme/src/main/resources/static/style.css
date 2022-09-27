@@ -58,5 +58,27 @@ textarea {
     border-image-slice: 1;
 }
 
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0px 8px 0px 16px;
+    width: 300px;
+    height: 38px;
+    background: #f4f4f4;
+}
 
+.search-input{
+    border: none;
+    font-size: 14px;
+    background: #f4f4f4;
+}
+
+.search-button {
+    border: none;
+    width: 38px;
+    height: 38px;
+    background: #f4f4f4;
+}
 
