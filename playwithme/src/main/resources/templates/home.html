@@ -17,14 +17,14 @@
 </head>
 <body layout:fragment="content">
 
-<div class="custom-hero" sec:authorize="isAnonymous()">
+<div style="background-color:#b8d1f5;" class="custom-hero" sec:authorize="isAnonymous()">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <h1 class="hero-heading">Play With Me</h1>
                 <p><br></p>
 
-                <div  class="line js-line mx-auto mb-3 my-10"></div>
+                <div class="line js-line mx-auto mb-3 my-10"></div>
                 <p><br></p>
                 <p class="sub-text">행사를 함께 갈 동행인을 모집해보세요! 리뷰기능과 매너온도, <br> 원하는 모집 상대 필터링을 통해 맞춤화된 모집이 가능합니다 </p>
 
@@ -76,19 +76,18 @@
     <div class="container">
         <div class="row mb-1">
             <div class="col-lg-7">
-                <h2 class="mb-4">Most Popular Events By Category</h2>
-                <div class="line my-3"></div>
+                <h3 class="mb-4"> <img src="image/podium.png"> &nbsp; PWM 카테고리별 인기 이벤트</h3>
             </div>
         </div>
         <div class="row">
 
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${topBaseball}==null"><a href="single.html"></a> ✨ Baseball </h3>
-                        <h3 th:if="${topBaseball}!=null"><a href="single.html"></a> ✨ Baseball : [[${topBaseball?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/baseball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px;" class="p-4 bg-white">
+                        <h3 th:if="${topBaseball}==null"><a href="single.html"></a>  야구 </h3>
+                        <h3 th:if="${topBaseball}!=null"><a href="single.html"></a>  야구 : [[${topBaseball?.name}]]</h3>
 
                         <span th:if="${topBaseball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
                         <span th:if="${topBaseball}!=null" class="date">  [[${#strings.substring(topBaseball?.date,0,10)}]]</span>
@@ -103,11 +102,11 @@
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${topSoccer}==null"><a href="single.html"></a> ✨ Soccer </h3>
-                        <h3 th:if="${topSoccer}!=null"><a href="single.html"></a> ✨ Soccer : [[${topSoccer?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/soccer.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px;" class="p-4 bg-white">
+                        <h3 th:if="${topSoccer}==null"><a href="single.html"></a>  축구 </h3>
+                        <h3 th:if="${topSoccer}!=null"><a href="single.html"></a>  축구 : [[${topSoccer?.name}]]</h3>
 
                         <span th:if="${topSoccer}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
                         <span th:if="${topSoccer}!=null" class="date"> [[${#strings.substring(topSoccer?.date,0,10)}]]</span>
@@ -122,11 +121,11 @@
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${topBasketball}==null"><a href="single.html"></a> ✨ Basketball </h3>
-                        <h3 th:if="${topBasketball}!=null"><a href="single.html"></a> ✨ Basketball : [[${topBasketball?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/basketball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px;" class="p-4 bg-white">
+                        <h3 th:if="${topBasketball}==null"><a href="single.html"></a> 농구 </h3>
+                        <h3 th:if="${topBasketball}!=null"><a href="single.html"></a> 농구 : [[${topBasketball?.name}]]</h3>
 
                         <span th:if="${topBasketball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
                         <span th:if="${topBasketball}!=null" class="date"> [[${#strings.substring(topBasketball?.date,0,10)}]]</span>
@@ -155,11 +154,11 @@
 
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${topMusical}==null"><a href="single.html"></a> ✨ Musical </h3>
-                            <h3 th:if="${topMusical}!=null"><a href="single.html"></a> ✨ Musical : [[${topMusical?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/musical.jpg" class="img-fluid"--></a>
+                        <div style="border-radius:10px;" class="p-4 bg-white">
+                            <h3 th:if="${topMusical}==null"><a href="single.html"></a> 뮤지컬 </h3>
+                            <h3 th:if="${topMusical}!=null"><a href="single.html"></a> 뮤지컬 : [[${topMusical?.name}]]</h3>
 
                             <span th:if="${topMusical}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
                             <span th:if="${topMusical}!=null" class="date"> [[${#strings.substring(topMusical?.date,0,10)}]]</span>
@@ -174,11 +173,11 @@
                 </div>
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${topConcert}==null"><a href="single.html"></a> ✨ Concert </h3>
-                            <h3 th:if="${topConcert}!=null"><a href="single.html"></a> ✨ Concert : [[${topConcert?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/concert.jpg" class="img-fluid"></a>
+                        <div style="border-radius:10px;" class="p-4 bg-white">
+                            <h3 th:if="${topConcert}==null"><a href="single.html"></a> 콘서트 </h3>
+                            <h3 th:if="${topConcert}!=null"><a href="single.html"></a> 콘서트 : [[${topConcert?.name}]]</h3>
 
                             <span th:if="${topConcert}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
                             <span th:if="${topConcert}!=null" class="date"> [[${#strings.substring(topConcert?.date,0,10)}]]</span>
