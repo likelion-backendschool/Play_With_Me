@@ -30,14 +30,14 @@
                 </div>
                 <div class="px-3">
                     <div class="d-flex justify-content-lg-around p-4 bg-white align-content-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="#000"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#000"
                              class="bi bi-person-circle align-self-center" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                         </svg>
 
                         <div class="d-flex align-items-start flex-column">
-                            <span th:text="${memberInfo.nickname}" class="h3"></span>
+                            <span th:text="${memberInfo.nickname}" class="h4"></span>
                             <span th:text="'나이대 : ' + ${memberInfo.ageRange} + '대'" class="mt-2 display-10">나이대</span>
                             <span th:text="'이메일 : ' + ${memberInfo.email}" class="mt-1">이메일</span>
                             <span th:text="'가입일자 : ' + ${memberInfo.createDate}" class="mt-1">가입일자</span>
@@ -54,7 +54,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#007BFF" class="bi bi-person-heart" viewBox="0 0 16 16">
                             <path d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4Zm13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z"/>
                         </svg>
-                        <span class="ms-2 mt-1 h3">매너 온도</span>
+                        <span class="ms-2 h3">매너 온도</span>
                     </div>
                     <div class="line my-3"></div>
                 </div>
