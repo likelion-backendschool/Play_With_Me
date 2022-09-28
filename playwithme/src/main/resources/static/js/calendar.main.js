@@ -136,7 +136,7 @@ function date_click(event) {
               // 이벤트가 없을 경우
               if(event_data2[0].length===0) {
                  var event_card = $("<div class='event-card'></div>");
-                 var event_name = $("<div class='event-name'> 해당 날짜는 일정이 없습니다 😵 </div>");
+                 var event_name = $("<div class='event-name'> 해당 날짜는 이벤트 일정이 없습니다 😵 </div>");
                  $(event_card).css({ "border-left": "10px solid #FF1744" });
                  $(event_card).append(event_name);
                  $(".events-container").append(event_card);
@@ -289,6 +289,7 @@ function new_event_json(name, count, date, day) {
     event_data["events"].push(event);
 }
 
+// 클릭하기 전 렌더링되는 이벤트 폼
 // Display all events of the selected date in card views
 function show_events(events, month, day) {
     // Clear the dates container
@@ -298,7 +299,7 @@ function show_events(events, month, day) {
     // If there are no events for this date, notify the user
     if(events.length===0) {
         var event_card = $("<div class='event-card'></div>");
-        var event_name = $("<div class='event-name'> 📆 원하는 날짜를 클릭해보세요! </div>");
+        var event_name = $("<div class='event-name'> 📆 동행 모집 원하는 날짜를 클릭해보세요! </div>");
         $(event_card).css({ "border-left": "10px solid #FF1744" });
         $(event_card).append(event_name);
         $(".events-container").append(event_card);
@@ -337,6 +338,7 @@ function check_events(day, month, year) {
 // ajax로 가져온 이벤트 리스트 담을 배열
 var event_data2=[];
 
+// 오픈소스에 담겨있던 샘플 데이터
 // Given data for events in JSON format
 var event_data = {
     "events": [

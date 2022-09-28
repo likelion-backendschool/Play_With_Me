@@ -9,7 +9,7 @@
 
 body {
   font: normal 16px/1.5 'GmarketSansMedium', "Helvetica Neue", sans-serif;
-  background: #fff;
+  background: #f8f9fd;
   color: #000;
   overflow-x: hidden;
 }
@@ -19,7 +19,7 @@ body {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .intro {
-  background: #fff;
+  background: #f8f9fd;
   padding: 20px 0;
 }
 
@@ -39,7 +39,7 @@ h1 {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .timeline ul {
-  background: #fff;
+  background: #f8f9fd;
   padding: 50px 0;
 }
 
@@ -238,8 +238,9 @@ span {
     padding: 5px 10px;
     color: #024cf7;
     font-size: 12px;
-    box-shadow:  inset 0 2px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.08);
     border-radius: 2px;
+  }
     i {
       margin-right: 5px;
     }
@@ -253,7 +254,7 @@ span {
         width:100%;
       }
     }
-  }
+
 
   .h3 {
    color: #024cf7;
@@ -269,14 +270,14 @@ span {
 
   #btn-memo-update {
     position: absolute;
-    right: 13%;
-    bottom: 10%;
+    right: 12%;
+    bottom: 13%;
     }
 
     #btn-memo-delete {
       position: absolute;
-      right: 5%;
-      bottom: 10%;
+      right:5%;
+      bottom: 13%;
       }
 
   #new-memo, #update-memo, .btn btn-dark btn-sm {
@@ -294,3 +295,7 @@ span {
     #memo-update-form {
     display:none;
     }
+
+  #guide, #guide-none {
+  color:grey;
+  }
