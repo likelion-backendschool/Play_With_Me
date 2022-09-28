@@ -45,7 +45,7 @@ INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 13);
 INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 14);
 INSERT INTO board(created_at, is_blind, event_id) VALUES(NOW(), FALSE, 15);
 
-
+-- 게시글(총 74개)
 -- article-baseball
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
 VALUES('10~19', '8월 2일 같이 기아 응원하실분 구해요!', NOW(), '여성', 3, TRUE, '저는 고1 여자인데 같이 응원하실 분 구해요~ 댓글 남겨주세요!', NOW(), 0, 1, 1);
@@ -54,8 +54,144 @@ VALUES('20~59', '인천 LG 응원 같이해요~~', NOW(), '성별무관', 5, TRU
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
 VALUES('30~49', '두산 팬분들 같이 응원하실 분 있으신가요??', NOW(), '남성', 2, TRUE, '같이 오래오래 야구경기 보러다닐 분 구해요!!', NOW(), 0, 3, 1);
 -- article-soccer
+-- 4번 게시판 게시글 시작(65개)
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
 VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 10
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 20
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 30
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 40
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 50
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 60
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('10~19', '9월 17일 경남 경기 같이 보러 가실분!', NOW(), '여성', 3, TRUE, '경남 경기 같이 보러 가실분!!!!!!', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~29', '부천 응원하시는 대학생분들 있나요??', NOW(), '성별무관', 5, TRUE, '부천 응원하시는 대학생분들 있나요??', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('30~49', '즐겁게 경기 보러가실 분 구합니다.', NOW(), '남자', 2, TRUE, '즐겁게 경기 보러가실 분 구합니다.', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~39', '같이 경기보고 저녁드실 분 구해요~', NOW(), '여성', 1, TRUE, '같이 경기보고 저녁드실 분 구해요~', NOW(), 0, 4, 1);
+INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
+VALUES('20~59', '경남 응원 같이 해요!', NOW(), '성별무관', 4, TRUE, '경남 응원 같이 해요!', NOW(), 0, 4, 1);
+-- 4번 게시판 게시글 끝
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
 VALUES('20~29', '수원 vs 서울 같이 가실 남성분 구합니다~~', NOW(), '남성', 2, TRUE, '같이 응원도 하고 재밌게 놀아요', NOW(), 0, 5, 1);
 INSERT INTO article(age_range, contents, created_at, gender, max_recruit_num, recruit_status, title, updated_at, views, board_id, member_id)
