@@ -3,6 +3,7 @@
       xmlns:th="http://thymeleaf.org"
 >
 
+
 <div class="bd-example" th:fragment="d_day" >
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
         <th:block th:if="${check} == 'full' ">
@@ -83,7 +84,7 @@
         </a>
         </th:block>
 
-        <th:block th:if="${check} == 'empty'">
+        <th:block th:if="${#authorization.expr('isAnonymous()')} or ${check} == 'empty'">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
 <!--                <li th:each="num: ${#numbers.sequence(0, events.size-1)}"-->
@@ -100,7 +101,8 @@
                                     <div style="width: 70%" class="d-flex flex-column justify-content-center">
 <!--                                        <h3 class="banner-text">현재 동행 예정인 이벤트가 존재하지 않습니다</h3>-->
 
-                                        <h4 th:text="'현재 '+${count}+'개의 이벤트에서 당신을 기다립니다!!'" class="banner-text"></h4>
+                                        <h4 sec:authorize="isAuthenticated()" th:text="'현재 '+${count}+'개의 이벤트에서 당신을 기다립니다!!'" class="banner-text"></h4>
+                                        <h4 sec:authorize="isAnonymous()" class="banner-text">다양한 이벤트가 당신을 기다립니다!</h4>
                                         <h4 class="banner-text">지금 바로 동행에 참여하세요!!</h4>
                                     </div>
                                     <img src="/image/banner1.png" style="width: 20%">
