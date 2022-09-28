@@ -73,7 +73,7 @@ public class TogetherController {
     }
 
 
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
@@ -83,6 +83,7 @@ public class TogetherController {
         return "recruit_confirm_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/recruit/{board_id}/{article_id}/{member_id}")
     public String form(@ModelAttribute("togetherForm") TogetherForm togetherForm, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId) {
 
@@ -107,6 +108,7 @@ public class TogetherController {
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("delete/{together_id}")
     public String doDelete(@PathVariable("together_id") Long togetherId, Principal principal){
 
