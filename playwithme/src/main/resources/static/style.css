@@ -63,6 +63,7 @@ textarea {
 .banner {
     background-color: #E8F8FC;
     border-radius: 20px;
+    height: 300px;
 }
 
 .banner-text {
