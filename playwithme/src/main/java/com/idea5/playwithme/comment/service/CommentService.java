@@ -17,6 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -27,6 +28,7 @@ public class CommentService {
     /**
      * 댓글 리스트 조회
      */
+    @Transactional(readOnly = true)
     public List<CommentDto> findByArticleId(Long id){
         List<Comment> byArticleId = commentRepository.findByArticleId(id);
         List<CommentDto> dtoList = new ArrayList<>();

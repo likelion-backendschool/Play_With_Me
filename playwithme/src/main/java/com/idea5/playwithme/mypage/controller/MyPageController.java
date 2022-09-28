@@ -67,14 +67,13 @@ public class MyPageController {
         Member member = memberService.findMember(principal.getName());
 
         List<Together> togethers = togetherService.findByMemberId(member.getId());
-
         Map<Together,Long> map = new LinkedHashMap<>();
-
-
-        for (Together together : togethers) {
-            map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
+        if(togethers != null){
+            for (Together together : togethers)
+                map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
         }
-//        model.addAttribute("events",events);
+
+
         model.addAttribute("map",map);
         return "d_day_list";
     }

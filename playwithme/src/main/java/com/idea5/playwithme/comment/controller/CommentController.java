@@ -9,6 +9,7 @@ import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class CommentController {
      * 작성
      */
     //localhost:
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/write/{board_id}/{article_id}")
     public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
@@ -75,6 +77,7 @@ public class CommentController {
     /**
      * 대댓글 작성
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/write/{board_id}/{article_id}/{comment_id}")
     public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
@@ -92,6 +95,7 @@ public class CommentController {
     /**
      * 수정
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{board_id}/{article_id}/{comment_id}")
     public String modifyComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id, CommentCreateForm createForm) {
         Long commentId = commentService.commentUpdate(id, createForm);// 로그인 세션 추가되면 변경해야 됨.
@@ -101,6 +105,7 @@ public class CommentController {
     /**
      * 삭제
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
         System.out.println("삭제 됐나요??");
