@@ -21,18 +21,33 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center mb-5">
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='baseball'">야구 모집게시판 캘린더</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='soccer'">축구 모집게시판 캘린더</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='basketball'">농구 모집게시판 캘린더</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='musical'">뮤지컬 모집게시판 캘린더</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='concert'">콘서트 모집게시판 캘린더</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='baseball'">
+					<img src="/image/calendar/baseball.png" style="height:50px; width:50px"> &nbsp;
+					<span class="hl">야구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='soccer'">
+					<img src="/image/calendar/soccer.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">축구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='basketball'">
+					<img src="/image/calendar/basketball.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">농구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='musical'">
+					<img src="/image/calendar/musical.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">뮤지컬</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='concert'">
+					<img src="/image/calendar/concert.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">콘서트</span> 모집게시판 캘린더
+				</h2>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="content w-100">
-					<div class="calendar-container">
-						<div class="calendar">
+		<div class="row" style="border-radius:10px;">
+			<div class="col-md-12" style="border-radius:10px;">
+				<div class="content w-100" style="border-radius:10px;">
+					<div class="calendar-container" style="border-top-left-radius:10px; border-bottom-left-radius:10px;">
+						<div class="calendar" style="border-top-left-radius:10px; border-bottom-left-radius:10px;">
 							<div class="year-header">
 								<span class="left-button fa fa-chevron-left" id="prev"> </span>
 								<span class="year" id="label"></span>
@@ -74,7 +89,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="events-container">
+					<div class="events-container" style="border-top-right-radius:10px; border-bottom-right-radius:10px;">
 					</div>
 					<div class="dialog" id="dialog">
 						<form class="form" id="form">

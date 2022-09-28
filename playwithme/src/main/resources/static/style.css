@@ -9,6 +9,7 @@
 html > body {
     font-family: "GmarketSansMedium";
     text-underline-position: under;
+    background-color: #f8f9fd;
 }
 
 textarea#exampleTextarea {
@@ -58,6 +59,7 @@ textarea {
     border-image-slice: 1;
 }
 
+/* 메인페이지 소개 배너 */
 .intro-banner {
     background-color: #faeceb;
     border-radius: 20px;
