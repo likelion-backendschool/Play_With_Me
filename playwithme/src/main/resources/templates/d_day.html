@@ -13,16 +13,15 @@
         </ol>
         <div>
             <div class="carousel-inner">
-
                 <div class="carousel-item active">
-                    <div class ="card bg-light" style="width: 100%">
-                        <div class="card-body mb-3 mr-5 ml-5">
-                            <div class="mr-5 ml-5">
+                    <div style="width: 100%">
+                        <div class="card-body mb-3 banner" style="padding-top: 50px; padding-bottom: 50px;">
+                            <div style="margin: 0px 100px">
                                 <div th:text="${first.event.name}" style="color: black;"></div>
                                 <div th:text="${first.event.location}" style="color: black;"></div>
                                 <div th:text="${#temporals.format(first.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
                                 <div class="d-flex justify-content-end">
-                                    <a th:href="@{|/board/${first.event.id}/${first.article.id}|}" class="btn btn-primary">
+                                    <a th:href="@{|/board/${first.event.id}/${first.article.id}|}" class="btn" style="background-color: #005DDB;">
                                         모집 게시글 바로가기
                                     </a>
                                 </div>
@@ -74,6 +73,7 @@
 <!--                <li th:each="num: ${#numbers.sequence(0, events.size-1)}"-->
 <!--                    data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>-->
             </ol>
+<!--            여기부터-->
             <div>
                 <div class="carousel-inner">
 
@@ -93,41 +93,9 @@
                             </div>
                         </div>
                     </div>
-
-<!--                    <div class="carousel-item" th:each="event : ${events}">-->
-<!--                        <div class ="card bg-light" style="width: 100%">-->
-<!--                            <div class="card-body mb-3 mr-5 ml-5">-->
-<!--                                <div class="mr-5 ml-5">-->
-<!--                                    <div th:text="${event.name}" style="color: black;"></div>-->
-<!--                                    <div th:text="${event.location}" style="color: black;"></div>-->
-<!--                                    <div th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}" style="color: black;"></div>-->
-<!--                                    <div class="d-flex justify-content-end">-->
-<!--                                        <a th:href="@{|/board/${event.id}|}" class="btn btn-primary">-->
-<!--                                            모집 게시판 바로가기-->
-<!--                                        </a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
                 </div>
+<!--                여기까지-->
             </div>
-
-<!--            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">-->
-<!--                <h5 aria-hidden="true" style="color:darkblue;">-->
-<!--                    <-->
-<!--                </h5>-->
-<!--                <span class="sr-only">Previous</span>-->
-<!--            </a>-->
-<!--            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">-->
-<!--                <h5 aria-hidden="true" style="color:darkblue;">-->
-<!--                    >-->
-<!--                </h5>-->
-<!--                <span class="sr-only">Next</span>-->
-<!--            </a>-->
         </th:block>
     </div>
 </div>
