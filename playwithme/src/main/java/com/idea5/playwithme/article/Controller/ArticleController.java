@@ -73,6 +73,8 @@ public class ArticleController {
         model.addAttribute("paging", paging);
         model.addAttribute("eventName", board.getEvent().getName());
 
+        System.out.println("paging.getTotalElements() = " + paging.getTotalElements());
+
         return "board";
     }
 
