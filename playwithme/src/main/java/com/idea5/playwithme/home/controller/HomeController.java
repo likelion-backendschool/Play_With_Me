@@ -55,7 +55,6 @@ public class HomeController {
         model.addAttribute("concertTopBoard", concertTopBoard);
         Long count = eventService.countEventAfterNow();
 
-        System.out.println("asd "+count);
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());

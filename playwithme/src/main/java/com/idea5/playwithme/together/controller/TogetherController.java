@@ -65,7 +65,7 @@ public class TogetherController {
             log.info("The name does not exist.......");
         }
         Member member = memberService.findMember(name);
-        System.out.println("member.getId() = " + member.getId());
+//        System.out.println("member.getId() = " + member.getId());
         List<TogetherInfoDto> togetherInfos = togetherService.findTogetherListByMemberId(member.getId());
         model.addAttribute("togetherInfos", togetherInfos);
 

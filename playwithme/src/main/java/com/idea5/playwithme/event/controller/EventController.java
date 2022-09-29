@@ -183,7 +183,7 @@ public class EventController {
     public String searchEvent (Model model, @RequestParam("kw")String kw, @RequestParam(value = "page", defaultValue = "0") int page){
         Page<Event> paging = eventService.getList(kw, page);
         for (Event event : paging) {
-            System.out.println(event.getName());
+//            System.out.println(event.getName());
         }
         model.addAttribute("paging", paging);
 

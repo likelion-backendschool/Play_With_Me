@@ -78,3 +78,8 @@ configurations {
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
 }
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.idea5.playwithme.PlaywithmeApplication'
+	}
+}

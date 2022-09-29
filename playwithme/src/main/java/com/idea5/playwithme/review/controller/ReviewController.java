@@ -109,8 +109,8 @@ public class ReviewController {
     public String review(@PathVariable("article_id") Long articleId, ReviewDto reviewDto, BindingResult bindingResult, Principal principal) {
         List<Review> reviewList = reviewDto.getReviewList();
         for (Review r : reviewList) {
-            System.out.println(r.getReviewee().getId());
-            System.out.println(r.getScore());
+//            System.out.println(r.getReviewee().getId());
+//            System.out.println(r.getScore());
         }
 
         reviewService.review(reviewDto);

@@ -60,10 +60,10 @@ public class CommentController {
     @PostMapping("/write/{board_id}/{article_id}")
     public String writeComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
-        System.out.println("작성 메서드 실행");
+//        System.out.println("작성 메서드 실행");
         Article findArticle = articleService.findById(articleId);
         if(bindingResult.hasErrors()){
-            System.out.println("바인딩 에러 발생");
+//            System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
         String name = principal.getName();
@@ -79,7 +79,7 @@ public class CommentController {
     public String reWriteComment(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long commentId, @Valid CommentCreateForm createForm, BindingResult bindingResult, Principal principal)
     {
         if(bindingResult.hasErrors()){
-            System.out.println("바인딩 에러 발생");
+//            System.out.println("바인딩 에러 발생");
             return "redirect:/board/%d/%d".formatted(boardId, articleId);
         }
         String name = principal.getName();
@@ -103,7 +103,7 @@ public class CommentController {
      */
     @GetMapping("/delete/{board_id}/{article_id}/{comment_id}")
     public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @PathVariable("comment_id") Long id) {
-        System.out.println("삭제 됐나요??");
+//        System.out.println("삭제 됐나요??");
         CommentDto comment = commentService.findComment(id);
         commentService.delete(id);
         return "redirect:/board/%d/%d".formatted(boardId, articleId);

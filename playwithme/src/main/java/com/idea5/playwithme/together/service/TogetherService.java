@@ -119,8 +119,8 @@ public class TogetherService {
             for(int j = 0; j < ids.size(); j++){
                 Long revieweeId = ids.get(j);
                 if(reviewerId != revieweeId){
-                    System.out.println("revieweeId = " + revieweeId);
-                    System.out.println("reviewerId = " + reviewerId);
+//                    System.out.println("revieweeId = " + revieweeId);
+//                    System.out.println("reviewerId = " + reviewerId);
                     reviewService.save(articleId, revieweeId, reviewerId);
                 }
 
