@@ -11,7 +11,7 @@
     </div>
     <!--모집중 상태이고 게시글 작성자에게만 모집 완료 버튼 노출-->
     <div class="d-flex justify-content-end" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
-        <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn btn-outline-primary" th:href="@{|/together/recruit/${board_id}/${article_id}/${article.member.getId()}|}" th:text="모집완료"></a>
+        <a onclick="if(!confirm('모집을 완료하시겠습니까?')) return false;" th:if="${article.recruitStatus == true}" class="btn" style="background-color:#7abdff; color:#fff;" th:href="@{|/together/recruit/${board_id}/${article_id}/${article.member.getId()}|}" th:text="모집완료"></a>
     </div>
     <h2 th:text="${article.title}"></h2>
     <div class="border-bottom my-2 py-2 d-flex">
@@ -20,9 +20,8 @@
             <i class="fa fa-eye me-1"></i>
             <span th:text="${article.views}"></span>
         </div>
-        <span class="badge rounded-pill text-bg-primary me-3" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
-        <span class="badge rounded-pill text-bg-secondary me-3" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
-        </th:block>
+        <span class="badge badge-recruit-state me-3 fs-6 pt-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+        <span class="badge badge-recruit-state me-3 fs-6 pt-1" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
 
         <div class="flex-grow-1"></div>
         <th:block
@@ -30,8 +29,8 @@
                 th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
             <!--모집중일 때만 수정, 삭제 가능-->
             <th:block th:if="${article.recruitStatus == true}" >
-                <a class="mx-1 badge text-bg-secondary" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}|}" th:text="수정"></a>
-                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="mx-1 badge text-bg-secondary" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}|}" th:text="삭제"></a>
+                <a class="badge badge-recruit-info fs-6 mx-2" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
+                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="badge badge-recruit-info fs-6" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="삭제"></a>
             </th:block>
         </th:block>
     </div>
@@ -41,15 +40,15 @@
         <div class="card-body d-flex align-items-center">
             <i class="fa fa-user-circle fa-2x"></i>
             <div class="mx-2">
-                <span class="badge bg-black">글쓴이</span>
+                <span class="badge bg-light text-dark fs-6">글쓴이</span>
                 <span th:text="${article.getMember().getNickname()}"></span>
                 <span class="mx-2">
                     <i class="fa fa-thermometer-three-quarters text-danger"></i>
                     <span class="me-2 text-danger" th:text="|${article.getMember().getMannerTemp()} &deg;|"></span>
                 </span>
-                <span class="badge rounded-pill text-bg-light mx-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
+                <span class="badge badge-recruit-info mx-1 fs-6 pt-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
                 <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                    <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
+                    <span class="badge badge-recruit-info mx-1 fs-6 pt-1" th:text="${gender}"></span>
                 </th:block>
             </div>
         </div>
@@ -63,33 +62,33 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">공연명</th>
+                    <th class="col-2" scope="row">공연명</th>
                     <td>
                         <div th:text="${event.name}"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">장소</th>
+                    <th class="col-2" scope="row">장소</th>
                     <td>
                         <div th:text="${event.location}"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">일시</th>
+                    <th class="col-2" scope="row">일시</th>
                     <td>
                         <span th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}"></span>
                         <span th:text="${#temporals.dayOfWeekName(event.date)}"></span>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">모집인원</th>
+                    <th class="col-2" scope="row">모집인원</th>
                     <td>
                         <div th:text="${article.maxRecruitNum}"></div>
                     </td>
                 </tr>
 
                 <tr>
-                    <th scope="row">내용</th>
+                    <th class="col-2" scope="row">내용</th>
                     <td>
                         <div th:text="${article.contents}"></div>
                     </td>
@@ -98,8 +97,8 @@
                 </tbody>
             </table>
 
-            <span class="badge rounded-pill text-bg-primary mx-1" th:text="|${article.ageRange}세|"></span>
-            <span class="badge rounded-pill text-bg-primary mx-1" th:text="${article.gender}"></span>
+            <span class="badge badge-recruit-info mx-1 fs-6 pt-1"  th:text="|${article.ageRange}세|"></span>
+            <span class="badge badge-recruit-info mx-1 fs-6 pt-1"  th:text="${article.gender}"></span>
         </div>
     </div>
 
@@ -116,7 +115,7 @@
         <div class = "d-flex justify-content-start align-items-center">
             <textarea th:field="*{contents}" class="form-control" rows="3"></textarea>
             <!--            <input type="text" name="query" placeholder="검색어">-->
-            <input type="submit" value="답변등록" class="btn btn-primary my-2">
+            <input type="submit" value="답변등록" class="btn mx-2 my-2" style="background-color:#7abdff; color:#fff;">
         </div>
         <!--     비밀 표시-->
         <div class="form-check ms-5 align-items-center">
@@ -162,7 +161,7 @@
                         <input type="checkbox" id="check" th:field="*{secretStatus}" class="form-check-input">
                         <label class="form-check-label" for="check">비밀</label>
                     </div>
-                    <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                    <button type="submit" class="btn ms-2 my-2" style="background-color:#7abdff; color:#fff;">수정 완료</button>
                 </div>
 
             </form>
@@ -172,18 +171,18 @@
                 <div class="d-flex justify-content-start fs-6 align-items-center">
 
                     <div th:if="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
-                        <div class="p-1 bg-primary text-white" th:text="글쓴이"></div>
+                        <div class="p-1 bg text-white" style="background-color:#7abdff;" th:text="글쓴이"></div>
                     </div>
                     <div th:unless="${article.member == comment.member}"  class="badge bg-light text-secondary text-start">
-                        <div class="p-1 mb-1 bg-primary text-white" th:text="${comment.member.nickname}"></div>
+                        <div class="p-1 mb-1 bg text-white" style="background-color:#7abdff;" th:text="${comment.member.nickname}"></div>
                     </div>
                     <div class="badge bg-light text-secondary p-2 text-start ">
                         <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
 
                     <div >
-                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
-                        <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                        <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm " style="background-color:#7abdff; color:#fff;" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
+                        <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm" style="background-color:#7abdff; color:#fff;" th:text="삭제"></a>
                     </div>
 
                 </div>
@@ -191,11 +190,12 @@
                 <div class="d-flex px-1 mb-3">
                     <!--            매너온도, 연령대, 성별, -->
                     <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                    <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                    <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
+                    <span class="text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
+                    <span class="badge badge-recruit-info mx-1 pt-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
                     <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                        <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
+                        <span class="badge badge-recruit-info mx-1 pt-1" th:text="${gender}"></span>
                     </th:block>
+
                 </div>
 
 
@@ -256,7 +256,7 @@
                             <input type="checkbox" th:field="*{secretStatus}" class="form-check-input">
                             <label class="form-check-label" for="check">비밀</label>
                         </div>
-                        <button type="submit" class="btn btn-primary ms-2 my-2">수정 완료</button>
+                        <button type="submit" class="btn ms-2 my-2" style="background-color:#7abdff; color:#fff;">수정 완료</button>
                     </div>
                 </form>
 
@@ -264,10 +264,10 @@
                     <div class="d-flex justify-content-start fs-6 ms-4 align-items-center">
 
                         <div th:if="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
-                            <div class="p-1 mb-1 bg-primary text-white" th:text="글쓴이"></div>
+                            <div class="p-1 mb-1 text-white" style="background-color:#7abdff;" th:text="글쓴이"></div>
                         </div>
                         <div th:unless="${article.member == child.member}"  class="badge bg-light text-secondary text-start">
-                            <div class="p-1 mb-1 bg-primary text-white" th:text="${child.member.nickname}"></div>
+                            <div class="p-1 mb-1 text-white" style="background-color:#7abdff;" th:text="${child.member.nickname}"></div>
                         </div>
 
                         <div class="badge bg-light text-secondary p-2 text-start ">
@@ -275,17 +275,17 @@
                         </div>
 
                         <div>
-                            <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm btn-outline-secondary" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}">수정</a>
-                            <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+                            <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm" style="background-color:#7abdff; color:#fff;" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}" >수정</a>
+                            <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm" style="background-color:#7abdff; color:#fff;" th:text="삭제"></a>
                         </div>
                     </div>
                     <div class="d-flex px-4 mb-3">
                         <!--            매너온도, 연령대, 성별, -->
                         <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                        <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                        <span class="badge rounded-pill text-bg-light mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
+                        <span class="text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
+                        <span class="badge badge-recruit-info mx-1 pt-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
                         <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                            <span class="badge rounded-pill text-bg-light mx-1" th:text="${gender}"></span>
+                            <span class="badge badge-recruit-info mx-1 pt-1" th:text="${gender}"></span>
                         </th:block>
                     </div>
                 </div>
@@ -306,7 +306,7 @@
                         <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
                     </svg>
                     <textarea th:field="*{contents}" class="form-control" rows="1" style="background-color:#f6f6f6;"></textarea>
-                    <input type="submit" value="답변등록" class="btn btn-primary my-2">
+                    <input type="submit" value="답변등록" class="btn mx-2 my-2" style="background-color:#7abdff; color:#fff;">
                 </div>
 
                 <div class="form-check ms-5 align-items-center">

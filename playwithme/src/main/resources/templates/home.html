@@ -17,195 +17,29 @@
 </head>
 <body layout:fragment="content">
 
-<div class="custom-hero" sec:authorize="isAnonymous()">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h1 class="hero-heading">Play With Me</h1>
-                <p><br></p>
+<div class="section-4" style="padding: 0px; margin-top: 10px;">
 
-                <div  class="line js-line mx-auto mb-3 my-10"></div>
-                <p><br></p>
-                <p class="sub-text">행사를 함께 갈 동행인을 모집해보세요! 리뷰기능과 매너온도, <br> 원하는 모집 상대 필터링을 통해 맞춤화된 모집이 가능합니다 </p>
+    <!--    <div class="container">-->
+    <!--        <div class="row mb-4 align-items-center">-->
+    <!--            <div class="col-6">-->
+    <!--                <h2 class="line-top">Your Own D-DAY</h2>-->
+    <!--            </div>-->
 
-                <p class="sub-text">Study With Me? 우리는 Play With Me!</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<div class="section" sec:authorize="isAnonymous()">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="0">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-thermometer-full" aria-hidden="true" fa-5x></i>
-                    </div>
-                    <div class="text">
-                        <h3>리뷰 및 매너온도</h3>
-                        <p>서로 간의 매너온도를 확인하고 리뷰를 통해 서로의 동행을 평가할 수 있어요</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-calendar-o" aria-hidden="true" fa-5x></i>
-                    </div>
-                    <div class="text">
-                        <h3>이벤트 캘린더</h3>
-                        <p>각 카테고리 달력을 통해 일자별 이벤트를 한눈에 확인 가능해요</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-history" aria-hidden="true" fa-5x></i>
-                    </div>
-                    <div class="text">
-                        <h3>타임라인 기능</h3>
-                        <p>타임라인 기능을 통해 다녀온 이벤트 목록과 메모를 작성할 수 있어요</p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-bell-o" fa-5x></i>
-                    </div>
-                    <div class="text">
-                        <h3>디데이 기능</h3>
-                        <p>동행 확정한 이벤트들 D-DAY를 한번에 모아서 볼 수 있어요</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-lock" fa-5x></i>
-                    </div>
-                    <div class="text">
-                        <h3>비밀댓글 기능</h3>
-                        <p>작성자와 댓글작성자만 비밀댓글을 공유하여 연락 방법을 주고 받을 수 있어요</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-v3 d-block">
-                    <div class="wrap-icon">
-                        <i class="fa fa-user-o"></i>
-                    </div>
-                    <div class="text">
-                        <h3>카카오 소셜로그인</h3>
-                        <p>카카오 계정이 있는 사람이라면 누구나 간편하게 1분 안에 가입 가능해요</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-<div class="container pb-5 mb-5" sec:authorize="isAnonymous()">
-    <div class="row justify-content-around">
-        <div class="col-lg-4 mb-4 mb-lg-0">
-
-            <h2 class="mb-4">How to?</h2>
-            <div class="line my-3"></div>
-
-            <p class="mt-5"><a href="#accordion_1" class="btn btn-primary">옆에서 Play With Me 사용법 알아보기 -> </a></p>
-
-        </div>
-        <div class="col-lg-7">
-            <div class="custom-accordion" id="accordion_1">
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">1. 원하는 이벤트 찾기</button>
-                    </h2>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p>1-1. 검색창 : 검색창으로 원하는 이벤트명이나 장소 검색하기</p>
-                            <p>1-2. 카테고리 : 카테고리로 분류된 이벤트 캘린더에서 찾기 </p>
-                        </div>
-                    </div>
-                </div> <!-- .accordion-item -->
-
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">2. 동행인 찾기</button>
-                    </h2>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p> 2-1. 로그인 : 카카오 소셜 로그인으로 간편하게 가입하기</p>
-                            <p> 2-2. 게시글 작성 : 모집 성별, 모집 나이대로 필터링된 게시글 작성하기</p>
-                            <p> 2-3. 댓글 작성 : 댓글로 서로 연락할 방법 공유하기</p>
-                        </div>
-                    </div>
-                </div> <!-- .accordion-item -->
-                <div class="accordion-item">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">3. 모집 완료 후 평가하기 (매너온도에 반영)</button>
-                    </h2>
-
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion_1">
-                        <div class="accordion-body">
-                            <p>모집완료 버튼을 통해 동행인을 확정하고 이벤트 일정 후에 서로를 평가해주세요! 리뷰 평점은 개인의 매너온도에 반영됩니다</p>
-                        </div>
-                    </div>
-
-                </div> <!-- .accordion-item -->
-
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-
-
-
-
-<div class="section-4" sec:authorize = "isAuthenticated()">
-
-<!--    <div class="container">-->
-<!--        <div class="row mb-4 align-items-center">-->
-<!--            <div class="col-6">-->
-<!--                <h2 class="line-top">Your Own D-DAY</h2>-->
-<!--            </div>-->
-
-<!--            <div>-->
-<!--                <th:block th:replace ="~{/d_day :: d_day}"> </th:block>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--            <div>-->
+    <!--                <th:block th:replace ="~{/d_day :: d_day}"> </th:block>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
     <div class="container">
         <div class="row mb-4 align-items-center">
             <div class="col-6">
-<!--                <th:block th:if="${check} == 'empty'">-->
-<!--                    <h2 class="line-top">Recommended Events</h2>-->
-<!--                </th:block>-->
-<!--                <th:block th:if="${check} == 'full'">-->
-<!--                    <h2 class="line-top">Your Own D-DAY</h2>-->
-<!--                </th:block>-->
-                <h2 class="line-top">Your Own D-DAY</h2>
+                <!--                <th:block th:if="${check} == 'empty'">-->
+                <!--                    <h2 class="line-top">Recommended Events</h2>-->
+                <!--                </th:block>-->
+                <!--                <th:block th:if="${check} == 'full'">-->
+                <!--                    <h2 class="line-top">Your Own D-DAY</h2>-->
+                <!--                </th:block>-->
+                <!--                <h2 class="line-top">Your Own D-DAY</h2>-->
             </div>
         </div>
 
@@ -215,74 +49,131 @@
     </div>
 </div>
 
+<!--승연시작-->
+<div class="container my-5">
+    <div class="row row-cols-5">
+        <div class="px-1">
+            <div class="card category-card" onclick="location.href='/event?category=baseball'" style="cursor: pointer; border: none; border-radius:20px;">
+                <div class="card-body d-flex flex-column align-items-center rounded-2">
+                    <div class="d-flex justify-content-center">
+                        <img src="/image/baseball4.png" class="w-50">
+                    </div>
+                    <div class="fs-4 text-center mt-3">야구</div>
+                </div>
+            </div>
+        </div>
+        <div class="px-1">
+            <div class="card category-card" onclick="location.href='/event?category=soccer'" style="cursor: pointer; border: none; border-radius:20px;">
+                <div class="card-body d-flex flex-column align-items-center rounded-2">
+                    <div class="d-flex justify-content-center">
+                        <img src="/image/soccer3.png" class="w-50">
+                    </div>
+                    <div class="fs-4 text-center mt-3">축구</div>
+                </div>
+            </div>
+        </div>
+        <div class="px-1">
+            <div class="card category-card" onclick="location.href='/event?category=basketball'" style="cursor: pointer; border: none; border-radius:20px;">
+                <div class="card-body d-flex flex-column align-items-center rounded-2">
+                    <div class="d-flex justify-content-center">
+                        <img src="/image/basketball3.png" class="w-50">
+                    </div>
+                    <div class="fs-4 text-center mt-3">농구</div>
+                </div>
+            </div>
+        </div>
+        <div class="px-1">
+            <div class="card category-card" onclick="location.href='/event?category=musical'" style="cursor: pointer; border: none; border-radius:20px;">
+                <div class="card-body d-flex flex-column align-items-center rounded-2">
+                    <div class="d-flex justify-content-center">
+                        <img src="/image/musical3.png" class="w-50">
+                    </div>
+                    <div class="fs-4 text-center mt-3">뮤지컬</div>
+                </div>
+            </div>
+        </div>
+        <div class="px-1">
+            <div class="card category-card" onclick="location.href='/event?category=concert'" style="cursor: pointer;  border: none; border-radius:20px;">
+                <div class="card-body d-flex flex-column align-items-center rounded-2">
+                    <div class="d-flex justify-content-center">
+                        <img src="/image/concert3.png" class="card-img w-50">
+                    </div>
+                    <div class="fs-4 text-center mt-3">콘서트</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--승연끝-->
 
 
+<!--디데이자리-->
 
 
 <div class="section">
     <div class="container">
         <div class="row mb-1">
             <div class="col-lg-7">
-                <h2 class="mb-4">Most Popular Events By Category</h2>
-                <div class="line my-3"></div>
+                <h3 class="mb-4"> <img src="image/podium.png"> &nbsp; PWM 카테고리별 인기 이벤트</h3>
             </div>
         </div>
         <div class="row">
 
 
-            <div class="col-md-6 mb-5 mb-lg-0 col-lg-4"> <!-- TODO: 중복제거 리팩토링-->
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${baseballTop}==null"><a href="single.html"></a> ✨ Baseball </h3>
-                        <h3 th:if="${baseballTop}!=null"><a href="single.html"></a> ✨ Baseball : [[${baseballTop?.name}]]</h3>
+            <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topBaseball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px; height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topBaseball}==null"><a href="single.html"></a>  야구 </h3>
+                        <h3 th:if="${topBaseball}!=null"><a href="single.html"></a>  야구 : [[${topBaseball?.name}]]</h3>
 
-                        <span th:if="${baseballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${baseballTop}!=null" class="date">  [[${#strings.substring(baseballTop?.date,0,10)}]]</span>
+                        <span th:if="${topBaseball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topBaseball}!=null" class="date">  [[${#strings.substring(topBaseball?.date,0,10)}]]</span>
 
-                        <p th:if="${baseballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${baseballTop}!=null"> [[${baseballTop?.location}]]</p>
+                        <p th:if="${topBaseball}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topBaseball}!=null"> [[${topBaseball?.location}]]</p>
 
-                        <p th:if="${baseballTop}==null" class="more"><a th:href="@{|/event?category=baseball|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${baseballTop}!=null" class="more"><a th:href="@{|/board/${baseballTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topBaseball}==null" class="more"><a th:href="@{|/event?category=baseball|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topBaseball}!=null" class="more"><a th:href="@{|/board/${topBaseballBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${soccerTop}==null"><a href="single.html"></a> ✨ Soccer </h3>
-                        <h3 th:if="${soccerTop}!=null"><a href="single.html"></a> ✨ Soccer : [[${soccerTop?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topSoccer.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topSoccer}==null"><a href="single.html"></a>  축구 </h3>
+                        <h3 th:if="${topSoccer}!=null"><a href="single.html"></a>  축구 : [[${topSoccer?.name}]]</h3>
 
-                        <span th:if="${soccerTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${soccerTop}!=null" class="date"> [[${#strings.substring(soccerTop?.date,0,10)}]]</span>
+                        <span th:if="${topSoccer}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topSoccer}!=null" class="date"> [[${#strings.substring(topSoccer?.date,0,10)}]]</span>
 
-                        <p th:if="${soccerTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${soccerTop}!=null"> [[${soccerTop?.location}]]</p>
+                        <p th:if="${topSoccer}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topSoccer}!=null"> [[${topSoccer?.location}]]</p>
 
-                        <p th:if="${soccerTop}==null" class="more"><a th:href="@{|/event?category=soccer|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${soccerTop}!=null" class="more"><a th:href="@{|/board/${soccerTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topSoccer}==null" class="more"><a th:href="@{|/event?category=soccer|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topSoccer}!=null" class="more"><a th:href="@{|/board/${topSoccerBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${basketballTop}==null"><a href="single.html"></a> ✨ Basketball </h3>
-                        <h3 th:if="${basketballTop}!=null"><a href="single.html"></a> ✨ Basketball : [[${basketballTop?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topBasketball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px; height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topBasketball}==null"><a href="single.html"></a> 농구 </h3>
+                        <h3 th:if="${topBasketball}!=null"><a href="single.html"></a> 농구 : [[${topBasketball?.name}]]</h3>
 
-                        <span th:if="${basketballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${basketballTop}!=null" class="date"> [[${#strings.substring(basketballTop?.date,0,10)}]]</span>
+                        <span th:if="${topBasketball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topBasketball}!=null" class="date"> [[${#strings.substring(topBasketball?.date,0,10)}]]</span>
 
-                        <p th:if="${basketballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${basketballTop}!=null"> [[${basketballTop?.location}]]</p>
+                        <p th:if="${topBasketball}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topBasketball}!=null"> [[${topBasketball?.location}]]</p>
 
-                        <p th:if="${basketballTop}==null" class="more"><a th:href="@{|/event?category=basketball|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${basketballTop}!=null" class="more"><a th:href="@{|/board/${basketballTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topBasketball}==null" class="more"><a th:href="@{|/event?category=basketball|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topBasketball}!=null" class="more"><a th:href="@{|/board/${topBasketballBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
@@ -302,39 +193,39 @@
 
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${musicalTop}==null"><a href="single.html"></a> ✨ Musical </h3>
-                            <h3 th:if="${musicalTop}!=null"><a href="single.html"></a> ✨ Musical : [[${musicalTop?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/topEvent/topMusical.jpg" class="img-fluid"--></a>
+                        <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                            <h3 th:if="${topMusical}==null"><a href="single.html"></a> 뮤지컬 </h3>
+                            <h3 th:if="${topMusical}!=null"><a href="single.html"></a> 뮤지컬 : [[${topMusical?.name}]]</h3>
 
-                            <span th:if="${musicalTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${musicalTop}!=null" class="date"> [[${#strings.substring(musicalTop?.date,0,10)}]]</span>
+                            <span th:if="${topMusical}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                            <span th:if="${topMusical}!=null" class="date"> [[${#strings.substring(topMusical?.date,0,10)}]]</span>
 
-                            <p th:if="${musicalTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                            <p th:if="${musicalTop}!=null"> [[${musicalTop?.location}]]</p>
+                            <p th:if="${topMusical}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                            <p th:if="${topMusical}!=null"> [[${topMusical?.location}]]</p>
 
-                            <p th:if="${musicalTop}==null" class="more"><a th:href="@{|/event?category=musical|}">이벤트 캘린더로 이동하기</a></p>
-                            <p th:if="${musicalTop}!=null" class="more"><a th:href="@{|/board/${musicalTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                            <p th:if="${topMusical}==null" class="more"><a th:href="@{|/event?category=musical|}">이벤트 캘린더로 이동하기</a></p>
+                            <p th:if="${topMusical}!=null" class="more"><a th:href="@{|/board/${topMusicalBoard.id}|}">모집 게시판으로 이동하기</a></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${concertTop}==null"><a href="single.html"></a> ✨ Concert </h3>
-                            <h3 th:if="${concertTop}!=null"><a href="single.html"></a> ✨ Concert : [[${concertTop?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/topEvent/topConcert.jpg" class="img-fluid"></a>
+                        <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                            <h3 th:if="${topConcert}==null"><a href="single.html"></a> 콘서트 </h3>
+                            <h3 th:if="${topConcert}!=null"><a href="single.html"></a> 콘서트 : [[${topConcert?.name}]]</h3>
 
-                            <span th:if="${concertTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${concertTop}!=null" class="date"> [[${#strings.substring(concertTop?.date,0,10)}]]</span>
+                            <span th:if="${topConcert}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                            <span th:if="${topConcert}!=null" class="date"> [[${#strings.substring(topConcert?.date,0,10)}]]</span>
 
-                            <p th:if="${concertTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                            <p th:if="${concertTop}!=null"> [[${concertTop?.location}]]</p>
+                            <p th:if="${topConcert}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                            <p th:if="${topConcert}!=null"> [[${topConcert?.location}]]</p>
 
-                            <p th:if="${concertTop}==null" class="more"><a th:href="@{|/event?category=concert|}">이벤트 캘린더로 이동하기</a></p>
-                            <p th:if="${concertTop}!=null" class="more"><a th:href="@{|/board/${concertTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                            <p th:if="${topConcert}==null" class="more"><a th:href="@{|/event?category=concert|}">이벤트 캘린더로 이동하기</a></p>
+                            <p th:if="${topConcert}!=null" class="more"><a th:href="@{|/board/${topConcertBoard.id}|}">모집 게시판으로 이동하기</a></p>
                         </div>
                     </div>
                 </div>
@@ -343,11 +234,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 

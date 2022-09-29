@@ -3,140 +3,147 @@
       xmlns:th="http://thymeleaf.org"
 >
 
+
 <div class="bd-example" th:fragment="d_day" >
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
         <th:block th:if="${check} == 'full' ">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li th:each="num: ${#numbers.sequence(0, togethers.size-1)}"
-                data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>
-        </ol>
-        <div>
-            <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <div class ="card bg-light" style="width: 100%">
-                        <div class="card-body mb-3 mr-5 ml-5">
-                            <div class="mr-5 ml-5">
-                                <div th:text="${first.event.name}" style="color: black;"></div>
-                                <div th:text="${first.event.location}" style="color: black;"></div>
-                                <div th:text="${#temporals.format(first.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
-                                <div class="d-flex justify-content-end">
-                                    <a th:href="@{|/board/${first.event.id}/${first.article.id}|}" class="btn btn-primary">
-                                        모집 게시글 바로가기
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item" th:each="together : ${togethers}">
-                    <div class ="card bg-light" style="width: 100%">
-                        <div class="card-body mb-3 mr-5 ml-5">
-                            <div class="mr-5 ml-5">
-                                <div th:text="${together.event.name}" style="color: black;"></div>
-                                <div th:text="${together.event.location}" style="color: black;"></div>
-                                <div th:text="${#temporals.format(together.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
-                                <div class="d-flex justify-content-end">
-                                    <a th:href="@{|/board/${together.event.id}/${together.article.id}|}" class="btn btn-primary">
-                                        모집 게시글 바로가기
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-
-        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-            <h5 aria-hidden="true" style="color:darkblue;">
-                <
-            </h5>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-            <h5 aria-hidden="true" style="color:darkblue;">
-                >
-            </h5>
-            <span class="sr-only">Next</span>
-        </a>
-        </th:block>
-
-        <th:block th:if="${check} == 'empty'">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-<!--                <li th:each="num: ${#numbers.sequence(0, events.size-1)}"-->
-<!--                    data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>-->
+                <li th:each="num: ${#numbers.sequence(0, togethers.size-1)}"
+                    data-target="#carouselExampleCaptions" data-slide-to="${num + 1}"></li>
             </ol>
             <div>
                 <div class="carousel-inner">
-
                     <div class="carousel-item active">
-                        <div class ="card bg-light" style="width: 100%">
-                            <div class="card-body mb-3 mr-5 ml-5">
-                                <div class="mr-5 ml-5">
-                                    <h2>
-                                        현재 동행 예정인 이벤트가 존재하지 않습니다
-                                    </h2>
-                                    <br>
-                                    <div class="d-flex justify-content-end">
-                                        <h4 th:text="'✨ 현재 '+${count}+'개의 이벤트에서 당신을 기다립니다!!'">
-
-                                        </h4>
-
+                        <div style="width: 100%">
+                            <div class="card-body mb-3 banner" style="padding-top: 50px; padding-bottom: 50px;">
+                                <div style="margin: 0px 100px" class="d-flex">
+                                    <div>
+                                        <div>
+                                            <h6>동행 예정 이벤트</h6>
+                                            <div th:text="${first.event.name}" style="color: black;" class="fs-4"></div>
+                                            <div th:text="${first.event.location}" style="color: black;"></div>
+                                            <div th:text="${#temporals.format(first.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex justify-content-end">
-                                        <h4>
-                                            지금 바로 동행에 참여하세요!!
-                                        </h4>
-
+                                    <div class="flex-grow-1"></div>
+                                    <div class="d-flex flex-column">
+                                        <div class="d-flex justify-content-center">
+                                            <img src="/image/banner3.png" style="width:150px;">
+                                        </div>
+                                        <a th:href="@{|/board/${first.event.id}/${first.article.id}|}" class="btn" style="background-color: #68A6FD; color: white;">
+                                            모집 게시글 바로가기
+                                        </a>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
 
-<!--                    <div class="carousel-item" th:each="event : ${events}">-->
-<!--                        <div class ="card bg-light" style="width: 100%">-->
-<!--                            <div class="card-body mb-3 mr-5 ml-5">-->
-<!--                                <div class="mr-5 ml-5">-->
-<!--                                    <div th:text="${event.name}" style="color: black;"></div>-->
-<!--                                    <div th:text="${event.location}" style="color: black;"></div>-->
-<!--                                    <div th:text="${#temporals.format(event.date, 'yyyy.MM.dd')}" style="color: black;"></div>-->
-<!--                                    <div class="d-flex justify-content-end">-->
-<!--                                        <a th:href="@{|/board/${event.id}|}" class="btn btn-primary">-->
-<!--                                            모집 게시판 바로가기-->
-<!--                                        </a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="carousel-item" th:each="together : ${togethers}">
+                        <div style="width: 100%">
+                            <div class="card-body mb-3 banner" style="padding-top: 50px; padding-bottom: 50px;">
+                                <div style="margin: 0px 100px" class="d-flex">
+                                    <div>
+                                        <div>
+                                            <h6>동행 예정 이벤트</h6>
+                                            <div th:text="${together.event.name}" style="color: black;" class="fs-4"></div>
+                                            <div th:text="${together.event.location}" style="color: black;"></div>
+                                            <div th:text="${#temporals.format(together.event.date, 'yyyy.MM.dd')}" style="color: black;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1"></div>
+                                    <div class="d-flex flex-column">
+                                        <div class="d-flex justify-content-center">
+                                            <img src="/image/banner3.png" style="width:150px;">
+                                        </div>
+                                        <a th:href="@{|/board/${together.event.id}/${together.article.id}|}" class="btn" style="background-color: #68A6FD; color: white;">
+                                            모집 게시글 바로가기
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
             </div>
 
-<!--            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">-->
-<!--                <h5 aria-hidden="true" style="color:darkblue;">-->
-<!--                    <-->
-<!--                </h5>-->
-<!--                <span class="sr-only">Previous</span>-->
-<!--            </a>-->
-<!--            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">-->
-<!--                <h5 aria-hidden="true" style="color:darkblue;">-->
-<!--                    >-->
-<!--                </h5>-->
-<!--                <span class="sr-only">Next</span>-->
-<!--            </a>-->
+            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                <h5 aria-hidden="true" style="color:darkblue;">
+                    <
+                </h5>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                <h5 aria-hidden="true" style="color:darkblue;">
+                    >
+                </h5>
+                <span class="sr-only">Next</span>
+            </a>
+        </th:block>
+
+                <th:block th:if="${#authorization.expr('isAnonymous()')} or ${check} == 'empty'">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                                <li th:each="num: ${#numbers.sequence(0, 1)}"
+                                    data-target="#carouselExampleCaptions" data-slide-to="${num}"></li>
+                </ol>
+                <div>
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div style="width: 100%;">
+                            <div class="card-body banner" style="padding: 50px 40px;">
+                                <div class="mr-5 ml-5 d-flex w-100">
+                                    <div style="width: 70%" class="d-flex flex-column justify-content-center">
+<!--                                        <h3 class="banner-text">현재 동행 예정인 이벤트가 존재하지 않습니다</h3>-->
+
+                                        <h4 sec:authorize="isAuthenticated()" th:text="'현재 '+${count}+'개의 이벤트에서 당신을 기다립니다!!'" class="banner-text"></h4>
+                                        <h4 sec:authorize="isAnonymous()" class="banner-text">저희 서비스가 처음이신가요?</h4>
+                                        <h4 sec:authorize="isAnonymous()" class="banner-text">다양한 이벤트가 당신을 기다립니다!</h4>
+                                        <h4 class="banner-text">지금 바로 동행에 참여하세요!!</h4>
+                                    </div>
+                                    <img src="/image/banner1.png" style="width: 20%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item" th:each="num: ${#numbers.sequence(0, 1)}">
+                        <div style="width: 100%">
+                            <div class="card-body intro-banner" style="padding: 50px 40px;">
+                                <div class="mr-5 ml-5 d-flex w-100">
+                                    <div style="width: 70%" class="d-flex flex-column justify-content-center">
+                                        <h5 style="color:#a6736f;" class="intro-banner-text">Play With Me? 우리는 Study With Me! </h5>
+                                        <h4 class="intro-banner-text"> <br> 리뷰기능과 매너온도, 원하는 모집 상대 필터링을 통해</h4>
+                                        <h4 class="intro-banner-text">내 동행인은 내가 직접 모집한다! </h4>
+                                    </div>
+                                    <img src="/image/search.png" style="width: 20%;">
+                                    <div class="d-flex justify-content-end"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <a style="opacity: 0.06;" class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                <h5 aria-hidden="true" style="color:darkblue;">
+                    <
+                </h5>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a style="opacity: 0.06;" class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                <h5 aria-hidden="true" style="color:darkblue;">
+                    >
+                </h5>
+                <span class="sr-only">Next</span>
+            </a>
+
         </th:block>
     </div>
 </div>
+

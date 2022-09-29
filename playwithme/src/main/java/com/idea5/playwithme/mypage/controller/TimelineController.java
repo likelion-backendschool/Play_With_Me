@@ -73,16 +73,16 @@ public class TimelineController {
         // 리스트에서 중복 이벤트 제거
         events = events.stream().filter(distinctByKey(Event::getName)).collect(Collectors.toList());
 
-        // 현재 날짜
-        List<Event> beforeNowEvents = new ArrayList<>();
+        // 현재 날짜 이전 이벤트들만 리스트에 추가
+        List<Event> eventsBeforeNow = new ArrayList<>();
         for(int i=0; i< events.size();i++) {
             if (LocalDateTime.now().isAfter(events.get(i).getDate())!=false) {
-                beforeNowEvents.add(events.get(i));
+                eventsBeforeNow.add(events.get(i));
             }
         }
 
         model.addAttribute("memberInfo", memberInfo);
-        model.addAttribute("events", beforeNowEvents);
+        model.addAttribute("events", eventsBeforeNow);
         model.addAttribute("timelines", timelines);
         model.addAttribute("requestDto", new TimelineRequestDto());
 

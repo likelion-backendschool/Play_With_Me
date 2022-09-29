@@ -55,7 +55,7 @@
         </div>
         <!--        로그인 했을 때는 회원이름, 이미지창 보여줌-->
         <div class="nav-item dropdown mx-2" sec:authorize="isAuthenticated()">
-            <a class="d-flex justify-content-lg-start align-items-center" href="#" data-toggle="dropdown" role="button">
+            <a class="nav-info" href="#" data-toggle="dropdown" role="button">
                 <p class="my-0 mx-3" th:text="${memberInfo.nickname}"></p>
                 <!-- 이미지 추가 -->
                 <img th:if="${memberInfo.gender} == male" src="/image/male.png" th:class="dropdown-toggle" height="38px">

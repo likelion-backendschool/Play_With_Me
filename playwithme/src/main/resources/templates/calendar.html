@@ -5,35 +5,49 @@
 		layout:decorate="~{fragment/layout}"
 >
 <head>
-	<title>Calendar 04</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/calendar.style.css" />
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/popper.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/main.js"></script>
+	<script src="/js/calendar.main.js"></script>
 </head>
 <body layout:fragment="content">
 <section class="ftco-section">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center mb-5">
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='baseball'">Baseball Calendar</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='soccer'">Soccer Calendar</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='basketball'">Basketball Calendar</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='musical'">Musical Calendar</h2>
-				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='concert'">Concert Calendar</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='baseball'">
+					<img src="/image/calendar/baseball.png" style="height:50px; width:50px"> &nbsp;
+					<span class="hl">야구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='soccer'">
+					<img src="/image/calendar/soccer.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">축구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='basketball'">
+					<img src="/image/calendar/basketball.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">농구</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='musical'">
+					<img src="/image/calendar/musical.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">뮤지컬</span> 모집게시판 캘린더
+				</h2>
+				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='concert'">
+					<img src="/image/calendar/concert.png" style="height:50px; width:50px">&nbsp;
+					<span class="hl">콘서트</span> 모집게시판 캘린더
+				</h2>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="content w-100">
-					<div class="calendar-container">
-						<div class="calendar">
+		<div class="row" style="border-radius:10px;">
+			<div class="col-md-12" style="border-radius:10px;">
+				<div class="content w-100" style="border-radius:10px;">
+					<div class="calendar-container" style="border-top-left-radius:10px; border-bottom-left-radius:10px;">
+						<div class="calendar" style="border-top-left-radius:10px; border-bottom-left-radius:10px;">
 							<div class="year-header">
 								<span class="left-button fa fa-chevron-left" id="prev"> </span>
 								<span class="year" id="label"></span>
@@ -42,30 +56,30 @@
 							<table class="months-table w-100">
 								<tbody>
 								<tr class="months-row">
-									<td class="month">Jan</td>
-									<td class="month">Feb</td>
-									<td class="month">Mar</td>
-									<td class="month">Apr</td>
-									<td class="month">May</td>
-									<td class="month">Jun</td>
-									<td class="month">Jul</td>
-									<td class="month">Aug</td>
-									<td class="month">Sep</td>
-									<td class="month">Oct</td>
-									<td class="month">Nov</td>
-									<td class="month">Dec</td>
+									<td class="month">01</td>
+									<td class="month">02</td>
+									<td class="month">03</td>
+									<td class="month">04</td>
+									<td class="month">05</td>
+									<td class="month">06</td>
+									<td class="month">07</td>
+									<td class="month">08</td>
+									<td class="month">09</td>
+									<td class="month">10</td>
+									<td class="month">11</td>
+									<td class="month">12</td>
 								</tr>
 								</tbody>
 							</table>
 
 							<table class="days-table w-100">
-								<td class="day">Sun</td>
-								<td class="day">Mon</td>
-								<td class="day">Tue</td>
-								<td class="day">Wed</td>
-								<td class="day">Thu</td>
-								<td class="day">Fri</td>
-								<td class="day">Sat</td>
+								<td class="day">일</td>
+								<td class="day">월</td>
+								<td class="day">화</td>
+								<td class="day">수</td>
+								<td class="day">목</td>
+								<td class="day">금</td>
+								<td class="day">토</td>
 							</table>
 							<div class="frame">
 								<table class="dates-table w-100">
@@ -75,7 +89,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="events-container">
+					<div class="events-container" style="border-top-right-radius:10px; border-bottom-right-radius:10px;">
 					</div>
 					<div class="dialog" id="dialog">
 						<form class="form" id="form">
