@@ -37,10 +37,28 @@ textarea {
     resize : none;
 }
 
-
+/* 뱃지 */
 .badge {
     font-size: 15px;
+    padding: 1px 9px 2px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
 }
+
+.badge-recruit-state {
+    background-color: #f5b5b0;
+}
+
+.badge-recruit-info {
+    background-color:#7abdff;
+}
+
+
 
 
 .eventTitle {
@@ -122,5 +140,31 @@ textarea {
     height: inherit;
 }
 
+/* 페이징 버튼 */
+.page-link {
+    color: #7abdff;
+    background-color: #fff;
+    border: 1px solid #7abdff;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    font-weight:bold;
+    background-color: #7abdff;
+    border-color: #7abdff;
+
+}
+
+.page-link:focus, .page-link:hover {
+    color: #fff;
+    background-color: #7abdff;
+    border-color: #7abdff;
+}
+
+.bar-manner-tempt {
+    background-color: #7abdff;
+    color: #7abdff;
+}
 
 
