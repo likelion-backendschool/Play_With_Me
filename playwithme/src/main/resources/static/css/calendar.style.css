@@ -8495,6 +8495,9 @@ h1, h2, h3, h4, h5,
 .error-input {
   border-color: #51a9db; }
 
+<<<<<<< HEAD:playwithme/src/main/resources/static/css/style.css
+=======
 .hl {
   background: linear-gradient(to top, #a4bcef 30%, transparent 30%);
 }
+>>>>>>> 4b8045ef25042ba3bdb5ad180c5e8b8ae823d1b5:playwithme/src/main/resources/static/css/calendar.style.css

@@ -7,52 +7,66 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Play With Me</title>
 </head>
 
-    <nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/}">
-            <img src="/image/LOGO.png" height="50px" >
+<nav th:fragment="navbarFragment"
+     class="navbar navbar-expand-lg navbar-light bg-white container px-3 py-2 justify-content-lg-between">
+    <div class="navbar-nav">
+        <a class="navbar-brand my-1" th:href="@{/}">
+            <img src="/image/logo4.png" height="40px">
         </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenuContent"
+                aria-controls="navbarMenuContent" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Collection of nav links, forms, and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-            <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link">Home</a>
-                <div class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categories</a>
-                    <div class="dropdown-menu">
-                        <a th:href="@{|/event?category=baseball|}" class="dropdown-item">Baseball</a>
-                        <a th:href="@{|/event?category=soccer|} " class="dropdown-item">Soccer</a>
-                        <a th:href="@{|/event?category=basketball|}"  class="dropdown-item">Basketball</a>
-                        <a th:href="@{|/event?category=musical|}"  class="dropdown-item">Musical</a>
-                        <a th:href="@{|/event?category=concert|}"  class="dropdown-item">Concert</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="navbar-nav ml-auto">
-                <form class="navbar-form form-inline search-form" action="/event/search" method="get">
-                    <div class="input-group mt-2">
-                        <input class="form-control"  type="text" name="kw"  placeholder="Search..." th:value="${param.kw}">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-default mr-2" >
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <div class="nav-item">
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|/mypage|}">Mypage</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{|${@KakaoAddress.kakaoLogin(#request.requestURI)}|}">Login</a>
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{|${@KakaoAddress.kakaoLogout(#request.requestURI)}|}">Logout</a>
+        <div class="collapse navbar-collapse" id="navbarMenuContent">
+            <a href="/about" class="nav-item nav-link"><h5 class="my-0">소개</h5></a>
+            <div class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link" role="button">
+                    <h5 class="my-0 dropdown-toggle">카테고리</h5>
+                </a>
+                <div class="dropdown-menu">
+                    <a th:href="@{|/event?category=baseball|}" class="dropdown-item"><h6>야구</h6></a>
+                    <a th:href="@{|/event?category=soccer|} " class="dropdown-item"><h6>축구</h6></a>
+                    <a th:href="@{|/event?category=basketball|}" class="dropdown-item"><h6>농구</h6></a>
+                    <a th:href="@{|/event?category=musical|}" class="dropdown-item"><h6>뮤지컬</h6></a>
+                    <a th:href="@{|/event?category=concert|}" class="dropdown-item"><h6>콘서트</h6></a>
                 </div>
             </div>
         </div>
-    </nav>
-</html>
+        <!-- 검색창 추가하기-->
+        <div class="d-flex align-items-center p-2">
+            <form class="search-form" action="/event/search" method="get">
+                <input class="search-input" type="text" name="kw" placeholder="찾으시는 행사가 있나요?" th:value="${param.kw}">
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="navbar-nav">
+        <!--        로그인 안했을 때는 로그인 보여줌-->
+        <div class="nav-item" sec:authorize="isAnonymous()">
+            <a class="nav-link" th:href="@{|${@KakaoAddress.kakaoLogin(#request.requestURI)}|}">로그인</a>
 
+        </div>
+        <!--        로그인 했을 때는 회원이름, 이미지창 보여줌-->
+        <div class="nav-item dropdown mx-2" sec:authorize="isAuthenticated()">
+            <a class="nav-info" href="#" data-toggle="dropdown" role="button">
+                <p class="my-0 mx-3" th:text="${memberInfo.nickname}"></p>
+                <!-- 이미지 추가 -->
+                <img th:if="${memberInfo.gender} == male" src="/image/male.png" th:class="dropdown-toggle" height="38px">
+                <img th:if="${memberInfo.gender} == female" src="/image/female.png" th:class="dropdown-toggle" height="38px">
+            </a>
+            <div class="dropdown-menu">
+                <!--        회원 팝업에 들어갈 내용-->
+                <a class="dropdown-item" th:href="@{|/mypage|}">마이페이지</a>
+                <a class="dropdown-item" th:href="@{|${@KakaoAddress.kakaoLogout(#request.requestURI)}|}">로그아웃</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</html>

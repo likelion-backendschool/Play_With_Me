@@ -16,5 +16,6 @@ public class MemberInfoDTO {
     private String ageRange;
     private String email;
     private String mannerTemp;
+    private String gender;
     private String createDate;
 }

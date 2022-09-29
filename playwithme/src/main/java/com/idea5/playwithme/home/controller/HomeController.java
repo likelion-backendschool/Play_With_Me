@@ -5,6 +5,7 @@ import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
@@ -58,6 +59,9 @@ public class HomeController {
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
             String check = "empty";
@@ -67,13 +71,14 @@ public class HomeController {
 //                events.remove(0);
 //                model.addAttribute("events",events);
             }
-
             else{
                 check = "full";
                 model.addAttribute("first",togethers.get(0));
                 togethers.remove(0);
                 model.addAttribute("togethers",togethers);
             }
+
+            model.addAttribute("member", member);
             model.addAttribute("count",count);
             model.addAttribute("check",check);
         }
@@ -83,7 +88,13 @@ public class HomeController {
 
     // 소개 페이지
     @GetMapping("/about")
-    public String intro() {
+    public String intro(Model model, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         return "about";
     }
 }
