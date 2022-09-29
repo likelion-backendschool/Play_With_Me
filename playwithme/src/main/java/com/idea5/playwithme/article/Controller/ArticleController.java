@@ -41,7 +41,7 @@ public class ArticleController {
     public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm, Principal principal) {
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 
@@ -77,7 +77,7 @@ public class ArticleController {
     public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page, Principal principal) {
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 
@@ -96,7 +96,7 @@ public class ArticleController {
     public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Principal principal) {
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 
@@ -124,7 +124,8 @@ public class ArticleController {
 
         // 메뉴바 회원 닉네임, 성별 내용 추가
         Member member = memberService.findMember(principal.getName());
-        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+
 
         Article article = articleService.findById(articleId);
         // 기존 값 넣기

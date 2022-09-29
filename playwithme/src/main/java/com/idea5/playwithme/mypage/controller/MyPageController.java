@@ -51,6 +51,7 @@ public class MyPageController {
         // MemberInfoDto에 Member 정보 저장
         MemberInfoDTO memberInfo = MemberInfoDTO.builder()
                 .memberId(member.getId())
+                .name(member.getName())
                 .nickname(member.getNickname())
                 .ageRange(member.getAgeRange())
                 .email(member.getEmail())
@@ -66,7 +67,7 @@ public class MyPageController {
     @GetMapping("/dday")
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
-        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
 
         List<Together> togethers = togetherService.findByMemberId(member.getId());
         Map<Together,Long> map = new LinkedHashMap<>();
