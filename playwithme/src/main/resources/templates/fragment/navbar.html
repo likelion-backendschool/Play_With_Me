@@ -56,10 +56,10 @@
         <!--        로그인 했을 때는 회원이름, 이미지창 보여줌-->
         <div class="nav-item dropdown mx-2" sec:authorize="isAuthenticated()">
             <a class="d-flex justify-content-lg-start align-items-center" href="#" data-toggle="dropdown" role="button">
-                <p class="my-0 mx-3" th:text="${member.nickname}"></p>
+                <p class="my-0 mx-3" th:text="${memberInfo.nickname}"></p>
                 <!-- 이미지 추가 -->
-                <img th:if="${member.gender} == male" src="/image/male.png" th:class="dropdown-toggle" height="38px">
-                <img th:if="${member.gender} == female" src="/image/female.png" th:class="dropdown-toggle" height="38px">
+                <img th:if="${memberInfo.gender} == male" src="/image/male.png" th:class="dropdown-toggle" height="38px">
+                <img th:if="${memberInfo.gender} == female" src="/image/female.png" th:class="dropdown-toggle" height="38px">
             </a>
             <div class="dropdown-menu">
                 <!--        회원 팝업에 들어갈 내용-->

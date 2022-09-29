@@ -2,6 +2,7 @@ package com.idea5.playwithme.mypage.controller;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.mypage.domain.Timeline;
 import com.idea5.playwithme.mypage.dto.TimelineRequestDto;
 import com.idea5.playwithme.member.service.MemberService;
@@ -45,6 +46,9 @@ public class TimelineController {
         // 현재 로그인한 회원 리턴
         Member member = memberService.findMember(principal.getName());
 
+        // 메뉴 바 정보
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+
         // 해당 회원의 Timeline 리스트
         List<Timeline> timelines = member.getTimelineList();
 
@@ -77,6 +81,7 @@ public class TimelineController {
             }
         }
 
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("events", beforeNowEvents);
         model.addAttribute("timelines", timelines);
         model.addAttribute("requestDto", new TimelineRequestDto());

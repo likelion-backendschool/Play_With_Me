@@ -5,6 +5,7 @@ import com.idea5.playwithme.board.service.BoardService;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.event.service.EventService;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.together.domain.Together;
 import com.idea5.playwithme.together.service.TogetherService;
@@ -59,6 +60,9 @@ public class HomeController {
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+
 
             List<Together> togethers = togetherService.findByMemberId(member.getId());
             String check = "empty";

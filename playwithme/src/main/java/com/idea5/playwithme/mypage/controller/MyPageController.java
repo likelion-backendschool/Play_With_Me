@@ -55,6 +55,7 @@ public class MyPageController {
                 .ageRange(member.getAgeRange())
                 .email(member.getEmail())
                 .mannerTemp(String.valueOf(member.getMannerTemp()))
+                .gender(member.getGender())
                 .createDate(createDate)
                 .build();
 
@@ -65,6 +66,7 @@ public class MyPageController {
     @GetMapping("/dday")
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
 
         List<Together> togethers = togetherService.findByMemberId(member.getId());
 
@@ -75,6 +77,7 @@ public class MyPageController {
             map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
         }
 //        model.addAttribute("events",events);
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("map",map);
         return "d_day_list";
     }

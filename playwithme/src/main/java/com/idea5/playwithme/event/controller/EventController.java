@@ -8,6 +8,9 @@ import com.idea5.playwithme.event.service.EventService;
 
 import com.idea5.playwithme.event.service.crawling.ConcertAndMusicalCrawlService;
 import com.idea5.playwithme.event.service.crawling.SportsCrawlService;
+import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
+import com.idea5.playwithme.member.service.MemberService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +37,7 @@ public class EventController {
 
     private List<Event> events = new ArrayList<>();
     private final BoardService boardService;
+    private final MemberService memberService;
 
 
     @GetMapping("/crawl")
@@ -56,7 +61,13 @@ public class EventController {
     }
 
     @GetMapping("/event")
-    public String showEvent(Model model, @RequestParam String category, @RequestParam(defaultValue = "new SimpleDateFormat(\"yyyy-MM-dd\").format(new Date())") String date) {
+    public String showEvent(Model model, @RequestParam String category, @RequestParam(defaultValue = "new SimpleDateFormat(\"yyyy-MM-dd\").format(new Date())") String date, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Integer categoryId = 0;
         switch (category) {
             case "baseball":
@@ -180,7 +191,13 @@ public class EventController {
     }
 
     @GetMapping("/event/search")
-    public String searchEvent (Model model, @RequestParam("kw")String kw, @RequestParam(value = "page", defaultValue = "0") int page){
+    public String searchEvent (Model model, @RequestParam("kw")String kw, @RequestParam(value = "page", defaultValue = "0") int page, Principal principal){
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Page<Event> paging = eventService.getList(kw, page);
         for (Event event : paging) {
             System.out.println(event.getName());

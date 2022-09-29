@@ -11,6 +11,7 @@ import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,13 @@ public class ArticleController {
     // 게시글 작성폼
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/write/{board_id}")
-    public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+    public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Board board = boardService.findById(boardId);
         model.addAttribute("eventName", board.getEvent().getName());
 
@@ -66,7 +73,13 @@ public class ArticleController {
 
     // 게시글 리스트 조회
     @GetMapping("/{board_id}")
-    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Board board = boardService.findById(boardId);
         Page<Article> paging = articleService.getList(boardId, page);
         model.addAttribute("paging", paging);
@@ -77,7 +90,13 @@ public class ArticleController {
 
     // 게시글 상세 조회
     @GetMapping("/{board_id}/{article_id}")
-    public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Article article = articleService.getDetails(boardId, articleId);
         List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         articleService.updateViews(article);
@@ -96,7 +115,13 @@ public class ArticleController {
     // 게시글 수정폼
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{board_id}/{article_id}")
-    public String modifyForm(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
+    public String modifyForm(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Article article = articleService.findById(articleId);
         // 기존 값 넣기
         articleUpdateForm.setTitle(article.getTitle());
@@ -157,8 +182,10 @@ public class ArticleController {
     @GetMapping("/manage")
     public String manage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "all") String category, @RequestParam(defaultValue = "new") String sortCode, Principal principal, Model model) {
         Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
 
         Page<Article> paging = articleService.getMyList(member.getId(), page, category, sortCode);
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("paging", paging);
         model.addAttribute("category", category);
         model.addAttribute("sortCode", sortCode);
