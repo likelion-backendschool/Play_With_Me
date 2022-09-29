@@ -2,8 +2,8 @@
 spring:
   datasource:
     url: jdbc:mariadb://localhost:3306/playwithme?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
-    username: user1
-    password: Ttest12341234@
+    username: root
+    password:
 
     driver-class-name: org.mariadb.jdbc.Driver
 
