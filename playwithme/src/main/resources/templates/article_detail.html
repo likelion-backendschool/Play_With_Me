@@ -20,8 +20,8 @@
             <i class="fa fa-eye me-1"></i>
             <span th:text="${article.views}"></span>
         </div>
-        <span class="badge badge-recruit-state me-3 fs-6" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
-        <span class="badge badge-recruit-state me-3 fs-6" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
+        <span class="badge badge-recruit-state me-3 fs-6 pt-1" th:if="${article.recruitStatus == true}" th:text="모집중"></span>
+        <span class="badge badge-recruit-state me-3 fs-6 pt-1" th:unless="${article.recruitStatus == true}" th:text="모집완료"></span>
 
         <div class="flex-grow-1"></div>
         <th:block
@@ -46,9 +46,9 @@
                     <i class="fa fa-thermometer-three-quarters text-danger"></i>
                     <span class="me-2 text-danger" th:text="|${article.getMember().getMannerTemp()} &deg;|"></span>
                 </span>
-                <span class="badge badge-recruit-info mx-1 fs-6" th:text="|${article.getMember().getAgeRange()}세|"></span>
+                <span class="badge badge-recruit-info mx-1 fs-6 pt-1" th:text="|${article.getMember().getAgeRange()}세|"></span>
                 <th:block th:with="gender = (${#strings.equals(article.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                    <span class="badge badge-recruit-info mx-1 fs-6" th:text="${gender}"></span>
+                    <span class="badge badge-recruit-info mx-1 fs-6 pt-1" th:text="${gender}"></span>
                 </th:block>
             </div>
         </div>
@@ -97,8 +97,8 @@
                 </tbody>
             </table>
 
-            <span class="badge badge-recruit-info mx-1 fs-6"  th:text="|${article.ageRange}세|"></span>
-            <span class="badge badge-recruit-info mx-1 fs-6"  th:text="${article.gender}"></span>
+            <span class="badge badge-recruit-info mx-1 fs-6 pt-1"  th:text="|${article.ageRange}세|"></span>
+            <span class="badge badge-recruit-info mx-1 fs-6 pt-1"  th:text="${article.gender}"></span>
         </div>
     </div>
 
@@ -190,11 +190,12 @@
                 <div class="d-flex px-1 mb-3">
                     <!--            매너온도, 연령대, 성별, -->
                     <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                    <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                    <span class="badge badge-recruit-info mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
+                    <span class="text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
+                    <span class="badge badge-recruit-info mx-1 pt-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
                     <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                        <span class="badge badge-recruit-info mx-1" th:text="${gender}"></span>
+                        <span class="badge badge-recruit-info mx-1 pt-1" th:text="${gender}"></span>
                     </th:block>
+
                 </div>
 
 
@@ -281,10 +282,10 @@
                     <div class="d-flex px-4 mb-3">
                         <!--            매너온도, 연령대, 성별, -->
                         <i class="fa fa-thermometer-three-quarters text-danger"></i>
-                        <span class="badge text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
-                        <span class="badge badge-recruit-info mx-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
+                        <span class="text-danger" th:text="|${comment.getMember().getMannerTemp()} &deg;|"></span>
+                        <span class="badge badge-recruit-info mx-1 pt-1" th:text="|${comment.getMember().getAgeRange()}세|"></span>
                         <th:block th:with="gender = (${#strings.equals(comment.getMember().getGender(), 'female') ? '여성' : '남성'})">
-                            <span class="badge badge-recruit-info mx-1" th:text="${gender}"></span>
+                            <span class="badge badge-recruit-info mx-1 pt-1" th:text="${gender}"></span>
                         </th:block>
                     </div>
                 </div>
