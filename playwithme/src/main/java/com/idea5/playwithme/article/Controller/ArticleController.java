@@ -202,7 +202,7 @@ public class ArticleController {
     @GetMapping("/manage")
     public String manage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "all") String category, @RequestParam(defaultValue = "new") String sortCode, Principal principal, Model model) {
         Member member = memberService.findMember(principal.getName());
-        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
 
         Page<Article> paging = articleService.getMyList(member.getId(), page, category, sortCode);
         model.addAttribute("memberInfo", memberInfo);
