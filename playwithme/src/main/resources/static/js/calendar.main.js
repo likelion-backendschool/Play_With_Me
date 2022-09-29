@@ -127,7 +127,7 @@ function date_click(event) {
               // 이벤트가 없을 경우
               if(event_data2[0].length===0) {
                  var event_card = $("<div class='event-card'></div>");
-                 var event_name = $("<div class='event-name'> 해당 날짜는 이벤트 일정이 없습니다 😵 </div>");
+                 var event_name = $("<div class='event-name'> 해당 날짜는 이벤트 일정이 없습니다&nbsp;<i class=\"fa fa-spinner\"></i> </div>");
                  $(event_card).css({ "border-left": "10px solid #FF1744" });
                  $(event_card).append(event_name);
                  $(".events-container").append(event_card);

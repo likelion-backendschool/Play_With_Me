@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "flaticon";
-  src: url("./flaticon.ttf?09a74f20e0694c25f2dc454659f5b1e4") format("truetype"), url("./flaticon.woff?09a74f20e0694c25f2dc454659f5b1e4") format("woff"), url("./flaticon.woff2?09a74f20e0694c25f2dc454659f5b1e4") format("woff2"), url("./flaticon.eot?09a74f20e0694c25f2dc454659f5b1e4#iefix") format("embedded-opentype"), url("./flaticon.svg?09a74f20e0694c25f2dc454659f5b1e4#flaticon") format("svg"); }
+  src: url("flaticon.ttf?09a74f20e0694c25f2dc454659f5b1e4") format("truetype"), url("flaticon.woff?09a74f20e0694c25f2dc454659f5b1e4") format("woff"), url("flaticon.woff2?09a74f20e0694c25f2dc454659f5b1e4") format("woff2"), url("flaticon.eot?09a74f20e0694c25f2dc454659f5b1e4#iefix") format("embedded-opentype"), url("flaticon.svg?09a74f20e0694c25f2dc454659f5b1e4#flaticon") format("svg"); }
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
   font-family: flaticon !important;
