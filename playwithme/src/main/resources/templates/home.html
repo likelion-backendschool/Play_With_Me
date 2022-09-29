@@ -18,6 +18,7 @@
 <body layout:fragment="content">
 
 <div class="section-4" style="padding: 0px; margin-top: 10px;">
+
     <!--    <div class="container">-->
     <!--        <div class="row mb-4 align-items-center">-->
     <!--            <div class="col-6">-->
@@ -114,66 +115,65 @@
     <div class="container">
         <div class="row mb-1">
             <div class="col-lg-7">
-                <h2 class="mb-4">Most Popular Events By Category</h2>
-                <div class="line my-3"></div>
+                <h3 class="mb-4"> <img src="image/podium.png"> &nbsp; PWM 카테고리별 인기 이벤트</h3>
             </div>
         </div>
         <div class="row">
 
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${baseballTop}==null"><a href="single.html"></a> ✨ Baseball </h3>
-                        <h3 th:if="${baseballTop}!=null"><a href="single.html"></a> ✨ Baseball : [[${baseballTop?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topBaseball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px; height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topBaseball}==null"><a href="single.html"></a>  야구 </h3>
+                        <h3 th:if="${topBaseball}!=null"><a href="single.html"></a>  야구 : [[${topBaseball?.name}]]</h3>
 
-                        <span th:if="${baseballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${baseballTop}!=null" class="date">  [[${#strings.substring(baseballTop?.date,0,10)}]]</span>
+                        <span th:if="${topBaseball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topBaseball}!=null" class="date">  [[${#strings.substring(topBaseball?.date,0,10)}]]</span>
 
-                        <p th:if="${baseballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${baseballTop}!=null"> [[${baseballTop?.location}]]</p>
+                        <p th:if="${topBaseball}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topBaseball}!=null"> [[${topBaseball?.location}]]</p>
 
-                        <p th:if="${baseballTop}==null" class="more"><a th:href="@{|/event?category=baseball|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${baseballTop}!=null" class="more"><a th:href="@{|/board/${baseballTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topBaseball}==null" class="more"><a th:href="@{|/event?category=baseball|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topBaseball}!=null" class="more"><a th:href="@{|/board/${topBaseballBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${soccerTop}==null"><a href="single.html"></a> ✨ Soccer </h3>
-                        <h3 th:if="${soccerTop}!=null"><a href="single.html"></a> ✨ Soccer : [[${soccerTop?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topSoccer.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topSoccer}==null"><a href="single.html"></a>  축구 </h3>
+                        <h3 th:if="${topSoccer}!=null"><a href="single.html"></a>  축구 : [[${topSoccer?.name}]]</h3>
 
-                        <span th:if="${soccerTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${soccerTop}!=null" class="date"> [[${#strings.substring(soccerTop?.date,0,10)}]]</span>
+                        <span th:if="${topSoccer}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topSoccer}!=null" class="date"> [[${#strings.substring(topSoccer?.date,0,10)}]]</span>
 
-                        <p th:if="${soccerTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${soccerTop}!=null"> [[${soccerTop?.location}]]</p>
+                        <p th:if="${topSoccer}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topSoccer}!=null"> [[${topSoccer?.location}]]</p>
 
-                        <p th:if="${soccerTop}==null" class="more"><a th:href="@{|/event?category=soccer|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${soccerTop}!=null" class="more"><a th:href="@{|/board/${soccerTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topSoccer}==null" class="more"><a th:href="@{|/event?category=soccer|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topSoccer}!=null" class="more"><a th:href="@{|/board/${topSoccerBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                <div class="blog_entry">
-                    <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                    <div class="p-4 bg-white">
-                        <h3 th:if="${basketballTop}==null"><a href="single.html"></a> ✨ Basketball </h3>
-                        <h3 th:if="${basketballTop}!=null"><a href="single.html"></a> ✨ Basketball : [[${basketballTop?.name}]]</h3>
+                <div style="border-radius:10px;" class="blog_entry">
+                    <a href="single.html"><img src="image/topEvent/topBasketball.jpg" class="img-fluid"></a>
+                    <div style="border-radius:10px; height:220px;" class="p-4 bg-white">
+                        <h3 th:if="${topBasketball}==null"><a href="single.html"></a> 농구 </h3>
+                        <h3 th:if="${topBasketball}!=null"><a href="single.html"></a> 농구 : [[${topBasketball?.name}]]</h3>
 
-                        <span th:if="${basketballTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                        <span th:if="${basketballTop}!=null" class="date"> [[${#strings.substring(basketballTop?.date,0,10)}]]</span>
+                        <span th:if="${topBasketball}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                        <span th:if="${topBasketball}!=null" class="date"> [[${#strings.substring(topBasketball?.date,0,10)}]]</span>
 
-                        <p th:if="${basketballTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                        <p th:if="${basketballTop}!=null"> [[${basketballTop?.location}]]</p>
+                        <p th:if="${topBasketball}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                        <p th:if="${topBasketball}!=null"> [[${topBasketball?.location}]]</p>
 
-                        <p th:if="${basketballTop}==null" class="more"><a th:href="@{|/event?category=basketball|}">이벤트 캘린더로 이동하기</a></p>
-                        <p th:if="${basketballTop}!=null" class="more"><a th:href="@{|/board/${basketballTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                        <p th:if="${topBasketball}==null" class="more"><a th:href="@{|/event?category=basketball|}">이벤트 캘린더로 이동하기</a></p>
+                        <p th:if="${topBasketball}!=null" class="more"><a th:href="@{|/board/${topBasketballBoard.id}|}">모집 게시판으로 이동하기</a></p>
                     </div>
                 </div>
             </div>
@@ -193,39 +193,39 @@
 
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${musicalTop}==null"><a href="single.html"></a> ✨ Musical </h3>
-                            <h3 th:if="${musicalTop}!=null"><a href="single.html"></a> ✨ Musical : [[${musicalTop?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/topEvent/topMusical.jpg" class="img-fluid"--></a>
+                        <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                            <h3 th:if="${topMusical}==null"><a href="single.html"></a> 뮤지컬 </h3>
+                            <h3 th:if="${topMusical}!=null"><a href="single.html"></a> 뮤지컬 : [[${topMusical?.name}]]</h3>
 
-                            <span th:if="${musicalTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${musicalTop}!=null" class="date"> [[${#strings.substring(musicalTop?.date,0,10)}]]</span>
+                            <span th:if="${topMusical}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                            <span th:if="${topMusical}!=null" class="date"> [[${#strings.substring(topMusical?.date,0,10)}]]</span>
 
-                            <p th:if="${musicalTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                            <p th:if="${musicalTop}!=null"> [[${musicalTop?.location}]]</p>
+                            <p th:if="${topMusical}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                            <p th:if="${topMusical}!=null"> [[${topMusical?.location}]]</p>
 
-                            <p th:if="${musicalTop}==null" class="more"><a th:href="@{|/event?category=musical|}">이벤트 캘린더로 이동하기</a></p>
-                            <p th:if="${musicalTop}!=null" class="more"><a th:href="@{|/board/${musicalTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                            <p th:if="${topMusical}==null" class="more"><a th:href="@{|/event?category=musical|}">이벤트 캘린더로 이동하기</a></p>
+                            <p th:if="${topMusical}!=null" class="more"><a th:href="@{|/board/${topMusicalBoard.id}|}">모집 게시판으로 이동하기</a></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-5 mb-lg-0 col-lg-4">
-                    <div class="blog_entry">
-                        <a href="single.html"><!--img src="images/img_h_3-min.jpg" alt="Free Website Template by Untree.co" class="img-fluid"--></a>
-                        <div class="p-4 bg-white">
-                            <h3 th:if="${concertTop}==null"><a href="single.html"></a> ✨ Concert </h3>
-                            <h3 th:if="${concertTop}!=null"><a href="single.html"></a> ✨ Concert : [[${concertTop?.name}]]</h3>
+                    <div style="border-radius:10px;" class="blog_entry">
+                        <a href="single.html"><img src="image/topEvent/topConcert.jpg" class="img-fluid"></a>
+                        <div style="border-radius:10px;  height:220px;" class="p-4 bg-white">
+                            <h3 th:if="${topConcert}==null"><a href="single.html"></a> 콘서트 </h3>
+                            <h3 th:if="${topConcert}!=null"><a href="single.html"></a> 콘서트 : [[${topConcert?.name}]]</h3>
 
-                            <span th:if="${concertTop}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
-                            <span th:if="${concertTop}!=null" class="date"> [[${#strings.substring(concertTop?.date,0,10)}]]</span>
+                            <span th:if="${topConcert}==null" class="date"> 아직 생성된 모집 게시글이 없습니다.</span>
+                            <span th:if="${topConcert}!=null" class="date"> [[${#strings.substring(topConcert?.date,0,10)}]]</span>
 
-                            <p th:if="${concertTop}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
-                            <p th:if="${concertTop}!=null"> [[${concertTop?.location}]]</p>
+                            <p th:if="${topConcert}==null"> 첫 번째로 모집 게시글을 적어보세요!</p>
+                            <p th:if="${topConcert}!=null"> [[${topConcert?.location}]]</p>
 
-                            <p th:if="${concertTop}==null" class="more"><a th:href="@{|/event?category=concert|}">이벤트 캘린더로 이동하기</a></p>
-                            <p th:if="${concertTop}!=null" class="more"><a th:href="@{|/board/${concertTopBoard.id}|}">모집 게시판으로 이동하기</a></p>
+                            <p th:if="${topConcert}==null" class="more"><a th:href="@{|/event?category=concert|}">이벤트 캘린더로 이동하기</a></p>
+                            <p th:if="${topConcert}!=null" class="more"><a th:href="@{|/board/${topConcertBoard.id}|}">모집 게시판으로 이동하기</a></p>
                         </div>
                     </div>
                 </div>

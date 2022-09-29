@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -30,29 +31,27 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model, Principal principal) {
 
-        Event baseballTop = eventService.findTopEventByArticleCount(1);
-        Event soccerTop = eventService.findTopEventByArticleCount(2);
-        Event basketballTop = eventService.findTopEventByArticleCount(3);
-        Event musicalTop = eventService.findTopEventByArticleCount(4);
-        Event concertTop = eventService.findTopEventByArticleCount(5);
+        List<Event> events = new ArrayList<>();
+        List<String> categories = new ArrayList<String>(Arrays.asList("Baseball", "Soccer", "Basketball", "Musical", "Concert"));
 
-        Board baseballTopBoard = baseballTop!=null? boardService.findByEvent_Id(baseballTop.getId()):null;
-        Board soccerTopBoard = soccerTop!=null? boardService.findByEvent_Id(soccerTop.getId()):null;
-        Board basketballTopBoard = basketballTop!=null? boardService.findByEvent_Id(basketballTop.getId()):null;
-        Board musicalTopBoard = musicalTop!=null? boardService.findByEvent_Id(musicalTop.getId()):null;
-        Board concertTopBoard = concertTop!=null? boardService.findByEvent_Id(concertTop.getId()):null;
+        int i;
+        for (i = 0; i < categories.size(); i++) {
+            // 카테고리별 인기 이벤트 리턴 (인기도 판별기준: 게시글 수)
+            Event topEvent = eventService.findTopEventByArticleCount(i+1); // categoryNo-> 1(baseball), 2(soccer), 3(basketball), 4(musical), 5(concert)
+            model.addAttribute(  "top" + categories.get(i), topEvent);
 
-        model.addAttribute("baseballTop",baseballTop);
-        model.addAttribute("soccerTop", soccerTop);
-        model.addAttribute("basketballTop", basketballTop);
-        model.addAttribute("musicalTop", musicalTop);
-        model.addAttribute("concertTop", concertTop);
+            events.add(topEvent);
 
-        model.addAttribute("baseballTopBoard",baseballTopBoard);
-        model.addAttribute("soccerTopBoard", soccerTopBoard);
-        model.addAttribute("basketballTopBoard", basketballTopBoard);
-        model.addAttribute("musicalTopBoard", musicalTopBoard);
-        model.addAttribute("concertTopBoard", concertTopBoard);
+            if (topEvent != null) {
+                // 인기 이벤트의 게시판 리턴
+                Board topBoard = boardService.findByEvent_Id(topEvent.getId());
+                model.addAttribute("top"+ categories.get(i) + "Board", topBoard);
+
+            } else {
+                model.addAttribute("top"+ categories.get(i) + "Board", null);
+            }
+        }
+
         Long count = eventService.countEventAfterNow();
 
         System.out.println("asd "+count);
@@ -63,19 +62,6 @@ public class HomeController {
             List<Together> togethers = togetherService.findByMemberId(member.getId());
             String check = "empty";
             if (togethers == null || togethers.size()==0)  {
-                List<Event> events = new ArrayList<>();
-
-                if(baseballTop!=null){
-                    events.add(baseballTop);
-                }if(soccerTop!=null){
-                    events.add(soccerTop);
-                }if(basketballTop!=null){
-                    events.add(basketballTop);
-                }if(musicalTop!=null){
-                    events.add(musicalTop);
-                }if(concertTop!=null){
-                    events.add(concertTop);
-                }
 
 //                model.addAttribute("first",events.get(0));
 //                events.remove(0);
