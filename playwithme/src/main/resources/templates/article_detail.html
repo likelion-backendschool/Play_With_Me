@@ -29,8 +29,8 @@
                 th:if="${#authentication.getPrincipal().getUsername() == article.member.username}">
             <!--모집중일 때만 수정, 삭제 가능-->
             <th:block th:if="${article.recruitStatus == true}" >
-                <a class="badge badge-recruit-info fs-6 mx-2" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
-                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="badge badge-recruit-info fs-6" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="삭제"></a>
+                <a class="badge badge-recruit-info fs-6 mx-2 pt-1" th:href="@{|/board/modify/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="수정"></a>
+                <a onclick="if(!confirm('해당 게시글을 삭제하시겠습니까?')) return false;" class="badge badge-recruit-info fs-6 pt-1" th:href="@{|/board/delete/${article.getBoard().id}/${article.id}?returnUrl=article-detail|}" th:text="삭제"></a>
             </th:block>
         </th:block>
     </div>
@@ -180,7 +180,7 @@
                         <div th:text="${#temporals.format(comment.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
 
-                    <div >
+                    <div th:if="${article.recruitStatus == true}" >
                         <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" class="btn btn-sm " style="background-color:#7abdff; color:#fff;" th:onclick="findHideId([[${comment.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${comment.id}">수정</a>
                         <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == comment.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${comment.id}|}" class="delete btn btn-sm" style="background-color:#7abdff; color:#fff;" th:text="삭제"></a>
                     </div>
@@ -274,9 +274,9 @@
                             <div th:text="${#temporals.format(child.updatedAt, 'yyyy-MM-dd HH:mm')}"></div>
                         </div>
 
-                        <div>
-                            <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm" style="background-color:#7abdff; color:#fff;" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}" >수정</a>
-                            <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm" style="background-color:#7abdff; color:#fff;" th:text="삭제"></a>
+                        <div th:if="${article.recruitStatus == true}">
+                            <a href="#" sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" class="btn btn-sm pt-5" style="background-color:#7abdff; color:#fff;" th:onclick="findHideId([[${child.id}]])" data-bs-toggle="collapse" th:attr="data-bs-target='.multi-collapse-'+${child.id}" >수정</a>
+                            <a href="javascript:void(0);"  sec:authorize="isAuthenticated()" th:if="${article.member != null and #authentication.getPrincipal().getUsername() == child.member.username}" th:data-uri="@{|/board/comment/delete/${board_id}/${article_id}/${child.id}|}" class="delete btn btn-sm pt-1" style="background-color:#7abdff; color:#fff;" th:text="삭제"></a>
                         </div>
                     </div>
                     <div class="d-flex px-4 mb-3">

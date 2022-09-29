@@ -47,7 +47,7 @@ public class TimelineController {
         Member member = memberService.findMember(principal.getName());
 
         // 메뉴 바 정보
-        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
 
         // 해당 회원의 Timeline 리스트
         List<Timeline> timelines = member.getTimelineList();

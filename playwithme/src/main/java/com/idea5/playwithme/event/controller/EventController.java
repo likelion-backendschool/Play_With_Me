@@ -64,7 +64,7 @@ public class EventController {
     public String showEvent(Model model, @RequestParam String category, @RequestParam(defaultValue = "new SimpleDateFormat(\"yyyy-MM-dd\").format(new Date())") String date, Principal principal) {
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 
@@ -194,7 +194,7 @@ public class EventController {
     public String searchEvent (Model model, @RequestParam("kw")String kw, @RequestParam(value = "page", defaultValue = "0") int page, Principal principal){
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 

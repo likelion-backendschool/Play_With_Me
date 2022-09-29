@@ -7,6 +7,7 @@ import com.idea5.playwithme.comment.service.CommentService;
 import com.idea5.playwithme.event.dto.EventDto;
 import com.idea5.playwithme.member.domain.Member;
 
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.dto.MemberRecruitDto;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.service.ReviewService;
@@ -63,23 +64,31 @@ public class TogetherController {
 
         if (name == null || name.isEmpty()) {
             log.info("The name does not exist.......");
+
         }
-        Member member = memberService.findMember(name);
-        System.out.println("member.getId() = " + member.getId());
+
+
+        Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+        model.addAttribute("memberInfo", memberInfo);
+
         List<TogetherInfoDto> togetherInfos = togetherService.findTogetherListByMemberId(member.getId());
         model.addAttribute("togetherInfos", togetherInfos);
 
         return "together_manage";
     }
 
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/recruit/{board_id}/{article_id}/{member_id}")
-    public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model) {
+    public String recruit(@PathVariable("board_id") Long board_id, @PathVariable("article_id") Long articleId, @PathVariable("member_id") Long memberId, Model model, Principal principal) {
+
+        Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+        model.addAttribute("memberInfo", memberInfo);
+
         List<MemberRecruitDto> recruitMember = memberService.findRecruitMember(articleId, memberId);
         model.addAttribute("recruitMember", recruitMember);
         model.addAttribute("togetherForm", new TogetherForm());
-
         return "recruit_confirm_form";
     }
 

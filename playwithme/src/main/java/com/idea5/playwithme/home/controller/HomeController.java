@@ -59,7 +59,7 @@ public class HomeController {
 
         if(principal!=null){
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
 
 
@@ -91,7 +91,7 @@ public class HomeController {
     public String intro(Model model, Principal principal) {
         if (principal != null && principal.getName().length()!=0) {
             Member member = memberService.findMember(principal.getName());
-            MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
             model.addAttribute("memberInfo", memberInfo);
         }
 
