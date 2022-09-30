@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
 
 
 @Slf4j
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class TogetherService {
@@ -61,6 +62,7 @@ public class TogetherService {
     EventService eventService;
 
 
+    @Transactional
     public void save(Long articleId, Long memberId){
 
         /**
@@ -85,6 +87,7 @@ public class TogetherService {
 
         togetherRepository.save(together);
     }
+
 
     public Together findById(long id) {
         return togetherRepository.findById(id)

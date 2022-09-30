@@ -11,6 +11,7 @@ import com.idea5.playwithme.comment.dto.CommentCreateForm;
 import com.idea5.playwithme.comment.dto.CommentDto;
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,13 @@ public class ArticleController {
     // 게시글 작성폼
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/write/{board_id}")
-    public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm) {
+    public String createForm(Model model, @PathVariable("board_id") Long boardId, ArticleCreateForm articleCreateForm, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Board board = boardService.findById(boardId);
         model.addAttribute("eventName", board.getEvent().getName());
 
@@ -49,6 +56,7 @@ public class ArticleController {
     @PostMapping("/write/{board_id}")
     public String create(@PathVariable("board_id") Long boardId, @Valid ArticleCreateForm articleCreateForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult.getErrorCount());
             return "article_create_form";
         }
         // 나이대 유효성 검사
@@ -66,18 +74,32 @@ public class ArticleController {
 
     // 게시글 리스트 조회
     @GetMapping("/{board_id}")
-    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public String getList(Model model, @PathVariable("board_id") Long boardId, @RequestParam(value = "page", defaultValue = "0") int page, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Board board = boardService.findById(boardId);
         Page<Article> paging = articleService.getList(boardId, page);
         model.addAttribute("paging", paging);
         model.addAttribute("eventName", board.getEvent().getName());
+
+        System.out.println("paging.getTotalElements() = " + paging.getTotalElements());
 
         return "board";
     }
 
     // 게시글 상세 조회
     @GetMapping("/{board_id}/{article_id}")
-    public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    public String getDetails(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, Principal principal) {
+        if (principal != null && principal.getName().length()!=0) {
+            Member member = memberService.findMember(principal.getName());
+            MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+            model.addAttribute("memberInfo", memberInfo);
+        }
+
         Article article = articleService.getDetails(boardId, articleId);
         List<CommentDto> findCommenets = commentService.findByArticleId(articleId);
         articleService.updateViews(article);
@@ -96,7 +118,15 @@ public class ArticleController {
     // 게시글 수정폼
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{board_id}/{article_id}")
-    public String modifyForm(Model model, @PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, ArticleUpdateForm articleUpdateForm) {
+    public String modifyForm(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId,
+                             @RequestParam("returnUrl") String returnUrl,
+                             Model model, ArticleUpdateForm articleUpdateForm, Principal principal) {
+
+        // 메뉴바 회원 닉네임, 성별 내용 추가
+        Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+
+
         Article article = articleService.findById(articleId);
         // 기존 값 넣기
         articleUpdateForm.setTitle(article.getTitle());
@@ -109,17 +139,21 @@ public class ArticleController {
         articleUpdateForm.setMaxRecruitNum(Integer.toString(article.getMaxRecruitNum()));
 
         Board board = boardService.findById(boardId);
+
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("eventName", board.getEvent().getName());
+        model.addAttribute("returnUrl", returnUrl);
 
         return "article_update_form";
-
     }
 
 
     // 게시글 수정
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{board_id}/{article_id}")
-    public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId, @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
+    public String modify(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId,
+                         @RequestParam("returnUrl") String returnUrl,
+                         @Valid ArticleUpdateForm articleUpdateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "article_update_form";
         }
@@ -132,6 +166,11 @@ public class ArticleController {
 
         articleService.update(articleId, articleUpdateForm);
 
+        // 게시글 관리 페이지 -> 수정 요청한 경우
+        if(returnUrl.equals("board-manage")) {
+            return "redirect:/board/manage";
+        }
+        // 게시글 상세 페이지 -> 수정 요청한 경우
         return "redirect:/board/%d/%d".formatted(boardId, articleId);
     }
 
@@ -146,9 +185,15 @@ public class ArticleController {
     // 게시글 삭제
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{board_id}/{article_id}")
-    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId) {
+    public String delete(@PathVariable("board_id") Long boardId, @PathVariable("article_id") Long articleId,
+                         @RequestParam("returnUrl") String returnUrl) {
         articleService.delete(articleId);
 
+        // 게시글 관리 페이지 -> 삭제 요청한 경우
+        if(returnUrl.equals("board-manage")) {
+            return "redirect:/board/manage";
+        }
+        // 게시글 상세 페이지 -> 삭제 요청한 경우
         return "redirect:/board/%d".formatted(boardId);
     }
 
@@ -157,8 +202,10 @@ public class ArticleController {
     @GetMapping("/manage")
     public String manage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "all") String category, @RequestParam(defaultValue = "new") String sortCode, Principal principal, Model model) {
         Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
 
         Page<Article> paging = articleService.getMyList(member.getId(), page, category, sortCode);
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("paging", paging);
         model.addAttribute("category", category);
         model.addAttribute("sortCode", sortCode);

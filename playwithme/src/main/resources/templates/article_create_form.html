@@ -12,13 +12,13 @@
     <form th:action="@{|/board/write/${board_id}|}" th:object="${articleCreateForm}" method="post">
         <div class="mb-3">
             <div class="mb-1">제목</div>
-            <input type="text" th:field="*{title}" class="form-control">
+            <input required type="text" th:field="*{title}" class="form-control" >
         </div>
         <div class="mb-3 d-flex">
             <div>
                 <div class="mb-1">최대 모집 인원</div>
-                <select name="maxRecruitNum" th:value="${articleCreateForm.maxRecruitNum}" class="form-select" aria-label="Default select example">
-                    <option selected>모집 인원을 선택해주세요.</option>
+                <select required name="maxRecruitNum" th:value="${articleCreateForm.maxRecruitNum}" class="form-select" aria-label="Default select example">
+                    <option value="">모집 인원을 선택해주세요.</option>
                     <option th:selected="${articleCreateForm.maxRecruitNum} == '1'">1</option>
                     <option th:selected="${articleCreateForm.maxRecruitNum} == '2'">2</option>
                     <option th:selected="${articleCreateForm.maxRecruitNum} == '3'">3</option>
@@ -28,8 +28,8 @@
             </div>
             <div class="mx-5">
                 <div class="mb-1">모집 성별</div>
-                <select name="gender" th:value="${articleCreateForm.gender}" class="form-select" aria-label="Default select example">
-                    <option selected>모집 성별을 선택해주세요.</option>
+                <select required name="gender" th:value="${articleCreateForm.gender}" class="form-select" aria-label="Default select example">
+                    <option value="">모집 성별을 선택해주세요.</option>
                     <option th:selected="${articleCreateForm.gender} == '남성'">남성</option>
                     <option th:selected="${articleCreateForm.gender} == '여성'">여성</option>
                     <option th:selected="${articleCreateForm.gender} == '성별무관'">성별무관</option>
@@ -39,8 +39,8 @@
         <div class="mb-3">
             <div class="mb-1">모집 연령대</div>
             <div class="d-flex">
-                <select name="minAge" th:value="${articleCreateForm.minAge}" class="form-select w-25" aria-label="Default select example">
-                    <option selected>모집 최소 연령을 선택해주세요.</option>
+                <select required name="minAge" th:value="${articleCreateForm.minAge}" class="form-select w-25" aria-label="Default select example">
+                    <option value="">모집 최소 연령을 선택해주세요.</option>
                     <option th:selected="${articleCreateForm.minAge} == '10'">10</option>
                     <option th:selected="${articleCreateForm.minAge} == '20'">20</option>
                     <option th:selected="${articleCreateForm.minAge} == '30'">30</option>
@@ -48,8 +48,8 @@
                     <option th:selected="${articleCreateForm.minAge} == '50'">50</option>
                 </select>
                 <span class="mx-3">~</span>
-                <select name="maxAge" th:value="${articleCreateForm.maxAge}" class="form-select w-25" aria-label="Default select example">
-                    <option selected>모집 최대 연령을 선택해주세요.</option>
+                <select required name="maxAge" th:value="${articleCreateForm.maxAge}" class="form-select w-25" aria-label="Default select example">
+                    <option value="">모집 최대 연령을 선택해주세요.</option>
                     <option th:selected="${articleCreateForm.maxAge} == '19'">19</option>
                     <option th:selected="${articleCreateForm.maxAge} == '29'">29</option>
                     <option th:selected="${articleCreateForm.maxAge} == '39'">39</option>
@@ -66,7 +66,7 @@
         <!-- 추후 에디터 적용될 수 있음 -->
         <div class="mb-3">
             <div class="mb-1">내용</div>
-            <textarea th:field="*{contents}"  class="form-control" rows="10"></textarea>
+            <textarea required th:field="*{contents}"  class="form-control" rows="10" ></textarea>
         </div>
         <div class="d-flex justify-content-center">
             <a th:href="@{|/board/${board_id}|}" th:text="이전" class="btn btn-primary m-2"></a>

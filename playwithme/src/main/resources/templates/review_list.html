@@ -18,7 +18,7 @@
                 <span class="mx-1" th:text="${article.board.event.name}"></span>
                 <span class="mx-1" th:text="${#temporals.format(article.board.event.date, 'yyyy.MM.dd')}"></span>
                 <span class="flex-grow-1"></span>
-                <a class="review-btn badge text-bg-primary fs-6" th:href="@{|/review/${article.id}|}" th:text="리뷰하기"></a>
+                <a class="review-btn badge badge-recruit-info fs-6" th:href="@{|/review/${article.id}|}" th:text="리뷰하기"></a>
             </div>
         </div>
     </div>

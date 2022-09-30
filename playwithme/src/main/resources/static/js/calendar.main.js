@@ -119,16 +119,7 @@ function date_click(event) {
 
        success: function(data){
              console.log("통신성공");
-             //console.log("data:")
-             //console.log(data);
-             //console.log("push하기 전 event_data2");
-             //console.log(event_data2);
-             //console.log("push하기 전 event_data2[0]");
-             //console.log(event_data2[0]);
              event_data2.push(data);
-             //event_data2 = data.slice();
-             //console.log(event_data2[0]);
-             //console.log(event_data2[0].length);
 
              // event-container에 event를 event-card에 담아 전달
               $(".events-container").empty();
@@ -136,7 +127,7 @@ function date_click(event) {
               // 이벤트가 없을 경우
               if(event_data2[0].length===0) {
                  var event_card = $("<div class='event-card'></div>");
-                 var event_name = $("<div class='event-name'> 해당 날짜는 이벤트 일정이 없습니다 😵 </div>");
+                 var event_name = $("<div class='event-name'> 해당 날짜는 이벤트 일정이 없습니다&nbsp;<i class=\"fa fa-spinner\"></i> </div>");
                  $(event_card).css({ "border-left": "10px solid #FF1744" });
                  $(event_card).append(event_name);
                  $(".events-container").append(event_card);
@@ -146,8 +137,8 @@ function date_click(event) {
                    for(var i=0; i<event_data2[0].length; i++) {
                        var event_card = $("<div class='event-card'></div>");
                        var event_name = $("<div class='event-name'>"+event_data2[0][i].name+"</div>");
-                       var event_location = $("<div class='event-location'>"+event_data2[0][i].location+"</div>");
-                       var event_dateString = $("<div class='event-dateString'>"+event_data2[0][i].date.split("T")[0]+"</div>");
+                       var event_location = $("<div class='event-location'><i class=\"fa fa-location-arrow\"></i>&nbsp;"+event_data2[0][i].location+"</div>");
+                       var event_dateString = $("<div class='event-dateString'><i class=\"fa fa-calendar-o\"></i>&nbsp;"+event_data2[0][i].date.split("T")[0]+"</div>");
                        var event_urlNotice = $("<div class='id event-urlNotice'> 모집 게시판 바로가기 </div>");
                        $(event_card).append(event_name).append(event_location).append(event_dateString).append(event_urlNotice);
                        $(".events-container").append(event_card);
@@ -299,7 +290,7 @@ function show_events(events, month, day) {
     // If there are no events for this date, notify the user
     if(events.length===0) {
         var event_card = $("<div class='event-card'></div>");
-        var event_name = $("<div class='event-name'> 📆 동행 모집 원하는 날짜를 클릭해보세요! </div>");
+        var event_name = $("<div class='event-name'>동행 모집 원하는 날짜를 클릭해보세요! </div>");
         $(event_card).css({ "border-left": "10px solid #FF1744" });
         $(event_card).append(event_name);
         $(".events-container").append(event_card);

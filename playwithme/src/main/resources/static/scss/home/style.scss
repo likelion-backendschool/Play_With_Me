@@ -1,0 +1,28 @@
+/*
+* Template Name: Style
+* Template Author: Untree.co
+* Template License: https://creativecommons.org/licenses/by/3.0/
+* Author URI: https://untree.co/
+
+* Twitter: https://twitter.com/Untree_co
+* Facebook: https://web.facebook.com/Untree.co/
+*/
+
+@import "static/scss/home/functions";
+@import "static/scss/home/variables";
+@import "static/scss/home/mixins";
+
+$primary: #000;
+$black: #000000;
+$white: #ffffff;
+$heading_color: #000;
+$heading_light_color: rgba($heading_color, .5);
+$font-family: 'Playfair Display', serif;
+$font-family-body: 'Crimson Text', serif;
+
+@import 'static/scss/home/site-base';
+@import 'static/scss/home/site-navbar';
+@import 'static/scss/home/site-blocks';
+// @import 'site-style';
+@import 'static/scss/home/site-elements';
+@import 'static/scss/home/site-footer';

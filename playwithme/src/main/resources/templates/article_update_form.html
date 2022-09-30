@@ -9,10 +9,10 @@
 
     <div class="badge bg-light text-dark fs-5 mb-3" th:text="${eventName}"></div>
 
-    <form th:action="@{|/board/modify/${board_id}/${article_id}|}" th:object="${articleUpdateForm}" method="post">
+    <form th:action="@{|/board/modify/${board_id}/${article_id}?returnUrl=${returnUrl}|}" th:object="${articleUpdateForm}" method="post">
         <div class="mb-3">
             <div class="mb-1">제목</div>
-            <input type="text" th:field="*{title}" class="form-control">
+            <input required type="text" th:field="*{title}" class="form-control">
         </div>
         <div class="mb-3 d-flex">
             <div>
@@ -63,10 +63,10 @@
         <!-- 추후 에디터 적용될 수 있음 -->
         <div class="mb-3">
             <div class="mb-1">내용</div>
-            <textarea th:field="*{contents}" class="form-control" rows="10"></textarea>
+            <textarea required th:field="*{contents}" class="form-control" rows="10"></textarea>
         </div>
         <div class="d-flex justify-content-center">
-            <a th:href="@{|/board/${board_id}/${article_id}|}" th:text="이전" class="btn btn-primary m-2"></a>
+            <a th:href="@{|/board/${board_id}/${article_id}?returnUrl=article-detail|}" th:text="이전" class="btn btn-primary m-2"></a>
             <button type="submit" class="btn btn-primary m-2">수정</button>
         </div>
     </form>

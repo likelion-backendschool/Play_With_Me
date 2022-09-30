@@ -29,7 +29,7 @@ import java.util.Map;
 public class MyPageController {
     private final MemberService memberService;
     private final TogetherService togetherService;
-    
+
     @GetMapping("")
     public String showMyPage(Model model, Principal principal) {
         // principal null 체크
@@ -51,10 +51,12 @@ public class MyPageController {
         // MemberInfoDto에 Member 정보 저장
         MemberInfoDTO memberInfo = MemberInfoDTO.builder()
                 .memberId(member.getId())
+                .name(member.getName())
                 .nickname(member.getNickname())
                 .ageRange(member.getAgeRange())
                 .email(member.getEmail())
                 .mannerTemp(String.valueOf(member.getMannerTemp()))
+                .gender(member.getGender())
                 .createDate(createDate)
                 .build();
 
@@ -65,17 +67,16 @@ public class MyPageController {
     @GetMapping("/dday")
     public String showDday(Model model, Principal principal){
         Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
 
         List<Together> togethers = togetherService.findByMemberId(member.getId());
-
         Map<Together,Long> map = new LinkedHashMap<>();
-
-        if(togethers!=null){
-            for (Together together : togethers) {
+        if(togethers != null){
+            for (Together together : togethers)
                 map.put(together, ChronoUnit.DAYS.between(LocalDateTime.now(), together.getEvent().getDate())+1);
-            }
         }
 
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("map",map);
         return "d_day_list";
     }

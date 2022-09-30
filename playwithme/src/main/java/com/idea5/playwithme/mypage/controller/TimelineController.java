@@ -2,6 +2,7 @@ package com.idea5.playwithme.mypage.controller;
 
 import com.idea5.playwithme.event.domain.Event;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.mypage.domain.Timeline;
 import com.idea5.playwithme.mypage.dto.TimelineRequestDto;
 import com.idea5.playwithme.member.service.MemberService;
@@ -45,6 +46,9 @@ public class TimelineController {
         // 현재 로그인한 회원 리턴
         Member member = memberService.findMember(principal.getName());
 
+        // 메뉴 바 정보
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().name(member.getName()).gender(member.getGender()).build();
+
         // 해당 회원의 Timeline 리스트
         List<Timeline> timelines = member.getTimelineList();
 
@@ -69,15 +73,16 @@ public class TimelineController {
         // 리스트에서 중복 이벤트 제거
         events = events.stream().filter(distinctByKey(Event::getName)).collect(Collectors.toList());
 
-        // 현재 날짜
-        List<Event> beforeNowEvents = new ArrayList<>();
+        // 현재 날짜 이전 이벤트들만 리스트에 추가
+        List<Event> eventsBeforeNow = new ArrayList<>();
         for(int i=0; i< events.size();i++) {
             if (LocalDateTime.now().isAfter(events.get(i).getDate())!=false) {
-                beforeNowEvents.add(events.get(i));
+                eventsBeforeNow.add(events.get(i));
             }
         }
 
-        model.addAttribute("events", beforeNowEvents);
+        model.addAttribute("memberInfo", memberInfo);
+        model.addAttribute("events", eventsBeforeNow);
         model.addAttribute("timelines", timelines);
         model.addAttribute("requestDto", new TimelineRequestDto());
 

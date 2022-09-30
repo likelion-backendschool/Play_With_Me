@@ -3,6 +3,7 @@ package com.idea5.playwithme.review.controller;
 import com.idea5.playwithme.article.domain.Article;
 import com.idea5.playwithme.article.service.ArticleService;
 import com.idea5.playwithme.member.domain.Member;
+import com.idea5.playwithme.member.dto.MemberInfoDTO;
 import com.idea5.playwithme.member.service.MemberService;
 import com.idea5.playwithme.review.domain.Review;
 import com.idea5.playwithme.review.domain.ReviewDto;
@@ -37,6 +38,7 @@ public class ReviewController {
     @GetMapping("/manage")
     public String reviewList(Model model, Principal principal) {
         Member member = memberService.findMember(principal.getName());
+        MemberInfoDTO memberInfo = MemberInfoDTO.builder().nickname(member.getNickname()).gender(member.getGender()).build();
 
         // 로그인한 회원 중 아직 리뷰를 완료하지 않은 게시글
         List<Article> articleList = articleService.getReviewArticelList(member.getId());
@@ -71,6 +73,7 @@ public class ReviewController {
             i++;
         }
 
+        model.addAttribute("memberInfo", memberInfo);
         model.addAttribute("articleList", articleList);
         model.addAttribute("localDate", LocalDate.now());
 
