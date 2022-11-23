@@ -46,7 +46,8 @@
 ![image](https://user-images.githubusercontent.com/28770427/203481312-317fbec4-1599-4977-bb5f-4cc115674482.png)
 
 ### 결과물
-  - 세부 페이지
+  
+  ![KakaoTalk_Photo_2022-11-23-15-12-41](https://user-images.githubusercontent.com/48237976/203482775-5404e85a-3f94-427a-8ac8-0e9392787bc7.png)
   ![Untitled (1)](https://user-images.githubusercontent.com/48237976/203482382-c7681082-1bd4-4029-83f3-460f0d85eaba.png)
   ![Untitled (2)](https://user-images.githubusercontent.com/48237976/203482381-2be08b10-7389-4840-9d6f-5625e927f9a2.png)
   ![Untitled (3)](https://user-images.githubusercontent.com/48237976/203482375-4400cdb0-d3df-4f72-be05-05074e538134.png)
