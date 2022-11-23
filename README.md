@@ -1,5 +1,7 @@
 # PLAY WITH ME
-
+<p align="center">
+<img alt="Untitled" src="https://user-images.githubusercontent.com/63441091/203480786-b26859fe-9b7e-4d26-8650-6dfc972cc6ca.png" width="220px" height="70px">
+</p>
 
 “행사를 함께 갈 동행인을 모집해보세요!”
 
