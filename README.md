@@ -45,15 +45,20 @@
 
 ### 결과물
   - 세부 페이지
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/affd3e44-7766-4d78-a9a0-ee98fc932d51/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7807b72e-3480-4697-a2e6-d1b48a8f8b88/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bf9ec482-9241-4bca-a915-929619bae7ce/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/39958b24-e2e0-45ec-b084-dedcc82318e4/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fed0f338-cda7-4ca0-acd8-ccb3bc7af07c/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/65241db3-254c-4840-9331-d6bc1700af5d/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2548b121-8f23-4e46-8ac3-2997196a259b/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1cb9e745-283f-4757-a627-72ddefb1c452/Untitled.png)
-  ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e601015d-113e-4a58-a57b-49b74d90aa6a/Untitled.png)
+  ![Untitled (1)](https://user-images.githubusercontent.com/48237976/203482382-c7681082-1bd4-4029-83f3-460f0d85eaba.png)
+  ![Untitled (2)](https://user-images.githubusercontent.com/48237976/203482381-2be08b10-7389-4840-9d6f-5625e927f9a2.png)
+  ![Untitled (3)](https://user-images.githubusercontent.com/48237976/203482375-4400cdb0-d3df-4f72-be05-05074e538134.png)
+  ![Untitled (4)](https://user-images.githubusercontent.com/48237976/203482370-7fc8abb2-de41-49b7-b074-0fe815b77444.png)
+  ![Untitled (5)](https://user-images.githubusercontent.com/48237976/203482367-0f262e65-940f-4d1d-98e0-29f98ba60d40.png)
+  ![Untitled (6)](https://user-images.githubusercontent.com/48237976/203482362-ffff124f-1358-4460-b123-c43d0d147696.png)
+![Untitled (7)](https://user-images.githubusercontent.com/48237976/203482358-b7d6dfc2-5d29-4253-ac50-083ae0f9528b.png)
+![Untitled (8)](https://user-images.githubusercontent.com/48237976/203482350-3789ee80-25a6-4799-a6df-f2273f38e600.png)
+
+
+
+
+
+
   
   - 시연영상
     - [https://drive.google.com/file/d/1aJM3OjAcas-yFUGx1kncEe0p6tr9al-6/view](https://drive.google.com/file/d/1aJM3OjAcas-yFUGx1kncEe0p6tr9al-6/view)
