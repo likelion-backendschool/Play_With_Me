@@ -43,7 +43,8 @@
 - jira
 
 ### DB 테이블
-![image](https://user-images.githubusercontent.com/28770427/203481312-317fbec4-1599-4977-bb5f-4cc115674482.png)
+<img width="852" alt="스크린샷 2023-03-09 오후 2 43 14" src="https://user-images.githubusercontent.com/81248569/223930968-6f9db94c-1e63-4ccc-a9e0-b2725d959c61.png">
+
 
 ### 결과물
   
