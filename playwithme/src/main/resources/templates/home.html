@@ -42,8 +42,8 @@
                 <!--                <h2 class="line-top">Your Own D-DAY</h2>-->
             </div>
         </div>
-
-        <div th:replace ="/d_day :: d_day">
+        <!-- 빌드시 경로 오류 해결 -->
+        <div th:replace ="d_day :: d_day">
 
         </div>
     </div>
@@ -53,7 +53,7 @@
 <div class="container my-5">
     <div class="row row-cols-5">
         <div class="px-1">
-            <div class="card category-card" onclick="location.href='/event?category=baseball'" style="cursor: pointer; border: none; border-radius:20px;">
+            <div class="card category-card" onclick="location.href='/event?category=baseball'" style="cursor: pointer; border: none; border-radius:20px; height:100%;">
                 <div class="card-body d-flex flex-column align-items-center rounded-2">
                     <div class="d-flex justify-content-center">
                         <img src="/image/baseball4.png" class="w-50">
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="px-1">
-            <div class="card category-card" onclick="location.href='/event?category=soccer'" style="cursor: pointer; border: none; border-radius:20px;">
+            <div class="card category-card" onclick="location.href='/event?category=soccer'" style="cursor: pointer; border: none; border-radius:20px;  height:100%;">
                 <div class="card-body d-flex flex-column align-items-center rounded-2">
                     <div class="d-flex justify-content-center">
                         <img src="/image/soccer3.png" class="w-50">
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="px-1">
-            <div class="card category-card" onclick="location.href='/event?category=basketball'" style="cursor: pointer; border: none; border-radius:20px;">
+            <div class="card category-card" onclick="location.href='/event?category=basketball'" style="cursor: pointer; border: none; border-radius:20px;  height:100%;">
                 <div class="card-body d-flex flex-column align-items-center rounded-2">
                     <div class="d-flex justify-content-center">
                         <img src="/image/basketball3.png" class="w-50">
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="px-1">
-            <div class="card category-card" onclick="location.href='/event?category=musical'" style="cursor: pointer; border: none; border-radius:20px;">
+            <div class="card category-card" onclick="location.href='/event?category=musical'" style="cursor: pointer; border: none; border-radius:20px;  height:100%;">
                 <div class="card-body d-flex flex-column align-items-center rounded-2">
                     <div class="d-flex justify-content-center">
                         <img src="/image/musical3.png" class="w-50">
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="px-1">
-            <div class="card category-card" onclick="location.href='/event?category=concert'" style="cursor: pointer;  border: none; border-radius:20px;">
+            <div class="card category-card" onclick="location.href='/event?category=concert'" style="cursor: pointer;  border: none; border-radius:20px;  height:100%;">
                 <div class="card-body d-flex flex-column align-items-center rounded-2">
                     <div class="d-flex justify-content-center">
                         <img src="/image/concert3.png" class="card-img w-50">
