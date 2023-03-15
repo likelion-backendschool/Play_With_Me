@@ -1,0 +1,8 @@
+# 개발용
+oauth2:
+  kakao:
+    login:
+      redirect-uri: "http://localhost:8080/member/login/oauth/kakao/callback"
+    logout:
+      redirect-uri: "http://localhost:8080/member/logout/oauth/kakao"
+
