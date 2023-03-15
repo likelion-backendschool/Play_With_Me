@@ -1,4 +1,10 @@
-# 개발용
+# 개발
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/playwithme?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: '0114'
+
 oauth2:
   kakao:
     login:
