@@ -22,7 +22,7 @@
 |FrontEnd|<img src="https://img.shields.io/badge/thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white"> <img  src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/fontawesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white">|
 |협업|<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">|
 |IDE|<img src="https://img.shields.io/badge/intellij idea-000000?style=for-the-badge&logo=IntelliJ IDEA&logoColor=white">|
-|배포|<img src="https://img.shields.io/badge/aws ec2-FF9900?style=for-the-badge&logoColor=white">|
+|배포|<img src="https://img.shields.io/badge/aws ec2-FF9900?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/aws rds-2270B3?style=for-the-badge&logoColor=white"> <img src="https://img.shields.io/badge/aws route 53-582EB3?style=for-the-badge&logoColor=white">|
 
 ### 세부 기능
 
@@ -45,6 +45,8 @@
 ### DB 테이블
 <img width="852" alt="스크린샷 2023-03-09 오후 2 43 14" src="https://user-images.githubusercontent.com/81248569/223930968-6f9db94c-1e63-4ccc-a9e0-b2725d959c61.png">
 
+### 배포
+- https://playwithme.site/
 
 ### 결과물
   
