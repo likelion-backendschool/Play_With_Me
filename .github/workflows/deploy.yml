@@ -26,7 +26,6 @@ jobs:
       # main 설정 파일 생성 및 write
       - name: Set .yml for main
         run: |
-          # main 설정 파일 디렉토리로 이동
           cd ./src/main/resources
           touch ./application-secret.yaml
           echo "${{ secrets.APPLICATION_SECRET_YML }}" >> ./application-secret.yml
