@@ -16,6 +16,9 @@ jobs:
       run:
         working-directory: "./playwithme"
     steps:
+      - name: Get Github Actions IP
+        id: ip
+        uses: haythem/public-ip@v1.2
       # 기본 체크아웃
       - name: Checkout
         uses: actions/checkout@v3
