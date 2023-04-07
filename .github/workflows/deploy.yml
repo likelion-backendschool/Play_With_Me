@@ -32,9 +32,9 @@ jobs:
           echo "${{ secrets.APPLICATION_SECRET_YML }}" >> ./application-secret.yml
         shell: bash
 
-			# Gradle build
-			- name: Make gradlew executable
-	      run: chmod 744 ./gradlew
+      # Gradle build
+      - name: Make gradlew executable
+        run: chmod 744 ./gradlew
 
       - name: Build with Gradle
         run: ./gradlew bootJar
