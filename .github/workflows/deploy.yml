@@ -27,9 +27,9 @@ jobs:
       # main 설정 파일 생성 및 write
       - name: Set .yml for main
         run: |
-          cd ./src/main/resources
-          touch ./application-secret.yml
-          echo "${{ secrets.APPLICATION_SECRET_YML }}" > ./application-secret.yml
+          cd ./playwithme/src/main/resources
+          touch ./playwithme/application-secret.yml
+          echo "${{ secrets.APPLICATION_SECRET_YML }}" > ./playwithme/application-secret.yml
         shell: bash
 
       # Gradle build
