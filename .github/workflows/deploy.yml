@@ -12,6 +12,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest #ubuntu-20.04
+    defaults:
+      run:
+        working-directory: "./playwithme"
     steps:
       # 기본 체크아웃
       - name: Checkout
@@ -27,9 +30,9 @@ jobs:
       # main 설정 파일 생성 및 write
       - name: Set .yml for main
         run: |
-          cd ./playwithme/src/main/resources
-          touch ./playwithme/application-secret.yml
-          echo "${{ secrets.APPLICATION_SECRET_YML }}" > ./playwithme/application-secret.yml
+          cd ./src/main/resources
+          touch ./application-secret.yml
+          echo "${{ secrets.APPLICATION_SECRET_YML }}" > ./application-secret.yml
         shell: bash
 
       # Gradle build
