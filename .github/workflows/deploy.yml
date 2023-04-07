@@ -55,6 +55,6 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             docker rm -f $(docker ps -qa)
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/도커 레파지토리 이름
-            docker pull ${{ secrets.DOCKER_USERNAME }}/도커 레파지토리 이름
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/playwithme
+            docker pull ${{ secrets.DOCKER_USERNAME }}/playwithme
             docker-compose up -d
