@@ -1,8 +1,9 @@
- 
-<p align="center"> 
-    <img width="463" alt="image" src="https://user-images.githubusercontent.com/63441091/236039325-2f398e68-15ae-41d0-8c4a-60c016994c2b.png">
-</p> 
 <h1 align="middle">PLAY WITH ME</h1>
+<p align="center"> 
+    <img width="300" alt="image" src="https://user-images.githubusercontent.com/63441091/236039325-2f398e68-15ae-41d0-8c4a-60c016994c2b.png">
+</p> 
+
+<h3 align="center"><a href="https://playwithme.site/"> 🔗 PLAY WITH ME 바로가기</a></h3>
 
 <h4 align="center"> 
   
@@ -43,7 +44,6 @@ Play With Me는 콘서트, 뮤지컬, 스포츠 경기를 함께 즐길 동행�
 <img width="752" alt="스크린샷 2023-03-09 오후 2 43 14" src="https://user-images.githubusercontent.com/81248569/223930968-6f9db94c-1e63-4ccc-a9e0-b2725d959c61.png">
 
 ## 결과물
-<h4><a href="https://playwithme.site/">🔗 PLAY WITH ME 바로가기</a></h4>
 <h4><a href="https://drive.google.com/file/d/1aJM3OjAcas-yFUGx1kncEe0p6tr9al-6/view">🔗 PLAY WITH ME 시연영상 보러가기</a></h4>
 
 |        |         |
