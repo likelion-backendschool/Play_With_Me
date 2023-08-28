@@ -1,0 +1,8 @@
+# 운영
+oauth2:
+  kakao:
+    login:
+      redirect-uri: "http://playwithme.site/member/login/oauth/kakao/callback"
+    logout:
+      redirect-uri: "http://playwithme.site/member/logout/oauth/kakao"
+

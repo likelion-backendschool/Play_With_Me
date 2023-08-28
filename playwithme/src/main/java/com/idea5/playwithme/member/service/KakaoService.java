@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.idea5.playwithme.member.domain.Member;
 import com.idea5.playwithme.member.domain.MemberRole;
 import com.idea5.playwithme.member.dto.KakaoUser;
-import com.idea5.playwithme.member.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,9 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -33,9 +30,14 @@ import java.util.List;
 @Service
 public class KakaoService {
 
+    @Value("${oauth2.kakao.rest-api-key}")
+    private String restApiKey;
+
+    @Value("${oauth2.kakao.login.redirect-uri}")
+    private String redirectUri;
+
     public String getAccessToken(String code) throws JsonProcessingException {
         String host = "https://kauth.kakao.com/oauth/token";
-        String redirectUrl = "http://localhost:8080/member/login/oauth/kakao/callback";
 
         // HttpHeader 오브젝트 생성
         HttpHeaders headers = new HttpHeaders();
@@ -44,8 +46,8 @@ public class KakaoService {
         // HttpBody 오브젝트 생성
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "0c7de4f37c334c2d42105c51f0b9ab12");
-        body.add("redirect_uri", redirectUrl);
+        body.add("client_id", restApiKey);
+        body.add("redirect_uri", redirectUri);
         body.add("code", code);
 
         // HttpHeader, HttpBody 하나의 오브젝트에 담기

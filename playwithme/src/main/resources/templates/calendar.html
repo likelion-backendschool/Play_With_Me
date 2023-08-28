@@ -17,10 +17,10 @@
 	<script src="/js/calendar.main.js"></script>
 </head>
 <body layout:fragment="content">
-<section class="ftco-section">
+<section class="ftco-section" style="padding: 3vh 0;">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-6 text-center mb-5">
+			<div class="col-md-6 text-center mb-1">
 				<h2 class="heading-section" th:if="${#httpServletRequest.getParameter('category')}=='baseball'">
 					<img src="/image/calendar/baseball.png" style="height:50px; width:50px"> &nbsp;
 					<span class="hl">야구</span> 모집게시판 캘린더
